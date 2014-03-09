@@ -6,7 +6,7 @@
 
 package com.toedter.chatty.model;
 
-public class SimpleUser {
+public class SimpleUser implements User {
     private final String id;
     private final String fullName;
     private final String email;
@@ -23,14 +23,17 @@ public class SimpleUser {
         this.email = email;
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public String getFullName() {
         return fullName;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }

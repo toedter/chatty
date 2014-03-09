@@ -14,14 +14,14 @@ import static org.hamcrest.Matchers.notNullValue;
 
 public class SimpleUserTest {
     @Test
-    public void shouldCreateSimpleUserWithDefaultConstructor() {
-        SimpleUser simpleUser = new SimpleUser();
+    public void should_create_SimpleUser_with_default_constructor() {
+        User simpleUser = new SimpleUser();
         assertThat(simpleUser, notNullValue());
     }
 
     @Test
-    public void shouldCreateSimpleUserWithNonDefaultConstructor() {
-        SimpleUser simpleUser = new SimpleUser("id", "Full Name", "EMail");
+    public void should_create_SimpleUser_with_non_default_constructor() {
+        User simpleUser = new SimpleUser("id", "Full Name", "EMail");
         assertThat(simpleUser.getId(), is("id"));
         assertThat(simpleUser.getFullName(), is("Full Name"));
         assertThat(simpleUser.getEmail(), is("EMail"));
