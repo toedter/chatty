@@ -1,0 +1,9 @@
+include 'com.toedter.chatty.model'
+
+rootProject.name = 'chatty'
+rootProject.children.each { project ->
+    String fileBaseName = project.name
+    String projectDirName = "subprojects/$fileBaseName"
+    project.projectDir = new File(settingsDir, projectDirName)
+    assert project.projectDir.isDirectory()
+}

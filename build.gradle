@@ -1,0 +1,23 @@
+apply from: "$rootDir/gradle/versioning.gradle"
+
+allprojects {
+    apply plugin: 'idea'
+    group = 'com.toedter'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply from: "$rootDir/gradle/jacoco.gradle"
+
+    repositories {
+        mavenCentral()
+    }
+
+    test {
+        reports.junitXml.destination = file("$reports.junitXml.destination/unit")
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
