@@ -1,6 +1,8 @@
 apply from: "$rootDir/gradle/integrationTest.gradle"
 
 dependencies {
+    compile project(':com.toedter.chatty.model')
+
     def jerseyVersion = '2.6'
     compile "org.glassfish.jersey.core:jersey-server:$jerseyVersion"
     compile "org.glassfish.jersey.core:jersey-client:$jerseyVersion"
@@ -18,9 +20,9 @@ dependencies {
     testCompile 'org.mockito:mockito-all:1.9.5'
 }
 
-tasks.withType(Test) {
-    testLogging {
-        showStandardStreams = true
-        exceptionFormat 'full'
-    }
-}
+//tasks.withType(Test) {
+//    testLogging {
+//        showStandardStreams = true
+//        exceptionFormat 'full'
+//    }
+//}
