@@ -23,6 +23,7 @@ import static org.junit.Assert.assertThat;
 public abstract class AbstractIntegrationTest {
     public static final String BASE_URI = "http://localhost:8080/chatty/";
     private WebTarget target;
+    private UserRepository userRepository;
 
     abstract public void startServer();
 
@@ -34,7 +35,7 @@ public abstract class AbstractIntegrationTest {
         Client c = ClientBuilder.newClient();
         target = c.target(BASE_URI);
 
-        UserRepository userRepository = ModelFactory.getInstance().getUserRepository();
+        userRepository = ModelFactory.getInstance().getUserRepository();
         userRepository.createUser(new SimpleUser("kai", "Kai Toedter", "kai@toedter.com"));
         userRepository.createUser(new SimpleUser("john", "John Doe", "john@doe.com"));
         userRepository.createUser(new SimpleUser("jane", "Jane Doe", "jane@doe.com"));
@@ -43,6 +44,7 @@ public abstract class AbstractIntegrationTest {
     @After
     public void after() {
         stopServer();
+        userRepository.deleteAll();
     }
 
     @Test
@@ -52,5 +54,20 @@ public abstract class AbstractIntegrationTest {
         assertThat(responseMsg, containsString("\"email\":\"john@doe.com\""));
         assertThat(responseMsg, containsString("\"id\":\"john\""));
         assertThat(responseMsg, containsString("\"fullName\":\"John Doe\""));
+        assertThat(responseMsg, containsString("\"email\":\"kai@toedter.com\""));
+        assertThat(responseMsg, containsString("\"id\":\"kai\""));
+        assertThat(responseMsg, containsString("\"fullName\":\"Kai Toedter\""));
+        assertThat(responseMsg, containsString("\"email\":\"jane@doe.com\""));
+        assertThat(responseMsg, containsString("\"id\":\"jane\""));
+        assertThat(responseMsg, containsString("\"fullName\":\"Jane Doe\""));
+    }
+
+    @Test
+    public void should_get_single_user_by_id() {
+        String responseMsg = target.path("users/kai").request().get(String.class);
+
+        assertThat(responseMsg, containsString("\"email\":\"kai@toedter.com\""));
+        assertThat(responseMsg, containsString("\"id\":\"kai\""));
+        assertThat(responseMsg, containsString("\"fullName\":\"Kai Toedter\""));
     }
 }

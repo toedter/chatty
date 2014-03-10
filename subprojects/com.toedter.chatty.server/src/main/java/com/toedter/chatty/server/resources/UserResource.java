@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -43,4 +44,14 @@ public class UserResource {
         return listRep.toString(RepresentationFactory.HAL_JSON);
     }
 
+    @GET
+    @Path("/{id}")
+    @Produces(RepresentationFactory.HAL_JSON)
+    public String getUser(@PathParam("id") final String id) {
+        Representation rep = representationFactory.newRepresentation();
+        User user = userRepository.getUserById(id);
+        rep.withBean(user)
+                .withLink("self", "/cis/api/users/" + id);
+        return rep.toString(RepresentationFactory.HAL_JSON);
+    }
 }
