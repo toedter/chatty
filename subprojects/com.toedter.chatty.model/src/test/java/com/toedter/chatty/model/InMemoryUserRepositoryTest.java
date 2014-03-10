@@ -96,6 +96,25 @@ public class InMemoryUserRepositoryTest {
         // then expect above exception
     }
 
+    @Test
+    public void should_update_user_with_existing_id() {
+        // given
+        User user1 = mock(User.class);
+        when(user1.getId()).thenReturn("1");
+        when(user1.getEmail()).thenReturn("a@a.com");
+        userRepository.createUser(user1);
+        User user2 = mock(User.class);
+        when(user2.getId()).thenReturn("1");
+        when(user2.getEmail()).thenReturn("b@b.com");
+
+        // when
+        userRepository.updateUser(user2);
+        User testUser = userRepository.getUserById("1");
+
+        // then expect above exception
+        assertThat(testUser.getEmail(), is("b@b.com"));
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void should_not_get_user_by_non_existing_id() {
         // given
