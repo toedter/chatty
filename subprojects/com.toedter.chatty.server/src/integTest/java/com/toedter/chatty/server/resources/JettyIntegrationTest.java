@@ -25,7 +25,7 @@ public class JettyIntegrationTest extends AbstractIntegrationTest {
         AtmosphereServlet atmoServlet = new AtmosphereServlet();
         context.addServlet(new ServletHolder(atmoServlet), "/atmos/*");
 
-        ServletContainer jerseyContainer = new ServletContainer(new ResourceConfig(UserResource.class));
+        ServletContainer jerseyContainer = new ServletContainer(resourceConfig);
         context.addServlet(new ServletHolder(jerseyContainer), "/api/*");
 
         server.start();

@@ -28,7 +28,7 @@ public class GrizzlyIntegrationTest extends AbstractIntegrationTest {
         ServletRegistration atmosphereRegistration = context.addServlet("Atmosphere", atmoServlet);
         atmosphereRegistration.addMapping("/atmos/*");
 
-        ServletContainer jerseyContainer = new ServletContainer(new ResourceConfig(UserResource.class));
+        ServletContainer jerseyContainer = new ServletContainer(resourceConfig);
         ServletRegistration jerseyRegistration = context.addServlet("Jersey", jerseyContainer);
         jerseyRegistration.addMapping("/api/*");
 

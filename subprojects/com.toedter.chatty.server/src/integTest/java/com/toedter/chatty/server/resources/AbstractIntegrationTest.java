@@ -11,6 +11,7 @@ import com.toedter.chatty.model.SimpleUser;
 import com.toedter.chatty.model.UserRepository;
 import org.atmosphere.wasync.*;
 import org.atmosphere.wasync.impl.AtmosphereClient;
+import org.glassfish.jersey.server.ResourceConfig;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +20,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.concurrent.CountDownLatch;
@@ -35,7 +38,8 @@ public abstract class AbstractIntegrationTest {
     private WebTarget target;
     private UserRepository userRepository;
     protected static int freePort = findFreePort();
-    public static final String BASE_URI = "http://localhost:" + freePort;
+    protected static final String BASE_URI = "http://localhost:" + freePort;
+    protected ResourceConfig resourceConfig = new ResourceConfig(UserResource.class, ChatJerseyResource.class);
 
     protected static int findFreePort() {
         ServerSocket socket = null;
@@ -139,6 +143,44 @@ public abstract class AbstractIntegrationTest {
         latch.await(1, TimeUnit.SECONDS);
         socket.close();
         assertThat(receivedMessage.toString(), is("hello"));
+    }
+
+    @Test
+    public void should_post_and_receive_single_message() throws Exception {
+
+        final StringBuilder receivedMessage = new StringBuilder();
+
+        final CountDownLatch latch = new CountDownLatch(1);
+
+        AtmosphereClient client = ClientFactory.getDefault().newClient(AtmosphereClient.class);
+
+        RequestBuilder request = client.newRequestBuilder()
+                .method(Request.METHOD.GET)
+                .uri(BASE_URI + "/chatty/atmos/chat2")
+                .trackMessageLength(true)
+                .transport(Request.TRANSPORT.LONG_POLLING);
+
+        Socket socket = client.create();
+        socket.on(new Function<String>() {
+            @Override
+            public void on(String message) {
+                receivedMessage.append(message);
+                latch.countDown();
+            }
+        }).on(new Function<IOException>() {
+
+            @Override
+            public void on(IOException e) {
+                fail(e.getMessage());
+            }
+
+        }).open(request.build());
+
+        target.path("/api/chat2").request().post(Entity
+                .entity("hello Jersey", MediaType.TEXT_PLAIN), String.class);
+        latch.await(1, TimeUnit.SECONDS);
+        socket.close();
+        assertThat(receivedMessage.toString(), is("hello Jersey"));
     }
 
 }
