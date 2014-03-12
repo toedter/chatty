@@ -9,6 +9,8 @@ package com.toedter.chatty.server.resources;
 import com.toedter.chatty.model.ModelFactory;
 import com.toedter.chatty.model.SimpleUser;
 import com.toedter.chatty.model.UserRepository;
+import org.atmosphere.wasync.*;
+import org.atmosphere.wasync.impl.AtmosphereClient;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,21 +18,26 @@ import org.junit.Test;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
+import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
+import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 public abstract class AbstractIntegrationTest {
     public static final String BASE_URI = "http://localhost:8080/chatty/";
     private WebTarget target;
     private UserRepository userRepository;
 
-    abstract public void startServer();
+    abstract public void startServer() throws Exception;
 
-    abstract public void stopServer();
+    abstract public void stopServer() throws Exception;
 
     @Before
-    public void before() {
+    public void before() throws Exception {
         startServer();
         Client c = ClientBuilder.newClient();
         target = c.target(BASE_URI);
@@ -42,14 +49,14 @@ public abstract class AbstractIntegrationTest {
     }
 
     @After
-    public void after() {
+    public void after() throws Exception {
         stopServer();
         userRepository.deleteAll();
     }
 
     @Test
     public void should_get_all_users_as_list() {
-        String responseMsg = target.path("users").request().get(String.class);
+        String responseMsg = target.path("api/users").request().get(String.class);
 
         assertThat(responseMsg, containsString("\"email\":\"john@doe.com\""));
         assertThat(responseMsg, containsString("\"id\":\"john\""));
@@ -64,10 +71,48 @@ public abstract class AbstractIntegrationTest {
 
     @Test
     public void should_get_single_user_by_id() {
-        String responseMsg = target.path("users/kai").request().get(String.class);
+        String responseMsg = target.path("api/users/kai").request().get(String.class);
 
         assertThat(responseMsg, containsString("\"email\":\"kai@toedter.com\""));
         assertThat(responseMsg, containsString("\"id\":\"kai\""));
         assertThat(responseMsg, containsString("\"fullName\":\"Kai Toedter\""));
     }
+
+    @Test
+    public void should_push_and_receive_single_message() throws Exception {
+
+        final StringBuilder receivedMessage = new StringBuilder();
+
+        final CountDownLatch latch = new CountDownLatch(1);
+
+        AtmosphereClient client = ClientFactory.getDefault().newClient(AtmosphereClient.class);
+
+        RequestBuilder request = client.newRequestBuilder()
+                .method(Request.METHOD.GET)
+                .uri(BASE_URI + "atmos/chat")
+                .trackMessageLength(true)
+                .transport(Request.TRANSPORT.LONG_POLLING);
+
+        Socket socket = client.create();
+        socket.on(new Function<String>() {
+            @Override
+            public void on(String message) {
+                receivedMessage.append(message);
+                latch.countDown();
+            }
+        }).on(new Function<IOException>() {
+
+            @Override
+            public void on(IOException e) {
+                fail(e.getMessage());
+            }
+
+        }).open(request.build()).fire("hello");
+
+
+        latch.await(1, TimeUnit.SECONDS);
+        socket.close();
+        assertThat(receivedMessage.toString(), is("hello"));
+    }
+
 }

@@ -1,13 +1,15 @@
 package com.toedter.chatty.server.resources;
 
+import org.atmosphere.cpr.AtmosphereServlet;
 import org.glassfish.grizzly.http.server.HttpServer;
-import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer;
+import org.glassfish.grizzly.servlet.WebappContext;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
-import org.glassfish.jersey.server.ContainerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.servlet.ServletContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.ServletRegistration;
 import java.io.IOException;
 import java.net.URI;
 
@@ -17,19 +19,25 @@ public class GrizzlyIntegrationTest extends AbstractIntegrationTest {
     private HttpServer server;
 
     @Override
-    public void startServer() {
+    public void startServer() throws Exception {
         final ResourceConfig rc = new ResourceConfig()
                 .packages("com.toedter.chatty.server.resources");
 
-        server = GrizzlyHttpServerFactory.createHttpServer(URI
-                .create(BASE_URI), ContainerFactory.createContainer(
-                GrizzlyHttpContainer.class, rc), false, null, false);
+        server = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI));
 
-        try {
-            server.start();
-        } catch (IOException e) {
-            logger.error("Cannot start Grizzly HTTP server.");
-        }
+        AtmosphereServlet atmoServlet = new AtmosphereServlet();
+        WebappContext context = new WebappContext("Chatty", "/chatty");
+
+        ServletRegistration atmosphereRegistration = context.addServlet("Atmosphere", atmoServlet);
+        atmosphereRegistration.addMapping("/atmos/*");
+
+        ServletContainer jerseyContainer = new ServletContainer(new ResourceConfig(UserResource.class));
+        ServletRegistration jerseyRegistration = context.addServlet("Jersey", jerseyContainer);
+        jerseyRegistration.addMapping("/api/*");
+
+        context.deploy(server);
+
+        server.start();
     }
 
     @Override
