@@ -16,7 +16,7 @@ public class JettyIntegrationTest extends AbstractIntegrationTest {
 
     @Override
     public void startServer() throws Exception {
-        server = new Server(8080);
+        server = new Server(freePort);
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/chatty");

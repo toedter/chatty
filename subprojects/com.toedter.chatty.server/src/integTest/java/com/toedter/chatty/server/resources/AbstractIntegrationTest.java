@@ -14,11 +14,14 @@ import org.atmosphere.wasync.impl.AtmosphereClient;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -28,9 +31,32 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 public abstract class AbstractIntegrationTest {
-    public static final String BASE_URI = "http://localhost:8080/chatty/";
+    private static Logger logger = LoggerFactory.getLogger(GrizzlyIntegrationTest.class);
     private WebTarget target;
     private UserRepository userRepository;
+    protected static int freePort = findFreePort();
+    public static final String BASE_URI = "http://localhost:" + freePort;
+
+    protected static int findFreePort() {
+        ServerSocket socket = null;
+        try {
+            socket = new ServerSocket(0);
+            int port = socket.getLocalPort();
+            logger.info("Using port {} for integration tests.", port);
+            return port;
+        } catch (IOException e) {
+            logger.warn("Cannot find free port, will use 8080.");
+            return 8080;
+        } finally {
+            if (socket != null) {
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                    logger.error("Cannot close socket.");
+                }
+            }
+        }
+    }
 
     abstract public void startServer() throws Exception;
 
@@ -40,7 +66,7 @@ public abstract class AbstractIntegrationTest {
     public void before() throws Exception {
         startServer();
         Client c = ClientBuilder.newClient();
-        target = c.target(BASE_URI);
+        target = c.target(BASE_URI + "/chatty");
 
         userRepository = ModelFactory.getInstance().getUserRepository();
         userRepository.createUser(new SimpleUser("kai", "Kai Toedter", "kai@toedter.com"));
@@ -89,7 +115,7 @@ public abstract class AbstractIntegrationTest {
 
         RequestBuilder request = client.newRequestBuilder()
                 .method(Request.METHOD.GET)
-                .uri(BASE_URI + "atmos/chat")
+                .uri(BASE_URI + "/chatty/atmos/chat")
                 .trackMessageLength(true)
                 .transport(Request.TRANSPORT.LONG_POLLING);
 

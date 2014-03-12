@@ -15,7 +15,7 @@ public class InMemoryUserRepository implements UserRepository {
 
     @Override
     public List<User> getAll() {
-        return new ArrayList(users.values());
+        return new ArrayList<>(users.values());
     }
 
     public void checkUserWithIdExists(String id) {

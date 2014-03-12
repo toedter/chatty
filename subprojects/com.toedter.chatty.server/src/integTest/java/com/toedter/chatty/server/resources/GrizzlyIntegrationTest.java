@@ -20,9 +20,6 @@ public class GrizzlyIntegrationTest extends AbstractIntegrationTest {
 
     @Override
     public void startServer() throws Exception {
-        final ResourceConfig rc = new ResourceConfig()
-                .packages("com.toedter.chatty.server.resources");
-
         server = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI));
 
         AtmosphereServlet atmoServlet = new AtmosphereServlet();
