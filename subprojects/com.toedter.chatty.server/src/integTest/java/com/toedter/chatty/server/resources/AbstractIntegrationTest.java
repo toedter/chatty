@@ -34,12 +34,14 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 public abstract class AbstractIntegrationTest {
-    private static Logger logger = LoggerFactory.getLogger(GrizzlyIntegrationTest.class);
+    private static Logger logger = LoggerFactory.getLogger(AbstractIntegrationTest.class);
+
     private WebTarget target;
     private UserRepository userRepository;
     protected static int freePort = findFreePort();
     protected static final String BASE_URI = "http://localhost:" + freePort;
     protected ResourceConfig resourceConfig = new ResourceConfig(UserResource.class, ChatJerseyResource.class);
+    protected Request.TRANSPORT atmosphereTransport = Request.TRANSPORT.LONG_POLLING;
 
     protected static int findFreePort() {
         ServerSocket socket = null;
@@ -121,10 +123,15 @@ public abstract class AbstractIntegrationTest {
                 .method(Request.METHOD.GET)
                 .uri(BASE_URI + "/chatty/atmos/chat")
                 .trackMessageLength(true)
-                .transport(Request.TRANSPORT.LONG_POLLING);
+                .transport(atmosphereTransport);
 
         Socket socket = client.create();
-        socket.on(new Function<String>() {
+        socket.on(new Function<Request.TRANSPORT>() {
+            @Override
+            public void on(Request.TRANSPORT t) {
+                logger.info("Using transport: " + t);
+            }
+        }).on(new Function<String>() {
             @Override
             public void on(String message) {
                 receivedMessage.append(message);
@@ -158,7 +165,7 @@ public abstract class AbstractIntegrationTest {
                 .method(Request.METHOD.GET)
                 .uri(BASE_URI + "/chatty/atmos/chat2")
                 .trackMessageLength(true)
-                .transport(Request.TRANSPORT.LONG_POLLING);
+                .transport(atmosphereTransport);
 
         Socket socket = client.create();
         socket.on(new Function<String>() {

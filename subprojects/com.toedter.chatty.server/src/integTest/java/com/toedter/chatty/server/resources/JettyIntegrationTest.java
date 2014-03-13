@@ -1,6 +1,7 @@
 package com.toedter.chatty.server.resources;
 
 import org.atmosphere.cpr.AtmosphereServlet;
+import org.atmosphere.wasync.Request;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -28,6 +29,7 @@ public class JettyIntegrationTest extends AbstractIntegrationTest {
         ServletContainer jerseyContainer = new ServletContainer(resourceConfig);
         context.addServlet(new ServletHolder(jerseyContainer), "/api/*");
 
+        atmosphereTransport = Request.TRANSPORT.WEBSOCKET;
         server.start();
     }
 

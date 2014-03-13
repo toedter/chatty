@@ -1,5 +1,7 @@
 package com.toedter.chatty.server.resources;
 
+import org.atmosphere.container.Grizzly2CometSupport;
+import org.atmosphere.container.GrizzlyCometSupport;
 import org.atmosphere.cpr.AtmosphereServlet;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.servlet.WebappContext;
@@ -23,6 +25,7 @@ public class GrizzlyIntegrationTest extends AbstractIntegrationTest {
         server = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI));
 
         AtmosphereServlet atmoServlet = new AtmosphereServlet();
+
         WebappContext context = new WebappContext("Chatty", "/chatty");
 
         ServletRegistration atmosphereRegistration = context.addServlet("Atmosphere", atmoServlet);
@@ -34,6 +37,7 @@ public class GrizzlyIntegrationTest extends AbstractIntegrationTest {
 
         context.deploy(server);
 
+        atmoServlet.framework().setAsyncSupport(new Grizzly2CometSupport(atmoServlet.framework().getAtmosphereConfig()));
         server.start();
     }
 
