@@ -10,10 +10,12 @@ Currently I am planning to use
  * [Siren](https://github.com/kevinswiber/siren)
 * Async Pub/Sub
  * [Atmosphere] (https://github.com/Atmosphere/atmosphere)
-* Jersey (JAX-RS reference implementation)
+* [Jersey] (https://jersey.java.net/) (JAX-RS reference implementation)
+* [TypeScript] (http://www.typescriptlang.org/) for web client
+* [AngularJS] (http://angularjs.org/)for web client
 * JUnit
-* Mockito
-* Gradle Build
+* [Mockito] (https://code.google.com/p/mockito/) for Mocking
+* [Gradle] (http://www.gradle.org/) as build system
 
 ## License
 MIT: http://toedter.mit-license.org
