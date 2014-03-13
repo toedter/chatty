@@ -37,7 +37,6 @@ public class GrizzlyIntegrationTest extends AbstractIntegrationTest {
 
         context.deploy(server);
 
-        atmoServlet.framework().setAsyncSupport(new Grizzly2CometSupport(atmoServlet.framework().getAtmosphereConfig()));
         server.start();
     }
 
