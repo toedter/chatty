@@ -12,7 +12,7 @@ Currently I am planning to use
  * [Atmosphere] (https://github.com/Atmosphere/atmosphere)
 * [Jersey] (https://jersey.java.net/) (JAX-RS reference implementation)
 * [TypeScript] (http://www.typescriptlang.org/) for web client
-* [AngularJS] (http://angularjs.org/)for web client
+* [AngularJS] (http://angularjs.org/) for web client
 * JUnit
 * [Mockito] (https://code.google.com/p/mockito/) for Mocking
 * [Gradle] (http://www.gradle.org/) as build system
