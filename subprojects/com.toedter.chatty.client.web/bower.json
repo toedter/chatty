@@ -1,0 +1,9 @@
+{
+    "name": "chatty-web-client",
+    "version": "0.1.0",
+    "description": "chat demo using atmosphere, typescript, javascript, jasmine, grunt, bower, etc.",
+    "dependencies": {
+        "atmosphere": "latest"
+    },
+    "devDependencies": {}
+}

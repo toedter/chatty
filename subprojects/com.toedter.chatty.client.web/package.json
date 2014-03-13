@@ -1,0 +1,15 @@
+{
+    "name": "chatty-web-client",
+    "version": "0.1.0",
+    "description": "test project for developing a demo with typescript, javascript, jasmine, grunt, bower, etc.",
+    "author": "Kai Toedter",
+    "dependencies": {
+    },
+    "devDependencies": {
+        "grunt": "latest",
+        "grunt-typescript": "latest",
+        "grunt-contrib-jasmine": "latest",
+        "grunt-contrib-uglify": "latest",
+        "grunt-contrib-jshint": "latest"
+    }
+}
