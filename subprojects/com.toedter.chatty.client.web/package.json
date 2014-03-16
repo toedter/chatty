@@ -6,6 +6,7 @@
     "dependencies": {
     },
     "devDependencies": {
+        "grunt-cli": "latest",
         "grunt": "latest",
         "grunt-typescript": "latest",
         "grunt-contrib-jasmine": "latest",
