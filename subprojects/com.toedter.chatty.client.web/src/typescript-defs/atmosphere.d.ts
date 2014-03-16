@@ -1,3 +1,9 @@
+// Type definitions for Atmpsphere 2.1.6
+// by Jeanfrancois Arcand, see
+// https://github.com/Atmosphere/atmosphere-javascript
+// TypeScript Definitions by Kai Toedter (kai@toedter.com)
+// TypeScript Definitions are licensed under MIT license, see see http://toedter.mit-license.org/
+
 declare module Atmosphere {
     interface Atmoshere {
         subscribe?: (string?, callback?:Function, request?:Request) => any;
