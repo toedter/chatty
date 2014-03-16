@@ -6,6 +6,12 @@
 
 package com.toedter.chatty.server.resources;
 
+/**
+ * Copyright (c) 2014 Kai Toedter
+ * All rights reserved.
+ * Licensed under MIT License, see http://toedter.mit-license.org/
+ */
+
 import org.atmosphere.config.service.Disconnect;
 import org.atmosphere.config.service.ManagedService;
 import org.atmosphere.config.service.Ready;
@@ -22,15 +28,15 @@ public class ChatResource {
 
     @Ready
     public void onReady(final AtmosphereResource r) {
-        logger.info("Browser {} connected.", r.uuid());
+        logger.info("client {} connected.", r.uuid());
     }
 
     @Disconnect
     public void onDisconnect(AtmosphereResourceEvent event) {
         if (event.isCancelled()) {
-            logger.info("Browser {} unexpectedly disconnected", event.getResource().uuid());
+            logger.info("client {} unexpectedly disconnected", event.getResource().uuid());
         } else if (event.isClosedByClient()) {
-            logger.info("Browser {} closed the connection", event.getResource().uuid());
+            logger.info("client {} closed the connection", event.getResource().uuid());
         }
     }
 

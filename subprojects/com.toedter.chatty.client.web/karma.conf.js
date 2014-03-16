@@ -14,7 +14,8 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'src/**/*.js'
+            'src/**/*.js',
+            'bower_components/atmosphere/atmosphere.js'
             // 'src/**/*.map'
         ],
 

@@ -4,8 +4,9 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         jasmine: {
-            src: 'src/**/*.js',
+            src: ['src/**/*.js', 'bower_components/atmosphere/atmosphere.js'],
             options: {
+                specs: 'stc/**/*Spec.js',
                 keepRunner: true
             }
         },
@@ -49,7 +50,7 @@ module.exports = function (grunt) {
                 options: {
                     '-W069': true
                 },
-                src: ['Gruntfile.js', 'src/**/*.js']
+                src: ['Gruntfile.js', 'src/**/*Spec.js']
             }
         }
     });
@@ -60,5 +61,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.registerTask('default', ['typescript:base', 'jasmine', 'jshint', 'dist']);
+    grunt.registerTask('test', ['typescript:base', 'jasmine']);
     grunt.registerTask('dist', ['typescript:dist', 'uglify']);
 };
