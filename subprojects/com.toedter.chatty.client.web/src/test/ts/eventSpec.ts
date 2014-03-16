@@ -11,7 +11,7 @@ describe('Publish - Subscribe', () => {
 
     it('should subscribe for a message and receive a sent message (transport: websocket)', (done) => {
         "use strict";
-        var socket:Atmosphere.Socket = atmosphere;
+        var socket:Atmosphere.Atmoshere = atmosphere;
 
         var request:Atmosphere.Request = {
             url: "http://localhost:8080/chatty/atmos/chat",
@@ -37,6 +37,6 @@ describe('Publish - Subscribe', () => {
         request.onClose = function (response:Atmosphere.Response) {
         };
 
-        var subSocket = socket.subscribe(request);
+        var subSocket:Atmosphere.Socket = socket.subscribe(request);
     });
 });
