@@ -8,3 +8,8 @@ buildscript {
 }
 
 apply plugin: 'grunt'
+
+// Doese not work yet...
+task gruntXXX(type: GruntTask) {
+    dependsOn ':com.toedter.chatty.server:runServer'
+}

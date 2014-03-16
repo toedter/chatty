@@ -32,3 +32,12 @@ dependencies {
 //        exceptionFormat 'full'
 //    }
 //}
+
+
+// TODO: Server is started but then killed....
+task runServer(type: JavaExec) {
+    group = 'server'
+    description = 'Starts server for integration test.'
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'com.toedter.chatty.server.JettyServer'
+}
