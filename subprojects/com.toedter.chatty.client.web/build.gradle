@@ -1,3 +1,5 @@
+apply from: "$rootDir/gradle/integrationTest.gradle"
+
 buildscript {
     repositories {
         jcenter()
@@ -9,7 +11,12 @@ buildscript {
 
 apply plugin: 'grunt'
 
-// Doese not work yet...
-task gruntXXX(type: GruntTask) {
-    dependsOn ':com.toedter.chatty.server:runServer'
+task gruntTest(type: GruntTask) << {
+    args = ["test"]
 }
+
+gruntTest.dependsOn ':com.toedter.chatty.server:startServerAsync'
+task gruntIntegrationTest(dependsOn: [':com.toedter.chatty.server:stopServer',gruntTest] )
+
+integrationTest.dependsOn gruntIntegrationTest;
+gruntIntegrationTest.mustRunAfter ':com.toedter.chatty.server:integrationTest'

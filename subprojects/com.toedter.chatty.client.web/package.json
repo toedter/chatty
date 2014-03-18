@@ -1,8 +1,18 @@
 {
     "name": "chatty-web-client",
+    "title": "chatty web client",
     "version": "0.1.0",
-    "description": "test project for developing a demo with typescript, javascript, jasmine, grunt, bower, etc.",
-    "author": "Kai Toedter",
+    "description": "chatty web client - a demo with typescript, atmosphere, javascript, jasmine, grunt, bower, etc.",
+    "author": {
+        "name": "Kai Toedter",
+        "url": "http://toedter.com"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://toedter.mit-license.org/"
+        }
+    ],
     "dependencies": {
     },
     "devDependencies": {
@@ -11,6 +21,7 @@
         "grunt-typescript": "latest",
         "grunt-contrib-jasmine": "latest",
         "grunt-contrib-uglify": "latest",
-        "grunt-contrib-jshint": "latest"
+        "grunt-contrib-jshint": "latest",
+        "bower": "latest"
     }
 }

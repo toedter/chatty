@@ -17,7 +17,7 @@ module.exports = function (grunt) {
                     // module: 'commonjs', // or amd
                     target: 'es5', //or es3
                     // base_path: 'path/to/typescript/files',
-                    sourcemap: true
+                    sourceMap: true
                     // declaration: true
                 }
             },
@@ -27,7 +27,7 @@ module.exports = function (grunt) {
                 options: {
                     module: 'commonjs',
                     target: 'es5',
-                    // sourcemap: true,
+                    // sourceMap: true,
                     declaration: true
                 }
             }

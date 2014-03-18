@@ -1,3 +1,5 @@
+import com.toedter.chatty.ShutdownServerTask
+
 apply from: "$rootDir/gradle/integrationTest.gradle"
 
 dependencies {
@@ -33,11 +35,12 @@ dependencies {
 //    }
 //}
 
+task startServerAsync << {
+    logger.lifecycle('Starting Jetty asynchronously')
+    def cp = sourceSets.main.runtimeClasspath.asPath
+    ant.java(fork:true, spawn:true, classname:"com.toedter.chatty.server.JettyServer", classpath: cp )
+}
 
-// TODO: Server is started but then killed....
-task runServer(type: JavaExec) {
-    group = 'server'
-    description = 'Starts server for integration test.'
-    classpath = sourceSets.main.runtimeClasspath
-    main = 'com.toedter.chatty.server.JettyServer'
+task stopServer(type: ShutdownServerTask) << {
+    logger.lifecycle('Stopping Jetty')
 }
