@@ -77,6 +77,7 @@ public class JettyServer {
         server.setHandler(handlerCollection);
 
         server.start();
+        logger.info("Jetty server started with port " + port);
         server.join();
     }
 
@@ -87,7 +88,6 @@ public class JettyServer {
     public static void main(String[] args) {
         JettyServer jettyServer = new JettyServer();
         try {
-            logger.info("Jetty server started with port 8080");
             jettyServer.startServer(8080);
 //            System.in.read();
 //            jettyServer.stopServer();

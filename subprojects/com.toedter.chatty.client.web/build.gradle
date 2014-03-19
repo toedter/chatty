@@ -4,15 +4,15 @@ buildscript {
     repositories {
         jcenter()
     }
-    dependencies {
-        classpath 'com.moowork.gradle:gradle-grunt-plugin:0.5'
-    }
 }
 
-apply plugin: 'grunt'
+task gruntTest(type: GruntTask) {
+    group = "Verification"
+    description = "Runs the Jasmine tests."
+    gruntArgs = "test"
 
-task gruntTest(type: GruntTask) << {
-    args = ["test"]
+    inputs.dir "[relative-path-to-source]"
+    inputs.file file("Gruntfile.js")
 }
 
 gruntTest.dependsOn ':com.toedter.chatty.server:startServerAsync'
@@ -20,3 +20,4 @@ task gruntIntegrationTest(dependsOn: [':com.toedter.chatty.server:stopServer',gr
 
 integrationTest.dependsOn gruntIntegrationTest;
 gruntIntegrationTest.mustRunAfter ':com.toedter.chatty.server:integrationTest'
+
