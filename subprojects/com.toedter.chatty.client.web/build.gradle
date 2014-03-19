@@ -16,8 +16,9 @@ task gruntTest(type: GruntTask) {
 }
 
 gruntTest.dependsOn ':com.toedter.chatty.server:startServerAsync'
-task gruntIntegrationTest(dependsOn: [':com.toedter.chatty.server:stopServer',gruntTest] )
+task gruntIntegrationTest(dependsOn: gruntTest)
 
 integrationTest.dependsOn gruntIntegrationTest;
 gruntIntegrationTest.mustRunAfter ':com.toedter.chatty.server:integrationTest'
 
+gruntTest.finalizedBy(':com.toedter.chatty.server:stopServer')
