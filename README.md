@@ -17,5 +17,13 @@ Currently I am planning to use
 * [Mockito] (https://code.google.com/p/mockito/) for Mocking
 * [Gradle] (http://www.gradle.org/) as build system
 
+Getting Started
+---------------
+cd subprojects/com.toedter.chatty.client.web
+npm install
+bower install
+cd ../..
+./gradlew build
+
 ## License
 MIT: http://toedter.mit-license.org
