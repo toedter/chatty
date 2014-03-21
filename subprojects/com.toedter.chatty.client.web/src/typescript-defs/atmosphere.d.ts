@@ -85,7 +85,7 @@ declare module Atmosphere {
         onError?: (response?:Response) => any;
         onClose?:  (response?:Response)  => any;
         onOpen?:  (response?:Response)  => any;
-        onMessage?:  (response?:Response)  => any;
+        onMessage?:  (response:Response)  => any;
         onReopen?:  (request?:Request, response?:Response) => any;
         onReconnect?:  (request?:Request, response?:Response)  => any;
         onMessagePublished?:  (response?:Response)  => any;
@@ -100,7 +100,7 @@ declare module Atmosphere {
         execute?: () => any;
         close?: () => any;
         disconnect?: () => any;
-        getUrl?: () => any;
+        getUrl?: () => string;
         push?: (message:string, dispatchUrl?:string) => any;
         getUUID?: () => any;
         pushLocal?: (message:string) => any;

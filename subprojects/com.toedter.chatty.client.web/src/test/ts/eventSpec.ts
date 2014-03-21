@@ -22,7 +22,7 @@ describe('Publish - Subscribe', () => {
             fallbackTransport: 'long-polling'
         };
 
-        request.onOpen = function (response:Atmosphere.Response) {
+        request.onOpen = function (response?:Atmosphere.Response) {
             // wait for the socket to be opened, then push a message
             subSocket.push('12345');
         };
@@ -34,7 +34,7 @@ describe('Publish - Subscribe', () => {
             done();
         };
 
-        request.onClose = function (response:Atmosphere.Response) {
+        request.onClose = function (response?:Atmosphere.Response) {
         };
 
         var subSocket:Atmosphere.Socket = socket.subscribe(request);
