@@ -19,11 +19,12 @@ Currently I am planning to use
 
 Getting Started
 ---------------
-cd subprojects/com.toedter.chatty.client.web
-npm install
-bower install
-cd ../..
-./gradlew build
+* cd subprojects/com.toedter.chatty.client.web
+* npm install (installs the dev dependencies for the TypeScript build)
+* bower install (installs atmosphere.js for the JavaScript runtime)
+* cd ../..
+* ./gradlew build (runs the integrationtests, both Java and JavaScript)
 
-## License
-MIT: http://toedter.mit-license.org
+License
+-------
+MIT, see http://toedter.mit-license.org
