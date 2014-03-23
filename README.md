@@ -4,9 +4,10 @@ chatty
 chatty - a chat demo that evaluates several technologies (and hopefully shows best practices)
 
 This project is at a very, very early stage, please stay tuned.
-Right now you can only run the integration tests
+Right now you can only run the integration tests.
 
-Used technologies:
+Used Technologies
+-----------------
 * Java 8 (This demo will not run with any Java < 8)
 * RESTful Hypermedia API
  * [HAL] (http://stateless.co/hal_specification.html) or
