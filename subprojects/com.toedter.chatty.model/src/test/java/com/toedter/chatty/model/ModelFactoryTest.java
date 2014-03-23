@@ -10,9 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 public class ModelFactoryTest {
 
@@ -39,6 +37,6 @@ public class ModelFactoryTest {
         modelFactory.initTestData();
         UserRepository userRepository = modelFactory.getUserRepository();
 
-        assertThat(userRepository.getSize(), greaterThan(3L));
+        assertThat(userRepository.getSize(), greaterThanOrEqualTo(3L));
     }
 }
