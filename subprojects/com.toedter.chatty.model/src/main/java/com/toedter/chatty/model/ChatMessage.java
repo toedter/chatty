@@ -1,0 +1,19 @@
+/**
+ * Copyright (c) 2014 Kai Toedter
+ * All rights reserved.
+ * Licensed under MIT License, see http://toedter.mit-license.org/
+ */
+
+package com.toedter.chatty.model;
+
+import java.time.Instant;
+
+public interface ChatMessage {
+    long getId();
+
+    String getMessage();
+
+    User getAuthor();
+
+    Instant getTimeStamp();
+}
