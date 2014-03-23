@@ -27,7 +27,7 @@ Getting Started
 * npm install (installs the dev dependencies for the TypeScript build)
 * bower install (installs atmosphere.js for the JavaScript runtime)
 * cd ../..
-* ./gradlew build (runs the integrationtests, both Java and JavaScript)
+* ./gradlew build (runs the integration tests, both Java and JavaScript)
 
 License
 -------
