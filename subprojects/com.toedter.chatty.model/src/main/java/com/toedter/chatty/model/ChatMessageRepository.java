@@ -8,12 +8,11 @@ package com.toedter.chatty.model;
 
 import java.util.List;
 
-public interface UserRepository {
-    List<User> getAll();
-    User getUserById(String id);
-    User saveUser(User user);
-    User updateUser(User user);
-    void deleteUserById(String id);
+public interface ChatMessageRepository {
+    List<ChatMessage> getAll();
+    ChatMessage getChatMessageById(long id);
+    ChatMessage saveChatMessage(ChatMessage chatMessage);
+    void deleteChatMessageById(long id);
     void deleteAll();
     long getSize();
 }

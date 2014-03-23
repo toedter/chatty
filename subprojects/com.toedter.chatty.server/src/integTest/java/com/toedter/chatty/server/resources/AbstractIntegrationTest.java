@@ -75,9 +75,9 @@ public abstract class AbstractIntegrationTest {
         target = c.target(BASE_URI + "/chatty");
 
         userRepository = ModelFactory.getInstance().getUserRepository();
-        userRepository.createUser(new SimpleUser("kai", "Kai Toedter", "kai@toedter.com"));
-        userRepository.createUser(new SimpleUser("john", "John Doe", "john@doe.com"));
-        userRepository.createUser(new SimpleUser("jane", "Jane Doe", "jane@doe.com"));
+        userRepository.saveUser(new SimpleUser("kai", "Kai Toedter", "kai@toedter.com"));
+        userRepository.saveUser(new SimpleUser("john", "John Doe", "john@doe.com"));
+        userRepository.saveUser(new SimpleUser("jane", "Jane Doe", "jane@doe.com"));
     }
 
     @After

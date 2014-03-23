@@ -41,7 +41,7 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public User createUser(User user) {
+    public User saveUser(User user) {
         checkUserValidity(user);
 
         if (users.get(user.getId()) != null) {

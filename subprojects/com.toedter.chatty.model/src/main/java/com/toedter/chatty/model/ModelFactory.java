@@ -30,8 +30,8 @@ public class ModelFactory {
     }
 
     public void initTestData() {
-        userRepository.createUser(new SimpleUser("toedter_k", "Kai Toedter", "kai@toedter.com"));
-        userRepository.createUser(new SimpleUser("doe_jo", "John Doe", "john@doe.com"));
-        userRepository.createUser(new SimpleUser("doe_ja", "Jane Doe", "jane@doe.com"));
+        userRepository.saveUser(new SimpleUser("toedter_k", "Kai Toedter", "kai@toedter.com"));
+        userRepository.saveUser(new SimpleUser("doe_jo", "John Doe", "john@doe.com"));
+        userRepository.saveUser(new SimpleUser("doe_ja", "Jane Doe", "jane@doe.com"));
     }
 }

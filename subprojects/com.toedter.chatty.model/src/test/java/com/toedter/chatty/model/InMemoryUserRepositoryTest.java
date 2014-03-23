@@ -23,6 +23,9 @@ import static org.mockito.Mockito.when;
 public class InMemoryUserRepositoryTest {
 
     private UserRepository userRepository;
+    private User user1;
+    private User user2;
+    private User user3;
 
     @Before
     public void before() {
@@ -41,7 +44,7 @@ public class InMemoryUserRepositoryTest {
         given(user.getId()).willReturn("1");
 
         // when
-        userRepository.createUser(user);
+        userRepository.saveUser(user);
 
         // then
         assertThat(userRepository.getUserById("1"),is(user));
@@ -52,7 +55,7 @@ public class InMemoryUserRepositoryTest {
         // given
 
         // when
-        userRepository.createUser(null);
+        userRepository.saveUser(null);
 
         // then expect above exception
     }
@@ -64,7 +67,7 @@ public class InMemoryUserRepositoryTest {
         given(user.getId()).willReturn(null);
 
         // when
-        userRepository.createUser(user);
+        userRepository.saveUser(user);
 
         // then expect above exception
     }
@@ -76,7 +79,7 @@ public class InMemoryUserRepositoryTest {
         given(user.getId()).willReturn(null);
 
         // when
-        userRepository.createUser(user);
+        userRepository.saveUser(user);
 
         // then expect above exception
     }
@@ -86,12 +89,12 @@ public class InMemoryUserRepositoryTest {
         // given
         User user1 = mock(User.class);
         when(user1.getId()).thenReturn("1");
-        userRepository.createUser(user1);
+        userRepository.saveUser(user1);
         User user2 = mock(User.class);
         when(user2.getId()).thenReturn("1");
 
         // when
-        userRepository.createUser(user2);
+        userRepository.saveUser(user2);
 
         // then expect above exception
     }
@@ -102,7 +105,7 @@ public class InMemoryUserRepositoryTest {
         User user1 = mock(User.class);
         when(user1.getId()).thenReturn("1");
         when(user1.getEmail()).thenReturn("a@a.com");
-        userRepository.createUser(user1);
+        userRepository.saveUser(user1);
         User user2 = mock(User.class);
         when(user2.getId()).thenReturn("1");
         when(user2.getEmail()).thenReturn("b@b.com");
@@ -135,18 +138,22 @@ public class InMemoryUserRepositoryTest {
         // then expect above exception
     }
 
+    private void createThreeUserMocks() {
+        user1 = mock(User.class);
+        when(user1.getId()).thenReturn("1");
+        userRepository.saveUser(user1);
+        user2 = mock(User.class);
+        when(user2.getId()).thenReturn("2");
+        userRepository.saveUser(user2);
+        user3 = mock(User.class);
+        when(user3.getId()).thenReturn("3");
+        userRepository.saveUser(user3);
+    }
+
     @Test
     public void should_get_all_users() {
         // given
-        User user1 = mock(User.class);
-        when(user1.getId()).thenReturn("1");
-        userRepository.createUser(user1);
-        User user2 = mock(User.class);
-        when(user2.getId()).thenReturn("2");
-        userRepository.createUser(user2);
-        User user3 = mock(User.class);
-        when(user3.getId()).thenReturn("3");
-        userRepository.createUser(user3);
+        createThreeUserMocks();
 
         // when
         List<User> users = userRepository.getAll();
@@ -158,15 +165,7 @@ public class InMemoryUserRepositoryTest {
     @Test
     public void should_get_users_by_id() {
         // given
-        User user1 = mock(User.class);
-        when(user1.getId()).thenReturn("1");
-        userRepository.createUser(user1);
-        User user2 = mock(User.class);
-        when(user2.getId()).thenReturn("2");
-        userRepository.createUser(user2);
-        User user3 = mock(User.class);
-        when(user3.getId()).thenReturn("3");
-        userRepository.createUser(user3);
+        createThreeUserMocks();
 
         // when
         User user3a = userRepository.getUserById("3");
@@ -182,15 +181,7 @@ public class InMemoryUserRepositoryTest {
     @Test
     public void should_get_correct_size() {
         // given
-        User user1 = mock(User.class);
-        when(user1.getId()).thenReturn("1");
-        userRepository.createUser(user1);
-        User user2 = mock(User.class);
-        when(user2.getId()).thenReturn("2");
-        userRepository.createUser(user2);
-        User user3 = mock(User.class);
-        when(user3.getId()).thenReturn("3");
-        userRepository.createUser(user3);
+        createThreeUserMocks();
 
         // when
         long size = userRepository.getSize();
@@ -202,15 +193,7 @@ public class InMemoryUserRepositoryTest {
     @Test
     public void should_delete_all_users() {
         // given
-        User user1 = mock(User.class);
-        when(user1.getId()).thenReturn("1");
-        userRepository.createUser(user1);
-        User user2 = mock(User.class);
-        when(user2.getId()).thenReturn("2");
-        userRepository.createUser(user2);
-        User user3 = mock(User.class);
-        when(user3.getId()).thenReturn("3");
-        userRepository.createUser(user3);
+        createThreeUserMocks();
 
         // when
         userRepository.deleteAll();
@@ -222,15 +205,7 @@ public class InMemoryUserRepositoryTest {
     @Test
     public void should_delete_user_by_id() {
         // given
-        User user1 = mock(User.class);
-        when(user1.getId()).thenReturn("1");
-        userRepository.createUser(user1);
-        User user2 = mock(User.class);
-        when(user2.getId()).thenReturn("2");
-        userRepository.createUser(user2);
-        User user3 = mock(User.class);
-        when(user3.getId()).thenReturn("3");
-        userRepository.createUser(user3);
+        createThreeUserMocks();
 
         // when
         userRepository.deleteUserById("2");
