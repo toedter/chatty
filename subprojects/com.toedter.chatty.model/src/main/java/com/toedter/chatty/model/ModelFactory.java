@@ -15,10 +15,12 @@ public class ModelFactory {
     private static ModelFactory instance = new ModelFactory();
 
     private UserRepository userRepository;
+    private ChatMessageRepository chatMessageRepository;
 
     public ModelFactory() {
         userRepository = new InMemoryUserRepository();
-        logger.info("Using memory based user repository.");
+        chatMessageRepository = new InMemoryChatMessageRepository();
+        logger.info("Using memory based user and chat message repositories.");
     }
 
     public static ModelFactory getInstance() {
@@ -29,9 +31,23 @@ public class ModelFactory {
         return userRepository;
     }
 
+    public ChatMessageRepository getChatMessageRepository() {
+        return chatMessageRepository;
+    }
+
     public void initTestData() {
-        userRepository.saveUser(new SimpleUser("toedter_k", "Kai Toedter", "kai@toedter.com"));
-        userRepository.saveUser(new SimpleUser("doe_jo", "John Doe", "john@doe.com"));
-        userRepository.saveUser(new SimpleUser("doe_ja", "Jane Doe", "jane@doe.com"));
+        SimpleUser toedter_k = new SimpleUser("toedter_k", "Kai Toedter", "kai@toedter.com");
+        userRepository.saveUser(toedter_k);
+        SimpleUser doe_jo = new SimpleUser("doe_jo", "John Doe", "john@doe.com");
+        userRepository.saveUser(doe_jo);
+        SimpleUser doe_ja = new SimpleUser("doe_ja", "Jane Doe", "jane@doe.com");
+        userRepository.saveUser(doe_ja);
+
+        ChatMessage helloAll = new SimpleChatMessage(toedter_k, "hello all!");
+        chatMessageRepository.saveChatMessage(helloAll);
+        ChatMessage hiKai1 = new SimpleChatMessage(doe_jo, "Hi Kai");
+        chatMessageRepository.saveChatMessage(hiKai1);
+        ChatMessage hiKai2 = new SimpleChatMessage(doe_ja, "Hi Kai!");
+        chatMessageRepository.saveChatMessage(hiKai2);
     }
 }

@@ -33,10 +33,22 @@ public class ModelFactoryTest {
     }
 
     @Test
-    public void should_initialize_user_repository_with_test_data() {
-        modelFactory.initTestData();
-        UserRepository userRepository = modelFactory.getUserRepository();
+    public void should_get_chat_message_repository() {
+        ChatMessageRepository chatMessageRepository = modelFactory.getChatMessageRepository();
+        assertThat(chatMessageRepository, notNullValue());
+    }
 
+    @Test
+    public void should_initialize_repositories_with_test_data() {
+        // given
+        modelFactory.initTestData();
+
+        // when
+        UserRepository userRepository = modelFactory.getUserRepository();
+        ChatMessageRepository chatMessageRepository = modelFactory.getChatMessageRepository();
+
+        // then
         assertThat(userRepository.getSize(), greaterThanOrEqualTo(3L));
+        assertThat(chatMessageRepository.getSize(), greaterThanOrEqualTo(3L));
     }
 }

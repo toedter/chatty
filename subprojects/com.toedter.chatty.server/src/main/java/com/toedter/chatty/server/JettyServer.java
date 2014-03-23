@@ -7,7 +7,7 @@
 package com.toedter.chatty.server;
 
 import com.toedter.chatty.model.ModelFactory;
-import com.toedter.chatty.server.resources.ChatJerseyResource;
+import com.toedter.chatty.server.resources.ChatMessageResource;
 import com.toedter.chatty.server.resources.UserResource;
 import org.atmosphere.cpr.AtmosphereServlet;
 import org.eclipse.jetty.server.Handler;
@@ -43,7 +43,7 @@ public class JettyServer {
         AtmosphereServlet atmoServlet = new AtmosphereServlet();
         context.addServlet(new ServletHolder(atmoServlet), "/atmos/*");
 
-        ResourceConfig resourceConfig = new ResourceConfig(UserResource.class, ChatJerseyResource.class);
+        ResourceConfig resourceConfig = new ResourceConfig(UserResource.class, ChatMessageResource.class);
         ServletContainer jerseyContainer = new ServletContainer(resourceConfig);
         context.addServlet(new ServletHolder(jerseyContainer), "/api/*");
 

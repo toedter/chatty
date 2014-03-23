@@ -9,28 +9,36 @@ package com.toedter.chatty.server.resources;
 import com.theoryinpractise.halbuilder.api.Representation;
 import com.theoryinpractise.halbuilder.api.RepresentationFactory;
 import com.theoryinpractise.halbuilder.standard.StandardRepresentationFactory;
+import com.toedter.chatty.model.ChatMessage;
+import com.toedter.chatty.model.ChatMessageRepository;
 import com.toedter.chatty.model.ModelFactory;
 import com.toedter.chatty.model.User;
-import com.toedter.chatty.model.UserRepository;
+import org.atmosphere.client.TrackMessageSizeInterceptor;
+import org.atmosphere.config.service.AtmosphereService;
+import org.atmosphere.cpr.BroadcasterFactory;
+import org.atmosphere.interceptor.AtmosphereResourceLifecycleInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
-import java.net.URI;
 
-@Path("users")
-public class UserResource {
+@Path("messages")
+@AtmosphereService(
+        dispatch = false,
+        interceptors = {AtmosphereResourceLifecycleInterceptor.class, TrackMessageSizeInterceptor.class},
+        path = "atmos/messages",
+        servlet = "org.glassfish.jersey.servlet.ServletContainer")
+public class ChatMessageResource {
     private static final RepresentationFactory representationFactory = new StandardRepresentationFactory();
     private static final MediaType HAL_JSON_TYPE = new MediaType("application", "hal+json");
 
-    private static Logger logger = LoggerFactory.getLogger(UserResource.class);
-    private static UserRepository userRepository = ModelFactory.getInstance().getUserRepository();
+    private final Logger logger = LoggerFactory.getLogger(ChatMessageResource.class);
 
     @GET
     @Produces(RepresentationFactory.HAL_JSON)
@@ -40,25 +48,21 @@ public class UserResource {
         Representation listRep = representationFactory.newRepresentation();
         listRep.withLink("self", baseURI, null, null, "en", "chatty");
 
-        for (User user : userRepository.getAll()) {
+        ChatMessageRepository chatMessageRepository = ModelFactory.getInstance().getChatMessageRepository();
+
+        for (ChatMessage chatMessage : chatMessageRepository.getAll()) {
             Representation rep = representationFactory.newRepresentation();
-            rep.withBean(user)
-                    .withLink("self", baseURI + "/" + user.getId());
-            listRep.withRepresentation("users", rep);
+            rep.withBean(chatMessage)
+                    .withLink("self", baseURI + "/" + chatMessage.getId());
+            listRep.withRepresentation("messages", rep);
         }
         return listRep.toString(RepresentationFactory.HAL_JSON);
     }
 
-    @GET
-    @Path("/{id}")
-    @Produces(RepresentationFactory.HAL_JSON)
-    public String getUser(@Context UriInfo uriInfo, @PathParam("id") final String id) {
-        Representation rep = representationFactory.newRepresentation();
-        String baseURI = uriInfo.getRequestUri().toString();
-
-        User user = userRepository.getUserById(id);
-        rep.withBean(user)
-                .withLink("self", baseURI);
-        return rep.toString(RepresentationFactory.HAL_JSON);
+    @POST
+    public void broadcast(String message) {
+        logger.info("Got message in post: " + message);
+        BroadcasterFactory.getDefault().lookup("/atmos/messages").broadcast(message);
     }
+
 }

@@ -40,7 +40,7 @@ public abstract class AbstractIntegrationTest {
     private UserRepository userRepository;
     protected static int freePort = findFreePort();
     protected static final String BASE_URI = "http://localhost:" + freePort;
-    protected ResourceConfig resourceConfig = new ResourceConfig(UserResource.class, ChatJerseyResource.class);
+    protected ResourceConfig resourceConfig = new ResourceConfig(UserResource.class, ChatMessageResource.class);
     protected Request.TRANSPORT atmosphereTransport = Request.TRANSPORT.LONG_POLLING;
 
     protected static int findFreePort() {
@@ -163,7 +163,7 @@ public abstract class AbstractIntegrationTest {
 
         RequestBuilder request = client.newRequestBuilder()
                 .method(Request.METHOD.GET)
-                .uri(BASE_URI + "/chatty/atmos/chat2")
+                .uri(BASE_URI + "/chatty/atmos/messages")
                 .trackMessageLength(true)
                 .transport(atmosphereTransport);
 
@@ -183,7 +183,7 @@ public abstract class AbstractIntegrationTest {
 
         }).open(request.build());
 
-        target.path("/api/chat2").request().post(Entity
+        target.path("/api/messages").request().post(Entity
                 .entity("hello Jersey", MediaType.TEXT_PLAIN), String.class);
         latch.await(1, TimeUnit.SECONDS);
         socket.close();
