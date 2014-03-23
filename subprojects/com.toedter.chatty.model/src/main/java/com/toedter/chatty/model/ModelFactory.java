@@ -17,9 +17,9 @@ public class ModelFactory {
     private UserRepository userRepository;
 
     public ModelFactory() {
-            userRepository = new InMemoryUserRepository();
-            logger.info("Using memory based user repository.");
-     }
+        userRepository = new InMemoryUserRepository();
+        logger.info("Using memory based user repository.");
+    }
 
     public static ModelFactory getInstance() {
         return instance;
@@ -27,5 +27,11 @@ public class ModelFactory {
 
     public UserRepository getUserRepository() {
         return userRepository;
+    }
+
+    public void initTestData() {
+        userRepository.createUser(new SimpleUser("toedter_k", "Kai Toedter", "kai@toedter.com"));
+        userRepository.createUser(new SimpleUser("doe_jo", "John Doe", "john@doe.com"));
+        userRepository.createUser(new SimpleUser("doe_ja", "Jane Doe", "jane@doe.com"));
     }
 }

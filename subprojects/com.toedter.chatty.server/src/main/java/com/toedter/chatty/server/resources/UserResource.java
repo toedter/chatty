@@ -19,7 +19,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriInfo;
 
 @Path("users")
 public class UserResource {
@@ -31,14 +33,16 @@ public class UserResource {
 
     @GET
     @Produces(RepresentationFactory.HAL_JSON)
-    public String getUsers() {
+    public String getUsers(@Context UriInfo uriInfo) {
+        String baseURI = uriInfo.getRequestUri().toString();
+
         Representation listRep = representationFactory.newRepresentation();
-        listRep.withLink("self", "/chatty/api/users", null, null, "en", "cis");
+        listRep.withLink("self", baseURI, null, null, "en", "chatty");
 
         for (User user : userRepository.getAll()) {
             Representation rep = representationFactory.newRepresentation();
             rep.withBean(user)
-                    .withLink("self", "/chatty/api/users/" + user.getId());
+                    .withLink("self", baseURI + "/" + user.getId());
             listRep.withRepresentation("users", rep);
         }
         return listRep.toString(RepresentationFactory.HAL_JSON);
@@ -47,11 +51,13 @@ public class UserResource {
     @GET
     @Path("/{id}")
     @Produces(RepresentationFactory.HAL_JSON)
-    public String getUser(@PathParam("id") final String id) {
+    public String getUser(@Context UriInfo uriInfo, @PathParam("id") final String id) {
         Representation rep = representationFactory.newRepresentation();
+        String baseURI = uriInfo.getRequestUri().toString();
+
         User user = userRepository.getUserById(id);
         rep.withBean(user)
-                .withLink("self", "/cis/api/users/" + id);
+                .withLink("self", baseURI);
         return rep.toString(RepresentationFactory.HAL_JSON);
     }
 }

@@ -6,6 +6,7 @@
 
 package com.toedter.chatty.server;
 
+import com.toedter.chatty.model.ModelFactory;
 import com.toedter.chatty.server.resources.ChatJerseyResource;
 import com.toedter.chatty.server.resources.UserResource;
 import org.atmosphere.cpr.AtmosphereServlet;
@@ -88,6 +89,9 @@ public class JettyServer {
     public static void main(String[] args) {
         JettyServer jettyServer = new JettyServer();
         try {
+            if(args != null && "inittestdata".equals(args[0])) {
+                ModelFactory.getInstance().initTestData();
+            }
             jettyServer.startServer(8080);
 //            System.in.read();
 //            jettyServer.stopServer();
