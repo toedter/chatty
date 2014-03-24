@@ -79,7 +79,7 @@ public class JettyServer {
 
         server.start();
         logger.info("Jetty server started with port " + port);
-        // server.join();
+        server.join();
     }
 
     public void stopServer() throws Exception {
