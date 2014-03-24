@@ -79,7 +79,7 @@ public class JettyServer {
 
         server.start();
         logger.info("Jetty server started with port " + port);
-        server.join();
+        // server.join();
     }
 
     public void stopServer() throws Exception {
@@ -89,13 +89,14 @@ public class JettyServer {
     public static void main(String[] args) {
         JettyServer jettyServer = new JettyServer();
         try {
-            if(args != null && "inittestdata".equals(args[0])) {
+            if(args != null && args.length > 0 && "inittestdata".equals(args[0])) {
                 ModelFactory.getInstance().initTestData();
             }
             jettyServer.startServer(8080);
 //            System.in.read();
 //            jettyServer.stopServer();
         } catch (Exception e) {
+            e.printStackTrace();
             logger.error("Cannot start Jetty server with port 8080");
         }
     }
