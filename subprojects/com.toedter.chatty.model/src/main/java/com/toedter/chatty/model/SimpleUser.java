@@ -7,9 +7,9 @@
 package com.toedter.chatty.model;
 
 public class SimpleUser implements User {
-    private final String id;
-    private final String fullName;
-    private final String email;
+    private  String id;
+    private  String fullName;
+    private  String email;
 
     public SimpleUser() {
         this.id = "";
@@ -38,4 +38,24 @@ public class SimpleUser implements User {
         return email;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "SimpleUser{" +
+                "id='" + id + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

@@ -6,9 +6,8 @@
 
 package com.toedter.chatty.server.resources;
 
-import com.toedter.chatty.model.ModelFactory;
-import com.toedter.chatty.model.SimpleUser;
-import com.toedter.chatty.model.UserRepository;
+import com.theoryinpractise.halbuilder.api.RepresentationFactory;
+import com.toedter.chatty.model.*;
 import org.atmosphere.wasync.*;
 import org.atmosphere.wasync.impl.AtmosphereClient;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -168,6 +167,8 @@ public abstract class AbstractIntegrationTest {
                 .transport(atmosphereTransport);
 
         Socket socket = client.create();
+        // TODO Check why Java 8 Lambdas don't work here
+        // TODO Try to deserialize a ChatMessage from a JSON+HAL string
         socket.on(new Function<String>() {
             @Override
             public void on(String message) {
@@ -183,11 +184,15 @@ public abstract class AbstractIntegrationTest {
 
         }).open(request.build());
 
-        target.path("/api/messages").request().post(Entity
-                .entity("hello Jersey", MediaType.TEXT_PLAIN), String.class);
+        SimpleUser author = new SimpleUser("author-id", "The Author", "author@test.com");
+        ChatMessage chatMessage = new SimpleChatMessage(author, "hello Jersey");
+
+        target.path("/api/messages").request(RepresentationFactory.HAL_JSON).post(Entity
+                .entity(chatMessage, MediaType.APPLICATION_JSON_TYPE), SimpleChatMessage.class);
         latch.await(1, TimeUnit.SECONDS);
         socket.close();
-        assertThat(receivedMessage.toString(), is("hello Jersey"));
+
+        assertThat(receivedMessage.toString(), containsString("hello Jersey"));
     }
 
 }

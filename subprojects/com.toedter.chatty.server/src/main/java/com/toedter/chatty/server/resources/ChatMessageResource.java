@@ -12,6 +12,7 @@ import com.theoryinpractise.halbuilder.standard.StandardRepresentationFactory;
 import com.toedter.chatty.model.ChatMessage;
 import com.toedter.chatty.model.ChatMessageRepository;
 import com.toedter.chatty.model.ModelFactory;
+import com.toedter.chatty.model.SimpleChatMessage;
 import org.atmosphere.client.TrackMessageSizeInterceptor;
 import org.atmosphere.config.service.AtmosphereService;
 import org.atmosphere.cpr.BroadcasterFactory;
@@ -87,9 +88,25 @@ public class ChatMessageResource {
     }
 
     @POST
-    public void broadcast(String message) {
-        logger.info("Got message in post: " + message);
-        BroadcasterFactory.getDefault().lookup("/atmos/messages").broadcast(message);
+    public void broadcast(@Context UriInfo uriInfo, SimpleChatMessage chatMessage) {
+        logger.info("Got message in post: " + chatMessage);
+
+        Representation rep = representationFactory.newRepresentation();
+        String baseURI = uriInfo.getRequestUri().toString();
+
+        rep.withLink("self", baseURI);
+
+        Representation authorRep = representationFactory.newRepresentation();
+        authorRep.withBean(chatMessage.getAuthor());
+        rep.withRepresentation("author", authorRep);
+
+        rep.withProperty("id", chatMessage.getId())
+                .withProperty("message", chatMessage.getMessage())
+                .withProperty("timeStamp", chatMessage.getTimeStamp().toString());
+
+        String jsonString = rep.toString(RepresentationFactory.HAL_JSON);
+        logger.info("JSONized message: " + jsonString);
+        BroadcasterFactory.getDefault().lookup("/atmos/messages").broadcast(jsonString);
     }
 
 }

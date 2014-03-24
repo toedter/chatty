@@ -25,7 +25,7 @@ public class SimpleChatMessageTest {
 
     @Test
     public void should_create_SimpleChatMessage_with_non_default_constructor() {
-        User authorMock = mock(User.class);
+        SimpleUser authorMock = mock(SimpleUser.class);
         ChatMessage chatMessage = new SimpleChatMessage(authorMock, "hello");
         assertThat(chatMessage.getId(), greaterThan(0L));
         assertThat(chatMessage.getTimeStamp(), lessThanOrEqualTo(Instant.now()));
