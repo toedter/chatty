@@ -54,7 +54,7 @@ task startServerSync(type: JavaExec) {
 
 task startServerAsync(type: ExecAndWait) {
     String gradlewExecutable = Os.isFamily(Os.FAMILY_WINDOWS) ? "gradlew.bat" : "./gradlew"
-    command "$gradlewExecutable :com.toedter.chatty.server:startServerSync"
+    command "$project.rootDir/$gradlewExecutable :com.toedter.chatty.server:startServerSync"
     readyString 'Jetty server started'
     logMessage ":$project.name:$it.name: Jetty server started and ready"
 }

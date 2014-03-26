@@ -20,7 +20,7 @@
     <logger name="org" level="ERROR"/>
 
     <root>
-        <level value="debug"/>
+        <level value="ERROR"/>
 
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
