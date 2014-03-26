@@ -5,24 +5,27 @@
 // TypeScript Definitions are licensed under MIT license, see see http://toedter.mit-license.org/
 
 declare module Atmosphere {
-    interface Atmoshere {
+    interface Atmosphere {
         subscribe?: (string?, callback?:Function, request?:Request) => any;
         unsubscribe?: () => any;
-        unsubscribeUrl?: (url:string) => any;
-        addCallback?: (callback:Function) => any;
+
+        // Which of the below is API
+
+//        unsubscribeUrl?: (url:string) => any;
+//        addCallback?: (callback:Function) => any;
 
 
-        onError?: (response?:Response) => any;
-        onClose?:  (response?:Response)  => any;
-        onOpen?:  (response?:Response)  => any;
-        onMessage?:  (response?:Response)  => any;
-        onReopen?:  (request?:Request, response?:Response) => any;
-        onReconnect?:  (request?:Request, response?:Response)  => any;
-        onMessagePublished?:  (response?:Response)  => any;
-        onTransportFailure?:  (reason?:string, response?:Response)  => any;
-        onLocalMessage?:  (request?:Request) => any;
-        onFailureToReconnect?:  (request?:Request, response?:Response) => any;
-        onClientTimeout?: (request?:Request) => any;
+//        onError?: (response?:Response) => any;
+//        onClose?:  (response?:Response)  => any;
+//        onOpen?:  (response?:Response)  => any;
+//        onMessage?:  (response?:Response)  => any;
+//        onReopen?:  (request?:Request, response?:Response) => any;
+//        onReconnect?:  (request?:Request, response?:Response)  => any;
+//        onMessagePublished?:  (response?:Response)  => any;
+//        onTransportFailure?:  (reason?:string, response?:Response)  => any;
+//        onLocalMessage?:  (request?:Request) => any;
+//        onFailureToReconnect?:  (request?:Request, response?:Response) => any;
+//        onClientTimeout?: (request?:Request) => any;
     }
 
     interface Response {
@@ -41,6 +44,7 @@ declare module Atmosphere {
     }
 
     interface Request {
+        // Which of the below is API?
         timeout?: number;
         method?: string;
         headers?: any;
@@ -108,6 +112,7 @@ declare module Atmosphere {
     }
 
     interface Util {
+        // is Util supposed to be Atmosphere API?
         now:  ()  => number;
         parseHeaders:  (headerString:string) => any;
         isArray:  (array:any[])  => boolean;
@@ -136,6 +141,6 @@ declare module Atmosphere {
     }
 }
 
-declare var atmosphere:Atmosphere.Atmoshere;
+declare var atmosphere:Atmosphere.Atmosphere;
 
 

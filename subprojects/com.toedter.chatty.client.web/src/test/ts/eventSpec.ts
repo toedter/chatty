@@ -11,7 +11,7 @@ describe('Publish - Subscribe', () => {
 
     it('should subscribe for a message and receive a sent message (transport: websocket)', (done) => {
         "use strict";
-        var socket:Atmosphere.Atmoshere = atmosphere;
+        var socket:Atmosphere.Atmosphere = atmosphere;
 
         var request:Atmosphere.Request = {
             url: "http://localhost:8080/chatty/atmos/chat",
@@ -42,7 +42,7 @@ describe('Publish - Subscribe', () => {
 
     it('should subscribe for a message and receive a sent message with POST', (done) => {
         "use strict";
-        var socket:Atmosphere.Atmoshere = atmosphere;
+        var socket:Atmosphere.Atmosphere = atmosphere;
 
         var request:Atmosphere.Request = {
             url: "http://localhost:8080/chatty/atmos/messages",
