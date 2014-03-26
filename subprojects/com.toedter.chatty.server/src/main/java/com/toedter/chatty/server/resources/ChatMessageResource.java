@@ -88,6 +88,7 @@ public class ChatMessageResource {
     }
 
     @POST
+    @Consumes("application/json")
     public void broadcast(@Context UriInfo uriInfo, SimpleChatMessage chatMessage) {
         logger.info("Got message in post: " + chatMessage);
 

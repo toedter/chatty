@@ -9,9 +9,9 @@ dependencies {
     testCompile 'org.mockito:mockito-all:1.9.5'
 }
 
-tasks.withType(Test) {
-    testLogging {
-        showStandardStreams = true
-        exceptionFormat 'full'
-    }
-}
+//tasks.withType(Test) {
+//    testLogging {
+//        showStandardStreams = true
+//        exceptionFormat 'full'
+//    }
+//}

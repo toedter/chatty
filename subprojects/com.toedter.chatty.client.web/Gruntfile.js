@@ -7,8 +7,10 @@ module.exports = function (grunt) {
             src: ['src/**/*.js', 'bower_components/atmosphere/atmosphere.js'],
             options: {
                 specs: 'stc/**/*Spec.js',
-                keepRunner: true
-            }
+                keepRunner: true,
+                '--web-security' : false,
+                '--local-to-remote-url-access' : true,
+                '--ignore-ssl-errors' : true           }
         },
         typescript: {
             base: {
