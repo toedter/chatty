@@ -3,7 +3,10 @@
     "version": "0.1.0",
     "description": "chat demo using atmosphere, typescript, javascript, jasmine, grunt, bower, etc.",
     "dependencies": {
-        "atmosphere": "latest"
+        "atmosphere": "latest",
+        "angularjs": "latest",
+        "angular-resource": "latest",
+        "bootstrap": "latest"
     },
     "devDependencies": {}
 }

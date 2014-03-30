@@ -13,7 +13,7 @@ public class SimpleChatMessage implements ChatMessage {
     private static AtomicLong nextId = new AtomicLong(1);
 
     private long id;
-    private String message;
+    private String text;
     private SimpleUser author;
     private Instant instant;
 
@@ -26,10 +26,10 @@ public class SimpleChatMessage implements ChatMessage {
         SimpleChatMessage.nextId = nextId;
     }
 
-    public SimpleChatMessage(SimpleUser author, String message) {
+    public SimpleChatMessage(SimpleUser author, String text) {
         this();
         this.author = author;
-        this.message = message;
+        this.text = text;
     }
 
     @Override
@@ -38,8 +38,8 @@ public class SimpleChatMessage implements ChatMessage {
     }
 
     @Override
-    public String getMessage() {
-        return message;
+    public String getText() {
+        return text;
     }
 
     @Override
@@ -56,8 +56,8 @@ public class SimpleChatMessage implements ChatMessage {
         this.id = id;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public void setAuthor(SimpleUser author) {
@@ -72,7 +72,7 @@ public class SimpleChatMessage implements ChatMessage {
     public String toString() {
         return "SimpleChatMessage{" +
                 "id=" + id +
-                ", message='" + message + '\'' +
+                ", text='" + text + '\'' +
                 ", author=" + author +
                 ", instant=" + instant +
                 '}';

@@ -9,10 +9,7 @@ package com.toedter.chatty.server.resources;
 import com.theoryinpractise.halbuilder.api.Representation;
 import com.theoryinpractise.halbuilder.api.RepresentationFactory;
 import com.theoryinpractise.halbuilder.standard.StandardRepresentationFactory;
-import com.toedter.chatty.model.ChatMessage;
-import com.toedter.chatty.model.ChatMessageRepository;
-import com.toedter.chatty.model.ModelFactory;
-import com.toedter.chatty.model.SimpleChatMessage;
+import com.toedter.chatty.model.*;
 import org.atmosphere.client.TrackMessageSizeInterceptor;
 import org.atmosphere.config.service.AtmosphereService;
 import org.atmosphere.cpr.BroadcasterFactory;
@@ -53,13 +50,15 @@ public class ChatMessageResource {
             rep.withLink("self", baseURI + "/" + chatMessage.getId())
                     .withLink("author", authorBaseURI + "/" + chatMessage.getAuthor().getId());
 
-//            Representation authorRep = representationFactory.newRepresentation();
-//            authorRep.withBean(chatMessage.getAuthor());
-//            rep.withRepresentation("author", authorRep);
-
             rep.withProperty("id", chatMessage.getId())
-                    .withProperty("message", chatMessage.getMessage())
+                    .withProperty("text", chatMessage.getText())
                     .withProperty("timeStamp", chatMessage.getTimeStamp().toString());
+
+            Representation authorRep = representationFactory.newRepresentation();
+            authorRep.withProperty("id", chatMessage.getAuthor().getId());
+
+            rep.withRepresentation("author", authorRep);
+
 
             listRep.withRepresentation("messages", rep);
         }
@@ -81,7 +80,7 @@ public class ChatMessageResource {
         rep.withRepresentation("author", authorRep);
 
         rep.withProperty("id", chatMessage.getId())
-                .withProperty("message", chatMessage.getMessage())
+                .withProperty("text", chatMessage.getText())
                 .withProperty("timeStamp", chatMessage.getTimeStamp().toString());
 
         return rep.toString(RepresentationFactory.HAL_JSON);
@@ -102,7 +101,7 @@ public class ChatMessageResource {
         rep.withRepresentation("author", authorRep);
 
         rep.withProperty("id", chatMessage.getId())
-                .withProperty("message", chatMessage.getMessage())
+                .withProperty("message", chatMessage.getText())
                 .withProperty("timeStamp", chatMessage.getTimeStamp().toString());
 
         String jsonString = rep.toString(RepresentationFactory.HAL_JSON);

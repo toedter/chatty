@@ -4,8 +4,8 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-/// <reference path="../../typescript-defs/jasmine.d.ts" />
-/// <reference path="../../typescript-defs/atmosphere.d.ts" />
+/// <reference path='../../typescript-defs/jasmine.d.ts' />
+/// <reference path='../../typescript-defs/atmosphere.d.ts' />
 
 describe('Publish - Subscribe', () => {
 
@@ -60,7 +60,7 @@ describe('Publish - Subscribe', () => {
             var postRequest = new XMLHttpRequest();
             postRequest.open("POST", "http://localhost:8080/chatty/api/messages", false);
             postRequest.setRequestHeader("Content-Type", "application/json");
-            postRequest.send('{"id":1,"message":"hello Jersey","timeStamp":"2014-03-25T17:38:34.765Z","author":{"email":"author@test.com","fullName":"The Author","id":"author-id"}}');
+            postRequest.send('{"id":1,"text":"hello Jersey","timeStamp":"2014-03-25T17:38:34.765Z","author":{"email":"author@test.com","fullName":"The Author","id":"author-id"}}');
         };
 
         request.onMessage = function (response:Atmosphere.Response) {

@@ -16,6 +16,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.eclipse.jetty.server.handler.ContextHandler;
 import org.eclipse.jetty.server.handler.HandlerCollection;
+import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -77,8 +78,13 @@ public class JettyServer {
         };
         handlerContext.setHandler(stopJettyHandler);
 
+        ResourceHandler fileHandler = new ResourceHandler();
+        fileHandler.setDirectoriesListed(true);
+        fileHandler.setWelcomeFiles(new String[]{"index.html"});
+        fileHandler.setResourceBase("subprojects/com.toedter.chatty.client.web");
+
         HandlerCollection handlerCollection = new HandlerCollection();
-        Handler[] handlers = {context, handlerContext};
+        Handler[] handlers = {context, handlerContext, fileHandler};
         handlerCollection.setHandlers(handlers);
         server.setHandler(handlerCollection);
 
