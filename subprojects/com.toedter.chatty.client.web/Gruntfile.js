@@ -4,17 +4,37 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         jasmine: {
-            src: ['src/**/*.js', 'bower_components/atmosphere/atmosphere.js'],
-            options: {
-                specs: 'stc/**/*Spec.js',
-                keepRunner: true,
-                '--web-security' : false,
-                '--local-to-remote-url-access' : true,
-                '--ignore-ssl-errors' : true           }
+            unit: {
+                src: ['bower_components/jquery/*min.js',
+                    'bower_components/angular/*min.js',
+                    'bower_components/angular-resource/*min.js',
+                    'bower_components/bootstrap/*min.js',
+                    'bower_components/atmosphere/*min.js',
+                    'src/main/**/*.js'],
+                options: {
+                    specs: 'src/test/**/*Spec.js',
+                    keepRunner: true
+                }
+            },
+            integration: {
+                src: ['bower_components/jquery/*min.js',
+                    'bower_components/angular/*min.js',
+                    'bower_components/angular-resource/*min.js',
+                    'bower_components/bootstrap/*min.js',
+                    'bower_components/atmosphere/*min.js',
+                    'src/main/**/*.js'],
+                options: {
+                    specs: 'src/integTest/**/*Spec.js',
+                    keepRunner: true,
+                    '--web-security': false,
+                    '--local-to-remote-url-access': true,
+                    '--ignore-ssl-errors': true
+                }
+            }
         },
         typescript: {
             base: {
-                src: ['src/**/*.ts'],
+                src: ['src/main/**/*.ts', 'src/test/**/*.ts', 'src/integTest/**/*.ts'],
                 options: {
                     // module: 'commonjs', // or amd
                     target: 'es5', //or es3
@@ -48,7 +68,7 @@ module.exports = function (grunt) {
             }
         },
         jshint: {
-             all: {
+            all: {
                 options: {
                     '-W069': true
                 },
@@ -63,6 +83,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.registerTask('default', ['typescript:base', 'jasmine', 'jshint', 'dist']);
-    grunt.registerTask('test', ['typescript:base', 'jasmine']);
+    grunt.registerTask('test', ['typescript:base', 'jasmine:unit']);
+    grunt.registerTask('itest', ['typescript:base', 'jasmine:integration']);
     grunt.registerTask('dist', ['typescript:dist', 'uglify']);
 };

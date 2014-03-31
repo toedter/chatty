@@ -8,17 +8,25 @@ buildscript {
 
 task gruntTest(type: GruntTask) {
     group = "Verification"
-    description = "Runs the Jasmine tests."
+    description = "Runs the Jasmine unit tests."
     gruntArgs = "test"
 
     inputs.dir "[relative-path-to-source]"
     inputs.file file("Gruntfile.js")
 }
 
-gruntTest.dependsOn ':com.toedter.chatty.server:startServerAsync'
-task gruntIntegrationTest(dependsOn: gruntTest)
+task gruntIntegrationTest(type: GruntTask) {
+    group = "Verification"
+    description = "Runs the Jasmine integration tests."
+    gruntArgs = "itest"
+
+    inputs.dir "[relative-path-to-source]"
+    inputs.file file("Gruntfile.js")
+}
+
+gruntIntegrationTest.dependsOn ':com.toedter.chatty.server:startServerAsync'
+gruntIntegrationTest.mustRunAfter ':com.toedter.chatty.server:integrationTest'
+gruntIntegrationTest.finalizedBy(':com.toedter.chatty.server:stopServer')
 
 integrationTest.dependsOn gruntIntegrationTest;
-gruntIntegrationTest.mustRunAfter ':com.toedter.chatty.server:integrationTest'
-
-gruntTest.finalizedBy(':com.toedter.chatty.server:stopServer')
+test.dependsOn gruntTest;

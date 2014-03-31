@@ -30,6 +30,6 @@ public class SimpleChatMessageTest {
         assertThat(chatMessage.getId(), greaterThan(0L));
         assertThat(chatMessage.getTimeStamp(), lessThanOrEqualTo(Instant.now()));
         assertThat(chatMessage.getAuthor(), is(authorMock));
-        assertThat(chatMessage.getMessage(), is("hello"));
+        assertThat(chatMessage.getText(), is("hello"));
     }
 }

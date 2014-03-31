@@ -11,7 +11,7 @@ import java.time.Instant;
 public interface ChatMessage {
     long getId();
 
-    String getMessage();
+    String getText();
 
     User getAuthor();
 
