@@ -100,9 +100,6 @@ public class JettyServer {
     public static void main(String[] args) {
         JettyServer jettyServer = new JettyServer();
         int port = 8080;
-        if(System.getenv("CIS_FREEPORT") != null) {
-            port = Integer.parseInt(System.getenv("CIS_FREEPORT"));
-        }
         try {
             if (args != null && args.length > 0) {
                 for (String arg : args) {
