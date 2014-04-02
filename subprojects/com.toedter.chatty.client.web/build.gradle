@@ -25,7 +25,7 @@ task gruntIntegrationTest(type: GruntTask) {
         def dirs= new File("$project.projectDir/src/generated/js")
         dirs.mkdirs()
         def freePort = project(':com.toedter.chatty.server').freePort
-        def portJs = new File("src/generated/js/freePort.js")
+        def portJs = new File("$project.projectDir/src/generated/js/freePort.js")
         if (portJs.exists()) {
             portJs.delete();
         }
