@@ -22,7 +22,10 @@ module.exports = function (grunt) {
                     'bower_components/angular-resource/*min.js',
                     'bower_components/bootstrap/*min.js',
                     'bower_components/atmosphere/*min.js',
-                    'src/main/**/*.js'],
+                    'src/main/**/*.js',
+                    'src/generated/**/*.js',
+                    'src/integTest/**/*Helper.js'
+                ],
                 options: {
                     specs: 'src/integTest/**/*Spec.js',
                     keepRunner: true,

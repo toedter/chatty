@@ -43,22 +43,44 @@ task startServerAsyncWithAnt << {
     ant.java(fork: true, spawn: true, classname: "com.toedter.chatty.server.JettyServer", classpath: cp)
 }
 
-task stopServer(type: ShutdownServerTask) << {
-    logger.lifecycle(":$project.name:$it.name: stopping Jetty server")
-}
-
 task startServerSync(type: JavaExec) {
+    if (project.hasProperty('port')) {
+        args = ['-port=' + port]
+    }
     main = 'com.toedter.chatty.server.JettyServer'
     classpath = sourceSets.main.runtimeClasspath
 }
 
 task startServerAsync(type: ExecAndWait) {
+    project.ext.freePort = findFreePort("$it.name")
+
     String gradlewExecutable = Os.isFamily(Os.FAMILY_WINDOWS) ? "gradlew.bat" : "./gradlew"
-    command "$project.rootDir/$gradlewExecutable :com.toedter.chatty.server:startServerSync"
+    command "$project.rootDir/$gradlewExecutable :com.toedter.chatty.server:startServerSync -Pport=$project.freePort"
     readyString 'Jetty server started'
-    logMessage ":$project.name:$it.name: Jetty server started and ready"
+    logMessage ":$project.name:$it.name: Jetty server started using port: $project.freePort"
 }
 
-task printName() << {
-    logger.lifecycle(":$project.name:$it.name: Jetty server started and ready")
+task stopServer(type: ShutdownServerTask) {
+    port = project.freePort;
+}
+
+def int findFreePort(String task) {
+    ServerSocket socket = null;
+    try {
+        socket = new ServerSocket(0);
+        int port = socket.getLocalPort();
+        // logger.lifecycle(":$project.name:$task: using port {} for integration tests.", port);
+        return port;
+    } catch (IOException e) {
+        logger.lifecycle(":$project.name:$task: cannot find free port, will use 8080.");
+        return 8080;
+    } finally {
+        if (socket != null) {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                logger.lifecycle("cannot close socket used for free port creation.");
+            }
+        }
+    }
 }

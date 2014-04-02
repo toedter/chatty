@@ -13,9 +13,11 @@ import org.gradle.api.tasks.TaskAction
 import static groovyx.net.http.ContentType.TEXT
 
 class ShutdownServerTask extends DefaultTask {
+    def port = "8080"
+
     @TaskAction
     private boolean shutdownServer() {
-        def http = new HTTPBuilder("http://localhost:8080/shutdown")
+        def http = new HTTPBuilder("http://localhost:" + port +"/shutdown")
         def responseStatus = http.get(contentType: TEXT) { resp, reader ->
             resp.status
         }

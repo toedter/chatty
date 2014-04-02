@@ -16,6 +16,21 @@ task gruntTest(type: GruntTask) {
 }
 
 task gruntIntegrationTest(type: GruntTask) {
+    doFirst {
+        // The integration test server finds a free port
+        // This port is propagated through the ext.freePort project property
+        // To publish it to the JavaScript integration tests, a js file containing
+        // the port is created on the fly
+        // this file has to be included in the jasmine src config
+        def freePort = project(':com.toedter.chatty.server').freePort
+        def portJs = new File("src/generated/freePort.js")
+        if (portJs.exists()) {
+            portJs.delete();
+        }
+        portJs.createNewFile()
+        portJs.append("var freePort = " + freePort + ";");
+    }
+
     group = "Verification"
     description = "Runs the Jasmine integration tests."
     gruntArgs = "itest"

@@ -6,7 +6,9 @@
 
 /// <reference path='../../typescript-defs/jasmine.d.ts' />
 /// <reference path='../../typescript-defs/atmosphere.d.ts' />
+/// <reference path='testHelper.ts' />
 
+var serverPort:number = getFreePort();
 describe('Publish - Subscribe', () => {
 
     it('should subscribe for a message and receive a sent message (transport: websocket)', (done) => {
@@ -14,8 +16,8 @@ describe('Publish - Subscribe', () => {
         var socket:Atmosphere.Atmosphere = atmosphere;
 
         var request:Atmosphere.Request = {
-            url: "http://localhost:8080/chatty/atmos/chat",
-            contentType: "application/json",
+            url: 'http://localhost:' + serverPort + '/chatty/atmos/chat',
+            contentType: 'application/json',
             logLevel: 'debug',
             transport: 'websocket',
             trackMessageLength: true,
@@ -45,8 +47,8 @@ describe('Publish - Subscribe', () => {
         var socket:Atmosphere.Atmosphere = atmosphere;
 
         var request:Atmosphere.Request = {
-            url: "http://localhost:8080/chatty/atmos/messages",
-            contentType: "application/json",
+            url: 'http://localhost:' + serverPort + '/chatty/atmos/messages',
+            contentType: 'application/json',
             logLevel: 'debug',
             transport: 'websocket',
             trackMessageLength: true,
@@ -58,8 +60,8 @@ describe('Publish - Subscribe', () => {
             console.log('atmosphere opened with transport ' + response.transport);
 
             var postRequest = new XMLHttpRequest();
-            postRequest.open("POST", "http://localhost:8080/chatty/api/messages", false);
-            postRequest.setRequestHeader("Content-Type", "application/json");
+            postRequest.open('POST', 'http://localhost:' + serverPort + '/chatty/api/messages', false);
+            postRequest.setRequestHeader("Content-Type", 'application/json');
             postRequest.send('{"id":1,"text":"hello Jersey","timeStamp":"2014-03-25T17:38:34.765Z","author":{"email":"author@test.com","fullName":"The Author","id":"author-id"}}');
         };
 

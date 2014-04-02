@@ -99,16 +99,26 @@ public class JettyServer {
 
     public static void main(String[] args) {
         JettyServer jettyServer = new JettyServer();
+        int port = 8080;
+        if(System.getenv("CIS_FREEPORT") != null) {
+            port = Integer.parseInt(System.getenv("CIS_FREEPORT"));
+        }
         try {
-            if(args != null && args.length > 0 && "inittestdata".equals(args[0])) {
-                ModelFactory.getInstance().initTestData();
+            if (args != null && args.length > 0) {
+                for (String arg : args) {
+                    if ("-testdata".equals(arg)) {
+                        ModelFactory.getInstance().initTestData();
+                    } else if (arg.startsWith("-port=")) {
+                        port = Integer.parseInt(arg.substring(6));
+                    }
+                }
             }
-            jettyServer.startServer(8080);
+            jettyServer.startServer(port);
 //            System.in.read();
 //            jettyServer.stopServer();
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error("Cannot start Jetty server with port 8080");
+            logger.error("Cannot start Jetty server");
         }
     }
 }
