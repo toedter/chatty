@@ -15,15 +15,17 @@ class UserService {
         console.log('User service started')
     }
 
-    connectUser(user:any, callback:(user:chatty.model.User) => void) {
+    connectUser(user:any, successCallback:(user:chatty.model.User) => void, errorCallback:(result:any) => void) {
 
         var userResource:chatty.model.UserResource =
             <chatty.model.UserResource> this.$resource('http://localhost:8080/chatty/api/users');
 
         userResource.save(user, (result:any) => {
-            callback(result);
+            successCallback(result);
         }, (result:any) => {
-            console.log('user id ' + user.id + ' already in use, please choose another id');
+            var alert:string ='user id ' + user.id + ' already in use, please choose another id';
+            console.log(alert);
+            errorCallback(result);
         });
     }
 

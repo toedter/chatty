@@ -42,7 +42,11 @@
             <div class="form-group">
                 <input style="width:458px" class="form-control" ng-model="chatMessage"
                        ng-disabled="!isConnected" placeholder="Enter chat message">
-                <button style="width:100px" type="submit" ng-disabled="!isConnected" class="btn btn-success">Send</button>
+                <button style="width:100px" type="submit" ng-disabled="!isConnected" class="btn btn-success">Send
+                </button>
+                </br>
+                </br>
+                <div class="alert {{chatStatusType}}">{{chatStatus}}</div>
             </div>
         </form>
 

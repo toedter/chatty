@@ -31,16 +31,22 @@ class MainController {
                         (user:chatty.model.User) => {
                             console.log("got user: " + user.id);
                             $scope.connectedUser = user;
-                            $scope.userButtonText = 'Disconnect';
-                            $scope.isConnected = true;
+                            $scope.subSocket = socket.subscribe(request);
+                        },
+                        (result:any) => {
+                            var alert:string ='user id "' + $scope.userId + '" already in use, please choose another id';
+                            $scope.chatStatus = alert;
+                            $scope.chatStatusType = 'alert alert-danger';
                         });
+                } else {
+                    var alert:string ='Please fill in user id, email and full name.';
+                    $scope.chatStatus = alert;
+                    $scope.chatStatusType = 'alert alert-danger';
                 }
             } else {
                 userService.disconnectUser($scope.connectedUser,
                     () => {
-                        $scope.connectedUser = undefined;
-                        $scope.userButtonText = 'Connect';
-                        $scope.isConnected = false;
+                        $scope.subSocket.close();
                     });
             }
         }
@@ -71,7 +77,13 @@ class MainController {
         };
 
         request.onOpen = function (response?:Atmosphere.Response) {
-            console.log('Atmosphere connected using: ' + response.transport);
+            var alert:string ='Atmosphere connected using: ' + response.transport;
+            console.log(alert);
+            $scope.chatStatus = alert;
+            $scope.chatStatusType = 'alert-success';
+            $scope.userButtonText = 'Disconnect';
+            $scope.isConnected = true;
+            $scope.$apply();
             // wait for the socket to be opened, then push a message using http post
         };
 
@@ -90,18 +102,22 @@ class MainController {
 
             $scope.chatMessages.push(JSON.parse(message));
             $scope.$apply();
-            // subSocket.close();
         };
 
         request.onClose = function (response?:Atmosphere.Response) {
-            console.log('Atmosphere socket closed');
+            var alert:string ='Atmosphere socket closed'
+            console.log(alert);
+            $scope.chatStatus = alert;
+            $scope.chatStatusType = 'alert-success';
+            $scope.connectedUser = undefined;
+            $scope.userButtonText = 'Connect';
+            $scope.isConnected = false;
+            // $scope.$apply();
         };
 
         request.onError = function (response?:Atmosphere.Response) {
             console.log('Atmosphere error: ' + response.reasonPhrase);
         };
-
-        var subSocket:Atmosphere.Socket = socket.subscribe(request);
     }
 
     sendHttpChatMessage(logService, content) {
