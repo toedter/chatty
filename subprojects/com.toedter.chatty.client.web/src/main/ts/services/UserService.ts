@@ -20,12 +20,12 @@ class UserService {
         var userResource:chatty.model.UserResource =
             <chatty.model.UserResource> this.$resource('http://localhost:8080/chatty/api/users');
 
-        userResource.save(user,(result:any) => {
+        userResource.save(user, (result:any) => {
             console.log('User service got something...');
             callback(result);
         }, (result:any) => {
             console.log('user id ' + user.id + ' already in use, please choose another id');
-         });
+        });
     }
 }
 

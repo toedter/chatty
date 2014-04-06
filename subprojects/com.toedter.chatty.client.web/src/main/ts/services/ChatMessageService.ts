@@ -6,7 +6,8 @@
 
 /// <reference path="../chatty.ts" />
 /// <reference path="../model/ChatMessage.ts" />
-/// <reference path="../../../typescript-defs/angularjs/angular.d.ts" />
+/// <reference path="../model/User.ts" />
+// / <reference path="../../../typescript-defs/angularjs/angular.d.ts" />
 
 class ChatMessageService {
     static $inject = ['$resource'];
@@ -20,12 +21,23 @@ class ChatMessageService {
             <chatty.model.ChatMessageResource> this.$resource('http://localhost:8080/chatty/api/messages');
 
         messageResource.get((result:any) => {
-            console.log('ChatMessage service got something');
+            console.log('ChatMessage service got something...');
             var messages:chatty.model.ChatMessage[] = [];
             if (result.hasOwnProperty("_embedded") && result._embedded.hasOwnProperty("messages")) {
                 messages = result._embedded.messages;
             }
             callback(messages);
+        });
+    }
+
+    postMessage(user:chatty.model.User, message:string):void {
+        var messageResource:chatty.model.ChatMessageResource =
+            <chatty.model.ChatMessageResource> this.$resource('http://localhost:8080/chatty/api/messages');
+
+        messageResource.save({author:user, text:message}, (result:any) => {
+            console.log(result);
+        }, (result:any) => {
+            console.log(result);
         });
     }
 }

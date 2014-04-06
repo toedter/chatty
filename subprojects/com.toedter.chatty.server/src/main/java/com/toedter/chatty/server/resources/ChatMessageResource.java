@@ -101,7 +101,7 @@ public class ChatMessageResource {
         rep.withRepresentation("author", authorRep);
 
         rep.withProperty("id", chatMessage.getId())
-                .withProperty("message", chatMessage.getText())
+                .withProperty("text", chatMessage.getText())
                 .withProperty("timeStamp", chatMessage.getTimeStamp().toString());
 
         String jsonString = rep.toString(RepresentationFactory.HAL_JSON);

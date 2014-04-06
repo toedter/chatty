@@ -22,46 +22,28 @@ class MainController {
         $scope.submitUser = () => {
             if ($scope.userId && $scope.userEmail && $scope.userFullName) {
                 console.log("user submitted: " + $scope.userId);
+                $scope.connectedUser = undefined;
                 userService.connectUser({id: $scope.userId, email: $scope.userEmail, fullName: $scope.userFullName},
                     (user:chatty.model.User) => {
                         console.log("got user: " + user.id);
+                        $scope.connectedUser = user;
                     });
             }
         }
 
-        $scope.onButtonClick = (type:string) => {
-            var upperType:string = type.toUpperCase();
-            var httpVerb:string = 'POST';
-            var content:string = '{"description":"Test ' + type.toLowerCase() + '","type":"' + upperType + '"}';
-            if (upperType === "DELETEALL") {
-                httpVerb = "DELETE"
-                content = '';
+        $scope.submitChatMessage = () => {
+            if ($scope.connectedUser) {
+                console.log("chat message submitted: " + $scope.chatMessage);
+                chatMessageService.postMessage($scope.connectedUser, $scope.chatMessage)
             }
+        }
 
-            if (upperType === "SEND10" || upperType === "SEND100") {
-                var maxChatMessages:number = 100;
-                if (upperType === "SEND10") {
-                    maxChatMessages = 10;
-                }
-                for (var i:number = 0; i < maxChatMessages; i++) {
-                    content = '{"description":"Test ALARM ' + i + '","type":"ALARM"}';
-                    this.sendHttpChatMessage(logService, upperType, httpVerb, content);
-                }
-            } else {
-                this.sendHttpChatMessage(logService, upperType, httpVerb, content);
-            }
-        };
 
-        chatMessageService
-            .
-            getAllChatMessages(
+        chatMessageService.getAllChatMessages(
             (chatMessages:chatty.model.ChatMessage[]) => {
-                $scope
-                    .
-                    chatMessages = chatMessages;
+                $scope.chatMessages = chatMessages;
             }
-        )
-        ;
+        );
 
         var socket:Atmosphere.Atmosphere = atmosphere;
 
@@ -108,10 +90,9 @@ class MainController {
         var subSocket:Atmosphere.Socket = socket.subscribe(request);
     }
 
-    sendHttpChatMessage(logService, upperType, httpVerb, content) {
-        logService.log('sending: ' + upperType);
+    sendHttpChatMessage(logService, content) {
         var request:XMLHttpRequest = new XMLHttpRequest();
-        request.open(httpVerb, 'http://localhost:8080/chatty/api/messages', true);
+        request.open('post', 'http://localhost:8080/chatty/api/messages', true);
         request.setRequestHeader('Content-Type', 'application/json');
         request.send(content);
     }

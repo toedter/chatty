@@ -38,9 +38,9 @@
             </div>
         </form>
         </br>
-        <form class="form-inline">
+        <form class="form-inline" ng-submit="submitChatMessage()">
             <div class="form-group">
-                <input style="width:458px" class="form-control" placeholder="Enter chat message">
+                <input style="width:458px" class="form-control" ng-model="chatMessage" placeholder="Enter chat message">
                 <button style="width:100px" type="submit" class="btn btn-success">Send</button>
             </div>
         </form>
