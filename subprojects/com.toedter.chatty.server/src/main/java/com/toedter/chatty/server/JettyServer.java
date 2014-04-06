@@ -28,6 +28,7 @@ import org.slf4j.bridge.SLF4JBridgeHandler;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 
 public class JettyServer {
@@ -81,7 +82,14 @@ public class JettyServer {
         ResourceHandler fileHandler = new ResourceHandler();
         fileHandler.setDirectoriesListed(true);
         fileHandler.setWelcomeFiles(new String[]{"index.html"});
-        fileHandler.setResourceBase("subprojects/com.toedter.chatty.client.web");
+
+        File file = new File(".");
+        String path = file.getAbsolutePath();
+        if (path.contains("chatty.server")) {
+            fileHandler.setResourceBase("../com.toedter.chatty.client.web");
+        } else {
+            fileHandler.setResourceBase("subprojects/com.toedter.chatty.client.web");
+        }
 
         HandlerCollection handlerCollection = new HandlerCollection();
         Handler[] handlers = {context, handlerContext, fileHandler};

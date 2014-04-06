@@ -28,8 +28,8 @@ Getting Started
 ---------------
 * ./gradlew build (builds all and runs the integration tests, both Java and TypeScript)
 * ./gradlew startServerSync (starts a Jetty server using port 8080)
-* Open "http://localhost:8080/src/main/webapp/chatty.html" in a web browser
-* Open "http://localhost:8080/src/main/webapp/chatty.html" in another web browser
+* Open [http://localhost:8080/src/main/webapp/chatty.html](http://localhost:8080/src/main/webapp/chatty.html) in a web browser
+* Open [http://localhost:8080/src/main/webapp/chatty.html](http://localhost:8080/src/main/webapp/chatty.html) in another web browser
 * Play around with chatty!
 
 Screenshot
