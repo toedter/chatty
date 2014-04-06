@@ -14,19 +14,33 @@
 /// <reference path="../../../typescript-defs/angularjs/angular.d.ts" />
 
 class MainController {
-    static $inject = ['$scope', 'logService', 'chatMessageService', 'userService', '$resource'];
+    static $inject = ['$scope', 'logService', 'chatMessageService', 'userService'];
 
-    constructor($scope, logService:LogService, chatMessageService:ChatMessageService, userService:UserService, private $resource:ng.resource.IResourceService) {
+    constructor($scope, logService:LogService, chatMessageService:ChatMessageService,
+                userService:UserService) {
         logService.log("Main controller started");
 
+        $scope.userButtonText = 'Connect';
+        $scope.isConnected = false;
+
         $scope.submitUser = () => {
-            if ($scope.userId && $scope.userEmail && $scope.userFullName) {
-                console.log("user submitted: " + $scope.userId);
-                $scope.connectedUser = undefined;
-                userService.connectUser({id: $scope.userId, email: $scope.userEmail, fullName: $scope.userFullName},
-                    (user:chatty.model.User) => {
-                        console.log("got user: " + user.id);
-                        $scope.connectedUser = user;
+            if(!$scope.isConnected) {
+                if ($scope.userId && $scope.userEmail && $scope.userFullName) {
+                    $scope.connectedUser = undefined;
+                    userService.connectUser({id: $scope.userId, email: $scope.userEmail, fullName: $scope.userFullName},
+                        (user:chatty.model.User) => {
+                            console.log("got user: " + user.id);
+                            $scope.connectedUser = user;
+                            $scope.userButtonText = 'Disconnect';
+                            $scope.isConnected = true;
+                        });
+                }
+            } else {
+                userService.disconnectUser($scope.connectedUser,
+                    () => {
+                        $scope.connectedUser = undefined;
+                        $scope.userButtonText = 'Connect';
+                        $scope.isConnected = false;
                     });
             }
         }

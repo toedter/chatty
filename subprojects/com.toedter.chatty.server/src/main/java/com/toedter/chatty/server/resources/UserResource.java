@@ -20,7 +20,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
-import java.net.URI;
 
 @Path("users")
 public class UserResource {
@@ -73,5 +72,12 @@ public class UserResource {
         String userHAL = rep.toString(RepresentationFactory.HAL_JSON);
         logger.info("return HAL: " + userHAL);
         return userHAL;
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public void deleteUser(@PathParam("id") final String id) {
+        logger.info("Got delete: " + id);
+        userRepository.deleteUserById(id);
     }
 }

@@ -29,19 +29,20 @@
         <form class="form-inline" ng-submit="submitUser()">
             <div class="form-group">
                 <input style="width:150px" type="text" class="form-control" ng-model="userId"
-                       placeholder="Enter ID">
+                       placeholder="Enter ID" ng-disabled="isConnected">
                 <input style="width:150px" type="text" class="form-control" ng-model="userEmail"
-                       placeholder="Enter email">
+                       placeholder="Enter email" ng-disabled="isConnected">
                 <input style="width:150px" type="text" class="form-control" ng-model="userFullName"
-                       placeholder="Enter full name">
-                <button style="width:100px" type="submit" class="btn btn-info">Connect</button>
+                       placeholder="Enter full name" ng-disabled="isConnected">
+                <button style="width:100px" type="submit" class="btn btn-info">{{userButtonText}}</button>
             </div>
         </form>
         </br>
         <form class="form-inline" ng-submit="submitChatMessage()">
             <div class="form-group">
-                <input style="width:458px" class="form-control" ng-model="chatMessage" placeholder="Enter chat message">
-                <button style="width:100px" type="submit" class="btn btn-success">Send</button>
+                <input style="width:458px" class="form-control" ng-model="chatMessage"
+                       ng-disabled="!isConnected" placeholder="Enter chat message">
+                <button style="width:100px" type="submit" ng-disabled="!isConnected" class="btn btn-success">Send</button>
             </div>
         </form>
 

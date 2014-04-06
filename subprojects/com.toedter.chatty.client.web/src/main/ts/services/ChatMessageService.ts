@@ -21,7 +21,6 @@ class ChatMessageService {
             <chatty.model.ChatMessageResource> this.$resource('http://localhost:8080/chatty/api/messages');
 
         messageResource.get((result:any) => {
-            console.log('ChatMessage service got something...');
             var messages:chatty.model.ChatMessage[] = [];
             if (result.hasOwnProperty("_embedded") && result._embedded.hasOwnProperty("messages")) {
                 messages = result._embedded.messages;

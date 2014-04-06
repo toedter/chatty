@@ -21,10 +21,21 @@ class UserService {
             <chatty.model.UserResource> this.$resource('http://localhost:8080/chatty/api/users');
 
         userResource.save(user, (result:any) => {
-            console.log('User service got something...');
             callback(result);
         }, (result:any) => {
             console.log('user id ' + user.id + ' already in use, please choose another id');
+        });
+    }
+
+    disconnectUser(user:any, callback:() => void) {
+
+        var userResource:chatty.model.UserResource =
+            <chatty.model.UserResource> this.$resource('http://localhost:8080/chatty/api/users/:id', { id: '@id' });
+
+        userResource.delete(user, (result:any) => {
+            callback();
+        }, (result:any) => {
+            console.log(result);
         });
     }
 }
