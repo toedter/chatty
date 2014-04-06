@@ -26,24 +26,25 @@
 <div class="container" ng-controller="MainController">
 
     <div class="chatty-template">
-        <form class="form-inline" role="form">
+        <form class="form-inline" ng-submit="submitUser()">
             <div class="form-group">
-                <input type="text" class="form-control" id="id" placeholder="Enter ID">
-            </div>
-            <div class="form-group">
-                <input type="email" class="form-control" id="email" placeholder="Enter email">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="name" placeholder="Enter full name">
-            </div>
-            <button type="submit" class="btn btn-info">Connect</button>
-        </form>
-        <form class="form-inline" role="form">
-            <div class="form-group">
-                <input class="form-control" placeholder="Enter chat message">
-                <button type="submit" class="btn btn-success">Send</button>
+                <input style="width:150px" type="text" class="form-control" ng-model="userId"
+                       placeholder="Enter ID">
+                <input style="width:150px" type="text" class="form-control" ng-model="userEmail"
+                       placeholder="Enter email">
+                <input style="width:150px" type="text" class="form-control" ng-model="userFullName"
+                       placeholder="Enter full name">
+                <button style="width:100px" type="submit" class="btn btn-info">Connect</button>
             </div>
         </form>
+        </br>
+        <form class="form-inline">
+            <div class="form-group">
+                <input style="width:458px" class="form-control" placeholder="Enter chat message">
+                <button style="width:100px" type="submit" class="btn btn-success">Send</button>
+            </div>
+        </form>
+
 
         <h3>MESSAGES</h3>
 
@@ -65,7 +66,9 @@
 
 <script src="../ts/chatty.js"></script>
 <script src="../ts/model/ChatMessage.js"></script>
+<script src="../ts/model/User.js"></script>
 <script src="../ts/services/ChatMessageService.js"></script>
+<script src="../ts/services/UserService.js"></script>
 <script src="../ts/services/LogService.js"></script>
 <script src="../ts/controllers/MainController.js"></script>
 

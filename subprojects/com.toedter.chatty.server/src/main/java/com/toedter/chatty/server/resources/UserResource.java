@@ -10,15 +10,13 @@ import com.theoryinpractise.halbuilder.api.Representation;
 import com.theoryinpractise.halbuilder.api.RepresentationFactory;
 import com.theoryinpractise.halbuilder.standard.StandardRepresentationFactory;
 import com.toedter.chatty.model.ModelFactory;
+import com.toedter.chatty.model.SimpleUser;
 import com.toedter.chatty.model.User;
 import com.toedter.chatty.model.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
@@ -60,5 +58,20 @@ public class UserResource {
         rep.withBean(user)
                 .withLink("self", baseURI);
         return rep.toString(RepresentationFactory.HAL_JSON);
+    }
+
+    @POST
+    @Produces(RepresentationFactory.HAL_JSON)
+    public String createUser(@Context UriInfo uriInfo, SimpleUser user) {
+        logger.info("Got post: " + user);
+        Representation rep = representationFactory.newRepresentation();
+        String baseURI = uriInfo.getRequestUri().toString();
+
+        userRepository.saveUser(user);
+        rep.withBean(user)
+                .withLink("self", baseURI);
+        String userHAL = rep.toString(RepresentationFactory.HAL_JSON);
+        logger.info("return HAL: " + userHAL);
+        return userHAL;
     }
 }

@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2014 Kai Toedter
+ * All rights reserved.
+ * Licensed under MIT License, see http://toedter.mit-license.org/
+ */
+
 function getBrowserString():string {
     var ua = navigator.userAgent, tem,
         M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*([\d\.]+)/i) || [];

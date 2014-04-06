@@ -1,16 +1,35 @@
+/**
+ * Copyright (c) 2014 Kai Toedter
+ * All rights reserved.
+ * Licensed under MIT License, see http://toedter.mit-license.org/
+ */
+
 /// <reference path="../chatty.ts" />
 /// <reference path="../model/ChatMessage.ts" />
+/// <reference path="../model/User.ts" />
 /// <reference path="../services/LogService.ts" />
 /// <reference path="../services/ChatMessageService.ts" />
+/// <reference path="../services/UserService.ts" />
 /// <reference path='../../../typescript-defs/atmosphere.d.ts' />
+/// <reference path="../../../typescript-defs/angularjs/angular.d.ts" />
 
 class MainController {
-    static $inject = ['$scope', 'logService', 'chatMessageService'];
+    static $inject = ['$scope', 'logService', 'chatMessageService', 'userService', '$resource'];
 
-    constructor($scope, logService:LogService, chatMessageService:ChatMessageService) {
+    constructor($scope, logService:LogService, chatMessageService:ChatMessageService, userService:UserService, private $resource:ng.resource.IResourceService) {
         logService.log("Main controller started");
 
-         $scope.onButtonClick = (type:string) => {
+        $scope.submitUser = () => {
+            if ($scope.userId && $scope.userEmail && $scope.userFullName) {
+                console.log("user submitted: " + $scope.userId);
+                userService.connectUser({id: $scope.userId, email: $scope.userEmail, fullName: $scope.userFullName},
+                    (user:chatty.model.User) => {
+                        console.log("got user: " + user.id);
+                    });
+            }
+        }
+
+        $scope.onButtonClick = (type:string) => {
             var upperType:string = type.toUpperCase();
             var httpVerb:string = 'POST';
             var content:string = '{"description":"Test ' + type.toLowerCase() + '","type":"' + upperType + '"}';
@@ -21,7 +40,7 @@ class MainController {
 
             if (upperType === "SEND10" || upperType === "SEND100") {
                 var maxChatMessages:number = 100;
-                if(upperType === "SEND10") {
+                if (upperType === "SEND10") {
                     maxChatMessages = 10;
                 }
                 for (var i:number = 0; i < maxChatMessages; i++) {
@@ -33,9 +52,16 @@ class MainController {
             }
         };
 
-        chatMessageService.getAllChatMessages((chatMessages:chatty.model.ChatMessage[]) => {
-            $scope.chatMessages = chatMessages;
-        });
+        chatMessageService
+            .
+            getAllChatMessages(
+            (chatMessages:chatty.model.ChatMessage[]) => {
+                $scope
+                    .
+                    chatMessages = chatMessages;
+            }
+        )
+        ;
 
         var socket:Atmosphere.Atmosphere = atmosphere;
 

@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2014 Kai Toedter
+ * All rights reserved.
+ * Licensed under MIT License, see http://toedter.mit-license.org/
+ */
+
 /// <reference path="../chatty.ts" />
 /// <reference path="../model/ChatMessage.ts" />
 /// <reference path="../../../typescript-defs/angularjs/angular.d.ts" />
