@@ -1,4 +1,6 @@
-apply from: "$rootDir/gradle/integrationTest.gradle"
+import com.toedter.chatty.GruntTask
+import com.toedter.chatty.NpmTask
+import com.toedter.chatty.BowerTask
 
 buildscript {
     repositories {
@@ -6,14 +8,35 @@ buildscript {
     }
 }
 
+task npmInstall(type: NpmTask) {
+    group = "build"
+    description = "installs all node modules."
+    npmArgs = "install"
+
+    inputs.dir "node_modules"
+    inputs.file file("package.json")
+}
+
+task bowerInstall(type: BowerTask) {
+    group = "build"
+    description = "installs all bower modules."
+    bowerArgs = "install"
+
+    inputs.dir "bower_components"
+    inputs.file file("bower.json")
+}
+bowerInstall.dependsOn npmInstall
+
 task gruntTest(type: GruntTask) {
-    group = "Verification"
+    group = "verification"
     description = "Runs the Jasmine unit tests."
     gruntArgs = "test"
 
-    inputs.dir "[relative-path-to-source]"
+    inputs.dir "src"
     inputs.file file("Gruntfile.js")
 }
+gruntTest.dependsOn bowerInstall
+
 
 task gruntIntegrationTest(type: GruntTask) {
     doFirst {
@@ -45,5 +68,7 @@ gruntIntegrationTest.dependsOn ':com.toedter.chatty.server:startServerAsync'
 gruntIntegrationTest.mustRunAfter ':com.toedter.chatty.server:integrationTest'
 gruntIntegrationTest.finalizedBy(':com.toedter.chatty.server:stopServer')
 
-integrationTest.dependsOn gruntIntegrationTest;
+task integrationTest << {}
+integrationTest.dependsOn bowerInstall, gruntIntegrationTest;
+
 test.dependsOn gruntTest;

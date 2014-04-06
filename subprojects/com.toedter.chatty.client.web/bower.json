@@ -7,6 +7,7 @@
         "angularjs": "latest",
         "angular-resource": "latest",
         "bootstrap": "latest"
+
     },
     "devDependencies": {}
 }
