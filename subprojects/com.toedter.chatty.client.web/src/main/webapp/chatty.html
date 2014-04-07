@@ -34,7 +34,8 @@
                        placeholder="Enter email" ng-disabled="isConnected">
                 <input style="width:150px" type="text" class="form-control" ng-model="userFullName"
                        placeholder="Enter full name" ng-disabled="isConnected">
-                <button style="width:100px" type="submit" class="btn btn-info">{{userButtonText}}</button>
+                <button style="width:100px" id="connectButton" type="submit" class="btn btn-info">{{userButtonText}}
+                </button>
             </div>
         </form>
         </br>
@@ -46,13 +47,11 @@
                 </button>
                 </br>
                 </br>
-                <div class="alert {{chatStatusType}}">{{chatStatus}}</div>
+                <div id="status" class="alert {{chatStatusType}}">{{chatStatus}}</div>
             </div>
         </form>
 
-
         <h3>MESSAGES</h3>
-
         <table class="table">
             <tr ng-repeat="message in chatMessages">
                 <td style="text-align: left; width:5%">{{message.id}}</td>

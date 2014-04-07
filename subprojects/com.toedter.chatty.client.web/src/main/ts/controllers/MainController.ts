@@ -22,6 +22,7 @@ class MainController {
 
         $scope.userButtonText = 'Connect';
         $scope.isConnected = false;
+        $scope.chatStatus = '';
 
         $scope.submitUser = () => {
             if(!$scope.isConnected) {
