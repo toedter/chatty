@@ -9,8 +9,7 @@ Used Technologies
 * RESTful Hypermedia API
  * [HAL] (http://stateless.co/hal_specification.html) or
  * [Siren](https://github.com/kevinswiber/siren)
-* Async Pub/Sub
- * [Atmosphere] (https://github.com/Atmosphere/atmosphere)
+* [Atmosphere] (https://github.com/Atmosphere/atmosphere) (Async Pub/Sub)
 * [Jersey] (https://jersey.java.net/) (JAX-RS reference implementation)
 * [TypeScript] (http://www.typescriptlang.org/) for web client
 * [AngularJS] (http://angularjs.org/) for web client
@@ -22,7 +21,8 @@ Requirements
 ------------
 * Java 8 JDK installed
 * Node.js installed
-* Grunt CLI installed
+* Grunt CLI installed (npm install -g grunt-cli)
+* Bower installed (npm install -g bower)
 
 Getting Started
 ---------------
