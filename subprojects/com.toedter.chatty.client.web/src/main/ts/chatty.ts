@@ -4,7 +4,7 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-/// <reference path="../../typescript-defs/angularjs/angular.d.ts" />
+/// <reference path="../../../typings/tsd.d.ts" />
 
 module chatty {
     angular.module('chatty', ['chatty.controllers', 'chatty.services', 'ngResource']);

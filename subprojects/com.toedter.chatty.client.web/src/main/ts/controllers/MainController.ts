@@ -10,8 +10,9 @@
 /// <reference path="../services/LogService.ts" />
 /// <reference path="../services/ChatMessageService.ts" />
 /// <reference path="../services/UserService.ts" />
-/// <reference path='../../../typescript-defs/atmosphere.d.ts' />
-/// <reference path="../../../typescript-defs/angularjs/angular.d.ts" />
+/// <reference path="../../../typings/atmosphere.d.ts" />
+/// <reference path="../../../../typings/tsd.d.ts" />
+
 
 class MainController {
     static $inject = ['$scope', 'logService', 'chatMessageService', 'userService'];

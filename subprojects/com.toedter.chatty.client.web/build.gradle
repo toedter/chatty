@@ -1,11 +1,21 @@
 import com.toedter.chatty.GruntTask
 import com.toedter.chatty.NpmTask
 import com.toedter.chatty.BowerTask
+import com.toedter.chatty.TsdTask
 
 buildscript {
     repositories {
         jcenter()
     }
+}
+
+task tsdInstall(type: TsdTask) {
+    group = "build"
+    description = "installs all TypeScript definitions."
+    tsdArgs = "update -so"
+
+    inputs.dir "typings"
+    inputs.file file("tsd.json")
 }
 
 task npmInstall(type: NpmTask) {
@@ -25,7 +35,6 @@ task bowerInstall(type: BowerTask) {
     inputs.dir "bower_components"
     inputs.file file("bower.json")
 }
-bowerInstall.dependsOn npmInstall
 
 task gruntTest(type: GruntTask) {
     group = "verification"
@@ -35,7 +44,7 @@ task gruntTest(type: GruntTask) {
     inputs.dir "src"
     inputs.file file("Gruntfile.js")
 }
-gruntTest.dependsOn bowerInstall
+gruntTest.dependsOn npmInstall, bowerInstall, tsdInstall
 
 
 task gruntIntegrationTest(type: GruntTask) {

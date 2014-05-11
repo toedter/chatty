@@ -1,0 +1,27 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "angularjs/angular.d.ts": {
+      "commit": "a23785ab1b400bfb2e2720f2b10002134b5e3608"
+    },
+    "jquery/jquery.d.ts": {
+      "commit": "a23785ab1b400bfb2e2720f2b10002134b5e3608"
+    },
+    "selenium-webdriver/selenium-webdriver.d.ts": {
+      "commit": "a23785ab1b400bfb2e2720f2b10002134b5e3608"
+    },
+    "angular-protractor/angular-protractor.d.ts": {
+      "commit": "a23785ab1b400bfb2e2720f2b10002134b5e3608"
+    },
+    "jasmine/jasmine.d.ts": {
+      "commit": "a23785ab1b400bfb2e2720f2b10002134b5e3608"
+    },
+    "angularjs/angular-resource.d.ts": {
+      "commit": "a23785ab1b400bfb2e2720f2b10002134b5e3608"
+    }
+  }
+}

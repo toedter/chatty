@@ -7,7 +7,7 @@
 /// <reference path="../chatty.ts" />
 /// <reference path="../model/ChatMessage.ts" />
 /// <reference path="../model/User.ts" />
-// / <reference path="../../../typescript-defs/angularjs/angular.d.ts" />
+/// <reference path="../../../../typings/tsd.d.ts" />
 
 class ChatMessageService {
     static $inject = ['$resource'];

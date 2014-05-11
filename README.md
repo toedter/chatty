@@ -22,6 +22,7 @@ Requirements
 * Node.js installed
 * Grunt CLI installed (npm install -g grunt-cli)
 * Bower installed (npm install -g bower)
+* TSD (TypeScript Definition Manager) installed (npm install -g tsd)
 
 Getting Started
 ---------------

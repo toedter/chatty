@@ -3,6 +3,7 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        clean: ["dist"],
         jasmine: {
             unit: {
                 src: ['bower_components/jquery/*min.js',
@@ -47,8 +48,8 @@ module.exports = function (grunt) {
                 }
             },
             dist: {
-                src: ['src/main/ts/*.ts'],
-                dest: 'dist/cdemo.js',
+                src: ['src/main/ts/**/*.ts'],
+                dest: 'dist/chatty.js',
                 options: {
                     module: 'commonjs',
                     target: 'es5',
@@ -81,6 +82,7 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-typescript');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -88,5 +90,5 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['typescript:base', 'jasmine', 'jshint', 'dist']);
     grunt.registerTask('test', ['typescript:base', 'jasmine:unit']);
     grunt.registerTask('itest', ['typescript:base', 'jasmine:integration']);
-    grunt.registerTask('dist', ['typescript:dist', 'uglify']);
+    grunt.registerTask('dist', ['clean', 'typescript:dist', 'uglify']);
 };
