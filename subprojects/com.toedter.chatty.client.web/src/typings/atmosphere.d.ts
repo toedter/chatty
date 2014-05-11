@@ -17,10 +17,6 @@ declare module Atmosphere {
         AtmosphereRequest: () => void;
     }
 
-    class AtmosphereRequest {
-
-    }
-
     interface Response {
         status?: number;
         reasonPhrase?: string;
