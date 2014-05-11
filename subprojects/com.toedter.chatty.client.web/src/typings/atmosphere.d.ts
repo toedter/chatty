@@ -12,9 +12,13 @@ declare module Atmosphere {
          * The atmosphere api is a little bit weird here: the first parameter can either be
          * a URL string or a Request object. If it is a URL string, then the additional parameters are expected.
          */
-        subscribe?: (url:any, callback?:Function, request?:Request) => Request;
+        subscribe?: (requestOrUrl:any, callback?:Function, request?:Request) => Request;
         unsubscribe?: () => void;
-        AtmosphereRequest:{};
+        AtmosphereRequest: () => void;
+    }
+
+    class AtmosphereRequest {
+
     }
 
     interface Response {
