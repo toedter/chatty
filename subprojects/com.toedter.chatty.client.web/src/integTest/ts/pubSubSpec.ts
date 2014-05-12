@@ -4,8 +4,8 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-/// <reference path='../../typescript-defs/jasmine.d.ts' />
-/// <reference path='../../typescript-defs/atmosphere.d.ts' />
+/// <reference path="../../../typings/tsd.d.ts" />
+/// <reference path='../../typings/atmosphere.d.ts' />
 /// <reference path='testHelper.ts' />
 
 var serverPort:number = getFreePort();
@@ -39,7 +39,7 @@ describe('Publish - Subscribe', () => {
         request.onClose = function (response?:Atmosphere.Response) {
         };
 
-        var subSocket:Atmosphere.Socket = socket.subscribe(request);
+        var subSocket:Atmosphere.Request = socket.subscribe(request);
     });
 
     it('should subscribe for a message and receive a sent message with POST', (done) => {
@@ -79,7 +79,7 @@ describe('Publish - Subscribe', () => {
             console.log(JSON.stringify(response));
         };
 
-        var subSocket:Atmosphere.Socket = socket.subscribe(request);
+        var subSocket:Atmosphere.Request = socket.subscribe(request);
     });
 
 });
