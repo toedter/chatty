@@ -11,7 +11,14 @@ declare module Atmosphere {
          */
         subscribe?: (requestOrUrl:any, callback?:Function, request?:Request) => Request;
         unsubscribe?: () => void;
-        AtmosphereRequest: () => void;
+
+        AtmosphereRequest?: AtmosphereRequest;
+    }
+
+    // needed to fit JavaScript "new atmosphere.AtmosphereRequest()"
+    // and compile with --noImplicitAny
+    interface AtmosphereRequest {
+        new(): Request;
     }
 
     interface Request {
