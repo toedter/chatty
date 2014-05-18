@@ -2,7 +2,6 @@
 // Project: https://github.com/Atmosphere/atmosphere-javascript
 // Definitions by: Kai Toedter <https://github.com/toedter/>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
-// TypeScript Definitions are licensed under MIT license, see see http://toedter.mit-license.org/
 
 declare module Atmosphere {
     interface Atmosphere {

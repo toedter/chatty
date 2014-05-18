@@ -1,7 +1,3 @@
-// Tests for Atmosphere v2.1.5 type definitions
-// Copyright 2014 Kai Toedter, <https://github.com/toedter/>
-// Licensed under MIT license, see see http://toedter.mit-license.org/
-
 /// <reference path="atmosphere.d.ts" />
 
 var socket = atmosphere;
@@ -14,10 +10,10 @@ request1.transport = 'websocket';
 request1.fallbackTransport = 'long-polling';
 
 var request2:Atmosphere.Request = {
-    url: document.location.host + 'chat',
-    contentType : "application/json",
-    logLevel : 'debug',
-    transport : 'websocket' ,
+    url: 'http://localhost:8080/chat',
+    contentType: "application/json",
+    logLevel: 'debug',
+    transport: 'websocket',
     fallbackTransport: 'long-polling'
 };
 
