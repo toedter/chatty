@@ -5,4 +5,3 @@ node_js:
 language: java
 jdk:
   - oraclejdk8
-  - openjdk8
