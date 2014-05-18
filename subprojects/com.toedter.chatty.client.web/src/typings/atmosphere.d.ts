@@ -2,14 +2,12 @@
 // Project: https://github.com/Atmosphere/atmosphere-javascript
 // Definitions by: Kai Toedter <https://github.com/toedter/>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
-
 // TypeScript Definitions are licensed under MIT license, see see http://toedter.mit-license.org/
-
 
 declare module Atmosphere {
     interface Atmosphere {
         /**
-         * The atmosphere api is a little bit weird here: the first parameter can either be
+         * The atmosphere API is a little bit special here: the first parameter can either be
          * a URL string or a Request object. If it is a URL string, then the additional parameters are expected.
          */
         subscribe?: (requestOrUrl:any, callback?:Function, request?:Request) => Request;
@@ -17,23 +15,7 @@ declare module Atmosphere {
         AtmosphereRequest: () => void;
     }
 
-    interface Response {
-        status?: number;
-        reasonPhrase?: string;
-        responseBody?: string;
-        messages?: string[];
-        headers?: string[];
-        state?: string;
-        transport?: string;
-        error?: string;
-        request?: Request;
-        partialMessage?: string;
-        errorHandled?: boolean;
-        closedByClientTimeout?: boolean;
-    }
-
     interface Request {
-        // Are all of the below attributes supposed to be API?
         timeout?: number;
         method?: string;
         headers?: any;
@@ -87,7 +69,7 @@ declare module Atmosphere {
         onFailureToReconnect?:  (request?:Request, response?:Response) => void;
         onClientTimeout?: (request?:Request) => void;
 
-        subscribe?: (options:Atmosphere.Request) => void;
+        subscribe?: (options:Request) => void;
         execute?: () => void;
         close?: () => void;
         disconnect?: () => void;
@@ -95,6 +77,21 @@ declare module Atmosphere {
         push?: (message:string, dispatchUrl?:string) => void;
         getUUID?: () => void;
         pushLocal?: (message:string) => void;
+    }
+
+    interface Response {
+        status?: number;
+        reasonPhrase?: string;
+        responseBody?: string;
+        messages?: string[];
+        headers?: string[];
+        state?: string;
+        transport?: string;
+        error?: string;
+        request?: Request;
+        partialMessage?: string;
+        errorHandled?: boolean;
+        closedByClientTimeout?: boolean;
     }
 }
 

@@ -1,8 +1,6 @@
-/**
- * Copyright (c) 2014 Kai Toedter
- * All rights reserved.
- * Licensed under MIT License, see http://toedter.mit-license.org/
- */
+// Tests for Atmosphere v2.1.5 type definitions
+// Copyright 2014 Kai Toedter, <https://github.com/toedter/>
+// Licensed under MIT license, see see http://toedter.mit-license.org/
 
 /// <reference path="atmosphere.d.ts" />
 
