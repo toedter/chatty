@@ -6,19 +6,15 @@
 
 package com.toedter.chatty.server.resources;
 
-import org.atmosphere.container.Grizzly2CometSupport;
-import org.atmosphere.container.GrizzlyCometSupport;
 import org.atmosphere.cpr.AtmosphereServlet;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.servlet.WebappContext;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
-import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletRegistration;
-import java.io.IOException;
 import java.net.URI;
 
 public class GrizzlyIntegrationTest extends AbstractIntegrationTest {
