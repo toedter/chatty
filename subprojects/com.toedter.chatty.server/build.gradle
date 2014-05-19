@@ -17,7 +17,7 @@ dependencies {
 
     compile 'org.eclipse.jetty.aggregate:jetty-all:9.1.5.v20140505'
 
-    compile "org.atmosphere:atmosphere-jersey:2.1.1"
+    compile "org.atmosphere:atmosphere-annotations:2.1.4"
     compile "org.atmosphere:wasync:1.3.1"
     compile "org.glassfish.grizzly:grizzly-http-all:2.3.11"
 
