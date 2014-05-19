@@ -28,10 +28,6 @@ public class GrizzlyIntegrationTest extends AbstractIntegrationTest {
 
     @Override
     public void startServer() throws Exception {
-        // Sometimes Grizzly gets an exception because the port is still bound by a previous test
-        // Let's give him a few milliseconds
-        Thread.sleep(100);
-
         server = GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI));
 
         AtmosphereServlet atmoServlet = new AtmosphereServlet();
