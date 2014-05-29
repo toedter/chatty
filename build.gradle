@@ -2,6 +2,7 @@ apply from: "$rootDir/gradle/versioning.gradle"
 
 allprojects {
     apply plugin: 'idea'
+    apply plugin: 'eclipse'
     group = 'com.toedter'
 }
 
