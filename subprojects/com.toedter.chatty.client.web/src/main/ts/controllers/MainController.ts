@@ -73,7 +73,6 @@ class MainController {
             url: 'http://localhost:8080/chatty/atmos/messages',
             contentType: 'application/json',
             logLevel: 'debug',
-            trackMessageLength: true,
             transport: 'websocket',
             fallbackTransport: 'long-polling'
         };
@@ -92,6 +91,10 @@ class MainController {
         request.onMessage = function (response:Atmosphere.Response) {
             var message:string = response.responseBody;
             console.log('Atmosphere got message: ' + message);
+            var index = message.indexOf("{");
+            if(index != 0 && index != -1) {
+                message = message.substring(index);
+            }
             var messageObject:any = JSON.parse(message);
 
             if (messageObject.hasOwnProperty('command')) {

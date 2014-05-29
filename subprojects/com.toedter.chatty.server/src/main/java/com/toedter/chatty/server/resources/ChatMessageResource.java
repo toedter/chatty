@@ -14,6 +14,8 @@ import org.atmosphere.client.TrackMessageSizeInterceptor;
 import org.atmosphere.config.service.AtmosphereService;
 import org.atmosphere.cpr.BroadcasterFactory;
 import org.atmosphere.interceptor.AtmosphereResourceLifecycleInterceptor;
+import org.atmosphere.interceptor.HeartbeatInterceptor;
+import org.atmosphere.interceptor.SuspendTrackerInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +27,8 @@ import javax.ws.rs.core.UriInfo;
 @Path("messages")
 @AtmosphereService(
         dispatch = false,
-        interceptors = {AtmosphereResourceLifecycleInterceptor.class, TrackMessageSizeInterceptor.class},
+        interceptors = {AtmosphereResourceLifecycleInterceptor.class,HeartbeatInterceptor.class,
+                SuspendTrackerInterceptor.class},
         path = "atmos/messages",
         servlet = "org.glassfish.jersey.servlet.ServletContainer")
 public class ChatMessageResource {
