@@ -10,17 +10,14 @@
 /// <reference path="../../../../typings/tsd.d.ts" />
 
 class ChatMessageService {
-    static $inject = ['$resource'];
+    static $inject = ['chatMessageResource'];
 
-    constructor(private $resource:ng.resource.IResourceService) {
+    constructor(private chatMessageResource:chatty.model.ChatMessageResource) {
         console.log('ChatMessage service started')
     }
 
     getAllChatMessages(callback:(messages:chatty.model.ChatMessage[]) => void) {
-        var messageResource:chatty.model.ChatMessageResource =
-            <chatty.model.ChatMessageResource> this.$resource('http://localhost:8080/chatty/api/messages');
-
-        messageResource.get((result:any) => {
+        this.chatMessageResource.get((result:any) => {
             var messages:chatty.model.ChatMessage[] = [];
             if (result.hasOwnProperty("_embedded") && result._embedded.hasOwnProperty("messages")) {
                 messages = result._embedded.messages;
@@ -30,10 +27,7 @@ class ChatMessageService {
     }
 
     postMessage(user:chatty.model.User, message:string):void {
-        var messageResource:chatty.model.ChatMessageResource =
-            <chatty.model.ChatMessageResource> this.$resource('http://localhost:8080/chatty/api/messages');
-
-        messageResource.save({author:user, text:message}, (result:any) => {
+        this.chatMessageResource.save({author:user, text:message}, (result:any) => {
             console.log(result);
         }, (result:any) => {
             console.log(result);

@@ -3,12 +3,23 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        meta: {
+            package: grunt.file.readJSON('package.json'),
+            src: {
+                main: 'src/main',
+                test: 'src/test'
+            },
+            bin: {
+                coverage: 'build/coverage'
+            }
+        },
         clean: ["dist"],
         jasmine: {
             unit: {
                 src: ['bower_components/jquery/*min.js',
                     'bower_components/angular/*min.js',
                     'bower_components/angular-resource/*min.js',
+                    'bower_components/angular-mocks/*.js',
                     'bower_components/bootstrap/*min.js',
                     'bower_components/atmosphere/*min.js',
                     'src/main/**/*.js'],
@@ -34,7 +45,35 @@ module.exports = function (grunt) {
                     '--local-to-remote-url-access': true,
                     '--ignore-ssl-errors': true
                 }
+            },
+            coverage: {
+                src: '<%= meta.src.main %>/ts/*.js',
+                options: {
+                    specs: '<%= meta.src.test %>/ts/*.js',
+                    template: require('grunt-template-jasmine-istanbul'),
+                    templateOptions: {
+                        coverage: '<%= meta.bin.coverage %>/coverage.json',
+                        report: [
+                            {
+                                type: 'html',
+                                options: {
+                                    dir: '<%= meta.bin.coverage %>/html'
+                                }
+                            },
+                            {
+                                type: 'cobertura',
+                                options: {
+                                    dir: '<%= meta.bin.coverage %>/cobertura'
+                                }
+                            },
+                            {
+                                type: 'text-summary'
+                            }
+                        ]
+                    }
+                }
             }
+
         },
         typescript: {
             base: {
@@ -86,9 +125,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
 
     grunt.registerTask('default', ['typescript:base', 'jasmine', 'jshint', 'dist']);
     grunt.registerTask('test', ['typescript:base', 'jasmine:unit']);
     grunt.registerTask('itest', ['typescript:base', 'jasmine:integration']);
     grunt.registerTask('dist', ['clean', 'typescript:dist', 'uglify']);
+    grunt.registerTask('test:coverage', ['jasmine:coverage']);
 };
