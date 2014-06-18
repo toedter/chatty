@@ -8,6 +8,15 @@
 /// <reference path='../../typings/atmosphere.d.ts' />
 /// <reference path='testHelper.ts' />
 
+
+declare var freePort:number
+function getFreePort():number {
+    if(freePort) {
+        return freePort;
+    }
+    return 8080;
+}
+
 var serverPort:number = getFreePort();
 describe('Publish - Subscribe', () => {
 

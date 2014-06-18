@@ -15,11 +15,3 @@ function getBrowserString():string {
     if ((tem = ua.match(/version\/([\.\d]+)/i)) != null) M[2] = tem[1];
     return M.join(' ');
 };
-
-declare var freePort:number
-function getFreePort():number {
-    if(freePort) {
-        return freePort;
-    }
-    return 8080;
-}

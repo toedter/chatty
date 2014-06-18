@@ -14,17 +14,22 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            'src/**/*.js',
-            'bower_components/atmosphere/atmosphere.js',
-            'bower_components/angular/angular.js',
-            'bower_components/angular-resource/angular-resource.js.js'
+            'bower_components/jquery/*min.js',
+            'bower_components/angular/*min.js',
+            'bower_components/angular-resource/*min.js',
+            'bower_components/angular-mocks/*.js',
+            'bower_components/bootstrap/*min.js',
+            'bower_components/atmosphere/*min.js',
+            'src/generated/**/*.js',
+            'src/**/*.js'
             // 'src/**/*.map'
         ],
 
 
         // list of files to exclude
         exclude: [
-
+            'src/funcTest/**/*.js',
+            'src/integTest/**/*.js'
         ],
 
 
