@@ -6,21 +6,29 @@
 
 package com.toedter.chatty
 
+import groovyx.net.http.ContentType
 import groovyx.net.http.HTTPBuilder
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
-
-import static groovyx.net.http.ContentType.TEXT
 
 class ShutdownServerTask extends DefaultTask {
     def port = "8080"
 
     @TaskAction
     private boolean shutdownServer() {
-        def http = new HTTPBuilder("http://localhost:" + port +"/shutdown")
-        def responseStatus = http.get(contentType: TEXT) { resp, reader ->
-            resp.status
+        def uri = "http://localhost:" + port + "/shutdown"
+        // println "Stopping server with URI: " + uri
+        def http = new HTTPBuilder(uri)
+        http.getClient().getParams().setParameter("http.connection.timeout", new Integer(500))
+        http.getClient().getParams().setParameter("http.socket.timeout", new Integer(500))
+        try {
+            http.get(contentType: ContentType.TEXT)
+        } catch (Exception e) {
+            // ignore
         }
-
-        responseStatus != HttpURLConnection.HTTP_OK    }
+        finally {
+            http.shutdown()
+        }
+        true
+    }
 }
