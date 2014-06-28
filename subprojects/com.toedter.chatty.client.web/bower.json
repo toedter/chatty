@@ -3,10 +3,10 @@
     "version": "0.1.0",
     "description": "chat demo using atmosphere, typescript, javascript, jasmine, grunt, bower, etc.",
     "dependencies": {
-        "atmosphere": "2.1.5",
-        "angular": "~1.2.16",
-        "angular-resource": "~1.2.16",
-        "angular-mocks": "~1.2.16",
+        "atmosphere": "2.2.1",
+        "angular": "~1.2.18",
+        "angular-resource": "~1.2.18",
+        "angular-mocks": "~1.2.18",
         "bootstrap": "3.1.1"
     },
     "devDependencies": {}
