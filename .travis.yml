@@ -7,4 +7,4 @@ before_script:
   - npm install -g bower
   - npm install -g tsd
 
-script: ./gradlew test integrationtest
+script: ./gradlew test
