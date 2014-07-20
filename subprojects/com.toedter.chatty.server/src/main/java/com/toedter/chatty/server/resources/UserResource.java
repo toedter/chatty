@@ -8,7 +8,7 @@ package com.toedter.chatty.server.resources;
 
 import com.theoryinpractise.halbuilder.api.Representation;
 import com.theoryinpractise.halbuilder.api.RepresentationFactory;
-import com.theoryinpractise.halbuilder.standard.StandardRepresentationFactory;
+import com.theoryinpractise.halbuilder.json.JsonRepresentationFactory;
 import com.toedter.chatty.model.ModelFactory;
 import com.toedter.chatty.model.SimpleUser;
 import com.toedter.chatty.model.User;
@@ -18,13 +18,11 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
 @Path("users")
 public class UserResource {
-    private static final RepresentationFactory representationFactory = new StandardRepresentationFactory();
-    private static final MediaType HAL_JSON_TYPE = new MediaType("application", "hal+json");
+    private static final RepresentationFactory representationFactory = new JsonRepresentationFactory();
 
     private static Logger logger = LoggerFactory.getLogger(UserResource.class);
     private static UserRepository userRepository = ModelFactory.getInstance().getUserRepository();

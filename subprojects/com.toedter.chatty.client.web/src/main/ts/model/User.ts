@@ -4,7 +4,7 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-/// <reference path="../../../../typings/tsd.d.ts" />
+/// <reference path="../../../../typings/angularjs/angular-resource.d.ts" />
 
 module chatty.model {
     export interface User extends ng.resource.IResource<User> {

@@ -8,9 +8,11 @@ package com.toedter.chatty.server.resources;
 
 import com.theoryinpractise.halbuilder.api.Representation;
 import com.theoryinpractise.halbuilder.api.RepresentationFactory;
-import com.theoryinpractise.halbuilder.standard.StandardRepresentationFactory;
-import com.toedter.chatty.model.*;
-import org.atmosphere.client.TrackMessageSizeInterceptor;
+import com.theoryinpractise.halbuilder.json.JsonRepresentationFactory;
+import com.toedter.chatty.model.ChatMessage;
+import com.toedter.chatty.model.ChatMessageRepository;
+import com.toedter.chatty.model.ModelFactory;
+import com.toedter.chatty.model.SimpleChatMessage;
 import org.atmosphere.config.service.AtmosphereService;
 import org.atmosphere.cpr.BroadcasterFactory;
 import org.atmosphere.interceptor.AtmosphereResourceLifecycleInterceptor;
@@ -27,12 +29,12 @@ import javax.ws.rs.core.UriInfo;
 @Path("messages")
 @AtmosphereService(
         dispatch = false,
-        interceptors = {AtmosphereResourceLifecycleInterceptor.class,HeartbeatInterceptor.class,
+        interceptors = {AtmosphereResourceLifecycleInterceptor.class, HeartbeatInterceptor.class,
                 SuspendTrackerInterceptor.class},
         path = "atmos/messages",
         servlet = "org.glassfish.jersey.servlet.ServletContainer")
 public class ChatMessageResource {
-    private static final RepresentationFactory representationFactory = new StandardRepresentationFactory();
+    private static final RepresentationFactory representationFactory = new JsonRepresentationFactory();
     private static final MediaType HAL_JSON_TYPE = new MediaType("application", "hal+json");
 
     private final Logger logger = LoggerFactory.getLogger(ChatMessageResource.class);

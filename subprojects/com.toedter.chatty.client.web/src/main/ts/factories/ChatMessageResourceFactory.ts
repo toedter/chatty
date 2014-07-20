@@ -6,7 +6,7 @@
 
 /// <reference path="../chatty.ts" />
 /// <reference path="../model/ChatMessage.ts" />
-/// <reference path="../../../../typings/tsd.d.ts" />
+/// <reference path="../../../../typings/angularjs/angular-resource.d.ts" />
 
 
 chatty.factories.factory('chatMessageResource', ['$resource', ($resource: ng.resource.IResourceService) : chatty.model.ChatMessageResource => {

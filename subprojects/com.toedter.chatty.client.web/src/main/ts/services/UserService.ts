@@ -6,7 +6,6 @@
 
 /// <reference path="../chatty.ts" />
 /// <reference path="../model/User.ts" />
-/// <reference path="../../../../typings/tsd.d.ts" />
 
 class UserService {
     static $inject = ['userResource'];

@@ -11,7 +11,7 @@
 /// <reference path="../services/ChatMessageService.ts" />
 /// <reference path="../services/UserService.ts" />
 /// <reference path="../../../typings/atmosphere.d.ts" />
-/// <reference path="../../../../typings/tsd.d.ts" />
+/// <reference path="../../../../typings/angularjs/angular.d.ts" />
 
 
 class MainController {

@@ -4,10 +4,9 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-/// <reference path="../../../typings/tsd.d.ts" />
+/// <reference path="../../../typings/jasmine/jasmine.d.ts" />
 /// <reference path='../../typings/atmosphere.d.ts' />
 /// <reference path='testHelper.ts' />
-
 
 declare var freePort:number
 function getFreePort():number {

@@ -4,7 +4,7 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-/// <reference path="../../../typings/tsd.d.ts" />
+/// <reference path="../../../typings/angularjs/angular.d.ts" />
 
 module chatty {
     angular.module('chatty', ['chatty.factories', 'chatty.controllers', 'chatty.services']);
