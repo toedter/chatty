@@ -13,6 +13,7 @@ import com.toedter.chatty.server.boot.rest.JsonInstantSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -22,7 +23,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.NONE)
-public class ChatMessage {
+public class ChatMessage implements Identifiable<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnore

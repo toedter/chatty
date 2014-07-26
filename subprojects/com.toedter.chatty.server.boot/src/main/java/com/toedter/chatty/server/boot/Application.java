@@ -1,14 +1,9 @@
-/*******************************************************************************
- * Copyright (C) Siemens AG, 2014. All Rights Reserved
- *
- * Transmittal, reproduction, dissemination and/or editing of this software as
- * well as utilization of its contents and communication thereof to others
- * without express authorization are prohibited. Offenders will be held liable
- * for payment of damages. All rights created by patent grant or registration of
- * a utility model or design patent are reserved.
- *
- * Contributors: Kai Tödter - initial API and implementation
- ******************************************************************************/
+/**
+ * Copyright (c) 2014 Kai Toedter
+ * All rights reserved.
+ * Licensed under MIT License, see http://toedter.mit-license.org/
+ */
+
 
 package com.toedter.chatty.server.boot;
 
@@ -78,6 +73,7 @@ public class Application {
 
         @Bean
         public CurieProvider curieProvider() {
+            // TODO: get rid of localhost:8080
             return new DefaultCurieProvider("chatty", new UriTemplate("http://localhost:8080/api/alps/{rel}"));
         }
     }
