@@ -6,9 +6,10 @@ chatty - a chat demo that evaluates several technologies (and hopefully shows be
 Used Technologies
 -----------------
 * Java 8 (This demo will not run with any Java < 8)
-* [HAL] (http://stateless.co/hal_specification.html) (RESTful Hypermedia API)
+* [HAL] (http://stateless.co/hal_specification.html) (Hypertext Application Language)
 * [Atmosphere] (https://github.com/Atmosphere/atmosphere) (Async Pub/Sub)
 * [Jersey] (https://jersey.java.net/) (JAX-RS reference implementation)
+* [Spring Boot] (http://projects.spring.io/spring-boot/) (+ Data, REST, HATEOAS)
 * [TypeScript] (http://www.typescriptlang.org/) for web client
 * [AngularJS] (http://angularjs.org/) for web client
 * [Protractor] (https://github.com/angular/protractor) for functional web client UI tests

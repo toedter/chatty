@@ -1,0 +1,30 @@
+<configuration debug='false'>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>test.log</file>
+
+        <encoder>
+            <pattern>%-30(%d{HH:mm:ss.SSS} [%thread)] %-5level %logger{20} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%-36(%d{HH:mm:ss.SSS} [%thread)] %-5level %logger{25} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.toedter.chatty" level="DEBUG"/>
+
+    <logger name="org.eclipse.jetty" level="ERROR"/>
+    <logger name="ch.qos" level="ERROR"/>
+    <logger name="com" level="ERROR"/>
+    <logger name="org" level="ERROR"/>
+
+    <root>
+        <level value="debug"/>
+
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>
