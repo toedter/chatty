@@ -17,7 +17,8 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.ServletRegistration;
 import java.net.URI;
 
-public class GrizzlyIntegrationTest extends AbstractIntegrationTest {
+// currently should not run with Grizzly, remove "abstract" if you want to run the Grizzly based tests
+public abstract class GrizzlyIntegrationTest extends AbstractIntegrationTest {
 
     private static Logger logger = LoggerFactory.getLogger(GrizzlyIntegrationTest.class);
     private HttpServer server;
