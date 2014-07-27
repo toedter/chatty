@@ -16,7 +16,6 @@ repositories {
     maven { url "http://repo.spring.io/milestone" }
 }
 
-apply plugin: 'war'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
@@ -42,10 +41,4 @@ dependencies {
     runtime 'org.hsqldb:hsqldb:2.3.2'
 
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
-}
-
-war {
-    rootSpec.exclude("**/tomcat*.jar")
-    rootSpec.exclude("**/jetty*.jar")
-    rootSpec.exclude("**/javax.servlet-api*.jar")
 }

@@ -67,10 +67,18 @@ Here is an example what you get at [http://localhost:8080/chatty/api/users](http
 }
 ```
 
+Spring Boot
+------------
+To run the Spring-Boot based server, invoke
+java -jar subprojects/com.toedter.chatty.server.boot/build/libs/com.toedter.chatty.server.boot-1.0.jar
+
+Then you can use [http://localhost:8080/api/](http://localhost:8080/api/) as enty point for exploring the HAL based API.
+
 What's Next?
 ------------
 * More tests
 * Better TypeScript integration
+* Integrate HAL browser
 
 License
 -------
