@@ -72,7 +72,30 @@ Spring Boot
 To run the Spring-Boot based server, invoke
 java -jar subprojects/com.toedter.chatty.server.boot/build/libs/com.toedter.chatty.server.boot-1.0.jar
 
-Then you can use [http://localhost:8080/api/](http://localhost:8080/api/) as enty point for exploring the HAL based API.
+Then you can use [http://localhost:8080/api/](http://localhost:8080/api/) as entry point for exploring the HAL based API.
+
+```javascript
+{
+  "_links" : {
+    "chatty:messages" : {
+      "href" : "http://localhost:8080/api/messages{?page,size,sort}",
+      "templated" : true
+    },
+    "chatty:users" : {
+      "href" : "http://localhost:8080/api/users{?page,size,sort,projection}",
+      "templated" : true
+    },
+    "profile" : {
+      "href" : "http://localhost:8080/api/alps"
+    },
+    "curies" : [ {
+      "href" : "http://localhost:8080/api/alps/{rel}",
+      "name" : "chatty",
+      "templated" : true
+    } ]
+  }
+}
+```
 
 What's Next?
 ------------
