@@ -77,7 +77,8 @@ public class ChatMessageResource {
         Representation rep = representationFactory.newRepresentation();
         String baseURI = uriInfo.getRequestUri().toString();
 
-        ChatMessage chatMessage = ModelFactory.getInstance().getChatMessageRepository().getChatMessageById(id);
+        ChatMessage chatMessage = ModelFactory.getInstance().getChatMessageRepository()
+                .getChatMessageById(id);
         rep.withLink("self", baseURI);
 
         Representation authorRep = representationFactory.newRepresentation();
