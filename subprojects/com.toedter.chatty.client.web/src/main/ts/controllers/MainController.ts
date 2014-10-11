@@ -10,7 +10,7 @@
 /// <reference path="../services/LogService.ts" />
 /// <reference path="../services/ChatMessageService.ts" />
 /// <reference path="../services/UserService.ts" />
-/// <reference path="../../../typings/atmosphere.d.ts" />
+/// <reference path="../../../../typings/atmosphere/atmosphere.d.ts" />
 /// <reference path="../../../../typings/angularjs/angular.d.ts" />
 
 
