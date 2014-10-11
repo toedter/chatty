@@ -5,7 +5,7 @@
  */
 
 /// <reference path="../../../typings/jasmine/jasmine.d.ts" />
-/// <reference path='../../typings/atmosphere.d.ts' />
+/// <reference path='../../../typings/atmosphere/atmosphere.d.ts' />
 /// <reference path='testHelper.ts' />
 
 declare var freePort:number
