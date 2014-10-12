@@ -6,19 +6,17 @@
 
 /// <reference path="../chatty.ts" />
 /// <reference path="../model/ChatMessage.ts" />
-/// <reference path="../model/User.ts" />
+/// <reference path="../model/ChattyScope.ts" />
 /// <reference path="../services/LogService.ts" />
 /// <reference path="../services/ChatMessageService.ts" />
 /// <reference path="../services/UserService.ts" />
 /// <reference path="../../../../typings/atmosphere/atmosphere.d.ts" />
 /// <reference path="../../../../typings/angularjs/angular.d.ts" />
 
-
 class MainController {
     static $inject = ['$scope', 'logService', 'chatMessageService', 'userService'];
 
-    constructor($scope, logService:LogService, chatMessageService:ChatMessageService,
-                userService:UserService) {
+    constructor($scope:ChattyScope, logService:LogService, chatMessageService:ChatMessageService, userService:UserService) {
         logService.log("Main controller started");
 
         $scope.userButtonText = 'Connect';
@@ -26,7 +24,7 @@ class MainController {
         $scope.chatStatus = '';
 
         $scope.submitUser = () => {
-            if(!$scope.isConnected) {
+            if (!$scope.isConnected) {
                 if ($scope.userId && $scope.userEmail && $scope.userFullName) {
                     $scope.connectedUser = undefined;
                     userService.connectUser({id: $scope.userId, email: $scope.userEmail, fullName: $scope.userFullName},
@@ -36,12 +34,12 @@ class MainController {
                             $scope.subSocket = socket.subscribe(request);
                         },
                         (result:any) => {
-                            var alert:string ='user id "' + $scope.userId + '" already in use, please choose another id';
+                            var alert:string = 'user id "' + $scope.userId + '" already in use, please choose another id';
                             $scope.chatStatus = alert;
                             $scope.chatStatusType = 'alert alert-danger';
                         });
                 } else {
-                    var alert:string ='Please fill in user id, email and full name.';
+                    var alert:string = 'Please fill in user id, email and full name.';
                     $scope.chatStatus = alert;
                     $scope.chatStatusType = 'alert alert-danger';
                 }
@@ -78,7 +76,7 @@ class MainController {
         };
 
         request.onOpen = function (response?:Atmosphere.Response) {
-            var alert:string ='Atmosphere connected using: ' + response.transport;
+            var alert:string = 'Atmosphere connected using: ' + response.transport;
             console.log(alert);
             $scope.chatStatus = alert;
             $scope.chatStatusType = 'alert-success';
@@ -92,7 +90,7 @@ class MainController {
             var message:string = response.responseBody;
             console.log('Atmosphere got message: ' + message);
             var index = message.indexOf("{");
-            if(index != 0 && index != -1) {
+            if (index != 0 && index != -1) {
                 message = message.substring(index);
             }
             var messageObject:any = JSON.parse(message);
@@ -110,7 +108,7 @@ class MainController {
         };
 
         request.onClose = function (response?:Atmosphere.Response) {
-            var alert:string ='Atmosphere socket closed'
+            var alert:string = 'Atmosphere socket closed'
             console.log(alert);
             $scope.chatStatus = alert;
             $scope.chatStatusType = 'alert-success';
