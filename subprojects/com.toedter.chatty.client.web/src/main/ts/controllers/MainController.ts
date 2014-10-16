@@ -131,4 +131,4 @@ class MainController {
     }
 }
 
-chatty.controllers.controller('mainController', MainController);
+chatty.controllers.controller('chatty.mainController', MainController);

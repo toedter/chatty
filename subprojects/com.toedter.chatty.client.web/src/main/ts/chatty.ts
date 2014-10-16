@@ -7,7 +7,7 @@
 /// <reference path="../../../typings/angularjs/angular.d.ts" />
 
 module chatty {
-    angular.module('chatty', ['chatty.factories', 'chatty.controllers', 'chatty.services']);
+    export var app = angular.module('chatty', ['chatty.factories', 'chatty.controllers', 'chatty.services']);
 
     export var factories = angular.module('chatty.factories', ['ngResource']);
     export var services = angular.module('chatty.services', ['chatty.factories']);
