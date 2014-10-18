@@ -72,7 +72,7 @@ Spring Boot
 To run the Spring-Boot based server, invoke
 gradlew bootrun
 
-Then you can use [http://localhost:8080/api/](http://localhost:8080/api/) as entry point for exploring the HAL based API.
+Then you can use [http://localhost:8080/chatty/api/](http://localhost:8080/chatty/api/) as entry point for exploring the HAL based API.
 
 ```javascript
 {
@@ -100,7 +100,7 @@ Then you can use [http://localhost:8080/api/](http://localhost:8080/api/) as ent
 HAL Browser
 ------------
 After having started the Spring Boot based server,
-you can use [http://localhost:8080/api/hal-browser/browser.html#/api/](http://localhost:8080/api/hal-browser/browser.html#/api/)
+you can use [http://localhost:8080/chatty/api/hal-browser/browser.html#/api/](http://localhost:8080/chatty/api/hal-browser/browser.html#/chatty/api/)
 as entry point for exploring the HAL based API with the embedded HAL-Browser.
 
 

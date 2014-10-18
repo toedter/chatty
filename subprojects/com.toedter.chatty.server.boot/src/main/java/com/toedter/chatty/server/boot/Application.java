@@ -53,7 +53,7 @@ public class Application {
     @Bean
     ServletRegistrationBean dispatcherRegistration(DispatcherServlet dispatcherServlet) {
         ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(dispatcherServlet);
-        servletRegistrationBean.addUrlMappings("/api/*");
+        servletRegistrationBean.addUrlMappings("/chatty/api/*");
         return servletRegistrationBean;
     }
 
