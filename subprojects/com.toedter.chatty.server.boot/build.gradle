@@ -1,5 +1,5 @@
 buildscript {
-    def springBootVersion = '1.1.7.RELEASE'
+    def springBootVersion = '1.2.0.M2'
     repositories {
         mavenCentral()
         maven { url "http://repo.spring.io/snapshot" }
@@ -24,7 +24,7 @@ apply from: "$rootDir/gradle/integrationTest.gradle"
 dependencies {
     compile project(':com.toedter.chatty.model')
     
-    def springBootVersion = '1.1.7.RELEASE'
+    def springBootVersion = '1.2.0.M2'
     compile "org.springframework.data:spring-data-rest-core:2.2.0.RELEASE"
     compile "org.springframework.data:spring-data-rest-webmvc:2.2.0.RELEASE"
     compile "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
