@@ -6,16 +6,17 @@
 
 /// <reference path="../chatty.ts" />
 
-class LogService {
-    static $inject = ['$rootScope'];
+module chatty {
+    export class LogService {
+        static $inject = ['$rootScope'];
 
-    constructor($rootScope) {
-        $rootScope.foo = 123;
-    }
+        constructor($rootScope) {
+            $rootScope.foo = 123;
+        }
 
-    log(msg: string) {
-        console.log(msg);
+        log(msg:string) {
+            console.log(msg);
+        }
     }
 }
-
-chatty.services.service('logService', LogService);
+chatty.services.service('chatty.logService', chatty.LogService);
