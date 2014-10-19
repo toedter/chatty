@@ -22,11 +22,9 @@ import java.time.Instant;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.NONE)
 public class ChatMessage implements Identifiable<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonIgnore
     private final Long id = null;
 
     private String text;

@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-public class ChatMessageRepositoryTestData {
-    private final Logger logger = LoggerFactory.getLogger(ChatMessageRepositoryTestData.class);
+public class TestDataLoader {
+    private final Logger logger = LoggerFactory.getLogger(TestDataLoader.class);
 
     @Autowired
     ChatMessageRepository chatMessageRepository;
@@ -38,5 +38,7 @@ public class ChatMessageRepositoryTestData {
         chatMessageRepository.save(hiKai1);
         ChatMessage hiKai2 = new ChatMessage(doe_ja, "Hi Kai!");
         chatMessageRepository.save(hiKai2);
+        ChatMessage howAreYou = new ChatMessage(toedter_k, "How are you today?");
+        chatMessageRepository.save(howAreYou);
     }
 }

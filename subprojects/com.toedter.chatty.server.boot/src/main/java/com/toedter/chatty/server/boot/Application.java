@@ -8,7 +8,7 @@
 package com.toedter.chatty.server.boot;
 
 import com.toedter.chatty.server.boot.service.ChatMessageRepositoryListener;
-import com.toedter.chatty.server.boot.service.ChatMessageRepositoryTestData;
+import com.toedter.chatty.server.boot.service.TestDataLoader;
 import org.atmosphere.cpr.AtmosphereServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,8 +46,8 @@ public class Application {
     }
 
     @Bean(initMethod = "loadData")
-    ChatMessageRepositoryTestData chatMessageRepositoryTestData() {
-        return new ChatMessageRepositoryTestData();
+    TestDataLoader RepositoryTestData() {
+        return new TestDataLoader();
     }
 
     @Bean
