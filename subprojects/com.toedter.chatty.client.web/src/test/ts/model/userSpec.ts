@@ -6,25 +6,25 @@
 
 describe('User', () => {
 
-    var userResource:chatty.model.UserResource;
+    var usersResource:chatty.model.UsersResource;
 
     // angular.mock.module('chatty.factories');
 
     beforeEach(module('chatty.factories'));
 
     beforeEach(() => {
-        inject(function (_userResource_) {
-            userResource = _userResource_;
+        inject(function (_usersResource_) {
+            usersResource = _usersResource_;
         })
     });
 
-    it('can get an instance of userResource', inject(function(userResource) {
-        expect(userResource).toBeDefined();
+    it('can get an instance of userResource', inject(function(usersResource) {
+        expect(usersResource).toBeDefined();
     }));
 
     it('should create user resource', () => {
-        var user:chatty.model.User;
-        user = userResource.get();
-        expect(user).toBeDefined();
+        var userResource:chatty.model.UserResource;
+        userResource = usersResource.get();
+        expect(userResource).toBeDefined();
     });
 });

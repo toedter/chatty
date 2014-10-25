@@ -29,9 +29,9 @@ module chatty {
                     if ($scope.userId && $scope.userEmail && $scope.userFullName) {
                         $scope.connectedUser = undefined;
                         userService.connectUser({id: $scope.userId, email: $scope.userEmail, fullName: $scope.userFullName},
-                            (user:chatty.model.User) => {
-                                console.log("got user: " + user.id);
-                                $scope.connectedUser = user;
+                            (userResource:chatty.model.UserResource) => {
+                                console.log("got user: " + userResource.id);
+                                $scope.connectedUser = userResource;
                                 $scope.subSocket = socket.subscribe(request);
                             },
                             (result:any) => {

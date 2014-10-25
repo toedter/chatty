@@ -6,18 +6,19 @@
 
 /// <reference path="../chatty.ts" />
 /// <reference path="../model/User.ts" />
+/// <reference path="../model/ChatMessage.ts" />
 
 module chatty {
     export class UserService {
-        static $inject = ['userResource'];
+        static $inject = ['usersResource'];
 
-        constructor(private userResource:chatty.model.UserResource) {
+        constructor(private usersResource:chatty.model.UsersResource) {
             console.log('User service started')
         }
 
-        connectUser(user:any, successCallback:(user:chatty.model.User) => void, errorCallback:(result:any) => void) {
+        connectUser(user:chatty.model.User, successCallback:(user:chatty.model.UserResource) => void, errorCallback:(result:any) => void) {
 
-            this.userResource.save(user, (result:any) => {
+            this.usersResource.save(user, (result:any) => {
                 successCallback(result);
             }, (result:any) => {
                 var alert:string = 'user id ' + user.id + ' already in use, please choose another id';
@@ -26,8 +27,8 @@ module chatty {
             });
         }
 
-        disconnectUser(user:any, callback:() => void) {
-            this.userResource.delete(user, (result:any) => {
+        disconnectUser(user:chatty.model.User, callback:() => void) {
+            this.usersResource.delete(user, (result:any) => {
                 callback();
             }, (result:any) => {
                 console.log(result);

@@ -7,13 +7,15 @@
 /// <reference path="../../../../typings/angularjs/angular-resource.d.ts" />
 
 module chatty.model {
-    export interface User extends ng.resource.IResource<User> {
+    export interface User {
         id: string;
         email: string;
         fullName: string;
     }
 
-    export interface UserResource extends ng.resource.IResourceClass<User> {
-        update(User) : User;
+    export interface UserResource extends User, ng.resource.IResource<User> {
+    }
+
+    export interface UsersResource extends ng.resource.IResourceClass<UserResource> {
     }
 }
