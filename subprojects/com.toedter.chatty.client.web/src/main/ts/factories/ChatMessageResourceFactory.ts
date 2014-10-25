@@ -9,10 +9,10 @@
 /// <reference path="../../../../typings/angularjs/angular-resource.d.ts" />
 
 
-chatty.factories.factory('chatMessageResource', ['$resource', ($resource: ng.resource.IResourceService) : chatty.model.ChatMessageResource => {
+chatty.factories.factory('chatMessagesResource', ['$resource', ($resource: ng.resource.IResourceService) : chatty.model.ChatMessagesResource => {
 
-    var chatMessageResource:chatty.model.ChatMessageResource =
-        <chatty.model.ChatMessageResource> $resource('http://localhost:8080/chatty/api/messages/:id');
+    var chatMessagesResource:chatty.model.ChatMessagesResource =
+        <chatty.model.ChatMessagesResource> $resource('http://localhost:8080/chatty/api/messages/:id');
 
-    return chatMessageResource;
+    return chatMessagesResource;
 }]);

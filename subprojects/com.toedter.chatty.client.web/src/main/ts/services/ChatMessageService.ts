@@ -10,15 +10,15 @@
 
 module chatty {
     export class ChatMessageService {
-        static $inject = ['chatMessageResource'];
+        static $inject = ['chatMessagesResource'];
 
-        constructor(private chatMessageResource:chatty.model.ChatMessageResource) {
+        constructor(private chatMessagesResource:chatty.model.ChatMessagesResource) {
             console.log('ChatMessage service started')
         }
 
-        getAllChatMessages(callback:(messages:chatty.model.ChatMessage[]) => void) {
-            this.chatMessageResource.get((result:any) => {
-                var messages:chatty.model.ChatMessage[] = [];
+        getAllChatMessages(callback:(messages:chatty.model.ChatMessageResource[]) => void) {
+            this.chatMessagesResource.get((result:any) => {
+                var messages:chatty.model.ChatMessageResource[] = [];
                 if (result.hasOwnProperty("_embedded") && result._embedded.hasOwnProperty("messages")) {
                     messages = result._embedded.messages;
                 }
@@ -27,7 +27,7 @@ module chatty {
         }
 
         postMessage(user:chatty.model.User, message:string):void {
-            this.chatMessageResource.save({author: user, text: message}, (result:any) => {
+            this.chatMessagesResource.save({author: user, text: message}, (result:any) => {
                 console.log(result);
             }, (result:any) => {
                 console.log(result);

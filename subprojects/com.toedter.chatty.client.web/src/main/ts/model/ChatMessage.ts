@@ -7,14 +7,17 @@
 /// <reference path="../../../../typings/angularjs/angular-resource.d.ts" />
 
 module chatty.model {
-    export interface ChatMessage extends ng.resource.IResource<ChatMessage> {
+    export interface ChatMessage {
         id: number;
         author: string;
         text: string;
         timeStamp: string;
     }
 
-    export interface ChatMessageResource extends ng.resource.IResourceClass<ChatMessage> {
+    export interface ChatMessageResource extends ChatMessage, ng.resource.IResource<ChatMessage> {
+    }
+
+    export interface ChatMessagesResource extends ng.resource.IResourceClass<ChatMessageResource> {
         update(ChatMessage) : Event;
     }
 }
