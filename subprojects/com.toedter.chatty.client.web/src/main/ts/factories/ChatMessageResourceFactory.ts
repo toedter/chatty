@@ -12,7 +12,7 @@
 chatty.factories.factory('chatMessagesResource', ['$resource', ($resource: ng.resource.IResourceService) : chatty.model.ChatMessagesResource => {
 
     var chatMessagesResource:chatty.model.ChatMessagesResource =
-        <chatty.model.ChatMessagesResource> $resource('http://localhost:8080/chatty/api/messages/:id');
+        <chatty.model.ChatMessagesResource> $resource('http://localhost:8080/chatty/api/messages/:id', { id: '@id' });
 
     return chatMessagesResource;
 }]);

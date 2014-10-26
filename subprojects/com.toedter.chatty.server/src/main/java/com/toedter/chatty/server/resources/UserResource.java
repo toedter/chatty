@@ -72,6 +72,22 @@ public class UserResource {
         return userHAL;
     }
 
+    @PUT
+    @Path("/{id}")
+    @Produces(RepresentationFactory.HAL_JSON)
+    public String updateUser(@Context UriInfo uriInfo, SimpleUser user) {
+        logger.info("Got put: " + user);
+        Representation rep = representationFactory.newRepresentation();
+        String baseURI = uriInfo.getRequestUri().toString();
+
+        userRepository.updateUser(user);
+        rep.withBean(user)
+                .withLink("self", baseURI);
+        String userHAL = rep.toString(RepresentationFactory.HAL_JSON);
+        logger.info("return HAL: " + userHAL);
+        return userHAL;
+    }
+
     @DELETE
     @Path("/{id}")
     public void deleteUser(@PathParam("id") final String id) {

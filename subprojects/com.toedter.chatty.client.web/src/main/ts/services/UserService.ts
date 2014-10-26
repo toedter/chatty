@@ -16,9 +16,10 @@ module chatty {
             console.log('User service started')
         }
 
-        connectUser(user:chatty.model.User, successCallback:(user:chatty.model.UserResource) => void, errorCallback:(result:any) => void) {
-
-            this.usersResource.save(user, (result:any) => {
+        connectUser(user:chatty.model.User,
+                    successCallback:(user:chatty.model.UserResource) => void,
+                    errorCallback:(result:chatty.model.UserResource) => void) {
+            this.usersResource.save(user, (result:chatty.model.UserResource) => {
                 successCallback(result);
             }, (result:any) => {
                 var alert:string = 'user id ' + user.id + ' already in use, please choose another id';

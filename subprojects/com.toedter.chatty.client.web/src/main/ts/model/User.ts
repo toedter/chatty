@@ -14,8 +14,10 @@ module chatty.model {
     }
 
     export interface UserResource extends User, ng.resource.IResource<User> {
+        $update(): UserResource;
     }
 
     export interface UsersResource extends ng.resource.IResourceClass<UserResource> {
+        update(User): UserResource;
     }
 }

@@ -18,6 +18,5 @@ module chatty.model {
     }
 
     export interface ChatMessagesResource extends ng.resource.IResourceClass<ChatMessageResource> {
-        update(ChatMessage) : Event;
     }
 }
