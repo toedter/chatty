@@ -1,0 +1,33 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <script src="../../../bower_components/angular/angular.min.js"></script>
+</head>
+<body>
+<div>
+    <label>Search:</label>
+    <input type="text" ng-model="search" placeholder="Enter search here">
+    <hr>
+    <table ng-controller="ConferencesController">
+        <tr ng-repeat="conf in conferences | filter:search">
+            <td style="text-align: left; width:30%">{{conf.name}}</td>
+            <td style="text-align: left; width:30%">{{conf.year}}</td>
+            <td style="text-align: left; width:30%">{{conf.location}}</td>
+        </tr>
+    </table>
+</div>
+<script>
+    var myApp = angular.module('myApp',[]);
+
+    myApp.controller('ConferencesController', ['$scope', function($scope) {
+        console.log('ConferencesController started...')
+        $scope.conferences = [
+            {'name':'WJAX', 'year':'2014', 'location':'Munich'},
+            {'name':'OOP', 'year':'2015', 'location':'Munich'},
+            {'name':'JAX', 'year':'2015', 'location':'Munich'},
+            {'name':'JavaOne', 'year':'2015', 'location':'San Francisco'},
+        ];
+    }]);
+</script>
+</body>
+</html>
