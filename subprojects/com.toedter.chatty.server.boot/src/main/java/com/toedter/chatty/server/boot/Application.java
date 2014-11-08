@@ -7,6 +7,7 @@
 
 package com.toedter.chatty.server.boot;
 
+import com.toedter.chatty.server.boot.rest.DynamicCurieProvider;
 import com.toedter.chatty.server.boot.service.ChatMessageRepositoryListener;
 import com.toedter.chatty.server.boot.service.TestDataLoader;
 import org.atmosphere.cpr.AtmosphereServlet;
@@ -51,13 +52,6 @@ public class Application {
     }
 
     @Bean
-    ServletRegistrationBean dispatcherRegistration(DispatcherServlet dispatcherServlet) {
-        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(dispatcherServlet);
-        servletRegistrationBean.addUrlMappings("/chatty/api/*");
-        return servletRegistrationBean;
-    }
-
-    @Bean
     ServletRegistrationBean atmosphereServlet() {
         ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new AtmosphereServlet(), "/atmos/*");
         Map<String, String> params = new HashMap<>();
@@ -73,8 +67,7 @@ public class Application {
 
         @Bean
         public CurieProvider curieProvider() {
-            // TODO: get rid of localhost:8080
-            return new DefaultCurieProvider("chatty", new UriTemplate("http://localhost:8080/api/alps/{rel}"));
+            return new DynamicCurieProvider("chatty", new UriTemplate("/api/alps/{rel}"));
         }
     }
 }
