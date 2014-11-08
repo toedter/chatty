@@ -10,6 +10,10 @@ buildscript {
     }
 }
 
+plugins {
+    id 'org.hidetake.ssh' version '0.4.3'
+}
+
 repositories {
     mavenCentral()
     maven { url "http://repo.spring.io/snapshot" }
@@ -44,3 +48,26 @@ dependencies {
 
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 }
+
+remotes {
+    boot2docker {
+        host = '192.168.59.103'
+        user = 'docker'
+        password = 'tcuser'
+    }
+}
+
+ssh.settings {
+    logging = 'stdout'
+}
+
+task deploy2docker << {
+    ssh.run {
+        session(remotes.boot2docker) {
+            execute('rm -rf chatty')
+            execute('mkdir chatty')
+            get 'test.txt', buildDir
+        }
+    }
+}
+
