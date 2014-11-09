@@ -1,5 +1,6 @@
 package com.toedter.chatty.server.boot.rest;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.hateoas.IanaRels;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Links;
@@ -16,6 +17,9 @@ import java.util.Collections;
  * The base uri of the curie link is created dynamically if the URI template starts with '/'.
  */
 public class DynamicCurieProvider implements CurieProvider {
+
+    @Value("${spring.data.rest.baseUri}")
+    String baseUri = "";
 
     private Curie curie;
     private String name;
@@ -66,7 +70,7 @@ public class DynamicCurieProvider implements CurieProvider {
 
     private Curie getCurie() {
         if (curie == null) {
-            String uri = ServletUriComponentsBuilder.fromCurrentContextPath().build().toString() + uriTemplate.toString();
+            String uri = ServletUriComponentsBuilder.fromCurrentContextPath().build().toString() + baseUri + uriTemplate.toString();
             this.curie = new Curie(name, uri);
         }
         return curie;
