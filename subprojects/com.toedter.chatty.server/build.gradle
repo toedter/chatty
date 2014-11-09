@@ -6,7 +6,7 @@ apply from: "$rootDir/gradle/integrationTest.gradle"
 dependencies {
     compile project(':com.toedter.chatty.model')
 
-    def jerseyVersion = '2.9'
+    def jerseyVersion = '2.13'
     compile "org.glassfish.jersey.core:jersey-server:$jerseyVersion"
     compile "org.glassfish.jersey.core:jersey-client:$jerseyVersion"
     compile "org.glassfish.jersey.containers:jersey-container-grizzly2-http:$jerseyVersion"

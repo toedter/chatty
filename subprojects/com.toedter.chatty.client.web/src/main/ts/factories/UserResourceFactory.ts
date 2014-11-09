@@ -8,7 +8,6 @@
 /// <reference path="../model/User.ts" />
 /// <reference path="../../../../typings/angularjs/angular-resource.d.ts" />
 
-
 chatty.factories.factory('usersResource', ['$resource', ($resource:ng.resource.IResourceService):chatty.model.UsersResource => {
 
     var updateAction : ng.resource.IActionDescriptor = {

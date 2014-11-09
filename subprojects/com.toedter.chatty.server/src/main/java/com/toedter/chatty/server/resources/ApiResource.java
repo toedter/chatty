@@ -12,7 +12,9 @@ import com.theoryinpractise.halbuilder.json.JsonRepresentationFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
@@ -26,13 +28,19 @@ public class ApiResource {
 
     @GET
     @Produces(RepresentationFactory.HAL_JSON)
-    public String getUsers(@Context UriInfo uriInfo) {
+    public String getApi(@Context UriInfo uriInfo) {
         String baseURI = uriInfo.getRequestUri().toString();
+        if(!baseURI.endsWith("/")) {
+            baseURI += "/";
+        }
 
-        Representation listRep = representationFactory.newRepresentation();
-        listRep.withLink("self", baseURI);
-        listRep.withLink("users", createUriFromResource(baseURI, UserResource.class));
-        listRep.withLink("messages", createUriFromResource(baseURI, ChatMessageResource.class));
+        Representation listRep = representationFactory.newRepresentation()
+//                .withFields(RepresentationFactory.COALESCE_ARRAYS)
+//                .withFields(RepresentationFactory.COALESCE_LINKS)
+//                .withFields(RepresentationFactory.STRIP_NULLS)
+                .withLink("chatty:users", createUriFromResource(baseURI, UserResource.class))
+                .withLink("chatty:messages", createUriFromResource(baseURI, ChatMessageResource.class))
+                .withNamespace("chatty", "http://docu.chatty.com/{rel}");
 
         return listRep.toString(RepresentationFactory.HAL_JSON);
     }

@@ -96,6 +96,7 @@ public class ChatMessageResource {
     @Consumes("application/json")
     public void broadcast(@Context UriInfo uriInfo, SimpleChatMessage chatMessage) {
         logger.info("Got message in post: " + chatMessage);
+        ModelFactory.getInstance().getChatMessageRepository().saveChatMessage(chatMessage);
 
         Representation rep = representationFactory.newRepresentation();
         String baseURI = uriInfo.getRequestUri().toString();

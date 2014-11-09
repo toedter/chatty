@@ -59,7 +59,6 @@ module chatty {
                 }
             }
 
-
             chatMessageService.getAllChatMessages(
                 (chatMessages:chatty.model.ChatMessage[]) => {
                     $scope.chatMessages = chatMessages;
@@ -90,7 +89,12 @@ module chatty {
             request.onMessage = function (response:Atmosphere.Response) {
                 var message:string = response.responseBody;
                 console.log('Atmosphere got message: ' + message);
-                var index = message.indexOf("{");
+                var index = message.indexOf("ERROR");
+                if (index != -1) {
+                    console.log('Atmosphere got ERROR: ' + message);
+                    return;
+                }
+                index = message.indexOf("{");
                 if (index != 0 && index != -1) {
                     message = message.substring(index);
                 } else {
@@ -124,13 +128,6 @@ module chatty {
             request.onError = function (response?:Atmosphere.Response) {
                 console.log('Atmosphere error: ' + response.reasonPhrase);
             };
-        }
-
-        sendHttpChatMessage(logService, content) {
-            var request:XMLHttpRequest = new XMLHttpRequest();
-            request.open('post', 'http://localhost:8080/chatty/api/messages', true);
-            request.setRequestHeader('Content-Type', 'application/json');
-            request.send(content);
         }
     }
 }

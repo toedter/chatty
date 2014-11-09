@@ -10,29 +10,52 @@
 
 module chatty {
     export class ChatMessageService {
-        static $inject = ['chatMessagesResource'];
+        static $inject = ['chatty.apiResource', '$resource'];
 
-        constructor(private chatMessagesResource:chatty.model.ChatMessagesResource) {
+        constructor(private apiResource:ng.resource.IResourceClass<ng.resource.IResource<any>>,
+                    private $resource:ng.resource.IResourceService) {
             console.log('ChatMessage service started')
         }
 
         getAllChatMessages(callback:(messages:chatty.model.ChatMessageResource[]) => void) {
-            this.chatMessagesResource.get((result:any) => {
-                var messages:chatty.model.ChatMessageResource[] = [];
-                if (result.hasOwnProperty("_embedded") && result._embedded.hasOwnProperty("messages")) {
-                    messages = result._embedded.messages;
+            this.apiResource.get((api:any) => {
+                var chatMessagesResource:chatty.model.ChatMessagesResource = this.getMessagesResource(api);
+                if (chatMessagesResource) {
+                    chatMessagesResource.get((result:any) => {
+                        var messages:chatty.model.ChatMessageResource[] = [];
+                        if (result.hasOwnProperty("_embedded") && result._embedded.hasOwnProperty("messages")) {
+                            messages = result._embedded.messages;
+                        }
+                        callback(messages);
+                    });
                 }
-                callback(messages);
             });
         }
 
         postMessage(user:chatty.model.User, message:string):void {
-            this.chatMessagesResource.save({author: user, text: message}, (result:any) => {
-                console.log(result);
-            }, (result:any) => {
-                console.log(result);
+            this.apiResource.get((api:any) => {
+                var chatMessagesResource:chatty.model.ChatMessagesResource = this.getMessagesResource(api);
+                if (chatMessagesResource) {
+                     chatMessagesResource.save({author: user, text: message}, (result:any) => {
+                        console.log(result);
+                    }, (result:any) => {
+                        console.log(result);
+                    });
+                }
             });
+        }
+
+        private getMessagesResource(apiResource:any):chatty.model.ChatMessagesResource {
+            if (apiResource.hasOwnProperty("_links") && apiResource._links.hasOwnProperty("chatty:messages")) {
+                var href:string = apiResource._links['chatty:messages'].href;
+                // remove template parameters
+                href = href.replace(/{.*}/g, '');
+                var chatMessagesResource:chatty.model.ChatMessagesResource =
+                    <chatty.model.ChatMessagesResource> this.$resource(href + '/:id', {id: '@id'});
+                return chatMessagesResource;
+            }
         }
     }
 }
+
 chatty.services.service('chatty.chatMessageService', chatty.ChatMessageService);
