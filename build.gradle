@@ -5,7 +5,6 @@ allprojects {
     apply plugin: 'idea'
     apply plugin: 'eclipse'
     group = 'com.toedter'
-    task stage(dependsOn: ['clean', 'jar'])
 }
 
 subprojects {

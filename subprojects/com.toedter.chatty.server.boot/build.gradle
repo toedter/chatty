@@ -70,3 +70,7 @@ task deploy2docker << {
     }
 }
 
+task stage(dependsOn: ['jar', 'bootRepackage'])
+
+
+
