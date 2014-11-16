@@ -6,7 +6,8 @@
 
 package com.toedter.chatty.server.boot.service;
 
-import com.toedter.chatty.model.ChatMessage;
+
+import com.toedter.chatty.server.boot.domain.ChatMessage;
 import org.atmosphere.cpr.BroadcasterFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,33 +24,34 @@ public class ChatMessageRepositoryListener extends AbstractRepositoryEventListen
     private static AtomicBoolean isBroadcasterInitialized = new AtomicBoolean(false);
 
     @Override
-    public void onAfterCreate(ChatMessage e) {
-        logger.debug("onAfterCreate: " + e);
-        notifySubscribers();
+    public void onAfterCreate(ChatMessage chatMessage) {
+        logger.info("onAfterCreate: " + chatMessage);
+        notifySubscribers(chatMessage);
     }
 
     @Override
-    protected void onAfterSave(ChatMessage entity) {
-        logger.debug("onAfterSave: " + entity);
-        notifySubscribers();
+    protected void onAfterSave(ChatMessage chatMessage) {
+        logger.info("onAfterSave: " + chatMessage);
+        notifySubscribers(chatMessage);
     }
 
     @Override
-    public void onAfterDelete(ChatMessage e) {
-        logger.debug("onAfterDelete: " + e);
-        notifySubscribers();
+    public void onAfterDelete(ChatMessage chatMessage) {
+        logger.info("onAfterDelete: " + chatMessage);
+        notifySubscribers(chatMessage);
     }
 
-    private void notifySubscribers() {
+    private void notifySubscribers(ChatMessage chatMessage) {
         shouldBroadcast.set(true);
         if (!isBroadcasterInitialized.getAndSet(true)) {
             logger.info("Broadcasting initialized");
             ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
             Runnable broadcaster = new Runnable() {
                 public void run() {
-                    // logger.debug("Broadcasting REFRESH: " + shouldBroadcast.get());
+                    // logger.info("Broadcasting REFRESH: " + shouldBroadcast.get());
                     if (shouldBroadcast.getAndSet(false)) {
-                        BroadcasterFactory.getDefault().lookup("/atmos/events").broadcast("{\"command\":\"reloadEvents\"}");
+                        BroadcasterFactory.getDefault().lookup("/chatty/atmos/messages")
+                                .broadcast("{\"text\":\"" + chatMessage.getText() + "\"}");
                     }
                 }
             };

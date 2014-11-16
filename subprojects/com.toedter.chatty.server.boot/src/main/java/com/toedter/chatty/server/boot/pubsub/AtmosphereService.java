@@ -14,7 +14,7 @@ import org.atmosphere.cpr.AtmosphereResourceEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@ManagedService(path = "/atmos/events")
+@ManagedService(path = "/chatty/atmos/messages")
 public class AtmosphereService {
     private final Logger logger = LoggerFactory.getLogger(AtmosphereService.class);
 

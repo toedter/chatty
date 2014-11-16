@@ -81,3 +81,9 @@ task integrationTest << {}
 integrationTest.dependsOn bowerInstall, gruntIntegrationTest;
 
 test.dependsOn gruntTest;
+
+task webjar(type: Jar, dependsOn: "jar") {
+    from(fileTree("dist")) {
+        into "META-INF/resources"
+    }
+}

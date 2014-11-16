@@ -6,13 +6,14 @@
 
 package com.toedter.chatty.server.boot.service;
 
-
+import com.toedter.chatty.server.boot.domain.AuthorProjection;
 import com.toedter.chatty.server.boot.domain.User;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.Description;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(
+        // excerptProjection = AuthorProjection.class,
         collectionResourceRel = "users",
         path = "users",
         collectionResourceDescription = @Description("The list of connected users"),

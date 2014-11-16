@@ -54,8 +54,8 @@
         <h3>MESSAGES</h3>
         <table class="table">
             <tr ng-repeat="message in chatMessages">
-                <td style="text-align: left; width:5%">{{message.id}}</td>
-                <td style="text-align: left; width:10%">{{message._embedded.author.id}}</td>
+                <td ng-if="message._embedded.author" style="text-align: left; width:10%">{{message._embedded.author.id}}</td>
+                <td ng-if="message.author" style="text-align: left; width:10%">{{message._embedded.author.id}}</td>
                 <td style="text-align: left; width:85%">{{message.text}}</td>
             </tr>
         </table>

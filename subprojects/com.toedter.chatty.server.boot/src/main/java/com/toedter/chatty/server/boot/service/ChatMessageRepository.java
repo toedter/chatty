@@ -8,9 +8,16 @@ package com.toedter.chatty.server.boot.service;
 
 
 import com.toedter.chatty.server.boot.domain.ChatMessage;
+import com.toedter.chatty.server.boot.domain.ChatMessageProjection;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.rest.core.annotation.Description;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestResource(collectionResourceRel = "messages", path = "messages")
+@RepositoryRestResource(
+        // excerptProjection = ChatMessageProjection.class,
+        collectionResourceRel = "messages",
+        path = "messages",
+        collectionResourceDescription = @Description("The list of chat messages"),
+        itemResourceDescription = @Description("A chat messages"))
 interface ChatMessageRepository extends PagingAndSortingRepository<ChatMessage, Long> {
 }

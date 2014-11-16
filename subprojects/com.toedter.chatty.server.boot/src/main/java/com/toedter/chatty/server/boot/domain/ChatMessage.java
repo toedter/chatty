@@ -6,8 +6,6 @@
 
 package com.toedter.chatty.server.boot.domain;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.toedter.chatty.server.boot.rest.JsonInstantSerializer;
 import lombok.AllArgsConstructor;
@@ -33,11 +31,20 @@ public class ChatMessage implements Identifiable<Long>{
     private User author;
 
     @JsonSerialize(using = JsonInstantSerializer.class)
-    private Instant timeStamp;
+    private Instant timeStamp = Instant.now();
 
     public ChatMessage(User author, String text) {
         this.text = text;
         this.author = author;
-        this.timeStamp = Instant.now();
+    }
+
+    @Override
+    public String toString() {
+        return "ChatMessage{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", author.id=" + author.getId() +
+                ", timeStamp=" + timeStamp +
+                '}';
     }
 }

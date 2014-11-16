@@ -32,11 +32,20 @@ module chatty {
             });
         }
 
-        postMessage(user:chatty.model.User, message:string):void {
+        postMessage(user:chatty.model.UserResource, message:string, userLocation:string):void {
             this.apiResource.get((api:any) => {
                 var chatMessagesResource:chatty.model.ChatMessagesResource = this.getMessagesResource(api);
                 if (chatMessagesResource) {
-                     chatMessagesResource.save({author: user, text: message}, (result:any) => {
+                    var newChatMessage:any;
+                    if(userLocation) {
+                        // For Spring Boot server
+                        newChatMessage = {author: userLocation, text: message};
+                    } else {
+                        // For Jetty server
+                        newChatMessage = {author: user, text: message};
+                    }
+
+                    chatMessagesResource.save(newChatMessage, (result:any) => {
                         console.log(result);
                     }, (result:any) => {
                         console.log(result);
@@ -50,8 +59,18 @@ module chatty {
                 var href:string = apiResource._links['chatty:messages'].href;
                 // remove template parameters
                 href = href.replace(/{.*}/g, '');
+
+                var saveAction:ng.resource.IActionDescriptor = {
+                    method: 'POST',
+                    isArray: false,
+                    params: {id: ''},
+                    headers: {'Content-Type': 'application/json'}
+                };
+
                 var chatMessagesResource:chatty.model.ChatMessagesResource =
-                    <chatty.model.ChatMessagesResource> this.$resource(href + '/:id', {id: '@id'});
+                    <chatty.model.ChatMessagesResource> this.$resource(href + "?projection=excerpt"+ '/:id', {id: '@id'}, {
+                        save: saveAction
+                    });
                 return chatMessagesResource;
             }
         }

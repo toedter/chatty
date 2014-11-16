@@ -13,7 +13,15 @@ chatty.factories.factory('usersResource', ['$resource', ($resource:ng.resource.I
     var updateAction : ng.resource.IActionDescriptor = {
         method: 'PUT',
         isArray: false,
-        params: { id: '@id' }
+        params: { id: '@id' },
+        headers: {'Content-Type': 'application/json'}
+    };
+
+    var saveAction : ng.resource.IActionDescriptor = {
+        method: 'POST',
+        isArray: false,
+        params: { id: '' },
+        headers: {'Content-Type': 'application/json'}
     };
 
     var usersResource:chatty.model.UsersResource =

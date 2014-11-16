@@ -28,9 +28,14 @@ module chatty {
                 if (!$scope.isConnected) {
                     if ($scope.userId && $scope.userEmail && $scope.userFullName) {
                         $scope.connectedUser = undefined;
-                        userService.connectUser({id: $scope.userId, email: $scope.userEmail, fullName: $scope.userFullName},
-                            (userResource:chatty.model.UserResource) => {
+                        userService.connectUser({
+                                id: $scope.userId,
+                                email: $scope.userEmail,
+                                fullName: $scope.userFullName
+                            },
+                            (userResource:chatty.model.UserResource, headers:Function) => {
                                 console.log("got user: " + userResource.id);
+                                $scope.connectedUserLocation = headers('Location');
                                 $scope.connectedUser = userResource;
                                 $scope.subSocket = socket.subscribe(request);
                             },
@@ -55,7 +60,7 @@ module chatty {
             $scope.submitChatMessage = () => {
                 if ($scope.connectedUser) {
                     console.log("chat message submitted: " + $scope.chatMessage);
-                    chatMessageService.postMessage($scope.connectedUser, $scope.chatMessage)
+                    chatMessageService.postMessage($scope.connectedUser, $scope.chatMessage, $scope.connectedUserLocation)
                 }
             }
 
@@ -119,10 +124,8 @@ module chatty {
                 console.log(alert);
                 $scope.chatStatus = alert;
                 $scope.chatStatusType = 'alert-success';
-                $scope.connectedUser = undefined;
                 $scope.userButtonText = 'Connect';
                 $scope.isConnected = false;
-                // $scope.$apply();
             };
 
             request.onError = function (response?:Atmosphere.Response) {

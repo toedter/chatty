@@ -23,6 +23,7 @@ interface ChattyScope extends ng.IScope {
     chatMessages: chatty.model.ChatMessage[];
 
     connectedUser: chatty.model.UserResource;
+    connectedUserLocation: string;
     subSocket: Atmosphere.Request;
 
     submitUser(): void;

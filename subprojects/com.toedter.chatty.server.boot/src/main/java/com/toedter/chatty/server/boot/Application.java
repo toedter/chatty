@@ -42,7 +42,7 @@ public class Application {
 
     @Bean
     ChatMessageRepositoryListener eventRepositoryListener() {
-        logger.debug("EventRepositoryListener created...");
+        logger.debug("ChatMessageRepositoryListener created...");
         return new ChatMessageRepositoryListener();
     }
 
@@ -53,7 +53,7 @@ public class Application {
 
     @Bean
     ServletRegistrationBean atmosphereServlet() {
-        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new AtmosphereServlet(), "/atmos/*");
+        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new AtmosphereServlet(), "/chatty/atmos/*");
         Map<String, String> params = new HashMap<>();
         params.put("org.atmosphere.cpr.packages", "com.siemens.cis.server.event.pubsub");
         servletRegistrationBean.setInitParameters(params);

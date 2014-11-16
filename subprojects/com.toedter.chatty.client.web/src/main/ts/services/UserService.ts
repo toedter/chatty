@@ -17,11 +17,13 @@ module chatty {
         }
 
         connectUser(user:chatty.model.User,
-                    successCallback:(user:chatty.model.UserResource) => void,
+                    successCallback:(user:chatty.model.UserResource, headers:Function) => void,
                     errorCallback:(result:chatty.model.UserResource) => void) {
-            this.usersResource.save(user, (result:chatty.model.UserResource) => {
-                successCallback(result);
+            this.usersResource.save(user, (result:chatty.model.UserResource, headers:Function) => {
+                console.log(headers);
+                successCallback(result, headers);
             }, (result:any) => {
+                console.log(result);
                 var alert:string = 'user id ' + user.id + ' already in use, please choose another id';
                 console.log(alert);
                 errorCallback(result);
