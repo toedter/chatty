@@ -103,12 +103,14 @@ After having started the Spring Boot based server,
 you can use [http://localhost:8080/chatty/api/hal-browser/browser.html#/api/](http://localhost:8080/chatty/api/hal-browser/browser.html#/chatty/api/)
 as entry point for exploring the HAL based API with the embedded HAL-Browser.
 
-
+Live Demo
+---------
+Currently the Spring Boot based server is deployed to Heroku. You can browse the Chatty API with the HAL browser at
+[https://chatty42.herokuapp.com/hal-browser/browser.html#https://chatty42.herokuapp.com/chatty/api](https://chatty42.herokuapp.com/hal-browser/browser.html#https://chatty42.herokuapp.com/chatty/api)
 
 What's Next?
 ------------
-* More tests
-
+* Deploy chatty to Docker container
 
 License
 -------
