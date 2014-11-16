@@ -1,13 +1,14 @@
 apply from: "$rootDir/gradle/versioning.gradle"
 
 allprojects {
+    apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'eclipse'
     group = 'com.toedter'
+    task stage(dependsOn: ['clean', 'jar'])
 }
 
 subprojects {
-    apply plugin: 'java'
     apply from: "$rootDir/gradle/jacoco.gradle"
 
     repositories {
@@ -23,4 +24,3 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.1'
 }
 
-task stage(dependsOn: ['build'])
