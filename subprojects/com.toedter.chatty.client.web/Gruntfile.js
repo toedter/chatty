@@ -142,6 +142,12 @@ module.exports = function (grunt) {
                             return noDots.replace(/<script src="ts[\s\S]*MainController.js/gi, '<script src="js/chatty.min.js');
                         }
                     }
+                },
+                boot: {
+                    expand: true,
+                    cwd: 'dist',
+                    src: '**/*',
+                    dest: '../com.toedter.chatty.server.boot/src/main/resources/static/chatty'
                 }
             }
         }
@@ -159,5 +165,6 @@ module.exports = function (grunt) {
     grunt.registerTask('test', ['typescript:base', 'jasmine:unit']);
     grunt.registerTask('itest', ['typescript:base', 'jasmine:integration']);
     grunt.registerTask('dist', ['clean', 'copy:dist', 'copy:modify', 'typescript:dist', 'uglify']);
+    grunt.registerTask('distBoot', ['dist', 'copy:boot']);
     grunt.registerTask('test:coverage', ['jasmine:coverage']);
 }

@@ -25,7 +25,7 @@ chatty.factories.factory('usersResource', ['$resource', ($resource:ng.resource.I
     };
 
     var usersResource:chatty.model.UsersResource =
-        <chatty.model.UsersResource> $resource('http://localhost:8080/chatty/api/users/:id', null, {
+        <chatty.model.UsersResource> $resource('/chatty/api/users/:id', null, {
             update:updateAction
         });
 

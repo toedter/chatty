@@ -73,7 +73,7 @@ module chatty {
             var socket:Atmosphere.Atmosphere = atmosphere;
 
             var request:Atmosphere.Request = {
-                url: 'http://localhost:8080/chatty/atmos/messages',
+                url: '/chatty/atmos/messages',
                 contentType: 'application/json',
                 logLevel: 'debug',
                 transport: 'websocket',
