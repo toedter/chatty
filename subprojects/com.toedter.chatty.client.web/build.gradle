@@ -86,15 +86,3 @@ task webjar(type: Jar, dependsOn: "jar") {
         into "META-INF/resources"
     }
 }
-
-task gruntDistBoot(type: GruntTask) {
-    group = "Distribution"
-    description = "Creates a distribution"
-    gruntArgs = "distBoot"
-
-    inputs.dir "src"
-    inputs.file file("Gruntfile.js")
-}
-
-// for heroku
-task stage(dependsOn: ['gruntDistBoot'])
