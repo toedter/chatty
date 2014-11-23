@@ -168,6 +168,13 @@ module.exports = function (grunt) {
                         }
                     }
                 }
+            },
+            bower: {
+                install: {
+                    options: {
+                        targetDir: './bower_components'
+                    }
+                }
             }
         }
     )
@@ -180,11 +187,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-tsd');
+    grunt.loadNpmTasks('grunt-bower-task');
 
     grunt.registerTask('default', ['typescript:base', 'jasmine', 'jshint', 'dist']);
     grunt.registerTask('test', ['typescript:base', 'jasmine:unit']);
     grunt.registerTask('itest', ['typescript:base', 'jasmine:integration']);
     grunt.registerTask('dist', ['clean', 'copy:dist', 'copy:modify', 'typescript:dist', 'uglify']);
-    grunt.registerTask('distBoot', ['tsd:refresh', 'dist', 'copy:boot']);
+    grunt.registerTask('distBoot', ['bower', 'tsd:refresh', 'dist', 'copy:boot']);
     grunt.registerTask('test:coverage', ['jasmine:coverage']);
 }
