@@ -51,7 +51,7 @@ public class ChatMessageRepositoryListener extends AbstractRepositoryEventListen
                     // logger.info("Broadcasting REFRESH: " + shouldBroadcast.get());
                     if (shouldBroadcast.getAndSet(false)) {
                         BroadcasterFactory.getDefault().lookup("/chatty/atmos/messages")
-                                .broadcast("{\"text\":\"" + chatMessage.getText() + "\"}");
+                                .broadcast("{\"command\":\"reloadChatMessages\"}");
                     }
                 }
             };

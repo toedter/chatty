@@ -113,9 +113,10 @@ module chatty {
                             $scope.chatMessages = chatMessages;
                         });
                     }
+                } else {
+                    $scope.chatMessages.push(JSON.parse(message));
                 }
 
-                $scope.chatMessages.push(JSON.parse(message));
                 $scope.$apply();
             };
 
