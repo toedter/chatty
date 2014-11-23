@@ -29,11 +29,15 @@ dependencies {
     compile project(':com.toedter.chatty.model')
     
     def springBootVersion = '1.2.0.RC2'
-    // compile "org.springframework.data:spring-data-rest-core:2.2.0.RELEASE"
+
     compile "org.springframework.data:spring-data-rest-webmvc:2.2.2.BUILD-SNAPSHOT"
     compile "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
     compile "org.springframework.boot:spring-boot-starter-data-rest:$springBootVersion"
     compile "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
+    compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion") {
+        exclude module: "spring-boot-starter-tomcat"
+    }
+    compile("org.springframework.boot:spring-boot-starter-jetty:$springBootVersion")
     compile "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:2.4.1.2"
     compile "org.springframework.hateoas:spring-hateoas:0.16.0.RELEASE"

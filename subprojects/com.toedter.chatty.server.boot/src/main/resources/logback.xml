@@ -15,10 +15,12 @@
 
     <logger name="com.toedter.chatty" level="DEBUG"/>
 
+    <logger name="jndi" level="ERROR"/>
     <logger name="org.eclipse.jetty" level="ERROR"/>
     <logger name="ch.qos" level="ERROR"/>
     <logger name="com" level="ERROR"/>
     <logger name="org" level="ERROR"/>
+
 
     <root>
         <level value="debug"/>
