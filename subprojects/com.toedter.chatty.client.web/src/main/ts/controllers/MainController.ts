@@ -81,7 +81,7 @@ module chatty {
             };
 
             request.onOpen = function (response?:Atmosphere.Response) {
-                var alert:string = 'Atmosphere connected using: ' + response.transport;
+                var alert:string = 'Connected to server using: ' + response.transport;
                 console.log(alert);
                 $scope.chatStatus = alert;
                 $scope.chatStatusType = 'alert-success';

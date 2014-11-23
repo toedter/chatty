@@ -131,6 +131,7 @@ module.exports = function (grunt) {
                         {expand: true, src: ['bower_components/**/*min.js'], dest: 'dist'},
                         {expand: true, src: ['bower_components/**/*.css'], dest: 'dist'},
                         {src: 'src/main/webapp/chatty.css', dest: 'dist/chatty.css'},
+                        {src: 'src/main/webapp/slate.css', dest: 'dist/slate.css'}
                     ]
                 },
                 modify: {
@@ -194,5 +195,6 @@ module.exports = function (grunt) {
     grunt.registerTask('itest', ['typescript:base', 'jasmine:integration']);
     grunt.registerTask('dist', ['clean', 'copy:dist', 'copy:modify', 'typescript:dist', 'uglify']);
     grunt.registerTask('distBoot', ['bower', 'tsd:refresh', 'dist', 'copy:boot']);
+    grunt.registerTask('distBootDev', ['dist', 'copy:boot']);
     grunt.registerTask('test:coverage', ['jasmine:coverage']);
 }
