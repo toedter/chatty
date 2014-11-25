@@ -106,7 +106,10 @@ as entry point for exploring the HAL based API with the embedded HAL-Browser.
 Live Demo
 ---------
 Currently the Spring Boot based server is deployed to Heroku. You can browse the Chatty API with the HAL browser at
-[https://chatty42.herokuapp.com/hal-browser/browser.html#https://chatty42.herokuapp.com/chatty/api](https://chatty42.herokuapp.com/hal-browser/browser.html#https://chatty42.herokuapp.com/chatty/api)
+[https://chatty42.herokuapp.com/hal-browser/browser.html#https://chatty42.herokuapp.com/chatty/api](https://chatty42.herokuapp.com/hal-browser/browser.html#https://chatty42.herokuapp.com/chatty/api).
+You can also try out a live demo of chatty at
+[https://chatty42.herokuapp.com/chatty/chatty.html](https://chatty42.herokuapp.com/chatty/chatty.html).
+But please be aware that this is only a test installment and will be reset periodically.
 
 What's Next?
 ------------
