@@ -193,8 +193,8 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['typescript:base', 'jasmine', 'jshint', 'dist']);
     grunt.registerTask('test', ['typescript:base', 'jasmine:unit']);
     grunt.registerTask('itest', ['typescript:base', 'jasmine:integration']);
+    grunt.registerTask('test:coverage', ['jasmine:coverage']);
     grunt.registerTask('dist', ['clean', 'copy:dist', 'copy:modify', 'typescript:dist', 'uglify']);
     grunt.registerTask('distBoot', ['bower', 'tsd:refresh', 'dist', 'copy:boot']);
     grunt.registerTask('distBootDev', ['dist', 'copy:boot']);
-    grunt.registerTask('test:coverage', ['jasmine:coverage']);
 }

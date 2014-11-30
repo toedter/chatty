@@ -22,8 +22,7 @@ Requirements
 * Java 8 JDK installed
 * Node.js installed
 * Grunt CLI installed (npm install -g grunt-cli)
-* Bower installed (npm install -g bower)
-* TSD (TypeScript Definition Manager) installed (npm install -g tsd)
+* Bower and TSD (TypeScript Definition Manager) don't have to be installed, the build will invoke the grunt contribs for bower and tsd
 
 Getting Started
 ---------------

@@ -9,10 +9,10 @@ buildscript {
     }
 }
 
-task tsdInstall(type: TsdTask) {
+task tsdInstall(type: GruntTask) {
     group = "build"
     description = "installs all TypeScript definitions."
-    tsdArgs = "update -so"
+    gruntArgs = "tsd"
 
     inputs.dir "typings"
     inputs.file file("tsd.json")
@@ -27,10 +27,10 @@ task npmInstall(type: NpmTask) {
     inputs.file file("package.json")
 }
 
-task bowerInstall(type: BowerTask) {
+task bowerInstall(type: GruntTask) {
     group = "build"
     description = "installs all bower modules."
-    bowerArgs = "install"
+    gruntArgs = "bower"
 
     inputs.dir "bower_components"
     inputs.file file("bower.json")
@@ -44,7 +44,10 @@ task gruntTest(type: GruntTask) {
     inputs.dir "src"
     inputs.file file("Gruntfile.js")
 }
-gruntTest.dependsOn npmInstall, bowerInstall, tsdInstall
+
+bowerInstall.dependsOn npmInstall
+tsdInstall.dependsOn npmInstall
+gruntTest.dependsOn bowerInstall, tsdInstall
 
 task gruntIntegrationTest(type: GruntTask) {
     doFirst {
