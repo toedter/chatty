@@ -76,19 +76,19 @@ Then you can use [http://localhost:8080/chatty/api/](http://localhost:8080/chatt
 ```javascript
 {
   "_links" : {
-    "chatty:messages" : {
-      "href" : "http://localhost:8080/api/messages{?page,size,sort}",
+    "chatty:users" : {
+      "href" : "http://localhost:8080/chatty/api/users{?page,size,sort,projection}",
       "templated" : true
     },
-    "chatty:users" : {
-      "href" : "http://localhost:8080/api/users{?page,size,sort,projection}",
+    "chatty:messages" : {
+      "href" : "http://localhost:8080/chatty/api/messages{?page,size,sort,projection}",
       "templated" : true
     },
     "profile" : {
-      "href" : "http://localhost:8080/api/alps"
+      "href" : "http://localhost:8080/chatty/api/alps"
     },
     "curies" : [ {
-      "href" : "http://localhost:8080/api/alps/{rel}",
+      "href" : "http://localhost:8080/chatty/api/alps/{rel}",
       "name" : "chatty",
       "templated" : true
     } ]
