@@ -2,6 +2,7 @@ import com.toedter.chatty.ShutdownServerTask
 import org.apache.tools.ant.taskdefs.condition.Os
 
 apply from: "$rootDir/gradle/integrationTest.gradle"
+apply plugin:'application'
 
 dependencies {
     compile project(':com.toedter.chatty.model')
@@ -29,6 +30,8 @@ dependencies {
     testCompile 'junit:junit:4.11'
     testCompile 'org.mockito:mockito-all:1.9.5'
 }
+
+mainClassName = 'com.toedter.chatty.server.JettyServer'
 
 //tasks.withType(Test) {
 //    testLogging {
