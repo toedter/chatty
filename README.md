@@ -135,7 +135,7 @@ Besides boot2docker open a new console and run the following
 
 ```bash
 cd subprojects/com.toedter.chatty.server
-./gradlew dockerBuildImage
+gradle dockerBuildImage
 ```
 
 if it is successful, you will see an image id.
@@ -150,11 +150,16 @@ docker images
 Then run:
 
 ```bash
-docker run -d -p 8080:8080 <imageId>
+ID=$(docker run -d -p 8080:8080 <imageId>)
 ```
 
-finally: Open a browser with the boot2docker IP address and Port 8080, e.g. http://192.168.59.103:8080/src/main/webapp/chatty.html
+Open a browser with the boot2docker IP address and Port 8080, e.g. [http://192.168.59.103:8080/src/main/webapp/chatty.html] (http://192.168.59.103:8080/src/main/webapp/chatty.html)
 
+finally stop the container:
+
+```bash
+docker stop $ID
+```
 
 What's Next?
 ------------
