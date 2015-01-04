@@ -35,6 +35,7 @@ module chatty {
                             },
                             (userResource:chatty.model.UserResource, headers:Function) => {
                                 console.log("got user: " + userResource.id);
+                                console.log("got location: " + headers('Location'));
                                 $scope.connectedUserLocation = headers('Location');
                                 $scope.connectedUser = userResource;
                                 $scope.subSocket = socket.subscribe(request);
@@ -73,7 +74,7 @@ module chatty {
             var socket:Atmosphere.Atmosphere = atmosphere;
 
             var request:Atmosphere.Request = {
-                url: '/chatty/atmos/messages',
+                url: chatty.testServer + '/chatty/atmos/messages',
                 contentType: 'application/json',
                 logLevel: 'debug',
                 transport: 'websocket',

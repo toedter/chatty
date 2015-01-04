@@ -19,8 +19,8 @@ module chatty {
         connectUser(user:chatty.model.User,
                     successCallback:(user:chatty.model.UserResource, headers:Function) => void,
                     errorCallback:(result:chatty.model.UserResource) => void) {
-            this.usersResource.save(user, (result:chatty.model.UserResource, headers:Function) => {
-                console.log(headers);
+            this.usersResource.save(user, (result:chatty.model.UserResource, headers:any) => {
+                console.log('location header: ' + headers('location'));
                 successCallback(result, headers);
             }, (result:any) => {
                 console.log(result);
