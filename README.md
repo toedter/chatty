@@ -110,9 +110,55 @@ You can also try out a live demo of chatty at
 [https://chatty42.herokuapp.com/chatty/chatty.html](https://chatty42.herokuapp.com/chatty/chatty.html).
 But please be aware that this is only a test installment and will be reset periodically.
 
+Docker integration
+------------------
+For the gradle docker integration the [gradle-docker-plugin] (https://github.com/bmuschko/gradle-docker-plugin) is used.
+
+#### prepare boot2docker
+Boot2docker must be installed. E.g. for MAC OS, follow [docker installation mac] (https://docs.docker.com/installation/mac/).
+Start boot2docker.app. If it is not already started type in the console
+
+```bash
+boot2docker up
+docker version
+boot2docker shellinit
+```
+
+try if boot2docker pull works - e.g.
+
+```bash
+docker pull dockerfile/java:oracle-java8
+```
+
+#### build and run it
+Besides boot2docker open a new console and run the following
+
+```bash
+cd subprojects/com.toedter.chatty.server
+./gradlew dockerBuildImage
+```
+
+if it is successful, you will see an image id.
+
+For using the docker commands, you might need to set ```DOCKER_HOST``` and other env Variables that came from ```boot2docker shellinit``` first.
+If you are unsure about the image id, list it and choose it:
+
+```bash
+docker images
+```
+
+Then run:
+
+```bash
+docker run -d -p 8080:8080 <imageId>
+```
+
+finally: Open a browser with the boot2docker IP address and Port 8080, e.g. http://192.168.59.103:8080/src/main/webapp/chatty.html
+
+
 What's Next?
 ------------
-* Deploy chatty to Docker container
+* improved Docker integration
 
 License
 -------

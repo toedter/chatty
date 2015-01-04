@@ -49,6 +49,7 @@ dependencies {
     testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion"
 }
 
+/*
 remotes {
     boot2docker {
         host = '192.168.59.103'
@@ -70,6 +71,7 @@ task deploy2docker << {
         }
     }
 }
+*/
 
 task stage(dependsOn: ['jar', 'bootRepackage'])
 
