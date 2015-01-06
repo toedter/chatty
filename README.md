@@ -116,38 +116,24 @@ For the gradle docker integration the [gradle-docker-plugin] (https://github.com
 
 #### prepare boot2docker
 Boot2docker must be installed. You find installation instructions at [boot2docker] (http://boot2docker.io/).
-Start boot2docker. If it is not already started type in the console
+Start boot2docker.
 
-```bash
-boot2docker up
-docker version
-boot2docker shellinit
-```
-
-try if boot2docker pull works - e.g.
-
-```bash
-docker pull dockerfile/java:oracle-java8
-```
-
-#### build and run it
-Besides boot2docker open a new console and run the following
+#### build the docker image and run it (create and start a docker container)
+Open a new console and run the following
 
 ```bash
 cd subprojects/com.toedter.chatty.server
 gradle dockerBuildImage
 ```
 
-if it is successful, you will see an image id.
-
-For using the docker commands, you might need to set ```DOCKER_HOST``` and other env Variables that came from ```boot2docker shellinit``` first.
-If you are unsure about the image id, list it and choose it:
+After successful image creation, you will see an image id.
+In the boot2docker console, type
 
 ```bash
 docker images
 ```
 
-Then run:
+You will see the newly created image. Then run the image:
 
 ```bash
 ID=$(docker run -d -p 8080:8080 <imageId>)
