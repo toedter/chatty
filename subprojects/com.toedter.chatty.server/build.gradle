@@ -13,7 +13,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.bmuschko:gradle-docker-plugin:0.7.1'
+        classpath 'com.bmuschko:gradle-docker-plugin:0.7.2'
     }
 }
 
@@ -63,7 +63,7 @@ docker {
         // or Java 8:
         baseImage = 'dockerfile/java:oracle-java8'
 
-        maintainer = 'Derk Muenchhausen "derk@muenchhausen.de"'
+        maintainer = 'Kai Toedter "kai@toedter.com"'
         tag = 'chatty-server:1.1'
         port = 8080
     }
@@ -78,21 +78,6 @@ applicationDistribution.from("$projectDir/../com.toedter.chatty.client.web") {
 dockerCopyDistResources {
     from "$projectDir/../com.toedter.chatty.client.web"
 }
-
-/* test: adds to docker file:
-dockerDistTar {
-    runCommand "mkdir /data/subprojects"
-    runCommand "ln -s /com.toedter.chatty.server-1.1/com.toedter.chatty.client.web /data/subprojects/com.toedter.chatty.client.web"
-    // addFile 'chatty.html', '/'
-}
-*/
-
-//tasks.withType(Test) {
-//    testLogging {
-//        showStandardStreams = true
-//        exceptionFormat 'full'
-//    }
-//}
 
 task startServerAsyncWithAnt << {
     logger.lifecycle('Starting Jetty asynchronously...')

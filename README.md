@@ -115,8 +115,8 @@ Docker integration
 For the gradle docker integration the [gradle-docker-plugin] (https://github.com/bmuschko/gradle-docker-plugin) is used.
 
 #### prepare boot2docker
-Boot2docker must be installed. E.g. for MAC OS, follow [docker installation mac] (https://docs.docker.com/installation/mac/).
-Start boot2docker.app. If it is not already started type in the console
+Boot2docker must be installed. You find installation instructions at [boot2docker] (http://boot2docker.io/).
+Start boot2docker. If it is not already started type in the console
 
 ```bash
 boot2docker up
