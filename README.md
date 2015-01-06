@@ -16,6 +16,7 @@ Used Technologies
 * [JUnit] (http://junit.org/) for Java unit and integration testing
 * [Mockito] (https://code.google.com/p/mockito/) for Mocking
 * [Gradle] (http://www.gradle.org/) as build system
+* [Docker] (https://www.docker.com) to create containers for the running apps
 
 Requirements
 ------------
