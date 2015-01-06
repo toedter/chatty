@@ -114,11 +114,11 @@ Docker integration
 ------------------
 For the gradle docker integration the [gradle-docker-plugin] (https://github.com/bmuschko/gradle-docker-plugin) is used.
 
-#### prepare boot2docker
+#### Prepare boot2docker
 Boot2docker must be installed. You find installation instructions at [boot2docker] (http://boot2docker.io/).
 Start boot2docker.
 
-#### build the docker image and run it (create and start a docker container)
+#### Build the docker image and run it (create and start a docker container)
 Open a new console and run the following
 
 ```bash
