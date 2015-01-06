@@ -88,6 +88,10 @@ public class JettyServer {
         String path = file.getAbsolutePath();
         if (path.contains("chatty.server")) {
             fileHandler.setResourceBase("../com.toedter.chatty.client.web");
+        } else if (path.startsWith("/data")) {
+            // Docker environment
+            // ToDo: path has to match the location in the docker environment: Possible improvements: create symbolic links cmds in Dockerfile? introduce a Jetty arameter file? use of environment variables?
+            fileHandler.setResourceBase("/com.toedter.chatty.server-1.1/com.toedter.chatty.client.web");
         } else {
             fileHandler.setResourceBase("subprojects/com.toedter.chatty.client.web");
         }
