@@ -115,9 +115,10 @@ Docker integration
 ------------------
 For the gradle docker integration the [gradle-docker-plugin] (https://github.com/bmuschko/gradle-docker-plugin) is used.
 
-#### Prepare boot2docker
-Boot2docker must be installed. You find installation instructions at [boot2docker] (http://boot2docker.io/).
-Start boot2docker.
+#### Install Docker
+You find installation instructions at [Docker] (https://www.docker.com). When you use Windows or MAC,
+install boot2docker. You find installation instructions at [boot2docker] (http://boot2docker.io/).
+Start Docker.
 
 #### Build the docker image and run it (create and start a docker container)
 Open a new console and run the following
@@ -140,7 +141,7 @@ You will see the newly created image. Then run the image:
 ID=$(docker run -d -p 8080:8080 <imageId>)
 ```
 
-Open a browser with the boot2docker IP address and Port 8080, e.g. [http://192.168.59.103:8080/src/main/webapp/chatty.html] (http://192.168.59.103:8080/src/main/webapp/chatty.html)
+Open a browser with the Docker IP address and Port 8080, e.g. [http://192.168.59.103:8080/src/main/webapp/chatty.html] (http://192.168.59.103:8080/src/main/webapp/chatty.html)
 
 finally stop the container:
 
