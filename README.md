@@ -120,7 +120,7 @@ You find installation instructions at [Docker] (https://www.docker.com). When yo
 install boot2docker. You find installation instructions at [boot2docker] (http://boot2docker.io/).
 Start Docker.
 
-#### Build the docker image and run it (create and start a docker container)
+#### Build the Docker image and run it (create and start a Docker container)
 Open a new console and run the following
 
 ```bash
@@ -129,7 +129,7 @@ gradle dockerBuildImage
 ```
 
 After successful image creation, you will see an image id.
-In the boot2docker console, type
+In the Docker console, type
 
 ```bash
 docker images
