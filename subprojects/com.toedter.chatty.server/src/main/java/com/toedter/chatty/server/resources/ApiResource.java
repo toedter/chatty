@@ -34,14 +34,14 @@ public class ApiResource {
             baseURI += "/";
         }
 
-        Representation listRep = representationFactory
+        Representation representation = representationFactory
                 .withFlag(RepresentationFactory.COALESCE_ARRAYS)
                 .newRepresentation()
                 .withLink("chatty:users", createUriFromResource(baseURI, UserResource.class))
                 .withLink("chatty:messages", createUriFromResource(baseURI, ChatMessageResource.class))
                 .withNamespace("chatty", "http://docu.chatty.com/{rel}");
 
-        return listRep.toString(RepresentationFactory.HAL_JSON);
+        return representation.toString(RepresentationFactory.HAL_JSON);
     }
 
     public static String createUriFromResource(String baseUri, final Class resourceClass) {
