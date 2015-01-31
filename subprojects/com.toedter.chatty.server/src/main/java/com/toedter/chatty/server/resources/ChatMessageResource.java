@@ -35,8 +35,6 @@ import javax.ws.rs.core.UriInfo;
         servlet = "org.glassfish.jersey.servlet.ServletContainer")
 public class ChatMessageResource {
     private static final RepresentationFactory representationFactory = new JsonRepresentationFactory();
-    private static final MediaType HAL_JSON_TYPE = new MediaType("application", "hal+json");
-
     private final Logger logger = LoggerFactory.getLogger(ChatMessageResource.class);
 
     @GET
@@ -44,14 +42,18 @@ public class ChatMessageResource {
     public String getChatMessages(@Context UriInfo uriInfo) {
         String baseURI = uriInfo.getRequestUri().toString();
 
-        Representation listRep = representationFactory.newRepresentation();
+        Representation listRep = representationFactory
+                .withFlag(RepresentationFactory.COALESCE_ARRAYS)
+                .newRepresentation();
         listRep.withLink("self", baseURI, null, null, "en", "chatty");
 
         ChatMessageRepository chatMessageRepository = ModelFactory.getInstance().getChatMessageRepository();
         String authorBaseURI = baseURI.replace("messages", "users");
 
         for (ChatMessage chatMessage : chatMessageRepository.getAll()) {
-            Representation rep = representationFactory.newRepresentation();
+            Representation rep = representationFactory
+                    .withFlag(RepresentationFactory.COALESCE_ARRAYS)
+                    .newRepresentation();
             rep.withLink("self", baseURI + "/" + chatMessage.getId())
                     .withLink("author", authorBaseURI + "/" + chatMessage.getAuthor().getId());
 
@@ -74,7 +76,9 @@ public class ChatMessageResource {
     @Path("/{id}")
     @Produces(RepresentationFactory.HAL_JSON)
     public String getChatMessage(@Context UriInfo uriInfo, @PathParam("id") final long id) {
-        Representation rep = representationFactory.newRepresentation();
+        Representation rep = representationFactory
+                .withFlag(RepresentationFactory.COALESCE_ARRAYS)
+                .newRepresentation();
         String baseURI = uriInfo.getRequestUri().toString();
 
         ChatMessage chatMessage = ModelFactory.getInstance().getChatMessageRepository()
@@ -98,12 +102,16 @@ public class ChatMessageResource {
         logger.info("Got message in post: " + chatMessage);
         ModelFactory.getInstance().getChatMessageRepository().saveChatMessage(chatMessage);
 
-        Representation rep = representationFactory.newRepresentation();
+        Representation rep = representationFactory
+                .withFlag(RepresentationFactory.COALESCE_ARRAYS)
+                .newRepresentation();
         String baseURI = uriInfo.getRequestUri().toString();
 
         rep.withLink("self", baseURI);
 
-        Representation authorRep = representationFactory.newRepresentation();
+        Representation authorRep = representationFactory
+                .withFlag(RepresentationFactory.COALESCE_ARRAYS)
+                .newRepresentation();
         authorRep.withBean(chatMessage.getAuthor());
         rep.withRepresentation("author", authorRep);
 

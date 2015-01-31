@@ -20,16 +20,16 @@ buildscript {
 dependencies {
     compile project(':com.toedter.chatty.model')
 
-    def jerseyVersion = '2.13'
+    def jerseyVersion = '2.15'
     compile "org.glassfish.jersey.core:jersey-server:$jerseyVersion"
     compile "org.glassfish.jersey.core:jersey-client:$jerseyVersion"
     compile "org.glassfish.jersey.containers:jersey-container-grizzly2-http:$jerseyVersion"
     compile "org.glassfish.jersey.containers:jersey-container-servlet:$jerseyVersion"
     compile "org.glassfish.jersey.media:jersey-media-moxy:$jerseyVersion"
 
-    compile 'com.theoryinpractise:halbuilder-standard:3.0.1'
+    compile 'com.theoryinpractise:halbuilder-standard:4.0.1'
 
-    compile 'org.eclipse.jetty.aggregate:jetty-all:9.1.5.v20140505'
+    compile 'org.eclipse.jetty.aggregate:jetty-all:9.2.7.v20150116'
 
     compile "org.atmosphere:atmosphere-annotations:2.2.3"
     compile "org.atmosphere:wasync:1.4.0"
