@@ -30,14 +30,13 @@ public class ApiResource {
     @Produces(RepresentationFactory.HAL_JSON)
     public String getApi(@Context UriInfo uriInfo) {
         String baseURI = uriInfo.getRequestUri().toString();
-        if(!baseURI.endsWith("/")) {
+        if (!baseURI.endsWith("/")) {
             baseURI += "/";
         }
 
-        Representation listRep = representationFactory.newRepresentation()
-//                .withFields(RepresentationFactory.COALESCE_ARRAYS)
-//                .withFields(RepresentationFactory.COALESCE_LINKS)
-//                .withFields(RepresentationFactory.STRIP_NULLS)
+        Representation listRep = representationFactory
+                .withFlag(RepresentationFactory.COALESCE_ARRAYS)
+                .newRepresentation()
                 .withLink("chatty:users", createUriFromResource(baseURI, UserResource.class))
                 .withLink("chatty:messages", createUriFromResource(baseURI, ChatMessageResource.class))
                 .withNamespace("chatty", "http://docu.chatty.com/{rel}");
