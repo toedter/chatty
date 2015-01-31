@@ -21,9 +21,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.hateoas.UriTemplate;
 import org.springframework.hateoas.hal.CurieProvider;
-import org.springframework.hateoas.hal.DefaultCurieProvider;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.DispatcherServlet;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +29,7 @@ import java.util.Map;
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
+// Todo: In next Spring Boot version use @SpringBootApplication
 public class Application {
     private static Logger logger = LoggerFactory.getLogger(Application.class);
 
