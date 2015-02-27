@@ -18,13 +18,13 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @Controller
-//@PropertySource({ "classpath:build-info.properties" })
+@PropertySource({ "classpath:build-info.properties" })
 public class BuildInfoController {
     private static Logger logger = LoggerFactory.getLogger(BuildInfoController.class);
 
-    //@Value( "${version}" )
+    @Value( "${version}" )
     private String version = "?";
-    //@Value( "${timestamp}" )
+    @Value( "${timestamp}" )
     private String timeStamp = "?";
     
     @RequestMapping("/chatty/api/buildinfo")
