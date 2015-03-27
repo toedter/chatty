@@ -1,0 +1,188 @@
+[[chatty-build-status]]
+= chatty
+
+image:https://travis-ci.org/toedter/chatty.svg?branch=master[Build Status, link="https://travis-ci.org/toedter/chatty"]
+
+A chat demo that evaluates several technologies (and hopefully
+shows best practices)
+
+[[used-technologies]]
+== Used Technologies
+
+* Java 8 (This demo will not run with any Java < 8)
+* http://stateless.co/hal_specification.html[HAL] (Hypertext
+Application Language)
+* https://github.com/Atmosphere/atmosphere[Atmosphere] (Async Pub/Sub)
+* https://jersey.java.net/[Jersey] (JAX-RS reference implementation)
+* http://projects.spring.io/spring-boot/[Spring Boot] (+ Data, REST, HATEOAS)
+* http://www.typescriptlang.org/[TypeScript] for web client
+* http://angularjs.org/[AngularJS] for web client
+* https://github.com/angular/protractor[Protractor] for functional web client UI tests
+* http://junit.org/[JUnit] for Java unit and integration testing
+* https://code.google.com/p/mockito/[Mockito] for Mocking
+* http://www.gradle.org/[Gradle] as build system
+* https://www.docker.com[Docker] to create containers for the running apps
+
+[[requirements]]
+== Requirements
+
+* Java 8 JDK installed
+* Node.js installed
+* Grunt CLI installed (npm install -g grunt-cli)
+* Bower and TSD (TypeScript Definition Manager) don’t have to be
+installed, the build will invoke the grunt contribs for bower and tsd
+
+[[getting-started]]
+== Getting Started
+
+* ./gradlew build (builds all and runs the integration tests, both Java and TypeScript)
+* ./gradlew startServerSync (starts a Jetty server using port 8080)
+* Open http://localhost:8080/src/main/webapp/chatty.html in a web browser
+* Open http://localhost:8080/src/main/webapp/chatty.html in another web browser
+* Play around with chatty!
+
+[[screenshot]]
+== Screenshot
+
+image:screenshot.png[Screenshot]
+
+[[hypermedia-api]]
+== Hypermedia API
+
+Here is an example what you get at
+http://localhost:8080/chatty/api/users. Currently I am using
+http://stateless.co/hal_specification.html[HAL]. The returnd mime type is
+*application/hal+json*. To get a pretty print in Chrome, please
+install the Chrome extensions 
+https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc[JSONView]
+and
+https://chrome.google.com/webstore/detail/application%20json%20xml-as-i/cgfnklamhhieaepdicnbahkbnolpbdmp[application/…+json|+xml
+as inline].
+
+[source,json]
+{
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/chatty/api/users",
+      "hreflang": "en",
+      "profile": "chatty"
+    }
+  },
+  "_embedded": {
+    "users": [
+      {
+         "_links": {
+            "self": {
+                "href": "http://localhost:8080/chatty/api/users/toedter_k"
+           }
+         },
+         "email": "kai@toedter.com",
+         "fullName": "Kai Toedter",
+         "id": "toedter_k"
+      }
+    ]
+  }
+}
+
+[[spring-boot]]
+== Spring Boot
+
+To run the Spring-Boot based server, invoke gradlew bootrun
+
+Then you can use http://localhost:8080/chatty/api/ as entry point for
+exploring the HAL based API.
+
+[source, json]
+{
+  "_links" : {
+    "chatty:users" : {
+      "href" : "http://localhost:8080/chatty/api/users{?page,size,sort,projection}",
+      "templated" : true
+    },
+    "chatty:messages" : {
+      "href" : "http://localhost:8080/chatty/api/messages{?page,size,sort,projection}",
+      "templated" : true
+    },
+    "profile" : {
+      "href" : "http://localhost:8080/chatty/api/alps"
+    },
+    "curies" : [ {
+      "href" : "http://localhost:8080/chatty/api/alps/{rel}",
+      "name" : "chatty",
+      "templated" : true
+    } ]
+  }
+}
+
+[[hal-browser]]
+== HAL Browser
+
+After having started the Spring Boot based server, you can use
+http://localhost:8080/chatty/api/hal-browser/browser.html#/chatty/api/[http://localhost:8080/chatty/api/hal-browser/browser.html#/api/]
+as entry point for exploring the HAL based API with the embedded
+HAL-Browser.
+
+[[live-demo]]
+== Live Demo
+
+Currently the Spring Boot based server is deployed to Heroku. You can
+browse the Chatty API with the HAL browser at
+https://chatty42.herokuapp.com/hal-browser/browser.html#https://chatty42.herokuapp.com/chatty/api.
+You can also try out a live demo of chatty at
+https://chatty42.herokuapp.com/chatty/chatty.html. But please be aware
+that this is only a test installment and will be reset periodically.
+
+[[docker-integration]]
+== Docker integration
+
+For the gradle docker integration the 
+https://github.com/bmuschko/gradle-docker-plugin[gradle-docker-plugin] is used.
+
+[[install-docker]]
+=== Install Docker
+
+You find installation instructions at https://www.docker.com[Docker].
+When you use Windows or MAC, install http://boot2docker.io/[boot2docker].
+Then start Docker.
+
+[[build-the-docker-image-and-run-it-create-and-start-a-docker-container]]
+==== Build the Docker image and run it (create and start a Docker container)
+
+Open a new console and run the following
+
+----------------------------------------
+cd subprojects/com.toedter.chatty.server
+gradle dockerBuildImage
+----------------------------------------
+
+After successful image creation, you will see an image id. In the Docker
+console, type
+
+-------------
+docker images
+-------------
+
+You will see the newly created image. Then run the image:
+
+------------------------------------------
+ID=$(docker run -d -p 8080:8080 <imageId>)
+------------------------------------------
+
+Open a browser with the Docker IP address and Port 8080, e.g.
+http://192.168.59.103:8080/src/main/webapp/chatty.html
+
+finally stop the container:
+
+---------------
+docker stop $ID
+---------------
+
+[[whats-next]]
+== What’s Next?
+
+* improved Docker integration
+
+[[license]]
+== License
+
+MIT, see http://toedter.mit-license.org
