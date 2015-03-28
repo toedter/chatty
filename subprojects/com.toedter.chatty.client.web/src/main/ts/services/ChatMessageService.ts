@@ -23,8 +23,8 @@ module chatty {
                 if (chatMessagesResource) {
                     chatMessagesResource.get((result:any) => {
                         var messages:chatty.model.ChatMessageResource[] = [];
-                        if (result.hasOwnProperty("_embedded") && result._embedded.hasOwnProperty("messages")) {
-                            messages = result._embedded.messages;
+                        if (result.hasOwnProperty("_embedded") && result._embedded.hasOwnProperty("chatty:messages")) {
+                            messages = result._embedded['chatty:messages'];
                         }
                         callback(messages);
                     });

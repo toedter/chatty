@@ -17,7 +17,6 @@ import java.util.Collections;
  * The base uri of the curie link is created dynamically if the URI template starts with '/'.
  */
 public class DynamicCurieProvider implements CurieProvider {
-
     @Value("${spring.data.rest.baseUri}")
     String baseUri = "";
 
@@ -55,15 +54,17 @@ public class DynamicCurieProvider implements CurieProvider {
         return Collections.singleton(getCurie());
     }
 
-    /*
-     * (non-Javadoc)
-     * @see org.springframework.hateoas.hal.CurieProvider#getNamespacedRelFrom(org.springframework.hateoas.Link)
-     */
     @Override
     public String getNamespacedRelFrom(Link link) {
+        return getNamespacedRelFor(link.getRel());
+    }
 
-        String rel = link.getRel();
-
+    /*
+     * (non-Javadoc)
+     * @see org.springframework.hateoas.hal.CurieProvider#getNamespacedRelFrom(java.lang.String)
+     */
+    @Override
+    public String getNamespacedRelFor(String rel) {
         boolean prefixingNeeded = !IanaRels.isIanaRel(rel) && !rel.contains(":");
         return prefixingNeeded ? String.format("%s:%s", getCurie().name, rel) : rel;
     }

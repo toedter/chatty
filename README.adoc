@@ -3,15 +3,13 @@
 
 image:https://travis-ci.org/toedter/chatty.svg?branch=master[Build Status, link="https://travis-ci.org/toedter/chatty"]
 
-A chat demo that evaluates several technologies (and hopefully
-shows best practices)
+A chat demo that evaluates several technologies (and hopefully shows best practices)
 
 [[used-technologies]]
 == Used Technologies
 
 * Java 8 (This demo will not run with any Java < 8)
-* http://stateless.co/hal_specification.html[HAL] (Hypertext
-Application Language)
+* http://stateless.co/hal_specification.html[HAL] (Hypertext Application Language)
 * https://github.com/Atmosphere/atmosphere[Atmosphere] (Async Pub/Sub)
 * https://jersey.java.net/[Jersey] (JAX-RS reference implementation)
 * http://projects.spring.io/spring-boot/[Spring Boot] (+ Data, REST, HATEOAS)
@@ -56,8 +54,7 @@ http://stateless.co/hal_specification.html[HAL]. The returnd mime type is
 install the Chrome extensions 
 https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc[JSONView]
 and
-https://chrome.google.com/webstore/detail/application%20json%20xml-as-i/cgfnklamhhieaepdicnbahkbnolpbdmp[application/…+json|+xml
-as inline].
+https://chrome.google.com/webstore/detail/application%20json%20xml-as-i/cgfnklamhhieaepdicnbahkbnolpbdmp[application/…+json|+xml as inline].
 
 [source,json]
 {
