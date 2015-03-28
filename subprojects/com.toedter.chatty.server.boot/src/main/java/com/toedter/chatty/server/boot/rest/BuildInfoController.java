@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.rest.webmvc.BasePathAwareController;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,8 @@ import java.util.Properties;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-@Controller
 @PropertySource({ "classpath:build-info.properties" })
+@BasePathAwareController
 public class BuildInfoController {
     private static Logger logger = LoggerFactory.getLogger(BuildInfoController.class);
 
@@ -27,7 +28,7 @@ public class BuildInfoController {
     @Value( "${timestamp}" )
     private String timeStamp = "?";
     
-    @RequestMapping("/chatty/api/buildinfo")
+    @RequestMapping("/buildinfo")
     @ResponseBody
     public HttpEntity<BuildInfo> buildInfo() {
         BuildInfo buildInfo = new BuildInfo(version, timeStamp);
