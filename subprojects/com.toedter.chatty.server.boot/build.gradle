@@ -29,6 +29,13 @@ dependencies {
     compile project(':com.toedter.chatty.model')
     
     def springBootVersion = '1.2.2.RELEASE'
+    def springVersion = '4.2.0.BUILD-SNAPSHOT'
+
+    compile "org.springframework:spring-context:$springVersion"
+    compile "org.springframework:spring-webmvc:$springVersion"
+    compile "org.springframework:spring-orm:$springVersion"
+    compile "org.springframework:spring-tx:$springVersion"
+    compile "org.springframework:spring-test:$springVersion"
 
     compile "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
     compile "org.springframework.boot:spring-boot-starter-data-rest:$springBootVersion"
