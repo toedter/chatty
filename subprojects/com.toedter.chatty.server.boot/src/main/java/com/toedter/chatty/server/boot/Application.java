@@ -23,7 +23,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.hateoas.UriTemplate;
 import org.springframework.hateoas.hal.CurieProvider;
 import org.springframework.stereotype.Service;
+import org.springframework.web.filter.ShallowEtagHeaderFilter;
 
+import javax.servlet.Filter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,6 +58,11 @@ public class Application {
         servletRegistrationBean.setInitParameters(params);
         logger.debug("Atmosphere servlet created...");
         return servletRegistrationBean;
+    }
+
+    @Bean
+    public Filter shallowEtagHeaderFilter() {
+        return new ShallowEtagHeaderFilter();
     }
 
     @Configuration

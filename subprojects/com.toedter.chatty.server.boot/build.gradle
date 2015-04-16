@@ -1,5 +1,5 @@
 buildscript {
-    def springBootVersion = '1.2.2.RELEASE'
+    def springBootVersion = '1.2.3.RELEASE'
     repositories {
         mavenCentral()
         maven { url "http://repo.spring.io/snapshot" }
@@ -28,14 +28,16 @@ apply from: "$rootDir/gradle/integrationTest.gradle"
 dependencies {
     compile project(':com.toedter.chatty.model')
     
-    def springBootVersion = '1.2.2.RELEASE'
-    def springVersion = '4.2.0.BUILD-SNAPSHOT'
+    def springBootVersion = '1.2.3.RELEASE'
 
-    compile "org.springframework:spring-context:$springVersion"
-    compile "org.springframework:spring-webmvc:$springVersion"
-    compile "org.springframework:spring-orm:$springVersion"
-    compile "org.springframework:spring-tx:$springVersion"
-    compile "org.springframework:spring-test:$springVersion"
+// if you want to use specific spring version
+//    def springVersion = '4.1.6.RELEASE'
+//
+//    compile "org.springframework:spring-context:$springVersion"
+//    compile "org.springframework:spring-webmvc:$springVersion"
+//    compile "org.springframework:spring-orm:$springVersion"
+//    compile "org.springframework:spring-tx:$springVersion"
+//    compile "org.springframework:spring-test:$springVersion"
 
     compile "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
     compile "org.springframework.boot:spring-boot-starter-data-rest:$springBootVersion"
@@ -44,8 +46,8 @@ dependencies {
     }
     compile("org.springframework.boot:spring-boot-starter-jetty:$springBootVersion")
     compile "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
-    compile "com.fasterxml.jackson.core:jackson-databind:2.4.4"
-    compile "org.springframework.data:spring-data-rest-webmvc:2.3.0.RC1"
+    compile "com.fasterxml.jackson.core:jackson-databind:2.5.2"
+    compile "org.springframework.data:spring-data-rest-webmvc:2.3.0.RELEASE"
     compile "org.springframework.hateoas:spring-hateoas:0.17.0.RELEASE"
     compile "org.projectlombok:lombok:1.14.8"
     compile "org.atmosphere:atmosphere-annotations:2.2.3"
