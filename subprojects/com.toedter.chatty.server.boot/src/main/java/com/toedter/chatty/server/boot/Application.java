@@ -65,13 +65,8 @@ public class Application {
         return new ShallowEtagHeaderFilter();
     }
 
-    @Configuration
-    @ComponentScan(excludeFilters = @ComponentScan.Filter({Service.class, Configuration.class}))
-    static class WebConfiguration {
-
-        @Bean
-        public CurieProvider curieProvider() {
-            return new DynamicCurieProvider("chatty", new UriTemplate("/alps/{rel}"));
-        }
+    @Bean
+    public CurieProvider curieProvider() {
+        return new DynamicCurieProvider("chatty", new UriTemplate("/alps/{rel}"));
     }
 }
