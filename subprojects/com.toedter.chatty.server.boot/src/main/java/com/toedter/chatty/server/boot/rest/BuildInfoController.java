@@ -10,21 +10,14 @@ import org.springframework.hateoas.ResourceProcessor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.InputStream;
-import java.util.Properties;
-
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @PropertySource({ "classpath:build-info.properties" })
 @BasePathAwareController
 public class BuildInfoController implements ResourceProcessor<RepositoryLinksResource> {
-    private static Logger logger = LoggerFactory.getLogger(BuildInfoController.class);
-
     @Value( "${version}" )
     private String version = "?";
     @Value( "${timestamp}" )
