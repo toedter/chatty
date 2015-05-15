@@ -22,7 +22,8 @@ import java.net.URI;
 
 @Path("/")
 public class ApiResource {
-    private static final RepresentationFactory representationFactory = new JsonRepresentationFactory();
+    private static final RepresentationFactory representationFactory =
+            new JsonRepresentationFactory();
 
     private static Logger logger = LoggerFactory.getLogger(ApiResource.class);
 
