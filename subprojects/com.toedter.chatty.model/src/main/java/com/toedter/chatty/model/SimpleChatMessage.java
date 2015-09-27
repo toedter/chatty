@@ -64,6 +64,10 @@ public class SimpleChatMessage implements ChatMessage {
         this.author = author;
     }
 
+    public void setTimeStamp(Instant instant) {
+        this.instant = instant;
+    }
+
     public void setTimeStamp(String timeStamp) {
         this.instant = Instant.parse(timeStamp);
     }

@@ -8,9 +8,7 @@ describe('User', () => {
 
     var usersResource:chatty.model.UsersResource;
 
-    // angular.mock.module('chatty.factories');
-
-    beforeEach(module('chatty.factories'));
+    beforeEach(angular.mock.module('chatty.factories'));
 
     beforeEach(() => {
         inject(function (_usersResource_) {

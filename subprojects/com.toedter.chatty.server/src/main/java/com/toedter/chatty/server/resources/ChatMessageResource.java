@@ -14,13 +14,16 @@ import com.toedter.chatty.model.ChatMessageRepository;
 import com.toedter.chatty.model.ModelFactory;
 import com.toedter.chatty.model.SimpleChatMessage;
 import org.atmosphere.config.service.AtmosphereService;
+import org.atmosphere.cpr.Broadcaster;
 import org.atmosphere.cpr.BroadcasterFactory;
 import org.atmosphere.interceptor.AtmosphereResourceLifecycleInterceptor;
 import org.atmosphere.interceptor.HeartbeatInterceptor;
 import org.atmosphere.interceptor.SuspendTrackerInterceptor;
+import org.atmosphere.util.ServletContextFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.ServletContext;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -36,6 +39,7 @@ import javax.ws.rs.core.UriInfo;
 public class ChatMessageResource {
     private static final RepresentationFactory representationFactory = new JsonRepresentationFactory();
     private final Logger logger = LoggerFactory.getLogger(ChatMessageResource.class);
+    private Broadcaster broadcaster;
 
     @GET
     @Produces(RepresentationFactory.HAL_JSON)
@@ -121,7 +125,14 @@ public class ChatMessageResource {
 
         String jsonString = rep.toString(RepresentationFactory.HAL_JSON);
         logger.info("JSONized message: " + jsonString);
-        BroadcasterFactory.getDefault().lookup("/atmos/messages").broadcast(jsonString);
+
+        if (broadcaster == null) {
+            ServletContext servletContext = ServletContextFactory.getDefault().getServletContext();
+            BroadcasterFactory factory = (BroadcasterFactory) servletContext.getAttribute("org.atmosphere.cpr.BroadcasterFactory");
+            broadcaster = factory.lookup("/atmos/messages");
+        }
+
+        broadcaster.broadcast(jsonString);
     }
 
 }

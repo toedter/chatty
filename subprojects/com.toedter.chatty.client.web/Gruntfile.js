@@ -22,7 +22,7 @@ module.exports = function (grunt) {
                         vendor: ['bower_components/jquery/*min.js',
                             'bower_components/angular/*min.js',
                             'bower_components/angular-resource/*min.js',
-                            'bower_components/angular-mocks/*.js',
+                            'bower_components/angular-mocks/angular-mocks.js',
                             'bower_components/bootstrap/*min.js',
                             'bower_components/atmosphere/*min.js'],
                         keepRunner: true
@@ -38,7 +38,7 @@ module.exports = function (grunt) {
                         vendor: ['bower_components/jquery/*min.js',
                             'bower_components/angular/*min.js',
                             'bower_components/angular-resource/*min.js',
-                            'bower_components/angular-mocks/*.js',
+                            'bower_components/angular-mocks/angular-mocks.js',
                             'bower_components/bootstrap/*min.js',
                             'bower_components/atmosphere/*min.js'],
                         keepRunner: true,

@@ -17,7 +17,7 @@ import java.util.Collections;
  * The base uri of the curie link is created dynamically if the URI template starts with '/'.
  */
 public class DynamicCurieProvider implements CurieProvider {
-    @Value("${spring.data.rest.baseUri}")
+    @Value("${spring.data.rest.base-path}")
     String baseUri = "";
 
     private Curie curie;

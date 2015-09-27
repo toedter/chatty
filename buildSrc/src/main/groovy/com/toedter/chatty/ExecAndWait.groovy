@@ -6,6 +6,8 @@
  * see http://fbflex.wordpress.com/2013/03/14/gradle-madness-execwait-a-task-that-waits-for-commandline-calls-to-be-ready/
  */
 
+package com.toedter.chatty
+
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 

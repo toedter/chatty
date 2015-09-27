@@ -8,11 +8,15 @@ package com.toedter.chatty.server.boot.service;
 
 
 import com.toedter.chatty.server.boot.domain.ChatMessage;
-import org.atmosphere.cpr.BroadcasterFactory;
+import org.atmosphere.cpr.*;
+import org.atmosphere.util.ServletContextFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.data.rest.core.event.AbstractRepositoryEventListener;
 
+import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -22,6 +26,10 @@ public class ChatMessageRepositoryListener extends AbstractRepositoryEventListen
     private final Logger logger = LoggerFactory.getLogger(ChatMessageRepositoryListener.class);
     private static AtomicBoolean shouldBroadcast = new AtomicBoolean(false);
     private static AtomicBoolean isBroadcasterInitialized = new AtomicBoolean(false);
+    private Broadcaster broadcaster;
+
+    @Inject
+    private ServletRegistrationBean atmosphereServlet;
 
     @Override
     public void onAfterCreate(ChatMessage chatMessage) {
@@ -46,16 +54,20 @@ public class ChatMessageRepositoryListener extends AbstractRepositoryEventListen
         if (!isBroadcasterInitialized.getAndSet(true)) {
             logger.info("Broadcasting initialized");
             ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
-            Runnable broadcaster = new Runnable() {
+            Runnable broadcasterRunnable = new Runnable() {
                 public void run() {
                     // logger.info("Broadcasting REFRESH: " + shouldBroadcast.get());
                     if (shouldBroadcast.getAndSet(false)) {
-                        BroadcasterFactory.getDefault().lookup("/chatty/atmos/messages")
-                                .broadcast("{\"command\":\"reloadChatMessages\"}");
+                        if (broadcaster == null) {
+                            ServletContext servletContext = ServletContextFactory.getDefault().getServletContext();
+                            BroadcasterFactory factory = (BroadcasterFactory) servletContext.getAttribute("org.atmosphere.cpr.BroadcasterFactory");
+                            broadcaster = factory.lookup("/chatty/atmos/messages");
+                        }
+                        broadcaster.broadcast("{\"command\":\"reloadChatMessages\"}");
                     }
                 }
             };
-            scheduledExecutorService.scheduleAtFixedRate(broadcaster, 0, 300, TimeUnit.MILLISECONDS);
+            scheduledExecutorService.scheduleAtFixedRate(broadcasterRunnable, 0, 300, TimeUnit.MILLISECONDS);
         }
     }
 

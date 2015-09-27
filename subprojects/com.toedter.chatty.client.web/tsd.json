@@ -6,28 +6,28 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "angularjs/angular.d.ts": {
-      "commit": "2c96e9e77765b72ce43ab8163f42e504f3e2facb"
+      "commit": "b937e64fc9245d299fa4ba26c6eddbeaed42a920"
     },
     "jquery/jquery.d.ts": {
-      "commit": "2c96e9e77765b72ce43ab8163f42e504f3e2facb"
+      "commit": "b937e64fc9245d299fa4ba26c6eddbeaed42a920"
     },
     "selenium-webdriver/selenium-webdriver.d.ts": {
-      "commit": "2c96e9e77765b72ce43ab8163f42e504f3e2facb"
+      "commit": "b937e64fc9245d299fa4ba26c6eddbeaed42a920"
     },
     "angular-protractor/angular-protractor.d.ts": {
-      "commit": "2c96e9e77765b72ce43ab8163f42e504f3e2facb"
+      "commit": "b937e64fc9245d299fa4ba26c6eddbeaed42a920"
     },
     "jasmine/jasmine.d.ts": {
-      "commit": "2c96e9e77765b72ce43ab8163f42e504f3e2facb"
+      "commit": "b937e64fc9245d299fa4ba26c6eddbeaed42a920"
     },
     "angularjs/angular-resource.d.ts": {
-      "commit": "2c96e9e77765b72ce43ab8163f42e504f3e2facb"
+      "commit": "b937e64fc9245d299fa4ba26c6eddbeaed42a920"
     },
     "angularjs/angular-mocks.d.ts": {
-      "commit": "2c96e9e77765b72ce43ab8163f42e504f3e2facb"
+      "commit": "b937e64fc9245d299fa4ba26c6eddbeaed42a920"
     },
     "atmosphere/atmosphere.d.ts": {
-      "commit": "2c96e9e77765b72ce43ab8163f42e504f3e2facb"
+      "commit": "b937e64fc9245d299fa4ba26c6eddbeaed42a920"
     }
   }
 }
