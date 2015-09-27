@@ -8,14 +8,13 @@ package com.toedter.chatty.server.boot.service;
 
 
 import com.toedter.chatty.server.boot.domain.ChatMessage;
-import org.atmosphere.cpr.*;
+import org.atmosphere.cpr.Broadcaster;
+import org.atmosphere.cpr.BroadcasterFactory;
 import org.atmosphere.util.ServletContextFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.data.rest.core.event.AbstractRepositoryEventListener;
 
-import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -27,9 +26,6 @@ public class ChatMessageRepositoryListener extends AbstractRepositoryEventListen
     private static AtomicBoolean shouldBroadcast = new AtomicBoolean(false);
     private static AtomicBoolean isBroadcasterInitialized = new AtomicBoolean(false);
     private Broadcaster broadcaster;
-
-    @Inject
-    private ServletRegistrationBean atmosphereServlet;
 
     @Override
     public void onAfterCreate(ChatMessage chatMessage) {

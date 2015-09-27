@@ -9,7 +9,7 @@
 package com.toedter.chatty
 
 import org.gradle.api.tasks.Exec
-import org.gradle.mvn3.org.codehaus.plexus.util.Os
+import org.apache.tools.ant.taskdefs.condition.Os
 
 abstract class JsTask extends Exec {
     def outputStream = new ByteArrayOutputStream()

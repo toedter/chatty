@@ -8,7 +8,6 @@ package com.toedter.chatty.server.boot.service;
 
 
 import com.toedter.chatty.server.boot.domain.ChatMessage;
-import com.toedter.chatty.server.boot.domain.ChatMessageProjection;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.Description;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;

@@ -1,5 +1,5 @@
-import com.toedter.chatty.ShutdownServerTask
 import com.toedter.chatty.ExecAndWait
+import com.toedter.chatty.ShutdownServerTask
 import org.apache.tools.ant.taskdefs.condition.Os
 
 apply from: "$rootDir/gradle/integrationTest.gradle"

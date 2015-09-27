@@ -1,7 +1,5 @@
 import com.toedter.chatty.GruntTask
 import com.toedter.chatty.NpmTask
-import com.toedter.chatty.BowerTask
-import com.toedter.chatty.TsdTask
 
 buildscript {
     repositories {
