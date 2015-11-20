@@ -100,12 +100,6 @@ module chatty {
                     console.log('Atmosphere got ERROR: ' + message);
                     return;
                 }
-                index = message.indexOf("{");
-                if (index != 0 && index != -1) {
-                    message = message.substring(index);
-                } else {
-                    return;
-                }
                 var messageObject:any = JSON.parse(message);
 
                 if (messageObject.hasOwnProperty('command')) {

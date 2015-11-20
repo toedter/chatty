@@ -30,9 +30,7 @@ public class Application {
     private static Logger logger = LoggerFactory.getLogger(Application.class);
 
     public static void main(String[] args) throws Exception {
-        SpringApplication springApplication = new SpringApplication(Application.class);
-        springApplication.setShowBanner(false);
-        springApplication.run(args);
+        SpringApplication.run(Application.class, args);
     }
 
     @Bean
