@@ -1,0 +1,12 @@
+{
+  "name": "chatty",
+  "components": {
+    "chatty-server": {
+      "image": "registry.giantswarm.io/$GIANTSWARM_LOGIN_NAME/chatty-boot:latest",
+      "ports": [8080],
+      "domains": {
+        "8080": "chatty-$GIANTSWARM_LOGIN_NAME.gigantic.io"
+      }
+    }
+  }
+}
