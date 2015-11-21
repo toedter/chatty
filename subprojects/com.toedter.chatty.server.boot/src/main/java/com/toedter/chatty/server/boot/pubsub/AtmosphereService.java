@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 public class AtmosphereService {
     private final Logger logger = LoggerFactory.getLogger(AtmosphereService.class);
 
-    @Ready(value = Ready.DELIVER_TO.ALL)
+    @Ready
     public void onReady(final AtmosphereResource r) {
         logger.info("Browser {} connected.", r.uuid());
     }

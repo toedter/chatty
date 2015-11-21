@@ -4,7 +4,7 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-package com.toedter.chatty.server.resources;
+package com.toedter.chatty.server.jetty.resources;
 
 import com.theoryinpractise.halbuilder.api.RepresentationFactory;
 import com.toedter.chatty.model.*;

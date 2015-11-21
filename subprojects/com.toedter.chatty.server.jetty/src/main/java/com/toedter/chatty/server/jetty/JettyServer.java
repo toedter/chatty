@@ -4,12 +4,12 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-package com.toedter.chatty.server;
+package com.toedter.chatty.server.jetty;
 
 import com.toedter.chatty.model.ModelFactory;
-import com.toedter.chatty.server.resources.ApiResource;
-import com.toedter.chatty.server.resources.ChatMessageResource;
-import com.toedter.chatty.server.resources.UserResource;
+import com.toedter.chatty.server.jetty.resources.ApiResource;
+import com.toedter.chatty.server.jetty.resources.ChatMessageResource;
+import com.toedter.chatty.server.jetty.resources.UserResource;
 import org.atmosphere.cpr.AtmosphereServlet;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Request;

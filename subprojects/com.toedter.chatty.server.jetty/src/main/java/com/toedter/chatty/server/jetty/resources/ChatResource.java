@@ -4,7 +4,7 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-package com.toedter.chatty.server.resources;
+package com.toedter.chatty.server.jetty.resources;
 
 /**
  * Copyright (c) 2014 Kai Toedter

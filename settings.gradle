@@ -1,5 +1,5 @@
 include 'com.toedter.chatty.model'
-include 'com.toedter.chatty.server'
+include 'com.toedter.chatty.server.jetty'
 include 'com.toedter.chatty.server.boot'
 include 'com.toedter.chatty.client.web'
 

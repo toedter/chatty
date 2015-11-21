@@ -4,7 +4,7 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-package com.toedter.chatty.server.resources;
+package com.toedter.chatty.server.jetty.resources;
 
 import org.atmosphere.cpr.AtmosphereServlet;
 import org.glassfish.grizzly.http.server.HttpServer;

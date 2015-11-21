@@ -8,8 +8,8 @@
 
 package com.toedter.chatty
 
-import org.gradle.api.tasks.Exec
 import org.apache.tools.ant.taskdefs.condition.Os
+import org.gradle.api.tasks.Exec
 
 abstract class JsTask extends Exec {
     def outputStream = new ByteArrayOutputStream()

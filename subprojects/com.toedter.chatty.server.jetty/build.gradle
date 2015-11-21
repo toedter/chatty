@@ -33,7 +33,7 @@ dependencies {
     compile 'org.eclipse.jetty.aggregate:jetty-all:9.2.7.v20150116'
 
     compile "org.projectlombok:lombok:1.16.6"
-    compile "org.atmosphere:atmosphere-annotations:2.3.4"
+    compile "org.atmosphere:atmosphere-annotations:2.3.5"
     compile "org.atmosphere:wasync:2.1.2"
     compile "org.glassfish.grizzly:grizzly-http-all:2.3.11"
 
