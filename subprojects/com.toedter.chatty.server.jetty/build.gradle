@@ -14,7 +14,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.bmuschko:gradle-docker-plugin:0.7.2'
+        classpath 'com.bmuschko:gradle-docker-plugin:2.6.1'
     }
 }
 
@@ -45,12 +45,12 @@ dependencies {
     testCompile 'org.mockito:mockito-all:1.10.5'
 }
 
-mainClassName = 'com.toedter.chatty.server.JettyServer'
+mainClassName = 'com.toedter.chatty.server.jetty.JettyServer'
 
 docker {
     // local, https and port 2376
-    serverUrl = 'https://192.168.59.103:2376'
-    certPath = new File('/Users/derk/.boot2docker/certs/boot2docker-vm')
+    url = 'https://192.168.99.2:2376'
+    certPath = new File(System.properties['user.home'], '.docker\\machine\\machines\\dev')
 
     // local, http and port 2375
     // note: working without TLS must be configured in boot2docker:
@@ -58,12 +58,7 @@ docker {
     // serverUrl = 'http://192.168.59.103:2375'
 
     javaApplication {
-        // either: Java 7 openjdk:
-        // baseImage = 'dockerfile/java:openjdk-7-jre'
-
-        // or Java 8:
-        baseImage = 'dockerfile/java:oracle-java8'
-
+        baseImage = 'java'
         maintainer = 'Kai Toedter "kai@toedter.com"'
         tag = 'chatty-server:1.1'
         port = 8080

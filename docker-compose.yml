@@ -1,0 +1,9 @@
+chatty-boot:
+  build: ./subprojects/com.toedter.chatty.server.boot
+  ports:
+    - "8080:8080"
+
+chatty-jetty:
+  build: ./subprojects/com.toedter.chatty.server.jetty
+  ports:
+    - "8081:8080"
