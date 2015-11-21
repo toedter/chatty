@@ -43,6 +43,15 @@ task gruntTest(type: GruntTask) {
     inputs.file file("Gruntfile.js")
 }
 
+task gruntDist(type: GruntTask) {
+    group = "build"
+    description = "Builds the distribution."
+    gruntArgs = "dist"
+
+    inputs.dir "dist"
+    inputs.file file("Gruntfile.js")
+}
+
 bowerInstall.dependsOn npmInstall
 tsdInstall.dependsOn npmInstall
 gruntTest.dependsOn bowerInstall, tsdInstall

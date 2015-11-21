@@ -5,7 +5,7 @@ module.exports = function (grunt) {
         hub: {
             all: {
                 src: ['subprojects/com.toedter.chatty.client.web/Gruntfile.js'],
-                tasks: ['distBoot']
+                tasks: ['bower', 'tsd:refresh', 'dist']
             }
         },
         copy: {

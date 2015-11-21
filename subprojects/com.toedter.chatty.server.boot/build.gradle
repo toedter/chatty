@@ -27,7 +27,7 @@ apply from: "$rootDir/gradle/integrationTest.gradle"
 
 dependencies {
     compile project(':com.toedter.chatty.model')
-    
+
     def springBootVersion = '1.3.0.RELEASE'
 
     compile "org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion"
@@ -56,12 +56,16 @@ task createBuildInfoFile << {
     props.store(buildInfoFile.newWriter(), null)
 }
 
+task copyWebApp(type: Copy) {
+    from project(':com.toedter.chatty.client.web').file('dist')
+    into "$buildDir/resources/main/static"
+}
+
+copyWebApp.dependsOn ':com.toedter.chatty.client.web:gruntDist'
+
 jar {
     dependsOn createBuildInfoFile
-    from(buildDir) {
-        include 'build-info.properties'
-        into('')
-    }
+    dependsOn copyWebApp
 }
 
 task stage(dependsOn: ['jar', 'bootRepackage'])
