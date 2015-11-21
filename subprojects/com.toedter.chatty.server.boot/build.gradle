@@ -49,7 +49,7 @@ dependencies {
 }
 
 task createBuildInfoFile << {
-    def buildInfoFile = new File("$buildDir/build-info.properties")
+    def buildInfoFile = new File("$buildDir/resources/main/build-info.properties")
     Properties props = new Properties()
     props.setProperty('version', project.version.toString())
     props.setProperty('timestamp', project.buildTimestamp)
