@@ -4,10 +4,10 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-package com.toedter.chatty.server.boot.service;
+package com.toedter.chatty.server.boot.message.web;
 
 
-import com.toedter.chatty.server.boot.domain.ChatMessage;
+import com.toedter.chatty.server.boot.message.ChatMessage;
 import org.atmosphere.cpr.Broadcaster;
 import org.atmosphere.cpr.BroadcasterFactory;
 import org.atmosphere.util.ServletContextFactory;

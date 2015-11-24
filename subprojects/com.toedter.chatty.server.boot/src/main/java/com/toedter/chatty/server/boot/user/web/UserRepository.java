@@ -4,9 +4,9 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-package com.toedter.chatty.server.boot.service;
+package com.toedter.chatty.server.boot.user.web;
 
-import com.toedter.chatty.server.boot.domain.User;
+import com.toedter.chatty.server.boot.user.User;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.Description;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -17,5 +17,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
         path = "users",
         collectionResourceDescription = @Description("The list of connected users"),
         itemResourceDescription = @Description("A user can author chat messages"))
-interface UserRepository extends PagingAndSortingRepository<User, String> {
+public interface UserRepository extends PagingAndSortingRepository<User, String> {
 }

@@ -4,10 +4,10 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-package com.toedter.chatty.server.boot.service;
+package com.toedter.chatty.server.boot.message.web;
 
 
-import com.toedter.chatty.server.boot.domain.ChatMessage;
+import com.toedter.chatty.server.boot.message.ChatMessage;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.Description;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -18,5 +18,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
         path = "messages",
         collectionResourceDescription = @Description("The list of chat messages"),
         itemResourceDescription = @Description("A chat messages"))
-interface ChatMessageRepository extends PagingAndSortingRepository<ChatMessage, Long> {
+public interface ChatMessageRepository extends PagingAndSortingRepository<ChatMessage, Long> {
 }

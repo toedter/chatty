@@ -4,10 +4,12 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-package com.toedter.chatty.server.boot.service;
+package com.toedter.chatty.server.boot.config;
 
-import com.toedter.chatty.server.boot.domain.ChatMessage;
-import com.toedter.chatty.server.boot.domain.User;
+import com.toedter.chatty.server.boot.message.ChatMessage;
+import com.toedter.chatty.server.boot.message.web.ChatMessageRepository;
+import com.toedter.chatty.server.boot.user.User;
+import com.toedter.chatty.server.boot.user.web.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

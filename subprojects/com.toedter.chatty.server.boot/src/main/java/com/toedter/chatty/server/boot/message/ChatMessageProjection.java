@@ -4,10 +4,11 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-package com.toedter.chatty.server.boot.domain;
+package com.toedter.chatty.server.boot.message;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.toedter.chatty.server.boot.rest.JsonInstantSerializer;
+import com.toedter.chatty.server.boot.user.AuthorProjection;
+import com.toedter.chatty.server.boot.config.JsonInstantSerializer;
 import org.springframework.data.rest.core.config.Projection;
 
 import java.time.Instant;

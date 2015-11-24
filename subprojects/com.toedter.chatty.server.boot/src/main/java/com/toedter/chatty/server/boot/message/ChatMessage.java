@@ -4,10 +4,11 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-package com.toedter.chatty.server.boot.domain;
+package com.toedter.chatty.server.boot.message;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.toedter.chatty.server.boot.rest.JsonInstantSerializer;
+import com.toedter.chatty.server.boot.user.User;
+import com.toedter.chatty.server.boot.config.JsonInstantSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

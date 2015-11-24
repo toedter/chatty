@@ -4,9 +4,10 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-package com.toedter.chatty.server.boot.domain;
+package com.toedter.chatty.server.boot.user;
 
 
+import com.toedter.chatty.server.boot.message.ChatMessage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

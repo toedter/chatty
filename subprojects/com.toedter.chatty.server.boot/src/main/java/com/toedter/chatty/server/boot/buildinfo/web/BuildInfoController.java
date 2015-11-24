@@ -1,5 +1,6 @@
-package com.toedter.chatty.server.boot.rest;
+package com.toedter.chatty.server.boot.buildinfo.web;
 
+import com.toedter.chatty.server.boot.buildinfo.BuildInfo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.rest.webmvc.BasePathAwareController;

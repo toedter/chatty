@@ -7,9 +7,9 @@
 
 package com.toedter.chatty.server.boot;
 
-import com.toedter.chatty.server.boot.rest.DynamicCurieProvider;
-import com.toedter.chatty.server.boot.service.ChatMessageRepositoryListener;
-import com.toedter.chatty.server.boot.service.TestDataLoader;
+import com.toedter.chatty.server.boot.config.DynamicCurieProvider;
+import com.toedter.chatty.server.boot.message.web.ChatMessageRepositoryListener;
+import com.toedter.chatty.server.boot.config.TestDataLoader;
 import org.atmosphere.cpr.AtmosphereServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,11 +26,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SpringBootApplication
-public class Application {
-    private static Logger logger = LoggerFactory.getLogger(Application.class);
+public class Chatty {
+    private static Logger logger = LoggerFactory.getLogger(Chatty.class);
 
     public static void main(String[] args) throws Exception {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(Chatty.class, args);
     }
 
     @Bean
@@ -40,7 +40,7 @@ public class Application {
     }
 
     @Bean(initMethod = "loadData")
-    TestDataLoader RepositoryTestData() {
+    TestDataLoader loadTestData() {
         return new TestDataLoader();
     }
 

@@ -4,7 +4,7 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-package com.toedter.chatty.server.boot.pubsub;
+package com.toedter.chatty.server.boot.config;
 
 import org.atmosphere.config.service.Disconnect;
 import org.atmosphere.config.service.ManagedService;

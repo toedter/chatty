@@ -1,4 +1,4 @@
-package com.toedter.chatty.server.boot.rest;
+package com.toedter.chatty.server.boot.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.hateoas.IanaRels;

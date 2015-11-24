@@ -1,4 +1,4 @@
-package com.toedter.chatty.server.boot.rest;
+package com.toedter.chatty.server.boot.buildinfo;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
