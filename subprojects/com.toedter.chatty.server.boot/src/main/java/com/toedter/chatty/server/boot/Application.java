@@ -61,6 +61,6 @@ public class Application {
 
     @Bean
     public CurieProvider curieProvider() {
-        return new DynamicCurieProvider("chatty", new UriTemplate("/alps/{rel}"));
+        return new DynamicCurieProvider("chatty", new UriTemplate("/profile/{rel}"));
     }
 }
