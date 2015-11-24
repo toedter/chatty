@@ -195,6 +195,6 @@ module.exports = function (grunt) {
     grunt.registerTask('itest', ['typescript:base', 'jasmine:integration']);
     grunt.registerTask('test:coverage', ['jasmine:coverage']);
     grunt.registerTask('dist', ['clean', 'copy:dist', 'copy:modify', 'typescript:dist', 'uglify']);
-    grunt.registerTask('distBoot', ['bower', 'tsd:refresh', 'dist', 'copy:boot']);
+    grunt.registerTask('distBoot', ['bower', 'tsd:refresh', 'dist']);
     grunt.registerTask('distBootDev', ['dist', 'copy:boot']);
 }

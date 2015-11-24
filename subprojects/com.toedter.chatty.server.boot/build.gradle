@@ -61,11 +61,11 @@ task copyWebApp(type: Copy) {
     into "$buildDir/resources/main/static"
 }
 
-copyWebApp.dependsOn ':com.toedter.chatty.client.web:gruntDist'
+// copyWebApp.dependsOn ':com.toedter.chatty.client.web:gruntDist'
 
 jar {
     dependsOn createBuildInfoFile
-    // dependsOn copyWebApp
+    dependsOn copyWebApp
 }
 
 task stage(dependsOn: ['jar', 'bootRepackage'])
