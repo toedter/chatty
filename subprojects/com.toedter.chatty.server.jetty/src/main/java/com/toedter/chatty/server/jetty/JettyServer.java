@@ -45,7 +45,7 @@ public class JettyServer {
         server = new Server(port);
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.setContextPath("/chatty");
+        context.setContextPath("/");
         // server.setHandler(context);
 
         AtmosphereServlet atmoServlet = new AtmosphereServlet();

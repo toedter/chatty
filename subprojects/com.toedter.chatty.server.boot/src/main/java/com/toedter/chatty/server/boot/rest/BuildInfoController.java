@@ -22,7 +22,7 @@ public class BuildInfoController implements ResourceProcessor<RepositoryLinksRes
     private String timeStamp = "?";
 
     private static final String BUILD_INFO = "buildinfo";
-    private static final String API =  "chatty/api/";
+    private static final String API =  "api/";
 
     @RequestMapping("/" + BUILD_INFO)
     @ResponseBody

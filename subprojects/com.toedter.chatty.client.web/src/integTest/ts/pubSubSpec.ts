@@ -68,7 +68,7 @@ describe('Publish - Subscribe', () => {
             console.log('atmosphere opened with transport ' + response.transport);
 
             var postRequest = new XMLHttpRequest();
-            postRequest.open('POST', 'http://localhost:' + serverPort + '/chatty/api/messages', false);
+            postRequest.open('POST', 'http://localhost:' + serverPort + '/api/messages', false);
             postRequest.setRequestHeader("Content-Type", 'application/json');
             postRequest.send('{"id":1,"text":"hello Jersey","timeStamp":"2014-03-25T17:38:34.765Z","author":{"email":"author@test.com","fullName":"The Author","id":"author-id"}}');
         };

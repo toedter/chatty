@@ -135,8 +135,8 @@ module.exports = function (grunt) {
                     ]
                 },
                 modify: {
-                    src: ['src/main/webapp/chatty.html'],
-                    dest: 'dist/chatty.html',
+                    src: ['src/main/webapp/index.html'],
+                    dest: 'dist/index.html',
                     options: {
                         process: function (content, srcpath) {
                             var noDots = content.replace(/\.\.\//g, '');
@@ -148,7 +148,7 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: 'dist',
                     src: '**/*',
-                    dest: '../com.toedter.chatty.server.boot/src/main/resources/static/chatty'
+                    dest: '../com.toedter.chatty.server.boot/src/main/resources/static'
                 }
             },
             tsd: {
