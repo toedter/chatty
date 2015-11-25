@@ -21,6 +21,13 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="#">Chatty</a>
         </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/api">HAL Browser</a></li>
+                <li><a href="/docs/api-guide.html">REST API Documentation</a></li>
+                <li><a href="/docs/getting-started-guide.html">REST API Getting Started</a></li>
+            </ul>
+        </div>
     </div>
 </div>
 
@@ -55,7 +62,9 @@
         <h3>MESSAGES</h3>
         <table class="table">
             <tr ng-repeat="message in chatMessages">
-                <td ng-if="message._embedded.author" style="text-align: left; width:10%">{{message._embedded.author.id}}</td>
+                <td ng-if="message._embedded.author" style="text-align: left; width:10%">
+                    {{message._embedded.author.id}}
+                </td>
                 <td ng-if="message.author" style="text-align: left; width:10%">{{message.author.id}}</td>
                 <td style="text-align: left; width:85%">{{message.text}}</td>
             </tr>
