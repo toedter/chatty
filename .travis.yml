@@ -18,11 +18,11 @@ before_script:
   - sudo mv docker-compose /usr/local/bin
 
 script:
-  - ./gradlew
-  - ./gradlew test
+  - ./gradlew gruntDist
+  - ./gradlew build
   - docker-compose build chatty-boot
   - docker tag chatty_chatty-boot kaitoedter/chatty
-  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" docker.io
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   - docker push kaitoedter/chatty
 
 deploy:
