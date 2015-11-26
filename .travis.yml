@@ -12,18 +12,18 @@ before_script:
   - npm install -g grunt-cli
   - npm install -g bower
   - npm install -g tsd
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/1.5.1/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
+#  - sudo rm /usr/local/bin/docker-compose
+#  - curl -L https://github.com/docker/compose/releases/download/1.5.1/docker-compose-`uname -s`-`uname -m` > docker-compose
+#  - chmod +x docker-compose
+#  - sudo mv docker-compose /usr/local/bin
 
 script:
   - ./gradlew gruntDist
   - ./gradlew build
-  - docker-compose build chatty-boot
-  - docker tag chatty_chatty-boot kaitoedter/chatty
-  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  - docker push kaitoedter/chatty
+#  - docker-compose build chatty-boot
+#  - docker tag chatty_chatty-boot kaitoedter/chatty
+#  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+#  - docker push kaitoedter/chatty
 
 deploy:
   provider: heroku

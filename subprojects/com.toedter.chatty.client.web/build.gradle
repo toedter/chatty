@@ -55,6 +55,7 @@ task gruntDist(type: GruntTask) {
 bowerInstall.dependsOn npmInstall
 tsdInstall.dependsOn npmInstall
 gruntTest.dependsOn bowerInstall, tsdInstall
+gruntDist.dependsOn gruntTest
 
 task gruntIntegrationTest(type: GruntTask) {
     doFirst {
