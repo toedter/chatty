@@ -25,8 +25,11 @@ use of HTTP verbs.
 | `POST`
 | Used to create a new resource
 
+| `PUT`
+| Used to update an existing resource (complete update)
+
 | `PATCH`
-| Used to update an existing resource, including partial updates
+| Used to update an existing resource (partial updates)
 
 | `DELETE`
 | Used to delete an existing resource
@@ -62,9 +65,8 @@ use of HTTP status codes.
 == Hypermedia
 
 Chatty's RESTful web service uses hypermedia and resources include links to other resources in their
-responses. Responses are in http://stateless.co/hal_specification.html[Hypertext Application
-from resource to resource.
-Language (HAL)] format. Links can be found beneath the `_links` key. Users of the API should
+responses. Responses are in http://stateless.co/hal_specification.html[Hypertext Application Language (HAL)]
+format. Links can be found beneath the `_links` key. Users of the API should
 not create URIs themselves, instead they should use the above-described links to navigate
 
 [[resources]]
@@ -125,11 +127,11 @@ include::{snippets}/users-list-example/http-response.adoc[]
 == Messages
 
 The Messages resources is used to create and list chat messages.
-... not finished yet
+... not finished yet, please stay tuned.
 
 [[resource-build-info]]
 == Build Info
 
 The build info gives you some information about version and timestamp.
-... not finished yet
+... not finished yet, please stay tuned.
 
