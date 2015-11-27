@@ -20,7 +20,10 @@ before_script:
 script:
   - ./gradlew gruntDist
   - ./gradlew build
-#  - cd subprojects/com.toedter.chatty.server.boot
+  - cd subprojects/com.toedter.chatty.server.boot
+  - ls -l
+  - cd build/libs
+  - ls -l
 #  - docker build -t kaitoedter/chatty .
 #  - docker-compose build chatty-boot
 #  - docker tag chatty_chatty-boot kaitoedter/chatty
