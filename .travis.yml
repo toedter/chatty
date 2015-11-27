@@ -21,10 +21,7 @@ script:
   - ./gradlew gruntDist
   - ./gradlew build
   - cd subprojects/com.toedter.chatty.server.boot
-  - ls -l
-  - cd build/libs
-  - ls -l
-#  - docker build -t kaitoedter/chatty .
+  - docker build -t kaitoedter/chatty .
 #  - docker-compose build chatty-boot
 #  - docker tag chatty_chatty-boot kaitoedter/chatty
 #  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
