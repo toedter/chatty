@@ -16,10 +16,11 @@ before_script:
 script:
   - ./gradlew gruntDist
   - ./gradlew build
-#  - cd subprojects/com.toedter.chatty.server.boot
-#  - docker build -t kaitoedter/chatty .
-#  - docker login --email="$DOCKER_EMAIL" --username="$DOCKER_USERNAME" --password="$DOCKER_PASSWORD"
-#  - docker push kaitoedter/chatty
+  - cd subprojects/com.toedter.chatty.server.boot
+  - docker build -t kaitoedter/chatty .
+  - docker login --email="$DOCKER_EMAIL" --username="$DOCKER_USERNAME" --password="$DOCKER_PASSWORD"
+  - docker push kaitoedter/chatty
+  - cd ../..
 
 deploy:
   provider: heroku
