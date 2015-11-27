@@ -24,8 +24,8 @@ script:
   - docker build -t kaitoedter/chatty .
 #  - docker-compose build chatty-boot
 #  - docker tag chatty_chatty-boot kaitoedter/chatty
-#  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-#  - docker push kaitoedter/chatty
+  - docker login --email="$DOCKER_EMAIL" --username="$DOCKER_USERNAME" --password="$DOCKER_PASSWORD"
+  - docker push kaitoedter/chatty
 
 deploy:
   provider: heroku
