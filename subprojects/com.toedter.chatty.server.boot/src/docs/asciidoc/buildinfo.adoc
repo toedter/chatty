@@ -1,0 +1,14 @@
+[[resource-build-info]]
+[[buildinfo]]
+== Build Info
+
+The build info gives you some information about version and timestamp.
+
+=== Example request
+
+include::{snippets}/build-info-get-example/curl-request.adoc[]
+
+=== Example response
+
+include::{snippets}/build-info-get-example/http-response.adoc[]
+include::{snippets}/build-info-get-example/response-fields.adoc[]

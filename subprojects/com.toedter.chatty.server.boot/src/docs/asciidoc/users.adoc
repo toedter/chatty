@@ -1,0 +1,44 @@
+[[resources-users]]
+== Users
+
+The Users resource is used to create and list users.
+
+
+[[resources-users-list]]
+=== Listing users
+
+A `GET` request will list all of the service's users.
+
+==== Response structure
+
+include::{snippets}/users-list-example/response-fields.adoc[]
+
+==== Example request
+
+include::{snippets}/users-list-example/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/users-list-example/http-response.adoc[]
+
+==== Links
+
+include::{snippets}/users-list-example/links.adoc[]
+
+
+[[resources-users-create]]
+=== Creating a user
+
+A `POST` request is used to create a user
+
+==== Request structure
+
+include::{snippets}/users-create-example/request-fields.adoc[]
+
+==== Example request
+
+include::{snippets}/users-create-example/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/users-create-example/http-response.adoc[]

@@ -1,0 +1,48 @@
+[[resources-messages]]
+== Messages
+
+The Messages resource is used to create and list chat messages.
+
+
+[[resources-messages-list]]
+=== Listing chat messages
+
+A `GET` request will list all of the service's chat messages.
+
+==== Response structure
+
+include::{snippets}/messages-list-example/response-fields.adoc[]
+
+==== Example request
+
+include::{snippets}/messages-list-example/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/messages-list-example/http-response.adoc[]
+
+==== Links
+
+include::{snippets}/messages-list-example/links.adoc[]
+
+
+[[resources-messages-create]]
+=== Creating a chat message
+
+A `POST` request is used to create a chat message
+
+==== Request structure
+
+include::{snippets}/messages-create-example/request-fields.adoc[]
+
+IMPORTANT: Whenever you want to link REST resources,
+you have to provide the URL to the REST resource you want to link to.
+In the example below, a chat message needs an author, which is provided by the URL of the corresponding user resource.
+
+==== Example request
+
+include::{snippets}/messages-create-example/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/messages-create-example/http-response.adoc[]
