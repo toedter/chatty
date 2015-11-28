@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.hateoas.MediaTypes;
 import org.springframework.restdocs.RestDocumentation;
 import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
@@ -36,7 +37,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.persistence.ManyToOne;
 import javax.servlet.RequestDispatcher;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -47,8 +53,10 @@ import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.li
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.snippet.Attributes.key;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -160,6 +168,51 @@ public class ApiDocumentation {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void usersCreateExample() throws Exception {
+        Map<String, String> user = new HashMap<String, String>();
+        user.put("id", "toedter_k");
+        user.put("fullName", "toedter_k");
+        user.put("email", "kai@toedter.com");
+
+        this.mockMvc.perform(
+                post("/api/users").contentType(MediaTypes.HAL_JSON).content(
+                        this.objectMapper.writeValueAsString(user))).andExpect(
+                status().isCreated())
+                .andDo(document("users-create-example",
+                        requestFields(
+                                fieldWithPath("id").description("The id of the user. Must be unique."),
+                                fieldWithPath("fullName").description("The full name of the user"),
+                                fieldWithPath("email").description("The e-mail of the user"))));
+    }
+
+    @Test
+    public void messagesCreateExample() throws Exception {
+        Map<String, String> user = new HashMap<String, String>();
+        user.put("id", "toedter_k");
+        user.put("fullName", "toedter_k");
+        user.put("email", "kai@toedter.com");
+
+        String userLocation = this.mockMvc
+                .perform(
+                        post("/api/users").contentType(MediaTypes.HAL_JSON).content(
+                                this.objectMapper.writeValueAsString(user)))
+                .andExpect(status().isCreated()).andReturn().getResponse()
+                .getHeader("Location");
+
+        Map<String, Object> chatMessage = new HashMap<String, Object>();
+        chatMessage.put("text", "Hello!");
+        chatMessage.put("author", userLocation);
+
+        this.mockMvc.perform(
+                post("/api/messages").contentType(MediaTypes.HAL_JSON).content(
+                        this.objectMapper.writeValueAsString(chatMessage))).andExpect(
+                status().isCreated())
+                .andDo(document("messages-create-example",
+                        requestFields(
+                                fieldWithPath("text").description("The text of the chat message"),
+                                fieldWithPath("author").description("The author of the chat message (a user)"))));
+    }
 
     private void createUser(String id, String fullName, String email) {
         User user = new User();
