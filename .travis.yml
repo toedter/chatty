@@ -19,10 +19,12 @@ script:
   - ./gradlew gruntDist
   - ./gradlew build
   - cd subprojects/com.toedter.chatty.server.boot
+  - ../../gradlew dockerfile
+  - cd build
   - docker build -t kaitoedter/chatty .
   - docker login --email="$DOCKER_EMAIL" --username="$DOCKER_USERNAME" --password="$DOCKER_PASSWORD"
   - docker push kaitoedter/chatty
-  - cd ../..
+  - cd ../../..
   - swarm login $SWARM_USER -p $SWARM_PASSWORD
   - sudo docker tag -f kaitoedter/chatty registry.giantswarm.io/toedter/chatty-boot
   - docker push registry.giantswarm.io/toedter/chatty-boot

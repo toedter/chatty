@@ -3,7 +3,7 @@ import com.toedter.chatty.ProjectVersion
 allprojects {
     ext.buildTimestamp = new Date().format('yyyy-MM-dd HH:mm:ss')
 
-    project.version = new ProjectVersion(1, 0, null)
-    // project.version = new ProjectVersion(1, 0, System.env.TRAVIS_BUILD_NUMBER)
+    // project.version = new ProjectVersion(1, 0, null)
+    project.version = new ProjectVersion(1, 0, System.env.TRAVIS_BUILD_NUMBER)
     // project.version = new ProjectVersion(1, 0, System.env.SOURCE_BUILD_NUMBER)
 }

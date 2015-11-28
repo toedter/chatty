@@ -60,6 +60,14 @@ task createBuildInfoFile << {
     props.store(buildInfoFile.newWriter(), null)
 }
 
+task createDockerfile << {
+    def dockerfile = new File("$buildDir/Dockerfile")
+    dockerfile.write 'FROM java\n'
+    dockerfile  << 'ADD libs/com.toedter.chatty.server.boot-' + project.version +'.jar .\n'
+    dockerfile  << 'CMD /usr/bin/java -Xmx400m -Xms400m -jar /com.toedter.chatty.server.boot-' + project.version +'.jar .\n'
+    dockerfile  << 'EXPOSE 8080\n'
+}
+
 test {
     outputs.dir snippetsDir
 }
@@ -81,7 +89,7 @@ jar {
     dependsOn createBuildInfoFile
     dependsOn copyWebApp
     dependsOn asciidoctor
-    from ("${asciidoctor.outputDir}/html5") {
+    from("${asciidoctor.outputDir}/html5") {
         into 'static/docs'
     }
 }
