@@ -88,16 +88,16 @@ public class ApiDocumentation {
                 .build();
     }
 
-    // @Test
+    @Test
     public void headersExample() throws Exception {
         this.document.snippets(responseHeaders(
                 headerWithName("Content-Type").description("The Content-Type of the payload, e.g. `application/hal+json`")));
 
-        this.mockMvc.perform(get("/"))
+        this.mockMvc.perform(get("/api"))
                 .andExpect(status().isOk());
     }
 
-    // @Test
+    @Test
     public void errorExample() throws Exception {
         this.document.snippets(responseFields(
                 fieldWithPath("error").description("The HTTP error that occurred, e.g. `Bad Request`"),
@@ -168,20 +168,4 @@ public class ApiDocumentation {
         user.setFullName(fullName);
         this.userRepository.save(user);
     }
-
-    private static class ConstrainedFields {
-
-        private final ConstraintDescriptions constraintDescriptions;
-
-        ConstrainedFields(Class<?> input) {
-            this.constraintDescriptions = new ConstraintDescriptions(input);
-        }
-
-        private FieldDescriptor withPath(String path) {
-            return fieldWithPath(path).attributes(key("constraints").value(StringUtils
-                    .collectionToDelimitedString(this.constraintDescriptions
-                            .descriptionsForProperty(path), ". ")));
-        }
-    }
-
 }
