@@ -78,4 +78,4 @@ This request will produce a response with the user's details in its body:
 
 include::{snippets}/creating-a-user/2/http-response.adoc[]
 
-Note the `chatty:messages` link which we'll make use of later.
+To learn about the other resources of this RESTful service, please take a look at the link:api-guide.html[API Guide].

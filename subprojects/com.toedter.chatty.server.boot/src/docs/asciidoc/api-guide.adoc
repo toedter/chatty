@@ -1,4 +1,4 @@
-= Chatty API Guide
+= Chatty REST API Guide
 Kai Tödter;
 :doctype: book
 :icons: font
@@ -9,6 +9,11 @@ Kai Tödter;
 
 [[overview]]
 = Overview
+
+[[overview-introduction]]
+== Introduction
+This guide provides you with a detailed description how to use the RESTful Chatty service. You will
+also find a short introduction in the link:getting-started-guide.html[Getting Started Guide].
 
 [[overview-http-verbs]]
 == HTTP verbs
@@ -122,7 +127,7 @@ include::{snippets}/index-example/links.adoc[]
 [[resources-users]]
 == Users
 
-The Users resources is used to create and list users
+The Users resources is used to create and list users.
 
 
 
@@ -143,6 +148,11 @@ include::{snippets}/users-list-example/curl-request.adoc[]
 
 include::{snippets}/users-list-example/http-response.adoc[]
 
+==== Links
+
+include::{snippets}/users-list-example/links.adoc[]
+
+
 [[resources-users-create]]
 === Creating a user
 
@@ -160,15 +170,70 @@ include::{snippets}/users-create-example/curl-request.adoc[]
 
 include::{snippets}/users-create-example/http-response.adoc[]
 
+
 [[resources-messages]]
 == Messages
 
 The Messages resources is used to create and list chat messages.
-... not finished yet, please stay tuned.
+
+
+[[resources-messages-list]]
+=== Listing chat messages
+
+A `GET` request will list all of the service's chat messages.
+
+==== Response structure
+
+include::{snippets}/messages-list-example/response-fields.adoc[]
+
+==== Example request
+
+include::{snippets}/messages-list-example/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/messages-list-example/http-response.adoc[]
+
+==== Links
+
+include::{snippets}/messages-list-example/links.adoc[]
+
+
+[[resources-messages-create]]
+=== Creating a chat message
+
+A `POST` request is used to create a chat message
+
+==== Request structure
+
+include::{snippets}/messages-create-example/request-fields.adoc[]
+
+IMPORTANT: Whenever you want to link REST resources,
+you have to provide the URL to the REST resource you want to link to.
+In the example below, a chat message needs an author, which is provided by the URL of the corresponding user resource.
+
+==== Example request
+
+include::{snippets}/messages-create-example/curl-request.adoc[]
+
+==== Example response
+
+include::{snippets}/messages-create-example/http-response.adoc[]
+
 
 [[resource-build-info]]
 == Build Info
 
 The build info gives you some information about version and timestamp.
-... not finished yet, please stay tuned.
+
+=== Example request
+
+include::{snippets}/build-info-get-example/curl-request.adoc[]
+
+=== Example response
+
+include::{snippets}/build-info-get-example/http-response.adoc[]
+include::{snippets}/build-info-get-example/response-fields.adoc[]
+
+
 

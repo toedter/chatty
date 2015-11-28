@@ -17,6 +17,8 @@
 package com.toedter.chatty.server.boot;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.toedter.chatty.server.boot.message.ChatMessage;
+import com.toedter.chatty.server.boot.message.web.ChatMessageRepository;
 import com.toedter.chatty.server.boot.user.User;
 import com.toedter.chatty.server.boot.user.web.UserRepository;
 import org.junit.Before;
@@ -27,20 +29,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.restdocs.RestDocumentation;
-import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
-import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.util.StringUtils;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.persistence.ManyToOne;
 import javax.servlet.RequestDispatcher;
-
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,10 +51,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.restdocs.snippet.Attributes.key;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -75,6 +68,9 @@ public class ApiDocumentation {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ChatMessageRepository chatMessageRepository;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -155,8 +151,8 @@ public class ApiDocumentation {
         this.document.snippets(
                 links(
                         linkWithRel("self").description("The <<resources-users,Users resource>>"),
-                        linkWithRel("profile").description("The <<resources-messages,Messages resource>>"),
-                        linkWithRel("curies").description("The <<resources-messages,Messages resource>>")
+                        linkWithRel("profile").description("The profile describes the data structure of this resource"),
+                        linkWithRel("curies").description("Curies are used for online documentation")
                 ),
                 responseFields(
                         fieldWithPath("_embedded.chatty:users").description("An array of <<resources-user, User resources>>"),
@@ -187,6 +183,31 @@ public class ApiDocumentation {
     }
 
     @Test
+    public void messagesListExample() throws Exception {
+        this.userRepository.deleteAll();
+        User user = createUser("toedter_k", "Kai Toedter", "kai@toedter.com");
+
+        this.chatMessageRepository.deleteAll();
+        createChatMessage("Hello!", user);
+        createChatMessage("How are you today?", user);
+
+        this.document.snippets(
+                links(
+                        linkWithRel("self").description("The <<resources-messages,Messages resource>>"),
+                        linkWithRel("profile").description("The profile describes the data structure of this resource"),
+                        linkWithRel("curies").description("Curies are used for online documentation")
+                ),
+                responseFields(
+                        fieldWithPath("_embedded.chatty:messages").description("An array of <<resources-message, Message resources>>"),
+                        fieldWithPath("_links").description("<<resources-index-links,Links>> to other resources"),
+                        fieldWithPath("page").description("The pagination information")
+                ));
+
+        this.mockMvc.perform(get("/api/messages"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     public void messagesCreateExample() throws Exception {
         Map<String, String> user = new HashMap<String, String>();
         user.put("id", "toedter_k");
@@ -211,14 +232,35 @@ public class ApiDocumentation {
                 .andDo(document("messages-create-example",
                         requestFields(
                                 fieldWithPath("text").description("The text of the chat message"),
-                                fieldWithPath("author").description("The author of the chat message (a user)"))));
+                                fieldWithPath("author").description("The author of the chat message. This must be the URL to an existing user resource."))));
     }
 
-    private void createUser(String id, String fullName, String email) {
+    @Test
+    public void buildInfoGetExample() throws Exception {
+        this.document.snippets(
+                responseFields(
+                        fieldWithPath("version").description("The version of this build"),
+                        fieldWithPath("timeStamp").description("The creation timestamp of this build"),
+                        fieldWithPath("_links.self").description("The link to this resource")
+                ));
+
+        this.mockMvc.perform(get("/api/buildinfo"))
+                .andExpect(status().isOk());
+    }
+
+    private User createUser(String id, String fullName, String email) {
         User user = new User();
         user.setId(id);
         user.setEmail(email);
         user.setFullName(fullName);
         this.userRepository.save(user);
+        return user;
+    }
+
+    private void createChatMessage(String text, User author) {
+        ChatMessage chatMessage = new ChatMessage();
+        chatMessage.setAuthor(author);
+        chatMessage.setText(text);
+        chatMessageRepository.save(chatMessage);
     }
 }
