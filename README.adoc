@@ -12,7 +12,7 @@ A chat demo that evaluates several technologies (and hopefully shows best practi
 * http://stateless.co/hal_specification.html[HAL] (Hypertext Application Language)
 * https://github.com/Atmosphere/atmosphere[Atmosphere] (Async Pub/Sub)
 * https://jersey.java.net/[Jersey] (JAX-RS reference implementation)
-* http://projects.spring.io/spring-boot/[Spring Boot] (+ Data, REST, HATEOAS)
+* http://projects.spring.io/spring-boot/[Spring Boot] (+ Spring Data REST & REST Docs)
 * http://www.typescriptlang.org/[TypeScript] for web client
 * http://angularjs.org/[AngularJS] for web client
 * https://github.com/angular/protractor[Protractor] for functional web client UI tests
@@ -122,11 +122,15 @@ HAL-Browser.
 [[live-demo]]
 == Live Demo
 
-Currently the Spring Boot based server is deployed to Heroku. You can
-browse the Chatty API with the HAL browser at
-https://chatty42.herokuapp.com/api.
-You can also try out a live demo of chatty at
-https://chatty42.herokuapp.com/chatty.html. But please be aware
+Currently the Spring Boot based server is deployed to Heroku and Giant Swarm.
+You can try out a live demo of chatty at
+
+* http://chatty-toedter.gigantic.io/
+* https://chatty42.herokuapp.com/
+
+The demos include a HAL browser for browsing Chatty's RESTful hypermedia API, as well
+as documentation of the REST API created with Spring Restdocs.
+But please be aware
 that this is only a test installment and will be reset periodically.
 
 [[docker-integration]]
