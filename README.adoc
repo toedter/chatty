@@ -146,10 +146,10 @@ by invoking: docker-compose up
 
 The Spring Boot based service is running on port 8080, the Jetty/HalBuilder based service on port 8081.
 
-[[whats-next]]
-== What’s Next?
+[[pebble-client]]
+== Pebble Client
 
-* improved Docker integration
+* For a Pebble client, see https://github.com/toedter/pebble-chatty
 
 [[license]]
 == License
