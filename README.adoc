@@ -74,7 +74,7 @@ https://chrome.google.com/webstore/detail/application%20json%20xml-as-i/cgfnklam
           "href" : "http://localhost:8080/api/users/doe_ja/messages"
         }
       }
-    }
+    } ]
   }
 }
 
