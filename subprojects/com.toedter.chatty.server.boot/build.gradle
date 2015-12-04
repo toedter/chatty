@@ -82,16 +82,18 @@ task copyWebApp(type: Copy) {
     from project(':com.toedter.chatty.client.web').file('dist')
     into "$buildDir/resources/main/static"
 }
-
 // copyWebApp.dependsOn ':com.toedter.chatty.client.web:gruntDist'
+
+task copyDoc(type: Copy) {
+    from "${asciidoctor.outputDir}/html5"
+    into "$buildDir/resources/main/static/docs"
+}
 
 jar {
     dependsOn createBuildInfoFile
     dependsOn copyWebApp
     dependsOn asciidoctor
-    from("${asciidoctor.outputDir}/html5") {
-        into 'static/docs'
-    }
+    dependsOn copyDoc
 }
 
 task stage(dependsOn: ['jar', 'bootRepackage'])

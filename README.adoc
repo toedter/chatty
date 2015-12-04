@@ -33,10 +33,10 @@ installed, the build will invoke the grunt contribs for bower and tsd
 [[getting-started]]
 == Getting Started
 
-* ./gradlew build (builds all and runs the integration tests, both Java and TypeScript)
-* ./gradlew startServerSync (starts a Jetty server using port 8080)
-* Open http://localhost:8080/src/main/webapp/chatty.html in a web browser
-* Open http://localhost:8080/src/main/webapp/chatty.html in another web browser
+* ./gradlew gruntdist build (builds all and runs the integration tests, both Java and TypeScript)
+* ./gradlew bootrun (starts a Jetty server using port 8080)
+* Open http://localhost:8080 in a web browser
+* Open http://localhost:8080 in another web browser
 * Play around with chatty!
 
 [[screenshot]]
@@ -48,8 +48,8 @@ image:screenshot.png[Screenshot]
 == Hypermedia API
 
 Here is an example what you get at
-http://localhost:8080/api/users. Currently I am using
-http://stateless.co/hal_specification.html[HAL]. The returnd mime type is
+http://localhost:8080/api/users. I am using
+http://stateless.co/hal_specification.html[HAL] (Hypertext Application Language). The returned mime type is
 *application/hal+json*. To get a pretty print in Chrome, please
 install the Chrome extensions 
 https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc[JSONView]
@@ -58,26 +58,23 @@ https://chrome.google.com/webstore/detail/application%20json%20xml-as-i/cgfnklam
 
 [source,json]
 {
-  "_links": {
-    "self": {
-      "href": "http://localhost:8080/api/users",
-      "hreflang": "en",
-      "profile": "chatty"
-    }
-  },
-  "_embedded": {
-    "users": [
-      {
-         "_links": {
-            "self": {
-                "href": "http://localhost:8080/api/users/toedter_k"
-           }
-         },
-         "email": "kai@toedter.com",
-         "fullName": "Kai Toedter",
-         "id": "toedter_k"
+  "_embedded" : {
+    "chatty:users" : [ {
+      "fullName" : "Jane Doe",
+      "email" : "jane@doe.com",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/users/doe_ja"
+        },
+        "chatty:user" : {
+          "href" : "http://localhost:8080/api/users/doe_ja{?projection}",
+          "templated" : true
+        },
+        "chatty:messages" : {
+          "href" : "http://localhost:8080/api/users/doe_ja/messages"
+        }
       }
-    ]
+    }
   }
 }
 
@@ -91,23 +88,28 @@ exploring the HAL based API.
 
 [source, json]
 {
-  "_links" : {
-    "chatty:users" : {
-      "href" : "http://localhost:8080/api/users{?page,size,sort,projection}",
-      "templated" : true
+  "_links": {
+    "chatty:users": {
+      "href": "http://localhost:8080/api/users{?page,size,sort,projection}",
+      "templated": true
     },
-    "chatty:messages" : {
-      "href" : "http://localhost:8080/api/messages{?page,size,sort,projection}",
-      "templated" : true
+    "chatty:messages": {
+      "href": "http://localhost:8080/api/messages{?page,size,sort,projection}",
+      "templated": true
     },
-    "profile" : {
-      "href" : "http://localhost:8080/api/alps"
+    "chatty:buildinfo": {
+      "href": "http://localhost:8080/api/buildinfo"
     },
-    "curies" : [ {
-      "href" : "http://localhost:8080/api/alps/{rel}",
-      "name" : "chatty",
-      "templated" : true
-    } ]
+    "profile": {
+      "href": "http://localhost:8080/api/profile"
+    },
+    "curies": [
+      {
+        "href": "http://localhost:8080/api/../docs/{rel}.html",
+        "name": "chatty",
+        "templated": true
+      }
+    ]
   }
 }
 
