@@ -2,6 +2,7 @@
 = chatty
 
 image:https://travis-ci.org/toedter/chatty.svg?branch=master[Build Status, link="https://travis-ci.org/toedter/chatty"]
+image:http://img.shields.io/badge/license-MIT-blue.svg["MIT", link="http://toedter.mit-license.org"]
 
 A chat demo that evaluates several technologies (and hopefully shows best practices)
 
