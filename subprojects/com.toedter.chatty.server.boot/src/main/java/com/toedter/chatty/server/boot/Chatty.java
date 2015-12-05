@@ -61,6 +61,6 @@ public class Chatty {
 
     @Bean
     public CurieProvider curieProvider() {
-        return new DynamicCurieProvider("chatty", new UriTemplate("/../docs/{rel}.html"));
+        return new DynamicCurieProvider("chatty", new UriTemplate("/../docs/html5/{rel}.html"));
     }
 }

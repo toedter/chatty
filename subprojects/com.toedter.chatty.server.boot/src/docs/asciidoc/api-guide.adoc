@@ -6,17 +6,18 @@ Kai Tödter;
 :toc: left
 :toclevels: 4
 :sectlinks:
+:numbered:
 
 [[overview]]
-= Overview
+== Overview
 
 [[overview-introduction]]
-== Introduction
+=== Introduction
 This guide provides you with a detailed description how to use the RESTful Chatty service. You will
 also find a short introduction in the link:getting-started-guide.html[Getting Started Guide].
 
 [[overview-http-verbs]]
-== HTTP verbs
+=== HTTP verbs
 
 Chatty tries to adhere as closely as possible to standard HTTP and REST conventions in its
 use of HTTP verbs.
@@ -41,7 +42,7 @@ use of HTTP verbs.
 |===
 
 [[overview-http-status-codes]]
-== HTTP status codes
+=== HTTP status codes
 
 Chatty tries to adhere as closely as possible to standard HTTP and REST conventions in its
 use of HTTP status codes.
@@ -67,16 +68,16 @@ use of HTTP status codes.
 |===
 
 [[overview-headers]]
-== Headers
+=== Headers
 
 Every response has the following header(s):
 
 include::{snippets}/headers-example/response-headers.adoc[]
 
 [[overview-errors]]
-== Errors
+=== Errors
 
-Whenever an error response (status code >= 400) is returned, the body will contain a JSON object
+Whenever an error response (status code >== 400) is returned, the body will contain a JSON object
 that describes the problem. The error object has the following structure:
 
 include::{snippets}/error-example/response-fields.adoc[]
@@ -87,7 +88,7 @@ For example, a request that attempts to apply a non-existent user will produce a
 include::{snippets}/error-example/http-response.adoc[]
 
 [[overview-hypermedia]]
-== Hypermedia
+=== Hypermedia
 
 Chatty's RESTful web service uses hypermedia and resources include links to other resources in their
 responses. Responses are in http://stateless.co/hal_specification.html[Hypertext Application Language (HAL)]
@@ -95,30 +96,30 @@ format. Links can be found beneath the `_links` key. Users of the API should
 not create URIs themselves, instead they should use the above-described links to navigate
 
 [[resources]]
-= Resources
+== Resources
 
 [[resources-index]]
-== Index
+=== Index
 
 The index provides the entry point into the service.
 
 [[resources-index-access]]
-=== Accessing the index
+==== Accessing the index
 
 A `GET` request is used to access the index
 
-==== Response structure
+===== Response structure
 
 include::{snippets}/index-example/response-fields.adoc[]
 
-==== Example response
+===== Example response
 
 include::{snippets}/index-example/http-response.adoc[]
 
 
 
 [[resources-index-links]]
-==== Links
+===== Links
 
 include::{snippets}/index-example/links.adoc[]
 

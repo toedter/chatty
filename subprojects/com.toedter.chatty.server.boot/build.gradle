@@ -5,13 +5,14 @@ buildscript {
         maven { url "http://repo.spring.io/milestone" }
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+        classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.10.1'
     }
 }
 
 plugins {
     id 'org.hidetake.ssh' version '0.4.3'
-    id "org.asciidoctor.convert" version "1.5.2"
+    id 'org.asciidoctor.convert' version '1.5.3'
 }
 
 ext {
@@ -63,9 +64,9 @@ task createBuildInfoFile << {
 task createDockerfile << {
     def dockerfile = new File("$buildDir/Dockerfile")
     dockerfile.write 'FROM java\n'
-    dockerfile  << 'ADD libs/com.toedter.chatty.server.boot-' + project.version +'.jar .\n'
-    dockerfile  << 'CMD /usr/bin/java -Xmx400m -Xms400m -jar /com.toedter.chatty.server.boot-' + project.version +'.jar .\n'
-    dockerfile  << 'EXPOSE 8080\n'
+    dockerfile << 'ADD libs/com.toedter.chatty.server.boot-' + project.version + '.jar .\n'
+    dockerfile << 'CMD /usr/bin/java -Xmx400m -Xms400m -jar /com.toedter.chatty.server.boot-' + project.version + '.jar .\n'
+    dockerfile << 'EXPOSE 8080\n'
 }
 
 test {
@@ -73,9 +74,12 @@ test {
 }
 
 asciidoctor {
-    attributes 'snippets': snippetsDir
-    inputs.dir snippetsDir
     dependsOn test
+    backends = ['html5', 'pdf']
+    attributes = [
+            snippets: snippetsDir
+    ]
+    inputs.dir snippetsDir
 }
 
 task copyWebApp(type: Copy) {
@@ -85,7 +89,7 @@ task copyWebApp(type: Copy) {
 // copyWebApp.dependsOn ':com.toedter.chatty.client.web:gruntDist'
 
 task copyDoc(type: Copy) {
-    from "${asciidoctor.outputDir}/html5"
+    from "${asciidoctor.outputDir}"
     into "$buildDir/resources/main/static/docs"
 }
 

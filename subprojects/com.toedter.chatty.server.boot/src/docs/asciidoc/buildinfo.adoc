@@ -1,14 +1,17 @@
-[[resource-build-info]]
 [[buildinfo]]
-== Build Info
+=== Build Info
 
 The build info gives you some information about version and timestamp.
 
-=== Example request
+[[resource-build-info]]
+==== Getting the build info
+A `GET` request will return the service's build information.
+
+===== Example request
 
 include::{snippets}/build-info-get-example/curl-request.adoc[]
 
-=== Example response
+===== Example response
 
 include::{snippets}/build-info-get-example/http-response.adoc[]
 include::{snippets}/build-info-get-example/response-fields.adoc[]
