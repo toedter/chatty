@@ -1,0 +1,21 @@
+= Chatty REST API Guides
+Kai Tödter; Version {project-version}
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+
+The API guides provide you with a detailed description how to use the RESTful Chatty service. You will
+also find a short introduction in the 'Getting Started Guide' and a
+detailed description of the whole API in the 'API Guide'. Both guides are available in HTML and PDF.
+
+[[overview-html]]
+== HTML
+
+* link:getting-started-guide.html[Getting Started Guide]
+* link:api-guide.html[API Guide]
+
+[[overview-pdf]]
+== PDF
+
+* link:../pdf/getting-started-guide.pdf[Getting Started Guide]
+* link:../pdf/api-guide.pdf[API Guide]
