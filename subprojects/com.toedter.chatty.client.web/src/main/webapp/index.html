@@ -36,11 +36,11 @@
         <form class="form-inline" ng-submit="submitUser()">
             <div class="form-group">
                 <input style="width:150px" type="text" class="form-control" ng-model="userId"
-                       placeholder="Enter ID" ng-disabled="isConnected">
+                       placeholder="Enter ID" maxlength="50" ng-disabled="isConnected">
                 <input style="width:150px" type="text" class="form-control" ng-model="userEmail"
-                       placeholder="Enter email" ng-disabled="isConnected">
+                       placeholder="Enter email" maxlength="50" ng-disabled="isConnected">
                 <input style="width:150px" type="text" class="form-control" ng-model="userFullName"
-                       placeholder="Enter full name" ng-disabled="isConnected">
+                       placeholder="Enter full name" maxlength="50" ng-disabled="isConnected">
                 <button style="width:100px" id="connectButton" type="submit" class="btn btn-info">{{userButtonText}}
                 </button>
             </div>
@@ -49,7 +49,7 @@
         <form class="form-inline" ng-submit="submitChatMessage()">
             <div class="form-group">
                 <input style="width:458px" class="form-control" ng-model="chatMessage"
-                       ng-disabled="!isConnected" placeholder="Enter chat message">
+                       ng-disabled="!isConnected"  maxlength="100" placeholder="Enter chat message">
                 <button style="width:100px" type="submit" ng-disabled="!isConnected" class="btn btn-success">Send
                 </button>
                 </br>

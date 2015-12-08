@@ -37,6 +37,19 @@ module chatty {
                 var chatMessagesResource:chatty.model.ChatMessagesResource = this.getMessagesResource(api);
                 if (chatMessagesResource) {
                     var newChatMessage:any;
+                    if(message.length > 100) {
+                        message = message.substring(0, 97) + "...";
+                    }
+                    var escapedChatMessage:string = message.replace(/\\n/g, "\\n")
+                        .replace(/\\'/g, "\\'")
+                        .replace(/\\"/g, '\\"')
+                        .replace(/\\&/g, "\\&")
+                        .replace(/\\r/g, "\\r")
+                        .replace(/\\t/g, "\\t")
+                        .replace(/\\b/g, "\\b")
+                        .replace(/\\f/g, "\\f");
+                    console.log("escaped message to be posted: " + escapedChatMessage);
+
                     if(userLocation) {
                         // For Spring Boot server
                         newChatMessage = {author: userLocation, text: message};
