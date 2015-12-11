@@ -29,8 +29,7 @@ script:
   - sudo docker tag -f kaitoedter/chatty registry02.giantswarm.io/toedter/chatty-boot
   - docker login --email="$DOCKER_EMAIL" --username="$SWARM_USER" --password="$SWARM_PASSWORD" registry02.giantswarm.io
   - docker push registry02.giantswarm.io/toedter/chatty-boot
-#  - swarm update chatty/chatty-server
-  - swarm up
+  - swarm update chatty/chatty-server
 
 deploy:
   provider: heroku

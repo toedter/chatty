@@ -128,7 +128,7 @@ HAL-Browser.
 Currently the Spring Boot based server is deployed to Heroku and Giant Swarm.
 You can try out a live demo of chatty at
 
-* http://chatty-toedter.gigantic.io/
+* http://chatty-toedter.leaseweb-alpha.giantswarm.io/
 * https://chatty42.herokuapp.com/
 
 The demos include a HAL browser for browsing Chatty's RESTful hypermedia API, as well
