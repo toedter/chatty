@@ -27,7 +27,7 @@ script:
   - cd ../../..
   - swarm login $SWARM_USER -p $SWARM_PASSWORD
   - sudo docker tag -f kaitoedter/chatty registry02.giantswarm.io/toedter/chatty-boot
-  - docker login registry02.giantswarm.io --email="$DOCKER_EMAIL" --username="$SWARM_USER" --password="$SWARM_PASSWORD"
+  - docker login --email="$DOCKER_EMAIL" --username="$SWARM_USER" --password="$SWARM_PASSWORD" registry02.giantswarm.io
   - docker push registry02.giantswarm.io/toedter/chatty-boot
   - swarm update chatty/chatty-server
 
