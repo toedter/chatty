@@ -158,7 +158,7 @@ module.exports = function (grunt) {
                         command: 'reinstall',
 
                         //optional: always get from HEAD
-                        latest: true,
+                        latest: false,
 
                         // specify config file
                         config: 'tsd.json',
