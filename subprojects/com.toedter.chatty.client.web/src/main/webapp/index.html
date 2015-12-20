@@ -59,7 +59,7 @@
         </form>
 
         <h3>MESSAGES</h3>
-        <table class="table">
+        <table class="table table-striped table-condensed">
             <tr ng-repeat="message in chatMessages">
                 <td ng-if="message._embedded.author" style="text-align: left; width:10%">
                     {{message._embedded.author.id}}
