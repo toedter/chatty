@@ -65,14 +65,14 @@ docker {
     }
 }
 
-applicationDistribution.from("$projectDir/../com.toedter.chatty.client.web") {
+applicationDistribution.from("$projectDir/../com.toedter.chatty.client.angular1") {
     include "bower_components/**"
     include "src/main/**"
-    into('com.toedter.chatty.client.web')
+    into('com.toedter.chatty.client.angular1')
 }
 
 dockerCopyDistResources {
-    from "$projectDir/../com.toedter.chatty.client.web"
+    from "$projectDir/../com.toedter.chatty.client.angular1"
 }
 
 task startServerAsyncWithAnt << {

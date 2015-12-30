@@ -4,7 +4,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         hub: {
             all: {
-                src: ['subprojects/com.toedter.chatty.client.web/Gruntfile.js'],
+                src: ['subprojects/com.toedter.chatty.client.angular1/Gruntfile.js'],
                 tasks: ['distBoot']
             }
         },
@@ -12,7 +12,7 @@ module.exports = function (grunt) {
             node_modules: {
                 expand: true,
                 src: 'node_modules/**/*',
-                dest: 'subprojects/com.toedter.chatty.client.web/'
+                dest: 'subprojects/com.toedter.chatty.client.angular1/'
             }
         }
     });
