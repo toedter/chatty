@@ -1,0 +1,11 @@
+node_modules
+bower_components
+/typings
+dist
+.idea
+.grunt
+.project
+src/**/*.js
+src/**/*.map
+_SpecRunner.html
+Test Results - karma_conf_js.html

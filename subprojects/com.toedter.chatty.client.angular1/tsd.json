@@ -1,0 +1,33 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "angularjs/angular.d.ts": {
+      "commit": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+    },
+    "jquery/jquery.d.ts": {
+      "commit": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+    },
+    "selenium-webdriver/selenium-webdriver.d.ts": {
+      "commit": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+    },
+    "angular-protractor/angular-protractor.d.ts": {
+      "commit": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+    },
+    "jasmine/jasmine.d.ts": {
+      "commit": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+    },
+    "angularjs/angular-resource.d.ts": {
+      "commit": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+    },
+    "angularjs/angular-mocks.d.ts": {
+      "commit": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+    },
+    "atmosphere/atmosphere.d.ts": {
+      "commit": "fb2b3b1e068c9ff7d8f9b0851c08d37d96c95c38"
+    }
+  }
+}

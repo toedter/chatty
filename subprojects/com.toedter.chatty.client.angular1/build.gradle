@@ -1,0 +1,99 @@
+import com.toedter.chatty.GruntTask
+import com.toedter.chatty.NpmTask
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+task tsdInstall(type: GruntTask) {
+    group = "build"
+    description = "installs all TypeScript definitions."
+    gruntArgs = "tsd"
+
+    inputs.dir "typings"
+    inputs.file file("tsd.json")
+}
+
+task npmInstall(type: NpmTask) {
+    group = "build"
+    description = "installs all node modules."
+    npmArgs = "install"
+
+    inputs.dir "node_modules"
+    inputs.file file("package.json")
+}
+
+task bowerInstall(type: GruntTask) {
+    group = "build"
+    description = "installs all bower modules."
+    gruntArgs = "bower"
+
+    inputs.dir "bower_components"
+    inputs.file file("bower.json")
+}
+
+task gruntTest(type: GruntTask) {
+    group = "verification"
+    description = "Runs the Jasmine unit tests."
+    gruntArgs = "test"
+
+    inputs.dir "src"
+    inputs.file file("Gruntfile.js")
+}
+
+task gruntDist(type: GruntTask) {
+    group = "build"
+    description = "Builds the distribution."
+    gruntArgs = "dist"
+
+    inputs.dir "dist"
+    inputs.file file("Gruntfile.js")
+}
+
+bowerInstall.dependsOn npmInstall
+tsdInstall.dependsOn npmInstall
+gruntTest.dependsOn bowerInstall, tsdInstall
+gruntDist.dependsOn gruntTest
+
+task gruntIntegrationTest(type: GruntTask) {
+    doFirst {
+        // The integration test server finds a free port
+        // This port is propagated through the ext.freePort project property
+        // To publish it to the JavaScript integration tests, a js file containing
+        // the port is created on the fly
+        // this file has to be included in the jasmine src config
+        def dirs= new File("$project.projectDir/src/generated/js")
+        dirs.mkdirs()
+        def freePort = project(':com.toedter.chatty.server').freePort
+        def portJs = new File("$project.projectDir/src/generated/js/freePort.js")
+        if (portJs.exists()) {
+            portJs.delete();
+        }
+        portJs.createNewFile()
+        portJs.append("var freePort = " + freePort + ";");
+    }
+
+    group = "Verification"
+    description = "Runs the Jasmine integration tests."
+    gruntArgs = "itest"
+
+    inputs.dir "[relative-path-to-source]"
+    inputs.file file("Gruntfile.js")
+}
+
+gruntIntegrationTest.dependsOn ':com.toedter.chatty.server:startServerAsync'
+gruntIntegrationTest.mustRunAfter ':com.toedter.chatty.server:integrationTest'
+gruntIntegrationTest.finalizedBy(':com.toedter.chatty.server:stopServer')
+
+task integrationTest << {}
+integrationTest.dependsOn bowerInstall, gruntIntegrationTest;
+
+test.dependsOn gruntTest;
+
+task webjar(type: Jar, dependsOn: "jar") {
+    from(fileTree("dist")) {
+        into "META-INF/resources"
+    }
+}
