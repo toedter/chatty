@@ -12,8 +12,8 @@ before_script:
   - npm install -g grunt-cli
   - npm install -g bower
   - npm install -g tsd
-  - curl -O https://downloads.giantswarm.io/swarm/clients/0.26.0/swarm-0.26.0-linux-amd64.tar.gz
-  - sudo tar xzf swarm-0.26.0-linux-amd64.tar.gz -C /usr/local/bin
+  - curl -O https://downloads.giantswarm.io/swarm/clients/0.25.0/swarm-0.25.0-linux-amd64.tar.gz
+  - sudo tar xzf swarm-0.25.0-linux-amd64.tar.gz -C /usr/local/bin
 
 script:
   - ./gradlew gruntDist
