@@ -1,0 +1,13 @@
+= Chatty Angular2 Client
+
+This Angular2 Chatty client is under heavy construction.
+My plan is to keep it up to date with the current Angular2 implementation and showcase best practices regarding Angular 2 and TypeScript.
+== Acknowledgements
+
+Many thanks to
+
+* Colin Eberhard for https://github.com/ColinEberhardt/angular2-goldilocks-seed
+* John Papa for https://github.com/johnpapa/angular2-tour-of-heroes
+* Dan Wahlin for https://github.com/DanWahlin/Angular2-JumpStart
+
+

@@ -1,0 +1,20 @@
+{
+  "version": "1.7.3",
+  "compileOnSave": false,
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "module": "system",
+    "moduleResolution": "node",
+    "removeComments": true,
+    "sourceMap": true,
+    "noImplicitAny": true
+  },
+  "filesGlob": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

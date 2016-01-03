@@ -1,0 +1,19 @@
+<div class="container">
+    <h4>Chat Messages</h4>
+    <table class="table table-striped table-condensed">
+        <thead>
+        <tr>
+            <th>Timestamp</th>
+            <th>Author</th>
+            <th>Text</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="#chatMessage of chatMessages">
+            <td style="text-align: left; width:10%">{{chatMessage.timeStamp}}</td>
+            <td style="text-align: left; width:10%">{{chatMessage.author}}</td>
+            <td style="text-align: left; width:80%">{{chatMessage.text}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
