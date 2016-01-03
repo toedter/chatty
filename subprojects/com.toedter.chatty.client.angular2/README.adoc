@@ -2,6 +2,7 @@
 
 This Angular2 Chatty client is under heavy construction.
 My plan is to keep it up to date with the current Angular2 implementation and showcase best practices regarding Angular 2 and TypeScript.
+
 == Acknowledgements
 
 Many thanks to
