@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014 Kai Toedter
+ * Copyright (c) 2016 Kai Toedter
  * All rights reserved.
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
@@ -10,14 +10,14 @@
 /// <reference path="../../../../typings/atmosphere/atmosphere.d.ts" />
 
 interface ChattyScope extends ng.IScope {
-    userButtonText : string;
-    isConnected : boolean;
-    chatStatus : string;
+    userButtonText: string;
+    isConnected: boolean;
+    chatStatus: string;
     chatStatusType: string;
 
-    userId : string;
-    userEmail : string;
-    userFullName : string;
+    userId: string;
+    userEmail: string;
+    userFullName: string;
 
     chatMessage: string;
     chatMessages: chatty.model.ChatMessage[];

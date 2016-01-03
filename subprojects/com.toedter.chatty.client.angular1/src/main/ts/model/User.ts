@@ -1,12 +1,12 @@
 /**
- * Copyright (c) 2014 Kai Toedter
+ * Copyright (c) 2016 Kai Toedter
  * All rights reserved.
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
 /// <reference path="../../../../typings/angularjs/angular-resource.d.ts" />
 
-module chatty.model {
+namespace chatty.model {
     export interface User {
         id: string;
         email: string;
@@ -18,6 +18,6 @@ module chatty.model {
     }
 
     export interface UsersResource extends ng.resource.IResourceClass<UserResource> {
-        update(User): UserResource;
+        update(user: User): UserResource;
     }
 }
