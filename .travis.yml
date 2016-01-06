@@ -17,6 +17,7 @@ before_script:
 
 script:
   - ./gradlew gruntDist
+  - ./gradlew gulp
   - ./gradlew build
   - cd subprojects/com.toedter.chatty.server.boot
   - ../../gradlew createDockerfile
