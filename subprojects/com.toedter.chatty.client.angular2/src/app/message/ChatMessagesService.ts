@@ -1,23 +1,24 @@
 import {Injectable} from 'angular2/core';
-import {ChatMessage} from './ChatMessage';
+import {Http, Response} from 'angular2/http';
+import 'rxjs/add/operator/map';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class ChatMessagesService {
-
-    private chatMessages: ChatMessage[];
-
-    constructor() {
-        const chatMessage: ChatMessage = {
-            author: 'toedter_k',
-            id: 1,
-            text: 'Hello, World',
-            timeStamp: '1234',
-        };
-        this.chatMessages = [];
-        this.chatMessages.push(chatMessage);
+    constructor(private http: Http) {
     }
 
-    public getChatMessages(): ChatMessage[] {
-        return this.chatMessages;
+    public getChatMessages(): Observable<any> {
+        let uri: string = 'api/messages?projection=excerpt';
+
+        if (!document.location.hostname || document.location.hostname === 'localhost') {
+           uri = 'http://localhost:8080/' + uri;
+        }
+
+        let observable: Observable<any> =
+            this.http.get(uri)
+            .map((response: Response) => response.json()._embedded['chatty:messages']);
+
+        return observable;
     }
 }
