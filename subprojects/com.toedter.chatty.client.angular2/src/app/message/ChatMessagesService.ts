@@ -9,10 +9,10 @@ export class ChatMessagesService {
     }
 
     public getChatMessages(): Observable<any> {
-        let uri: string = 'api/messages?projection=excerpt';
+        let uri: string = '/api/messages?projection=excerpt';
 
         if (!document.location.hostname || document.location.hostname === 'localhost') {
-           uri = 'http://localhost:8080/' + uri;
+           uri = 'http://localhost:8080' + uri;
         }
 
         let observable: Observable<any> =
