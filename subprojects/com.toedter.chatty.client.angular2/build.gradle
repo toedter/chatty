@@ -1,4 +1,5 @@
 import com.toedter.chatty.NpmTask
+import com.toedter.chatty.GulpTask
 
 buildscript {
     repositories {
@@ -14,4 +15,14 @@ task npmInstall(type: NpmTask) {
     inputs.dir "node_modules"
     inputs.file file("package.json")
 }
+
+task gulp(type: GulpTask) {
+    group = "build"
+    description = "runs gulp."
+    gulpArgs = "build"
+
+    inputs.file file("gulpfile.js")
+}
+
+gulp.dependsOn npmInstall
 
