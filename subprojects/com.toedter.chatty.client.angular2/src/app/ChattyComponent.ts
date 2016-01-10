@@ -1,6 +1,7 @@
 import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
 import {ChatMessagesComponent} from './message/ChatMessagesComponent';
+import {UsersComponent} from './user/UsersComponent';
 
 @Component({
     selector: 'chatty',
@@ -8,7 +9,8 @@ import {ChatMessagesComponent} from './message/ChatMessagesComponent';
     directives: [ROUTER_DIRECTIVES],
 })
 @RouteConfig([
-    {path: '/messages', name: 'Messages', component: ChatMessagesComponent, useAsDefault: true}
+    {path: '/messages', name: 'Messages', component: ChatMessagesComponent, useAsDefault: true},
+    {path: '/users', name: 'Users', component: UsersComponent},
 ])
 export class ChattyComponent {
 }
