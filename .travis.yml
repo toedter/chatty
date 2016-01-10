@@ -12,8 +12,6 @@ before_script:
   - npm install -g grunt-cli
   - npm install -g bower
   - npm install -g tsd
-  - curl -O https://downloads.giantswarm.io/swarm/clients/0.26.0/swarm-0.26.0-linux-amd64.tar.gz
-  - sudo tar xzf swarm-0.26.0-linux-amd64.tar.gz -C /usr/local/bin
 
 script:
   - ./gradlew gruntDist
@@ -25,12 +23,6 @@ script:
   - docker build -t kaitoedter/chatty .
   - docker login --email="$DOCKER_EMAIL" --username="$DOCKER_USERNAME" --password="$DOCKER_PASSWORD"
   - docker push kaitoedter/chatty
-  - cd ../../..
-  - swarm login $SWARM_USER -p $SWARM_PASSWORD
-  - sudo docker tag -f kaitoedter/chatty registry02.giantswarm.io/toedter/chatty-boot
-  - docker login --email="$DOCKER_EMAIL" --username="$SWARM_USER" --password="$SWARM_PASSWORD" registry02.giantswarm.io
-  - docker push registry02.giantswarm.io/toedter/chatty-boot
-  - swarm update chatty/chatty-server
 
 deploy:
   provider: heroku
