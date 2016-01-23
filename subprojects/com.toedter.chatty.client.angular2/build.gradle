@@ -4,20 +4,14 @@ plugins {
 }
 
 node {
+    version = '4.2.6'
     download = true
-
-    // Set the work directory for unpacking node
     workDir = file("${project.buildDir}/nodejs")
-
-    // Set the work directory where node_modules should be located
     nodeModulesDir = file("${project.projectDir}")
 }
 
 gulp {
-    // Whether colors should output on the terminal
     colors = true
-
-    // Whether output from Gulp should be buffered - useful when running tasks in parallel
     bufferOutput = true
 }
 
