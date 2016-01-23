@@ -12,7 +12,7 @@ const paths = {
     dist: 'dist',
     distFiles: 'dist/**/*',
     srcFiles: 'src/**/*',
-    srcTsFiles: 'src/**/*.ts',
+    srcTsFiles: 'src/app/**/*.ts',
 }
 
 // clean the contents of the distribution directory

@@ -1,28 +1,25 @@
-import com.toedter.chatty.NpmTask
-import com.toedter.chatty.GulpTask
-
-buildscript {
-    repositories {
-        jcenter()
-    }
+plugins {
+    id "com.moowork.node" version "0.11"
+    id "com.moowork.gulp" version "0.11"
 }
 
-task npmInstall(type: NpmTask) {
-    group = "build"
-    description = "installs all node modules."
-    npmArgs = "install"
+node {
+    download = true
 
-    inputs.dir "node_modules"
-    inputs.file file("package.json")
+    // Set the work directory for unpacking node
+    workDir = file("${project.buildDir}/nodejs")
+
+    // Set the work directory where node_modules should be located
+    nodeModulesDir = file("${project.projectDir}")
 }
 
-task gulp(type: GulpTask) {
-    group = "build"
-    description = "runs gulp."
-    gulpArgs = "build"
+gulp {
+    // Whether colors should output on the terminal
+    colors = true
 
-    inputs.file file("gulpfile.js")
+    // Whether output from Gulp should be buffered - useful when running tasks in parallel
+    bufferOutput = true
 }
 
-gulp.dependsOn npmInstall
-
+gulp_build.dependsOn 'npm_install'
+build.dependsOn gulp_build
