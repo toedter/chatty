@@ -12,7 +12,7 @@
     "noImplicitAny": true
   },
   "filesGlob": [
-    "src/app/**/*.ts"
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules"
