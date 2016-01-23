@@ -107,7 +107,7 @@ jar {
     dependsOn copyDoc
 }
 
-task stage(dependsOn: [':com.toedter.chatty.client.angular2:gulp_default', 'jar', 'bootRepackage'])
+task stage(dependsOn: [':com.toedter.chatty.client.angular2:gulp_build', 'jar', 'bootRepackage'])
 
 
 
