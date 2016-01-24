@@ -26,15 +26,13 @@ A chat demo that evaluates several technologies (and hopefully shows best practi
 == Requirements
 
 * Java 8 JDK installed
-* Node.js installed
-* Grunt CLI installed (npm install -g grunt-cli)
-* Bower and TSD (TypeScript Definition Manager) don’t have to be
-installed, the build will invoke the grunt contribs for bower and tsd
+* JavaScript tooling like Node.js, Grunt CLI, Bower and TSD (TypeScript Definition Manager) doesn't have to be
+installed manually, it will be installed automatically (and project local) during the Gradle build.
 
 [[getting-started]]
 == Getting Started
 
-* ./gradlew gruntdist build (builds all and runs the integration tests, both Java and TypeScript)
+* ./gradlew build (builds all, both Java and TypeScript)
 * ./gradlew bootrun (starts a Jetty server using port 8080)
 * Open http://localhost:8080 in a web browser
 * Open http://localhost:8080 in another web browser
