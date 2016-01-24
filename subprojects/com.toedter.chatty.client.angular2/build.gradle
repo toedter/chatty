@@ -6,7 +6,7 @@ plugins {
 node {
     version = '4.2.6'
     download = true
-    workDir = file("${project.buildDir}/nodejs")
+    workDir = file("${rootProject.buildDir}/node")
     nodeModulesDir = file("${project.projectDir}")
 }
 
@@ -15,5 +15,15 @@ gulp {
     bufferOutput = true
 }
 
-gulp_build.dependsOn 'npm_install'
+clean{
+    delete "dist"
+}
+
+npm_install.inputs.dir new File(projectDir, "package.json")
+npm_install.outputs.dir new File(projectDir, "node_modules")
+
+gulp_build.inputs.dir new File(projectDir, "src")
+gulp_build.outputs.dir new File(projectDir, "dist")
+
+gulp_build.dependsOn npm_install
 build.dependsOn gulp_build
