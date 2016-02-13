@@ -55,43 +55,34 @@ dependencies {
     testCompile "org.springframework.restdocs:spring-restdocs-mockmvc:$springRestdocsVersion"
 }
 
-ext {
-    bootExplodedDir = 'boot-exploded'
-}
-
-task deleteBootExplodedDir(type: Delete) {
-    delete "${buildDir}/${bootExplodedDir}"
+task deleteDockerDir(type: Delete) {
+    delete "${buildDir}/docker"
 }
 
 task unzipBoot(type: Copy) {
     def zipFile = file("${buildDir}/libs/com.toedter.chatty.server.boot-" + project.version + '.jar')
-    def outputDir = file("${buildDir}/${bootExplodedDir}")
+    def outputDir = file("${buildDir}/docker/app")
 
     from zipTree(zipFile)
     into outputDir
-}
-unzipBoot.dependsOn deleteBootExplodedDir
 
-task copyLibs(type: Copy) {
-    from("${buildDir}/${bootExplodedDir}/lib")
-    into "${buildDir}/docker/lib"
+    def copyDetails = []
+    eachFile { copyDetails << it }
+    doLast {
+        copyDetails.each { FileCopyDetails details ->
+            def target = new File(outputDir, details.path)
+            if(target.exists()) {
+                target.setLastModified(details.lastModified)
+            }
+        }
+    }
 }
-copyLibs.dependsOn unzipBoot
+unzipBoot.dependsOn deleteDockerDir
 
-task copyApp(type: Copy) {
-    from("${buildDir}/${bootExplodedDir}")
-    into "${buildDir}/docker/app"
-    exclude 'lib'
+task moveBootExplodedLib << {
+    ant.move(file:"${buildDir}/docker/app/lib", toFile:"${buildDir}/docker/lib")
 }
-copyApp.dependsOn copyLibs
-
-task createBuildInfoFile << {
-    def buildInfoFile = new File("$buildDir/resources/main/build-info.properties")
-    Properties props = new Properties()
-    props.setProperty('version', project.version.toString())
-    props.setProperty('timestamp', project.buildTimestamp)
-    props.store(buildInfoFile.newWriter(), null)
-}
+moveBootExplodedLib.dependsOn unzipBoot
 
 task createDockerfile << {
     def dockerfile = new File("$buildDir/Dockerfile")
@@ -101,7 +92,15 @@ task createDockerfile << {
     dockerfile << 'CMD /usr/bin/java -Xmx400m -Xms400m -cp /app/ org.springframework.boot.loader.JarLauncher\n'
     dockerfile << 'EXPOSE 8080\n'
 }
-createDockerfile.dependsOn copyApp
+createDockerfile.dependsOn moveBootExplodedLib
+
+task createBuildInfoFile << {
+    def buildInfoFile = new File("$buildDir/resources/main/build-info.properties")
+    Properties props = new Properties()
+    props.setProperty('version', project.version.toString())
+    props.setProperty('timestamp', project.buildTimestamp)
+    props.store(buildInfoFile.newWriter(), null)
+}
 
 test {
     outputs.dir snippetsDir
