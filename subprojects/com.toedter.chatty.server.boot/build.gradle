@@ -89,7 +89,7 @@ task createDockerfile << {
     dockerfile.write 'FROM jeanblanchard/java:8\n'
     dockerfile << 'COPY docker/lib/ /app/lib/\n'
     dockerfile << 'COPY docker/app/ /app/\n'
-    dockerfile << 'CMD /usr/bin/java -Xmx400m -Xms400m -cp /app/ org.springframework.boot.loader.JarLauncher\n'
+    dockerfile << 'CMD java -Xmx400m -Xms400m -cp /app/ org.springframework.boot.loader.JarLauncher\n'
     dockerfile << 'EXPOSE 8080\n'
 }
 createDockerfile.dependsOn moveBootExplodedLib
