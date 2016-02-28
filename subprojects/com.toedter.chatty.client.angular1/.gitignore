@@ -8,4 +8,3 @@ dist
 src/**/*.js
 src/**/*.map
 _SpecRunner.html
-Test Results - karma_conf_js.html

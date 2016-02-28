@@ -4,8 +4,8 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-/// <reference path="../../../typings/jasmine/jasmine.d.ts" />
-/// <reference path='../../../typings/atmosphere/atmosphere.d.ts' />
+/// <reference path="../../../typings/main/ambient/jasmine/jasmine.d.ts" />
+/// <reference path='../../../typings/main/ambient/atmosphere/atmosphere.d.ts' />
 
 declare var freePort: number;
 

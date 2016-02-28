@@ -25,15 +25,15 @@ npm_install.outputs.dir new File(projectDir, "node_modules")
 grunt_bower.inputs.dir new File(projectDir, "bower.json")
 grunt_bower.outputs.dir new File(projectDir, "bower_components")
 
-grunt_tsd.inputs.dir new File(projectDir, "tsd.json")
-grunt_tsd.outputs.dir new File(projectDir, "typings")
+grunt_typings.inputs.dir new File(projectDir, "typings.json")
+grunt_typings.outputs.dir new File(projectDir, "typings")
 
 grunt_dist.inputs.dir new File(projectDir, "src")
 grunt_dist.outputs.dir new File(projectDir, "dist")
 
 installGrunt.dependsOn npmInstall
-grunt_tsd.dependsOn installGrunt
+grunt_typings.dependsOn installGrunt
 grunt_bower.dependsOn installGrunt
-grunt_dist.dependsOn grunt_bower, grunt_tsd
+grunt_dist.dependsOn grunt_bower, grunt_typings
 
 build.dependsOn grunt_dist

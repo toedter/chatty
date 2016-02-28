@@ -4,7 +4,7 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-/// <reference path="../../../../typings/angularjs/angular-resource.d.ts" />
+/// <reference path="../../../../typings/main/ambient/angular-resource/angular-resource.d.ts" />
 
 namespace chatty.model {
     export interface User {

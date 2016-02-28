@@ -151,24 +151,8 @@ module.exports = function (grunt) {
                     dest: '../com.toedter.chatty.server.boot/src/main/resources/static'
                 }
             },
-            tsd: {
-                refresh: {
-                    options: {
-                        // execute a command
-                        command: 'reinstall',
-
-                        //optional: always get from HEAD
-                        latest: false,
-
-                        // specify config file
-                        config: 'tsd.json',
-
-                        // experimental: options to pass to tsd.API
-                        opts: {
-                            // props from tsd.Options
-                        }
-                    }
-                }
+            typings: {
+                install: {}
             },
             bower: {
                 install: {
@@ -187,7 +171,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
-    grunt.loadNpmTasks('grunt-tsd');
+    grunt.loadNpmTasks('grunt-typings');
     grunt.loadNpmTasks('grunt-bower-task');
 
     grunt.registerTask('default', ['typescript:base', 'jasmine', 'jshint', 'dist']);

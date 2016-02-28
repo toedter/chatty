@@ -4,7 +4,7 @@
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
 
-/// <reference path="../../../typings/angularjs/angular.d.ts" />
+/// <reference path="../../../typings/main/ambient/angular/angular.d.ts" />
 
 namespace chatty {
     export var app = angular.module('chatty', ['chatty.factories', 'chatty.controllers', 'chatty.services']);

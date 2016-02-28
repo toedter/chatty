@@ -3,9 +3,9 @@
  * All rights reserved.
  * Licensed under MIT License, see http://toedter.mit-license.org/
  */
-/// <reference path="../../../typings/tsd.d.ts" />
-/// <reference path='../../../typings/atmosphere/atmosphere.d.ts' />
-/// <reference path='../../../typings/jasmine/jasmine.d.ts' />
+/// <reference path="../../../typings/main.d.ts" />
+/// <reference path='../../../typings/main/ambient/atmosphere/atmosphere.d.ts' />
+/// <reference path='../../../typings/main/ambient/jasmine/jasmine.d.ts' />
 
 describe('Functional tests', () => {
 
