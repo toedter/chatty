@@ -10,9 +10,9 @@
 /// <reference path="../services/LogService.ts" />
 /// <reference path="../services/ChatMessageService.ts" />
 /// <reference path="../services/UserService.ts" />
-/// <reference path="../../../../typings/main/ambient/atmosphere/atmosphere.d.ts" />
-/// <reference path="../../../../typings/main/ambient/angular/angular.d.ts" />
-/// <reference path="../../../../typings/main/ambient/jquery/jquery.d.ts" />
+/// <reference path="../../../../typings/main/ambient/atmosphere/index.d.ts" />
+/// <reference path="../../../../typings/main/ambient/angular/index.d.ts" />
+/// <reference path="../../../../typings/main/ambient/jquery/index.d.ts" />
 
 namespace chatty {
     export class MainController {

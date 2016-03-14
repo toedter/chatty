@@ -6,8 +6,8 @@
 
 /// <reference path="../model/User.ts" />
 /// <reference path="../model/ChatMessage.ts" />
-/// <reference path="../../../../typings/main/ambient/angular/angular.d.ts" />
-/// <reference path="../../../../typings/main/ambient/atmosphere/atmosphere.d.ts" />
+/// <reference path="../../../../typings/main/ambient/angular/index.d.ts" />
+/// <reference path="../../../../typings/main/ambient/atmosphere/index.d.ts" />
 
 interface ChattyScope extends ng.IScope {
     userButtonText: string;

@@ -5,7 +5,7 @@
  */
 
 /// <reference path="../chatty.ts" />
-/// <reference path="../../../../typings/main/ambient/angular-resource/angular-resource.d.ts" />
+/// <reference path="../../../../typings/main/ambient/angular-resource/index.d.ts" />
 
 chatty.factories.factory(
     'chatty.apiResource',

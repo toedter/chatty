@@ -1,6 +1,6 @@
-/// <reference path="../../../../typings/main/ambient/jasmine/jasmine.d.ts" />
-/// <reference path="../../../../typings/main/ambient/angular/angular.d.ts" />
-/// <reference path="../../../../typings/main/ambient/angular-mocks/angular-mocks.d.ts" />
+/// <reference path="../../../../typings/main/ambient/jasmine/index.d.ts" />
+/// <reference path="../../../../typings/main/ambient/angular/index.d.ts" />
+/// <reference path="../../../../typings/main/ambient/angular-mocks/index.d.ts" />
 /// <reference path="../../../main/ts/model/User.ts" />
 /// <reference path="../../../main/ts/factories/UserResourceFactory.ts" />
 
