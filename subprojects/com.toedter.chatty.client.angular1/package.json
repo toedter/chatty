@@ -13,10 +13,6 @@
       "url": "http://toedter.mit-license.org/"
     }
   ],
-  "dependencies": {
-    "grunt-typings": "^0.1.3",
-    "typings": "^0.6.8"
-  },
   "devDependencies": {
     "grunt": "0.4.5",
     "grunt-typescript": "0.8.0",
@@ -27,5 +23,7 @@
     "grunt-contrib-jshint": "0.11.3",
     "grunt-contrib-copy": "0.8.1",
     "grunt-bower-task": "0.4.0"
+    "typings": "^0.6.8",
+    "grunt-typings": "^0.1.3"
   }
 }
