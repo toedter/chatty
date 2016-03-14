@@ -23,7 +23,7 @@
     "grunt-contrib-jshint": "0.11.3",
     "grunt-contrib-copy": "0.8.1",
     "grunt-bower-task": "0.4.0",
-    "grunt-typings": "^0.1.4",
-    "typings": "^0.7.8"
+    "grunt-typings": "0.1.4",
+    "typings": "0.7.8"
   }
 }
