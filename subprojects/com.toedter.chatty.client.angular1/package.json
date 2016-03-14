@@ -22,7 +22,7 @@
     "grunt-contrib-uglify": "0.9.2",
     "grunt-contrib-jshint": "0.11.3",
     "grunt-contrib-copy": "0.8.1",
-    "grunt-bower-task": "0.4.0"
+    "grunt-bower-task": "0.4.0",
     "typings": "^0.6.8",
     "grunt-typings": "^0.1.3"
   }
