@@ -1,10 +1,11 @@
 plugins {
-    id "com.moowork.node" version "0.11"
-    id "com.moowork.grunt" version "0.11"
+    id "com.moowork.node" version "0.12"
+    id "com.moowork.grunt" version "0.12"
 }
 
 node {
-    version = '4.2.6'
+    version = '4.4.1'
+    npmVersion = '3.8.3'
     download = true
     workDir = file("${rootProject.buildDir}/node")
     nodeModulesDir = file("${project.projectDir}")
