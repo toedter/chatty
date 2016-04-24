@@ -86,7 +86,7 @@ moveBootExplodedLib.dependsOn unzipBoot
 
 task createDockerfile << {
     def dockerfile = new File("$buildDir/Dockerfile")
-    dockerfile.write 'FROM jeanblanchard/java:8\n'
+    dockerfile.write 'FROM java:openjdk-8-jre-alpine\n'
     dockerfile << 'COPY docker/lib/ /app/lib/\n'
     dockerfile << 'COPY docker/app/ /app/\n'
     dockerfile << 'CMD java -Xmx400m -Xms400m -cp /app/ org.springframework.boot.loader.JarLauncher\n'
