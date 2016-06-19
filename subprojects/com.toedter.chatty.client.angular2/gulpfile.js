@@ -29,8 +29,14 @@ gulp.task('copy:assets', ['clean'], function () {
 // copy dependencies
 gulp.task('copy:libs', ['clean'], function () {
     return gulp.src([
-        'node_modules/@angular/common/bundles/common.umd.js',
         'node_modules/@angular/core/bundles/core.umd.js',
+        'node_modules/@angular/common/bundles/common.umd.js',
+        'node_modules/@angular/compiler/bundles/compiler.umd.js',
+        'node_modules/@angular/http/bundles/http.umd.js',
+        'node_modules/@angular/router/bundles/router.umd.js',
+        'node_modules/@angular/platform-browser/bundles/platform-browser.umd.js',
+        'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+
         'node_modules/systemjs/dist/system.js',
         'node_modules/rxjs/bundles/Rx.js',
         'node_modules/zone.js/dist/zone.js',
