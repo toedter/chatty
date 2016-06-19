@@ -18,12 +18,18 @@
     "gulp-typescript": "^2.10.0"
   },
   "dependencies": {
-    "angular2": "2.0.0-beta.12",
-    "systemjs": "0.19.6",
-    "es6-promise": "^3.0.2",
-    "es6-shim": "^0.35.0",
-    "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.2",
-    "zone.js": "0.6.6"
+    "@angular/http": "2.0.0-rc.2",
+    "@angular/common": "2.0.0-rc.2",
+    "@angular/compiler": "2.0.0-rc.2",
+    "@angular/core": "2.0.0-rc.2",
+    "@angular/platform-browser": "2.0.0-rc.2",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.2",
+    "@angular/platform-server": "2.0.0-rc.2",
+    "@angular/router": "2.0.0-rc.2",
+    "core-js": "^2.4.0",
+    "rxjs": "5.0.0-beta.6",
+    "zone.js": "~0.6.12",
+    "systemjs": "^0.19.31",
+    "reflect-metadata": "0.1.3"
   }
 }

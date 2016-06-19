@@ -1,7 +1,8 @@
-///<reference path="../../node_modules/angular2/typings/browser.d.ts"/>
+///<reference path="../../typings/index.d.ts"/>
 
-import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
+import {Component} from '@angular/core';
+import {ROUTER_DIRECTIVES} from '@angular/router';
+import {Routes, Router} from '@angular/router';
 import {ChatMessagesComponent} from './message/ChatMessagesComponent';
 import {UsersComponent} from './user/UsersComponent';
 
@@ -10,9 +11,15 @@ import {UsersComponent} from './user/UsersComponent';
     templateUrl: 'app/ChattyComponent.html',
     directives: [ROUTER_DIRECTIVES],
 })
-@RouteConfig([
-    {path: '/messages', name: 'Messages', component: ChatMessagesComponent, useAsDefault: true},
-    {path: '/users', name: 'Users', component: UsersComponent},
+@Routes([
+    {path: '/messages', component: ChatMessagesComponent},
+    {path: '/users', component: UsersComponent},
 ])
 export class ChattyComponent {
+    constructor(private router: Router) {
+    }
+
+    ngOnInit() {
+        this.router.navigate(['/users']);
+    }
 }

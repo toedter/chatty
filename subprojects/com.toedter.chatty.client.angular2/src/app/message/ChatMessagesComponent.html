@@ -9,7 +9,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="#chatMessage of chatMessages">
+        <tr *ngFor="let chatMessage of chatMessages">
             <td style="text-align: left; width:20%">{{chatMessage.timeStamp}}</td>
             <td style="text-align: left; width:10%">{{chatMessage.author.id}}</td>
             <td style="text-align: left; width:70%">{{chatMessage.text}}</td>

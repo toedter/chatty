@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {User} from './User';
 import {UsersService} from './UsersService';
 
@@ -6,7 +6,7 @@ import {UsersService} from './UsersService';
 @Component({
     selector: 'chat-messages',
     templateUrl: 'app/user/UsersComponent.html',
-    viewBindings: [UsersService],
+    viewProviders: [UsersService],
 })
 export class UsersComponent {
     private users: User[];

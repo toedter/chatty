@@ -9,7 +9,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="#user of users">
+        <tr *ngFor="let user of users">
             <td style="text-align: left; width:10%">{{user.id}}</td>
             <td style="text-align: left; width:10%">{{user.fullName}}</td>
             <td style="text-align: left; width:80%">{{user.email}}</td>

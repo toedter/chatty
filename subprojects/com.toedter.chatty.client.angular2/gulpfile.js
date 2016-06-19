@@ -29,13 +29,13 @@ gulp.task('copy:assets', ['clean'], function () {
 // copy dependencies
 gulp.task('copy:libs', ['clean'], function () {
     return gulp.src([
-            'node_modules/angular2/bundles/angular2-polyfills.js',
-            'node_modules/systemjs/dist/system.src.js',
-            'node_modules/rxjs/bundles/Rx.js',
-            'node_modules/angular2/bundles/angular2.dev.js',
-            'node_modules/angular2/bundles/router.dev.js',
-            'node_modules/angular2/bundles/http.dev.js'
-        ])
+        'node_modules/@angular/common/bundles/common.umd.js',
+        'node_modules/@angular/core/bundles/core.umd.js',
+        'node_modules/systemjs/dist/system.js',
+        'node_modules/rxjs/bundles/Rx.js',
+        'node_modules/zone.js/dist/zone.js',
+        'node_modules/reflect-metadata/Reflect.js'
+    ])
         .pipe(gulp.dest('dist/lib'))
 });
 
@@ -70,9 +70,10 @@ gulp.task('serve', ['build'], function () {
 // replace link to libs in index.html
 gulp.task('replace:index', ['clean'], function () {
     gulp.src(['src/index.html'])
-        .pipe(replace('../node_modules/angular2/bundles', 'lib'))
         .pipe(replace('../node_modules/systemjs/dist', 'lib'))
         .pipe(replace('../node_modules/rxjs/bundles', 'lib'))
+        .pipe(replace('../node_modules/reflect-metadata', 'lib'))
+        .pipe(replace('../node_modules/zone.js/dist', 'lib'))
         .pipe(gulp.dest('dist'));
 });
 
