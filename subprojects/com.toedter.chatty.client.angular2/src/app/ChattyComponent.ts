@@ -2,19 +2,13 @@
 
 import {Component} from '@angular/core';
 import {ROUTER_DIRECTIVES} from '@angular/router';
-import {Routes, Router} from '@angular/router';
-import {ChatMessagesComponent} from './message/ChatMessagesComponent';
-import {UsersComponent} from './user/UsersComponent';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'chatty',
     templateUrl: 'app/ChattyComponent.html',
     directives: [ROUTER_DIRECTIVES],
 })
-@Routes([
-    {path: '/messages', component: ChatMessagesComponent},
-    {path: '/users', component: UsersComponent},
-])
 export class ChattyComponent {
     constructor(private router: Router) {
     }

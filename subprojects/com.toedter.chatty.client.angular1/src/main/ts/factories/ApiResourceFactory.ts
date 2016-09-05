@@ -10,7 +10,12 @@
 chatty.factories.factory(
     'chatty.apiResource',
     ['$resource', ($resource: ng.resource.IResourceService): ng.resource.IResourceClass<ng.resource.IResource<any>> => {
-        let apiRoot: ng.resource.IResourceClass<ng.resource.IResource<any>> = $resource(chatty.testServer + '/api');
+        let apiRoot: ng.resource.IResourceClass<ng.resource.IResource<any>> = $resource(chatty.testServer + '/api/', {}, {
+            get: {
+                method: 'GET',
+                isArray: false,
+                headers: {'Accept': 'application/hal+json'}
+            }});
 
         return apiRoot;
-    }, ] );
+    },]);

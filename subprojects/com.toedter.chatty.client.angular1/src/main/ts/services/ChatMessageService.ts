@@ -19,7 +19,7 @@ namespace chatty {
 
         getAllChatMessages(callback: (messages: chatty.model.ChatMessageResource[]) => void) {
             this.apiResource.get((api: any) => {
-                let chatMessagesResource: chatty.model.ChatMessagesResource = this.getMessagesResource(api);
+                let chatMessagesResource: chatty.model.ChatMessagesResource = this.getMessagesResource(api, true);
                 if (chatMessagesResource) {
                     chatMessagesResource.get((result: any) => {
                         let messages: chatty.model.ChatMessageResource[] = [];
@@ -34,7 +34,7 @@ namespace chatty {
 
         postMessage(user: chatty.model.UserResource, message: string, userLocation: string): void {
             this.apiResource.get((api: any) => {
-                let chatMessagesResource: chatty.model.ChatMessagesResource = this.getMessagesResource(api);
+                let chatMessagesResource: chatty.model.ChatMessagesResource = this.getMessagesResource(api, false);
                 if (chatMessagesResource) {
                     let newChatMessage: any;
                     if (message.length > 100) {
@@ -70,7 +70,7 @@ namespace chatty {
             });
         }
 
-        private getMessagesResource(apiResource: any): chatty.model.ChatMessagesResource {
+        private getMessagesResource(apiResource: any, withProjektion: boolean): chatty.model.ChatMessagesResource {
             if (apiResource.hasOwnProperty('_links') && apiResource._links.hasOwnProperty('chatty:messages')) {
                 let href: string = apiResource._links['chatty:messages'].href;
                 // remove template parameters
@@ -80,11 +80,15 @@ namespace chatty {
                     method: 'POST',
                     isArray: false,
                     params: {id: ''},
-                    headers: {'Content-Type': 'application/json'},
+                    headers: {'Accept': 'application/hal+json','Content-Type': 'application/json'}
                 };
 
+                if (withProjektion) {
+                    href = href + '?projection=excerpt';
+                }
+
                 const chatMessagesResource: chatty.model.ChatMessagesResource =
-                    <chatty.model.ChatMessagesResource> this.$resource(href + '?projection=excerpt' + '/:id', {id: '@id'}, {
+                    <chatty.model.ChatMessagesResource> this.$resource(href + '/:id', {id: '@id'}, {
                         save: saveAction
                     });
                 return chatMessagesResource;

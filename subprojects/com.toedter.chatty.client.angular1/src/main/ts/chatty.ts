@@ -20,4 +20,5 @@ namespace chatty {
     if (!document.location.hostname || document.location.hostname === 'localhost') {
         chatty.testServer = 'http://localhost:8080';
     }
+    console.log('chatty test server: ' + chatty.testServer);
 }

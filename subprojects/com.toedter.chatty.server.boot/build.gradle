@@ -43,6 +43,8 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "org.springframework.boot:spring-boot-devtools"
     compile "org.springframework.data:spring-data-rest-hal-browser"
+    compile "org.springframework.hateoas:spring-hateoas:0.21.0.BUILD-SNAPSHOT"
+
     compile "org.projectlombok:lombok:1.16.6"
     compile "org.atmosphere:atmosphere-annotations:2.4.0"
     compile "org.atmosphere:wasync:2.1.2"
