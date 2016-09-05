@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.restdocs.JUnitRestDocumentation;
 import org.springframework.restdocs.RestDocumentation;
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -44,9 +45,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringApplicationConfiguration(classes = Chatty.class)
 @WebAppConfiguration
 public class ApiDocumentation {
-
     @Rule
-    public final RestDocumentation restDocumentation = new RestDocumentation("build/generated-snippets");
+    public final JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("build/generated-snippets");
 
     private RestDocumentationResultHandler document;
 
@@ -78,11 +78,12 @@ public class ApiDocumentation {
 
     @Test
     public void headersExample() throws Exception {
-        this.document.snippets(responseHeaders(
-                headerWithName("Content-Type").description("The Content-Type of the payload, e.g. `application/hal+json`")));
-
-        this.mockMvc.perform(get("/api"))
-                .andExpect(status().isOk());
+        this.mockMvc.perform(get("/api")
+                .header("Accept", MediaTypes.HAL_JSON))
+                .andExpect(status().isOk())
+                .andDo(document("headers-example",
+                        responseHeaders(
+                                headerWithName("Content-Type").description("The Content-Type of the payload, e.g. `application/hal+json`"))));
     }
 
     @Test
@@ -110,19 +111,19 @@ public class ApiDocumentation {
 
     @Test
     public void indexExample() throws Exception {
-        this.document.snippets(
-                links(
-                        linkWithRel("chatty:users").description("The <<resources-users,Users resource>>"),
-                        linkWithRel("chatty:messages").description("The <<resources-messages,Messages resource>>"),
-                        linkWithRel("chatty:buildinfo").description("The <<resource-build-info,BuildInfo resource>>"),
-                        linkWithRel("curies").description("The Curies for documentation"),
-                        linkWithRel("profile").description("The profiles of the REST resources")
-                ),
-                responseFields(
-                        fieldWithPath("_links").description("<<resources-index-links,Links>> to other resources")));
-
-        this.mockMvc.perform(get("/api"))
-                .andExpect(status().isOk());
+        this.mockMvc.perform(get("/api")
+                .header("Accept", MediaTypes.HAL_JSON))
+                .andExpect(status().isOk())
+                .andDo(document("index-example",
+                        links(
+                                linkWithRel("chatty:users").description("The <<resources-users,Users resource>>"),
+                                linkWithRel("chatty:messages").description("The <<resources-messages,Messages resource>>"),
+                                linkWithRel("chatty:buildinfo").description("The <<resource-build-info,BuildInfo resource>>"),
+                                linkWithRel("curies").description("The Curies for documentation"),
+                                linkWithRel("profile").description("The profiles of the REST resources")
+                        ),
+                        responseFields(
+                                fieldWithPath("_links").description("<<resources-index-links,Links>> to other resources"))));
     }
 
     @Test

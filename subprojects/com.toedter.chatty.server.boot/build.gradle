@@ -3,6 +3,7 @@ buildscript {
         mavenCentral()
         maven { url "http://repo.spring.io/snapshot" }
         maven { url "http://repo.spring.io/milestone" }
+        maven { url 'https://repo.spring.io/libs-snapshot' }
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
@@ -23,6 +24,7 @@ repositories {
     mavenCentral()
     maven { url "http://repo.spring.io/snapshot" }
     maven { url "http://repo.spring.io/milestone" }
+    maven { url 'https://repo.spring.io/libs-snapshot' }
 }
 
 apply plugin: 'eclipse'
@@ -73,7 +75,7 @@ task unzipBoot(type: Copy) {
     doLast {
         copyDetails.each { FileCopyDetails details ->
             def target = new File(outputDir, details.path)
-            if(target.exists()) {
+            if (target.exists()) {
                 target.setLastModified(details.lastModified)
             }
         }
@@ -82,7 +84,7 @@ task unzipBoot(type: Copy) {
 unzipBoot.dependsOn deleteDockerDir
 
 task moveBootExplodedLib << {
-    ant.move(file:"${buildDir}/docker/app/lib", toFile:"${buildDir}/docker/lib")
+    ant.move(file: "${buildDir}/docker/app/lib", toFile: "${buildDir}/docker/lib")
 }
 moveBootExplodedLib.dependsOn unzipBoot
 
