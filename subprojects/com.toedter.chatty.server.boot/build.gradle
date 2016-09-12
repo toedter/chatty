@@ -84,14 +84,14 @@ task unzipBoot(type: Copy) {
 unzipBoot.dependsOn deleteDockerDir
 
 task moveBootExplodedLib << {
-    ant.move(file: "${buildDir}/docker/app/lib", toFile: "${buildDir}/docker/lib")
+    ant.move(file: "${buildDir}/docker/app/BOOT-INF/lib", toFile: "${buildDir}/docker/lib")
 }
 moveBootExplodedLib.dependsOn unzipBoot
 
 task createDockerfile << {
     def dockerfile = new File("$buildDir/Dockerfile")
     dockerfile.write 'FROM java:openjdk-8-jre-alpine\n'
-    dockerfile << 'COPY docker/lib/ /app/lib/\n'
+    dockerfile << 'COPY docker/lib/ /app/BOOT-INF/lib/\n'
     dockerfile << 'COPY docker/app/ /app/\n'
     dockerfile << 'CMD java -Xmx400m -Xms400m -cp /app/ org.springframework.boot.loader.JarLauncher\n'
     dockerfile << 'EXPOSE 8080\n'
