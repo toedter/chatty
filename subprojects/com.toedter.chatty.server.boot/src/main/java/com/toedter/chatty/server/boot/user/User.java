@@ -21,7 +21,7 @@ import java.util.List;
 @Data
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(suppressConstructorProperties = true)
 public class User {
     @Id
     private String id;
