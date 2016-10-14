@@ -21,4 +21,6 @@ npm_run_build.outputs.dir new File(projectDir, "dist")
 task prepareJS {}
 prepareJS.dependsOn npm_install
 
+build.dependsOn npm_run_build
+
 
