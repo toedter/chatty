@@ -126,7 +126,16 @@ task copyWebApp(type: Copy) {
 // copyWebApp.dependsOn ':com.toedter.chatty.client.angular1:gruntDist'
 
 task copyAngular2Client(type: Copy) {
-    from project(':com.toedter.chatty.client.angular2').file('dist')
+    from project(':com.toedter.chatty.client.angular2').file('dist') {
+        include '**/*.js'
+    }
+    from project(':com.toedter.chatty.client.angular2').file('src/main/webapp') {
+        include '**/*.css'
+        include '**/*.html'
+    }
+
+    includeEmptyDirs = false
+
     into "$buildDir/resources/main/static/ng2"
 }
 // copyAngular2Client.dependsOn ':com.toedter.chatty.client.angular2:gulp_default'
