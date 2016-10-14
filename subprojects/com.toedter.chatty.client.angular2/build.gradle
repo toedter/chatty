@@ -1,17 +1,9 @@
-apply plugin: 'java'
-apply plugin: 'spring-boot'
 apply plugin: 'com.moowork.node'
 
 node {
     download = false
     workDir = file("${rootProject.buildDir}/node")
     nodeModulesDir = file("${project.projectDir}")
-}
-
-repositories {
-    mavenCentral()
-    maven { url "http://repo.spring.io/snapshot" }
-    maven { url "http://repo.spring.io/milestone" }
 }
 
 clean{
@@ -21,35 +13,7 @@ clean{
 npm_run_build.inputs.dir new File(projectDir, "src")
 npm_run_build.outputs.dir new File(projectDir, "dist")
 
-task copyWebApp(type: Copy) {
-    from('dist') {
-        include '**/*.js'
-    }
-    from('src/main/webapp') {
-        include '**/*.css'
-        include '**/*.html'
-    }
-    into 'build/resources/main/static'
-
-    includeEmptyDirs = false
-}
-
 task prepareJS {}
 prepareJS.dependsOn npm_install
 
-copyWebApp.dependsOn npm_run_build
-build.dependsOn copyWebApp
-
-dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile "org.springframework.boot:spring-boot-starter-data-jpa"
-    compile "org.springframework.boot:spring-boot-starter-data-rest"
-    compile "org.springframework.data:spring-data-rest-hal-browser"
-    compile "org.projectlombok:lombok:1.16.6"
-    compile "com.jayway.jsonpath:json-path"
-
-    runtime 'org.hsqldb:hsqldb:2.3.3'
-
-    testCompile("org.springframework.boot:spring-boot-starter-test")
-}
 
