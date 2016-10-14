@@ -1,20 +1,19 @@
 {
-  "version": "1.7.3",
-  "compileOnSave": false,
   "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "outDir": "dist",
+    "rootDir": ".",
+    "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es5",
-    "module": "system",
     "moduleResolution": "node",
-    "removeComments": true,
-    "sourceMap": true,
-    "noImplicitAny": true
+    "types": ["node", "es6-promise", "es6-collections", "jasmine"]
   },
-  "filesGlob": [
-    "src/**/*.ts"
-  ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "atom": { "rewriteTsconfig": false }
 }
