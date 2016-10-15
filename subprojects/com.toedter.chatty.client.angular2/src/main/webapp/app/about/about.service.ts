@@ -16,10 +16,7 @@ export class AboutService {
 
         let observable: Observable<any> =
             this.http.get(uri)
-                .map((response: Response) => {
-                    console.log('response: ' + response.json().version);
-                    return response.json();
-                });
+                .map((response: Response) => response.json());
 
         return observable;
     }

@@ -130,8 +130,8 @@ task copyAngular2Client(type: Copy) {
         include '**/*.js'
     }
     from ('../com.toedter.chatty.client.angular2/src/main/webapp') {
-        include '**/*.css'
-        include '**/*.html'
+        include '*.css'
+        include '*.html'
     }
 
     includeEmptyDirs = false

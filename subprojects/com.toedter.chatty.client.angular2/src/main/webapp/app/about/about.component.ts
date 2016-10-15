@@ -16,7 +16,6 @@ export class AboutComponent {
     }
 
     ngOnInit() {
-        console.log("about init");
         this.aboutService.getAbout()
             .subscribe((about: About) => {
                 this.timestamp = about.timeStamp;
