@@ -30,6 +30,16 @@ public class Chatty {
     private static Logger logger = LoggerFactory.getLogger(Chatty.class);
 
     public static void main(String[] args) throws Exception {
+
+        // when deployed as a docker container to heroku
+        // heroku sets the PORT environment variable
+        // The DYNO environment variable is just to make sure to run in an heroku environment
+        String ENV_PORT = System.getenv().get("PORT");
+        String ENV_DYNO = System.getenv().get("DYNO");
+        if(ENV_PORT != null && ENV_DYNO != null) {
+            System.getProperties().put("server.port", ENV_PORT);
+        }
+
         SpringApplication.run(Chatty.class, args);
     }
 
