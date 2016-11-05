@@ -10,13 +10,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.restdocs.JUnitRestDocumentation;
-import org.springframework.restdocs.RestDocumentation;
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -41,14 +39,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Chatty.class)
-@WebAppConfiguration
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class ApiDocumentation {
     @Rule
     public final JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("build/generated-snippets");
 
-    private RestDocumentationResultHandler document;
+    private RestDocumentationResultHandler documentationHandler;
 
     @Autowired
     private UserRepository userRepository;
@@ -66,13 +63,13 @@ public class ApiDocumentation {
 
     @Before
     public void setUp() {
-        this.document = document("{method-name}",
+        this.documentationHandler = document("{method-name}",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()));
 
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
                 .apply(documentationConfiguration(this.restDocumentation))
-                .alwaysDo(this.document)
+                .alwaysDo(this.documentationHandler)
                 .build();
     }
 
@@ -81,20 +78,13 @@ public class ApiDocumentation {
         this.mockMvc.perform(get("/api")
                 .header("Accept", MediaTypes.HAL_JSON))
                 .andExpect(status().isOk())
-                .andDo(document("headers-example",
+                .andDo(this.documentationHandler.document(
                         responseHeaders(
                                 headerWithName("Content-Type").description("The Content-Type of the payload, e.g. `application/hal+json`"))));
     }
 
     @Test
     public void errorExample() throws Exception {
-        this.document.snippets(responseFields(
-                fieldWithPath("error").description("The HTTP error that occurred, e.g. `Bad Request`"),
-                fieldWithPath("message").description("A description of the cause of the error"),
-                fieldWithPath("path").description("The path to which the request was made"),
-                fieldWithPath("status").description("The HTTP status code, e.g. `400`"),
-                fieldWithPath("timestamp").description("The time, in milliseconds, at which the error occurred")));
-
         this.mockMvc
                 .perform(get("/error")
                         .requestAttr(RequestDispatcher.ERROR_STATUS_CODE, 400)
@@ -106,7 +96,14 @@ public class ApiDocumentation {
                 .andExpect(jsonPath("error", is("Bad Request")))
                 .andExpect(jsonPath("timestamp", is(notNullValue())))
                 .andExpect(jsonPath("status", is(400)))
-                .andExpect(jsonPath("path", is(notNullValue())));
+                .andExpect(jsonPath("path", is(notNullValue())))
+                .andDo(this.documentationHandler.document(
+                        responseFields(
+                                fieldWithPath("error").description("The HTTP error that occurred, e.g. `Bad Request`"),
+                                fieldWithPath("message").description("A description of the cause of the error"),
+                                fieldWithPath("path").description("The path to which the request was made"),
+                                fieldWithPath("status").description("The HTTP status code, e.g. `400`"),
+                                fieldWithPath("timestamp").description("The time, in milliseconds, at which the error occurred"))));
     }
 
     @Test
@@ -114,7 +111,7 @@ public class ApiDocumentation {
         this.mockMvc.perform(get("/api")
                 .header("Accept", MediaTypes.HAL_JSON))
                 .andExpect(status().isOk())
-                .andDo(document("index-example",
+                .andDo(this.documentationHandler.document(
                         links(
                                 linkWithRel("chatty:users").description("The <<resources-users,Users resource>>"),
                                 linkWithRel("chatty:messages").description("The <<resources-messages,Messages resource>>"),
@@ -133,20 +130,19 @@ public class ApiDocumentation {
         createUser("user_1", "Kai Toedter", "kai@toedter.com");
         createUser("user_2", "John Doe", "john@doe.com");
 
-        this.document.snippets(
-                links(
-                        linkWithRel("self").description("The <<resources-users,Users resource>>"),
-                        linkWithRel("profile").description("The profile describes the data structure of this resource"),
-                        linkWithRel("curies").description("Curies are used for online documentation")
-                ),
-                responseFields(
-                        fieldWithPath("_embedded.chatty:users").description("An array of <<resources-user, User resources>>"),
-                        fieldWithPath("_links").description("<<resources-index-links,Links>> to other resources"),
-                        fieldWithPath("page").description("The pagination information")
-                ));
-
         this.mockMvc.perform(get("/api/users"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andDo(this.documentationHandler.document(
+                        links(
+                                linkWithRel("self").description("The <<resources-users,Users resource>>"),
+                                linkWithRel("profile").description("The profile describes the data structure of this resource"),
+                                linkWithRel("curies").description("Curies are used for online documentation")
+                        ),
+                        responseFields(
+                                fieldWithPath("_embedded.chatty:users").description("An array of <<resources-user, User resources>>"),
+                                fieldWithPath("_links").description("<<resources-index-links,Links>> to other resources"),
+                                fieldWithPath("page").description("The pagination information")
+                        )));
     }
 
     @Test
@@ -160,7 +156,7 @@ public class ApiDocumentation {
                 post("/api/users").contentType(MediaTypes.HAL_JSON).content(
                         this.objectMapper.writeValueAsString(user))).andExpect(
                 status().isCreated())
-                .andDo(document("users-create-example",
+                .andDo(this.documentationHandler.document(
                         requestFields(
                                 fieldWithPath("id").description("The id of the user. Must be unique."),
                                 fieldWithPath("fullName").description("The full name of the user"),
@@ -176,20 +172,19 @@ public class ApiDocumentation {
         createChatMessage("Hello!", user);
         createChatMessage("How are you today?", user);
 
-        this.document.snippets(
-                links(
-                        linkWithRel("self").description("The <<resources-messages,Messages resource>>"),
-                        linkWithRel("profile").description("The profile describes the data structure of this resource"),
-                        linkWithRel("curies").description("Curies are used for online documentation")
-                ),
-                responseFields(
-                        fieldWithPath("_embedded.chatty:messages").description("An array of <<resources-message, Message resources>>"),
-                        fieldWithPath("_links").description("<<resources-index-links,Links>> to other resources"),
-                        fieldWithPath("page").description("The pagination information")
-                ));
-
         this.mockMvc.perform(get("/api/messages"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andDo(this.documentationHandler.document(
+                        links(
+                                linkWithRel("self").description("The <<resources-messages,Messages resource>>"),
+                                linkWithRel("profile").description("The profile describes the data structure of this resource"),
+                                linkWithRel("curies").description("Curies are used for online documentation")
+                        ),
+                        responseFields(
+                                fieldWithPath("_embedded.chatty:messages").description("An array of <<resources-message, Message resources>>"),
+                                fieldWithPath("_links").description("<<resources-index-links,Links>> to other resources"),
+                                fieldWithPath("page").description("The pagination information")
+                        )));
     }
 
     @Test
@@ -214,7 +209,7 @@ public class ApiDocumentation {
                 post("/api/messages").contentType(MediaTypes.HAL_JSON).content(
                         this.objectMapper.writeValueAsString(chatMessage))).andExpect(
                 status().isCreated())
-                .andDo(document("messages-create-example",
+                .andDo(this.documentationHandler.document(
                         requestFields(
                                 fieldWithPath("text").description("The text of the chat message"),
                                 fieldWithPath("author").description("The author of the chat message. This must be the URL to an existing user resource."))));
@@ -222,15 +217,14 @@ public class ApiDocumentation {
 
     @Test
     public void buildInfoGetExample() throws Exception {
-        this.document.snippets(
-                responseFields(
-                        fieldWithPath("version").description("The version of this build"),
-                        fieldWithPath("timeStamp").description("The creation timestamp of this build"),
-                        fieldWithPath("_links.self").description("The link to this resource")
-                ));
-
         this.mockMvc.perform(get("/api/buildinfo"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andDo(this.documentationHandler.document(
+                        responseFields(
+                                fieldWithPath("version").description("The version of this build"),
+                                fieldWithPath("timeStamp").description("The creation timestamp of this build"),
+                                fieldWithPath("_links.self").description("The link to this resource")
+                        )));
     }
 
     private User createUser(String id, String fullName, String email) {
