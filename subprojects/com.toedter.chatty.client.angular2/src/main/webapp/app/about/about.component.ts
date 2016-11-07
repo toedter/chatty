@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {About} from "./about";
 import {AboutService} from "./about.service";
 
@@ -8,7 +8,7 @@ import {AboutService} from "./about.service";
     styleUrls: ['about.component.css'],
     providers: [AboutService]
 })
-export class AboutComponent {
+export class AboutComponent implements OnInit{
     private version: string;
     private timestamp: string;
 
