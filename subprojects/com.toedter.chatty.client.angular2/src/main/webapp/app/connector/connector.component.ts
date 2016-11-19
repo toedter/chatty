@@ -24,6 +24,9 @@ export class ConnectorComponent implements OnInit {
 
     constructor(private usersService: UserService, private chatMessagesService: ChatMessagesService, private connectorService: ConnectorService) {
         this.user = new User('','','');
+
+        // for testing
+        // this.user = new User('kai','Kai Tödter','kai@toedter.com');
     }
 
     ngOnInit() {
