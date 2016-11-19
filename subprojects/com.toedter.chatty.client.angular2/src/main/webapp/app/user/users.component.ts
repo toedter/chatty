@@ -1,17 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from './user';
-import {UsersService} from './users.service';
+import {UserService} from './user.service';
 
 
 @Component({
     selector: 'chat-messages',
-    templateUrl: 'users.component.html',
-    providers: [UsersService],
+    templateUrl: 'users.component.html'
 })
 export class UsersComponent implements OnInit{
     private users: User[];
 
-    constructor(private usersService: UsersService) {
+    constructor(private usersService: UserService) {
     }
 
     ngOnInit() {

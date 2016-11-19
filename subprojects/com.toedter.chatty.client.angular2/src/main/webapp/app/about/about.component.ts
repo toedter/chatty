@@ -5,8 +5,7 @@ import {AboutService} from "./about.service";
 @Component({
     selector: 'about',
     templateUrl: 'about.component.html',
-    styleUrls: ['about.component.css'],
-    providers: [AboutService]
+    styleUrls: ['about.component.css']
 })
 export class AboutComponent implements OnInit{
     private version: string;

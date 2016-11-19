@@ -1,0 +1,28 @@
+<br>
+<br>
+<div class="container">
+    <form class="form-inline" (ngSubmit)="submitConnection()">
+        <div class="form-group">
+            <input style="width:150px" type="text" class="form-control" [(ngModel)]="user.id" name="userId"
+                   placeholder="Enter ID" maxlength="50" [disabled]="isConnected">
+            <input style="width:150px" type="text" class="form-control" [(ngModel)]="user.email" name="userEmail"
+                   placeholder="Enter email" maxlength="50" [disabled]="isConnected">
+            <input style="width:150px" type="text" class="form-control" [(ngModel)]="user.fullName" name="userFullName"
+                   placeholder="Enter full name" maxlength="50" [disabled]="isConnected">
+            <button style="width:100px" id="connectButton" type="submit" class="btn btn-info">{{connectButtonText}}
+            </button>
+        </div>
+    </form>
+    <br>
+    <form class="form-inline" (ngSubmit)="sendChatMessage()">
+        <div class="form-group">
+            <input style="width:458px" class="form-control" [(ngModel)]="chatMessageText" name="xxx"
+                   [disabled]="!isConnected" maxlength="100" placeholder="Enter chat message">
+            <button style="width:100px" type="submit" [disabled]="!isConnected" class="btn btn-success">Send
+            </button>
+            <br>
+            <br>
+            <div id="status" class="alert {{connectionStateType}}">{{connectionState}}</div>
+        </div>
+    </form>
+</div>
