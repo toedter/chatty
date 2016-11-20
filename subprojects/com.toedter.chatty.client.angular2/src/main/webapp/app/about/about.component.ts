@@ -12,6 +12,7 @@ export class AboutComponent implements OnInit{
     private timestamp: string;
 
     constructor(private aboutService: AboutService) {
+        console.log('AboutComponent constructor');
     }
 
     ngOnInit() {

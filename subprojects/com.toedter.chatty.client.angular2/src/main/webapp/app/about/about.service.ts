@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 @Injectable()
 export class AboutService {
     constructor(private http: Http) {
+        console.log('AboutService constructor');
     }
 
     public getAbout(): Observable<any> {
