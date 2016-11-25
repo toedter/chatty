@@ -1,16 +1,18 @@
 import {Injectable} from "@angular/core";
 import {Subject} from "rxjs";
+import {isContext} from "vm";
 
 @Injectable()
 export class ConnectorService {
+    private connected: boolean;
     private subject: Subject<any>;
     private socket: Atmosphere.Atmosphere;
     private request: Atmosphere.Request;
     private subsocket: Atmosphere.Request;
 
     constructor() {
+        this.connected = false;
         this.subject = new Subject();
-        let localSubject: Subject<any> = this.subject;
 
         let serverURL: string = '';
         if (!document.location.hostname || document.location.hostname === 'localhost') {
@@ -27,13 +29,13 @@ export class ConnectorService {
             fallbackTransport: 'long-polling',
         };
 
-        request.onOpen = function (response?: Atmosphere.Response) {
+        request.onOpen = (response?: Atmosphere.Response) => {
             const alert: string = 'Connected to server using: ' + response.transport;
             console.log(alert);
-            // wait for the socket to be opened, then push a message using http post
+            this.connected = true;
         };
 
-        request.onMessage = function (response: Atmosphere.Response) {
+        request.onMessage = (response: Atmosphere.Response) => {
             let message: string = response.responseBody;
             console.log('Atmosphere got message: ' + message);
             let index = message.indexOf('ERROR');
@@ -45,14 +47,15 @@ export class ConnectorService {
 
             if (messageObject.hasOwnProperty('command')) {
                 if (messageObject.command === 'reloadChatMessages') {
-                    localSubject.next();
+                    this.subject.next();
                 }
             }
         };
 
-        request.onClose = function (response?: Atmosphere.Response) {
+        request.onClose = (response?: Atmosphere.Response) => {
             const alert: string = 'Atmosphere socket closed';
             console.log(alert);
+            this.connected = false;
         };
 
         request.onError = function (response?: Atmosphere.Response) {
@@ -66,10 +69,16 @@ export class ConnectorService {
     }
 
     public closeConnection() {
-        this.subsocket.close();
+        if (this.subsocket) {
+            this.subsocket.close();
+        }
     }
 
     public subscribeForReloadChatMessages(callback: () => void) {
         this.subject.subscribe(callback);
+    }
+
+    public isConnected(): boolean {
+        return this.connected;
     }
 }

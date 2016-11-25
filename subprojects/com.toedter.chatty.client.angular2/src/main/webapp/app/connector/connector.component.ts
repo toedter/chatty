@@ -22,33 +22,50 @@ export class ConnectorComponent implements OnInit {
     private connectionStateType: string = 'alert-info';
     private chatMessageText: string = 'hello';
 
-    constructor(private usersService: UserService, private chatMessagesService: ChatMessagesService, private connectorService: ConnectorService) {
-        this.user = new User('','','');
-        console.log('ConnectorComponent constructor');
-
-        // for testing
-        // this.user = new User('kai','Kai Tödter','kai@toedter.com');
+    constructor(
+        private usersService: UserService,
+        private chatMessagesService: ChatMessagesService,
+        private connectorService: ConnectorService) {
     }
 
     ngOnInit() {
+        this.user = this.usersService.getCurrentUser();
+        if(this.connectorService.isConnected()) {
+            this.setConnectedState()
+        } else {
+            this.setDisconnectedState();
+        }
     }
 
-    submitConnection() {
+    public submitConnection() {
         if (!this.isConnected) {
             this.usersService.createUser(this.user)
                 .subscribe((user: User) => this.connect(user),
                     error => this.connectionState = 'Cannot create User');
         } else {
             let userIdToDelete = this.user.id;
-            this.usersService.deleteUser(userIdToDelete)
+            this.usersService.deleteUserById(userIdToDelete)
                 .subscribe((state: number) => this.disconnect(),
                     error => this.connectionState = 'Cannot delete User');
         }
     }
 
+    public sendChatMessage() {
+        // this is a hack, getting the HAL structure from the backend service
+        // which is not exposed in the User class
+        let userSelfURI = (<any>this.user)._links.self.href;
+        this.chatMessagesService.sendChatMessage(this.chatMessageText, userSelfURI)
+            .subscribe((chatMessage: ChatMessage) => console.log("connector component: sent chat message: " + chatMessage.text),
+            error => this.connectionState = 'Could not send chat message');
+    }
+
     private connect(user: User) {
         this.user = user;
         this.connectorService.subscribe();
+        this.setConnectedState();
+    }
+
+    private setConnectedState() {
         this.isConnected = true;
         this.connectButtonText = ConnectorComponent.DISCONNECT;
         this.connectionState = ConnectorComponent.CONNECTED;
@@ -57,18 +74,13 @@ export class ConnectorComponent implements OnInit {
 
     private disconnect() {
         this.connectorService.closeConnection();
+        this.setDisconnectedState();
+    }
+
+    private setDisconnectedState() {
         this.isConnected = false;
         this.connectButtonText = ConnectorComponent.CONNECT;
         this.connectionState = ConnectorComponent.NOT_CONNECTED;
         this.connectionStateType = 'alert-info'
-    }
-
-    sendChatMessage() {
-        // this is a hack, getting the HAL structure from the backend service
-        // which is not exposed in the User class
-        let userSelfURI = (<any>this.user)._links.self.href;
-        this.chatMessagesService.sendChatMessage(this.chatMessageText, userSelfURI)
-            .subscribe((chatMessage: ChatMessage) => console.log("connector component: sent chat message: " + chatMessage.text),
-            error => this.connectionState = 'Could not send chat message');
     }
 }
