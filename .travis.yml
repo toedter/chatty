@@ -8,6 +8,8 @@ jdk:
 services:
   - docker
 
+install: true
+
 script:
   - ./gradlew build
   - cd subprojects/com.toedter.chatty.server.boot
