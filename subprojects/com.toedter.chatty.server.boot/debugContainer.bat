@@ -1,0 +1,1 @@
+docker run -p 8080:8080 -p 8000:8000 -e CHATTY_JAVA_ARGS=-agentlib:jdwp=transport=dt_socket,server=y,address=8000,suspend=n chatty

@@ -138,7 +138,7 @@ that this is only a test installment and will be reset periodically.
 
 You find installation instructions at https://www.docker.com[Docker].
 When you use Windows or MAC, install https://www.docker.com/docker-toolbox[Docker Toolbox].
-To prepare the docker image creation you have to run 'gradlew build distTar'.
+To prepare the docker image creation you have to run 'gradlew build createDockerfile distTar'.
 Under Windows and MAC you want to create a VM with docker-machine and connect to it.
 Then you can create the images and start up 2 containers
 (one for the Spring Boot based service, the other for the Jetty/HABBuilder based service)
