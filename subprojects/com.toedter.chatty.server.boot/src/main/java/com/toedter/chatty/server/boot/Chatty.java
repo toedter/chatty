@@ -8,14 +8,14 @@
 package com.toedter.chatty.server.boot;
 
 import com.toedter.chatty.server.boot.config.DynamicCurieProvider;
-import com.toedter.chatty.server.boot.message.web.ChatMessageRepositoryListener;
 import com.toedter.chatty.server.boot.config.TestDataLoader;
+import com.toedter.chatty.server.boot.message.web.ChatMessageRepositoryListener;
 import org.atmosphere.cpr.AtmosphereServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.embedded.ServletRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.hateoas.UriTemplate;
 import org.springframework.hateoas.hal.CurieProvider;

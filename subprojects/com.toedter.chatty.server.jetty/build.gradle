@@ -75,10 +75,12 @@ dockerCopyDistResources {
     from "$projectDir/../com.toedter.chatty.client.angular1"
 }
 
-task startServerAsyncWithAnt << {
-    logger.lifecycle('Starting Jetty asynchronously...')
-    def cp = sourceSets.main.runtimeClasspath.asPath
-    ant.java(fork: true, spawn: true, classname: "com.toedter.chatty.server.JettyServer", classpath: cp)
+task startServerAsyncWithAnt() {
+    doLast {
+        logger.lifecycle('Starting Jetty asynchronously...')
+        def cp = sourceSets.main.runtimeClasspath.asPath
+        ant.java(fork: true, spawn: true, classname: "com.toedter.chatty.server.JettyServer", classpath: cp)
+    }
 }
 
 task startServerSync(type: JavaExec) {
