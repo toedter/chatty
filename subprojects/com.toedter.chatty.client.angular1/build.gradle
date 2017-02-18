@@ -32,7 +32,7 @@ grunt_typings.outputs.dir new File(projectDir, "typings")
 grunt_dist.inputs.dir new File(projectDir, "src")
 grunt_dist.outputs.dir new File(projectDir, "dist")
 
-installGrunt.dependsOn yarn_install
+installGrunt.dependsOn npmInstall
 grunt_typings.dependsOn installGrunt
 grunt_bower.dependsOn installGrunt
 grunt_dist.dependsOn grunt_bower, grunt_typings
