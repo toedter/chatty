@@ -1,6 +1,6 @@
 plugins {
-    id "com.moowork.node" version "0.12"
-    id "com.moowork.grunt" version "0.12"
+    id "com.moowork.node" version "0.14"
+    id "com.moowork.grunt" version "0.13"
 }
 
 node {
@@ -32,7 +32,7 @@ grunt_typings.outputs.dir new File(projectDir, "typings")
 grunt_dist.inputs.dir new File(projectDir, "src")
 grunt_dist.outputs.dir new File(projectDir, "dist")
 
-installGrunt.dependsOn npmInstall
+installGrunt.dependsOn yarn_install
 grunt_typings.dependsOn installGrunt
 grunt_bower.dependsOn installGrunt
 grunt_dist.dependsOn grunt_bower, grunt_typings

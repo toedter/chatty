@@ -1,11 +1,10 @@
 plugins {
-    id "com.moowork.node" version "0.12"
-    id "com.moowork.grunt" version "0.12"
+    id "com.moowork.node" version "0.14"
 }
 
 node {
-    version = '4.4.1'
-    npmVersion = '3.8.3'
+    version = '6.9.5'
+    yarnVersion = '0.16.1'
     download = true
     workDir = file("${rootProject.buildDir}/node")
     nodeModulesDir = file("${project.projectDir}")
@@ -15,10 +14,6 @@ clean{
     delete "dist"
 }
 
-npm_run_build.inputs.dir new File(projectDir, "src")
-npm_run_build.outputs.dir new File(projectDir, "dist")
-npm_run_build.dependsOn npm_install
-
-build.dependsOn npm_run_build
+build.dependsOn yarn_run_build
 
 
