@@ -2,7 +2,7 @@ apply from: "$rootDir/gradle/versioning.gradle"
 
 ext {
     springRestdocsVersion = '1.1.2.RELEASE'
-    springBootVersion = '1.5.1.RELEASE'
+    springBootVersion = '1.5.2.RELEASE'
 }
 
 allprojects {
