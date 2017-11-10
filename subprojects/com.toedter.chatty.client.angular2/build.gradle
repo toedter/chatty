@@ -3,8 +3,7 @@ plugins {
 }
 
 node {
-    version = '6.9.5'
-    yarnVersion = '0.16.1'
+    version = '8.9.1'
     download = true
     workDir = file("${rootProject.buildDir}/node")
     nodeModulesDir = file("${project.projectDir}")
@@ -14,6 +13,6 @@ clean{
     delete "dist"
 }
 
-build.dependsOn yarn_run_build
+build.dependsOn npm_run_build
 
 

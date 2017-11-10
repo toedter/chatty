@@ -18,7 +18,7 @@ var webpackConfig = {
     plugins: [
         new webpack.ContextReplacementPlugin(
             // The (\\|\/) piece accounts for path separators in *nix and Windows
-            /angular(\\|\/)core(\\|\/)@angular/,
+            /(.+)?angular(\\|\/)core(.+)?/,
             path.resolve(__dirname, './src'),
             {
                 // your Angular Async Route paths relative to this root directory
