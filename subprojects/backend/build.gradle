@@ -63,7 +63,7 @@ task deleteDockerDir(type: Delete) {
 }
 
 task unzipBoot(type: Copy) {
-    def zipFile = file("${buildDir}/libs/com.toedter.chatty.server.boot-" + project.version + '.jar')
+    def zipFile = file("${buildDir}/libs/com.toedter.chatty-" + project.version + '.jar')
     def outputDir = file("${buildDir}/docker/app")
 
     from zipTree(zipFile)
@@ -140,6 +140,7 @@ task copyDoc(type: Copy) {
 }
 
 jar {
+    baseName = 'com.toedter.chatty'
     dependsOn createBuildInfoFile
     dependsOn copyWebApp
     dependsOn asciidoctor
