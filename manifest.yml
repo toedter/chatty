@@ -1,0 +1,7 @@
+---
+applications:
+- name: chatty
+  memory: 500MB
+  random-route: true
+  path: subprojects/backend/build/libs/com.toedter.chatty.server.boot-1.0.jar
+

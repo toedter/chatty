@@ -1,8 +1,5 @@
-include 'com.toedter.chatty.model'
-include 'com.toedter.chatty.server.jetty'
-include 'com.toedter.chatty.server.boot'
-include 'com.toedter.chatty.client.angular1'
-include 'com.toedter.chatty.client.angular2'
+include 'frontend'
+include 'backend'
 
 rootProject.name = 'chatty'
 rootProject.children.each { project ->

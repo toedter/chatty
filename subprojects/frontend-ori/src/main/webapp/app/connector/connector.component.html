@@ -1,0 +1,31 @@
+<br>
+<br>
+<div class="container">
+    <form #userForm="ngForm" class="form-inline" (ngSubmit)="submitConnection()">
+        <div class="form-group">
+            <input required minlength="3" maxlength="10" style="width:150px" type="text" class="form-control"
+                   [(ngModel)]="user.id" name="userId" [disabled]="isConnected" placeholder="Enter ID">
+            <input required maxlength="40" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" style="width:150px"
+                   type="text" class="form-control" [(ngModel)]="user.email" name="userEmail"
+                   [disabled]="isConnected" placeholder="Enter email">
+            <input required minlength="3" maxlength="30" style="width:150px" type="text" class="form-control"
+                   [(ngModel)]="user.fullName" name="userFullName"
+                   [disabled]="isConnected" placeholder="Enter full name">
+            <button style="width:100px" id="connectButton" [disabled]="!(userForm.form.valid || isConnected)" type="submit"
+                    class="btn btn-info">{{connectButtonText}}
+            </button>
+        </div>
+    </form>
+    <br>
+    <form #messageForm="ngForm" class="form-inline" (ngSubmit)="sendChatMessage()">
+        <div class="form-group">
+            <input required style="width:458px" class="form-control" [(ngModel)]="chatMessageText" name="xxx"
+                   [disabled]="!isConnected" maxlength="100" placeholder="Enter chat message">
+            <button style="width:100px" type="submit" [disabled]="!(messageForm.form.valid && isConnected)" class="btn btn-success">Send
+            </button>
+            <br>
+            <br>
+            <div id="status" class="alert {{connectionStateType}}">{{connectionState}}</div>
+        </div>
+    </form>
+</div>

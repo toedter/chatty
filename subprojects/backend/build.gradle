@@ -1,0 +1,152 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url 'https://repo.spring.io/libs-snapshot' }
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+        classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.10.1'
+    }
+}
+
+plugins {
+    id 'org.hidetake.ssh' version '0.4.3'
+    id 'org.asciidoctor.convert' version '1.5.3'
+}
+
+ext {
+    snippetsDir = file("$buildDir/generated-snippets")
+}
+
+repositories {
+    mavenCentral()
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url "http://repo.spring.io/milestone" }
+    maven { url 'https://repo.spring.io/libs-snapshot' }
+}
+
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply from: "$rootDir/gradle/integrationTest.gradle"
+
+dependencies {
+    compile project(':frontend')
+
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
+    compile "org.springframework.boot:spring-boot-starter-data-rest"
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat"
+    }
+    compile "org.springframework.boot:spring-boot-starter-jetty"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "org.springframework.boot:spring-boot-devtools"
+    compile "org.springframework.data:spring-data-rest-hal-browser"
+    compile "org.springframework.hateoas:spring-hateoas:0.21.0.BUILD-SNAPSHOT"
+
+    compile "org.projectlombok:lombok:1.16.6"
+    compile "org.atmosphere:atmosphere-annotations:2.4.0"
+    compile "org.atmosphere:wasync:2.1.2"
+    compile "javax.inject:javax.inject:1"
+    runtime 'org.hsqldb:hsqldb:2.3.3'
+    runtime 'org.atteo:evo-inflector:1.2.1'
+
+    testCompile 'com.jayway.jsonpath:json-path'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile "org.springframework.restdocs:spring-restdocs-mockmvc:$springRestdocsVersion"
+}
+
+task deleteDockerDir(type: Delete) {
+    delete "${buildDir}/docker"
+}
+
+task unzipBoot(type: Copy) {
+    def zipFile = file("${buildDir}/libs/com.toedter.chatty.server.boot-" + project.version + '.jar')
+    def outputDir = file("${buildDir}/docker/app")
+
+    from zipTree(zipFile)
+    into outputDir
+
+    def copyDetails = []
+    eachFile { copyDetails << it }
+    doLast {
+        copyDetails.each { FileCopyDetails details ->
+            def target = new File(outputDir, details.path)
+            if (target.exists()) {
+                target.setLastModified(details.lastModified)
+            }
+        }
+    }
+}
+unzipBoot.dependsOn deleteDockerDir
+
+task moveBootExplodedLib() {
+    doLast {
+        ant.move(file: "${buildDir}/docker/app/BOOT-INF/lib", toFile: "${buildDir}/docker/lib")
+    }
+}
+moveBootExplodedLib.dependsOn unzipBoot
+
+task createDockerfile () {
+    doLast {
+        def dockerfile = new File("$buildDir/Dockerfile")
+        dockerfile.write 'FROM java:openjdk-8-jre-alpine\n'
+        dockerfile << 'COPY docker/lib/ /app/BOOT-INF/lib/\n'
+        dockerfile << 'COPY docker/app/ /app/\n'
+        dockerfile << 'CMD java $CHATTY_JAVA_ARGS -Xmx400m -Xms400m -cp /app/ org.springframework.boot.loader.JarLauncher\n'
+        dockerfile << 'EXPOSE 8080\n'
+    }
+}
+createDockerfile.dependsOn moveBootExplodedLib
+
+task createBuildInfoFile () {
+    doLast {
+        def buildInfoFile = new File("$buildDir/resources/main/build-info.properties")
+        Properties props = new Properties()
+        props.setProperty('version', project.version.toString())
+        props.setProperty('timestamp', project.buildTimestamp)
+        props.store(buildInfoFile.newWriter(), null)
+    }
+}
+
+test {
+    outputs.dir snippetsDir
+}
+
+asciidoctor {
+    dependsOn test
+    backends = ['html5', 'pdf']
+    attributes = [
+            snippets: snippetsDir
+    ]
+    inputs.dir snippetsDir
+}
+
+task copyWebApp(type: Copy) {
+    from ('../frontend/dist') {
+        include '**/*'
+    }
+
+    includeEmptyDirs = false
+
+    into "$buildDir/resources/main/static"
+}
+
+task copyDoc(type: Copy) {
+    from "${asciidoctor.outputDir}"
+    into "$buildDir/resources/main/static/docs"
+}
+
+jar {
+    dependsOn createBuildInfoFile
+    dependsOn copyWebApp
+    dependsOn asciidoctor
+    dependsOn copyDoc
+}
+
+task stage(dependsOn: [':frontend:build', 'jar', 'bootRepackage'])
+
+
+

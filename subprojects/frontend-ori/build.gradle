@@ -1,0 +1,18 @@
+plugins {
+    id "com.moowork.node" version "0.14"
+}
+
+node {
+    version = '8.9.3'
+    download = true
+    workDir = file("${rootProject.buildDir}/node")
+    nodeModulesDir = file("${project.projectDir}")
+}
+
+clean{
+    delete "dist"
+}
+
+build.dependsOn npm_run_build
+
+

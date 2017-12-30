@@ -10,12 +10,11 @@ A chat demo that evaluates several technologies (and hopefully shows best practi
 == Used Technologies
 
 * Java 8 (This demo will not run with any Java < 8)
+* http://projects.spring.io/spring-boot/[Spring Boot] (+ Spring Data REST & REST Docs)
 * http://stateless.co/hal_specification.html[HAL] (Hypertext Application Language)
 * https://github.com/Atmosphere/atmosphere[Atmosphere] (Async Pub/Sub)
-* https://jersey.java.net/[Jersey] (JAX-RS reference implementation)
-* http://projects.spring.io/spring-boot/[Spring Boot] (+ Spring Data REST & REST Docs)
 * http://www.typescriptlang.org/[TypeScript] for web client
-* http://angularjs.org/[AngularJS] for web client
+* http://angular.io/[Angular] for web client
 * https://github.com/angular/protractor[Protractor] for functional web client UI tests
 * http://junit.org/[JUnit] for Java unit and integration testing
 * https://code.google.com/p/mockito/[Mockito] for Mocking
@@ -33,7 +32,7 @@ installed manually, it will be installed automatically (and project local) durin
 == Getting Started
 
 * ./gradlew build (builds all, both Java and TypeScript)
-* ./gradlew bootrun (starts a Jetty server using port 8080)
+* ./gradlew bootrun (starts a server using port 8080)
 * Open http://localhost:8080 in a web browser
 * Open http://localhost:8080 in another web browser
 * Play around with chatty!
