@@ -12,7 +12,7 @@ install: true
 
 script:
   - ./gradlew build
-  - cd subprojects/com.toedter.chatty.server.boot
+  - cd subprojects/backend
   - ../../gradlew createDockerfile
   - cd build
   - docker build -t kaitoedter/chatty .
