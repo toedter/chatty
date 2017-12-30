@@ -6,7 +6,6 @@ import {HttpClient} from "@angular/common/http";
 @Injectable()
 export class AboutService {
     constructor(private http: HttpClient) {
-        console.log('AboutService constructor');
     }
 
     public getAbout(): Observable<any> {
