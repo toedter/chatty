@@ -16,9 +16,9 @@ script:
   - ../../gradlew createDockerfile
   - cd build
   - docker build -t kaitoedter/chatty .
-  - docker login --email="$DOCKER_EMAIL" --username="$DOCKER_USERNAME" --password="$DOCKER_PASSWORD"
+  - docker login --username="$DOCKER_USERNAME" --password="$DOCKER_PASSWORD"
   - docker push kaitoedter/chatty
-  - docker login --email=_ --username=_ --password="$HEROKU_AUTH_TOKEN" registry.heroku.com
+  - docker login --username=_ --password="$HEROKU_AUTH_TOKEN" registry.heroku.com
   - docker tag kaitoedter/chatty registry.heroku.com/chatty42/web
   - docker push registry.heroku.com/chatty42/web
   - cd ../../..
