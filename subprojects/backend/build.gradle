@@ -133,6 +133,7 @@ task copyWebApp(type: Copy) {
 
     into "$buildDir/resources/main/static"
 }
+copyWebApp.dependsOn project(':frontend').build
 
 task copyDoc(type: Copy) {
     from "${asciidoctor.outputDir}"
