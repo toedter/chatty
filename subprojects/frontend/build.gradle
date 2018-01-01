@@ -13,6 +13,12 @@ clean{
     delete "dist"
 }
 
+npm_install.inputs.file new File(projectDir, "package.json")
+npm_install.outputs.dir new File(projectDir, "node_modules")
+
+npm_run_build.inputs.dir new File(projectDir, "src")
+npm_run_build.outputs.dir new File(projectDir, "dist")
+
 build.dependsOn npm_run_build
 
 

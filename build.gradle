@@ -13,14 +13,9 @@ allprojects {
 
 subprojects {
     apply plugin: 'java'
-    apply from: "$rootDir/gradle/jacoco.gradle"
 
     repositories {
         mavenCentral()
-    }
-
-    test {
-        reports.junitXml.destination = file("$reports.junitXml.destination/unit")
     }
 }
 
