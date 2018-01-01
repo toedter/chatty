@@ -1,6 +1,5 @@
 package com.toedter.chatty.server.boot;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.toedter.chatty.server.boot.user.User;
 import org.junit.Before;
@@ -10,7 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.hateoas.MediaTypes;
-import org.springframework.restdocs.RestDocumentation;
+import org.springframework.restdocs.JUnitRestDocumentation;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -31,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class GettingStartedDocumentation {
 
     @Rule
-    public final RestDocumentation restDocumentation = new RestDocumentation("build/generated-snippets");
+    public final JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("build/generated-snippets");
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -60,7 +59,7 @@ public class GettingStartedDocumentation {
     }
 
     @Test
-    public void creatingAUser() throws JsonProcessingException, Exception {
+    public void creatingAUser() throws Exception {
         String userLocation = createUser();
         MvcResult user = getUser(userLocation);
     }

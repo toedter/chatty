@@ -7,13 +7,13 @@ buildscript {
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
-        classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.10.1'
+        classpath 'org.asciidoctor:asciidoctorj-pdf:1.5.0-alpha.15'
     }
 }
 
 plugins {
     id 'org.hidetake.ssh' version '0.4.3'
-    id 'org.asciidoctor.convert' version '1.5.3'
+    id 'org.asciidoctor.convert' version '1.5.7'
 }
 
 ext {
@@ -54,6 +54,8 @@ dependencies {
 
     testCompile 'com.jayway.jsonpath:json-path'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile "org.springframework.restdocs:spring-restdocs-core:$springRestdocsVersion"
+    testCompile "org.springframework.restdocs:spring-restdocs-asciidoctor:$springRestdocsVersion"
     testCompile "org.springframework.restdocs:spring-restdocs-mockmvc:$springRestdocsVersion"
 }
 

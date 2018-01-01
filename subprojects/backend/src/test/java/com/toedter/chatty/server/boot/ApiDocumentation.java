@@ -36,9 +36,7 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -124,7 +122,7 @@ public class ApiDocumentation {
                                 linkWithRel("profile").description("The profiles of the REST resources")
                         ),
                         responseFields(
-                                fieldWithPath("_links").description("<<resources-index-links,Links>> to other resources"))));
+                                subsectionWithPath("_links").description("<<resources-index-links,Links>> to other resources"))));
     }
 
     @Test
@@ -143,9 +141,9 @@ public class ApiDocumentation {
                                 linkWithRel("curies").description("Curies are used for online documentation")
                         ),
                         responseFields(
-                                fieldWithPath("_embedded.chatty:users").description("An array of <<resources-user, User resources>>"),
-                                fieldWithPath("_links").description("<<resources-index-links,Links>> to other resources"),
-                                fieldWithPath("page").description("The pagination information")
+                                subsectionWithPath("_embedded.chatty:users").description("An array of <<resources-user, User resources>>"),
+                                subsectionWithPath("_links").description("<<resources-index-links,Links>> to other resources"),
+                                subsectionWithPath("page").description("The pagination information")
                         )));
     }
 
@@ -185,9 +183,9 @@ public class ApiDocumentation {
                                 linkWithRel("curies").description("Curies are used for online documentation")
                         ),
                         responseFields(
-                                fieldWithPath("_embedded.chatty:messages").description("An array of <<resources-message, Message resources>>"),
-                                fieldWithPath("_links").description("<<resources-index-links,Links>> to other resources"),
-                                fieldWithPath("page").description("The pagination information")
+                                subsectionWithPath("_embedded.chatty:messages").description("An array of <<resources-message, Message resources>>"),
+                                subsectionWithPath("_links").description("<<resources-index-links,Links>> to other resources"),
+                                subsectionWithPath("page").description("The pagination information")
                         )));
     }
 
@@ -227,7 +225,7 @@ public class ApiDocumentation {
                         responseFields(
                                 fieldWithPath("version").description("The version of this build"),
                                 fieldWithPath("timeStamp").description("The creation timestamp of this build"),
-                                fieldWithPath("_links.self").description("The link to this resource")
+                                subsectionWithPath("_links.self").description("The link to this resource")
                         )));
     }
 
