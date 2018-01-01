@@ -1,0 +1,24 @@
+[[resources-message]]
+=== Chat Message
+
+The chat message resource is used to get and change a single message.
+
+
+[[resources-message-get]]
+==== Getting a chat message
+
+===== Response structure
+
+include::{snippets}/message-get-example/response-fields.adoc[]
+
+===== Example request
+
+include::{snippets}/message-get-example/curl-request.adoc[]
+
+===== Example response
+
+include::{snippets}/message-get-example/http-response.adoc[]
+
+===== Links
+
+include::{snippets}/message-get-example/links.adoc[]

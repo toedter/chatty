@@ -46,3 +46,5 @@ include::{snippets}/messages-create-example/curl-request.adoc[]
 ===== Example response
 
 include::{snippets}/messages-create-example/http-response.adoc[]
+
+include::chatMessage.adoc[]

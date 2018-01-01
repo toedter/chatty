@@ -33,9 +33,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -148,6 +146,28 @@ public class ApiDocumentation {
     }
 
     @Test
+    public void userGetExample() throws Exception {
+        this.userRepository.deleteAll();
+
+        createUser("user_1", "John Doe", "john@doe.com");
+
+        this.mockMvc.perform(get("/api/users/user_1"))
+                .andExpect(status().isOk())
+                .andDo(this.documentationHandler.document(
+                        links(
+                                linkWithRel("self").description("the self link to this user"),
+                                linkWithRel("chatty:user").description("the (possibly templated) link to this user"),
+                                linkWithRel("chatty:messages").description("The <<resources-messages,Messages>> of this user"),
+                                linkWithRel("curies").description("Curies are used for online documentation")
+                        ),
+                        responseFields(
+                                fieldWithPath("id").description("The id of the user. Must be unique."),
+                                fieldWithPath("fullName").description("The full name of the user"),
+                                fieldWithPath("email").description("The e-mail of the user"),
+                                subsectionWithPath("_links").description("<<resources-index-links,Links>> to other resources"))));
+    }
+
+    @Test
     public void usersCreateExample() throws Exception {
         Map<String, String> user = new HashMap<String, String>();
         user.put("id", "toedter_k");
@@ -214,7 +234,30 @@ public class ApiDocumentation {
                 .andDo(this.documentationHandler.document(
                         requestFields(
                                 fieldWithPath("text").description("The text of the chat message"),
-                                fieldWithPath("author").description("The author of the chat message. This must be the URL to an existing user resource."))));
+                                fieldWithPath("author").description("The author of the chat message. This must be the URL to an existing user resource"))));
+    }
+
+    @Test
+    public void messageGetExample() throws Exception {
+        this.userRepository.deleteAll();
+        User user = createUser("toedter_k", "Kai Toedter", "kai@toedter.com");
+
+        this.chatMessageRepository.deleteAll();
+        long id = createChatMessage("Hello!", user);
+
+        this.mockMvc.perform(get("/api/messages/" + id))
+                .andExpect(status().isOk())
+                .andDo(this.documentationHandler.document(
+                        links(
+                                linkWithRel("self").description("the self link to this user"),
+                                linkWithRel("chatty:chatMessage").description("the (possibly templated) link to this message"),
+                                linkWithRel("author").description("the author of this message"),
+                                linkWithRel("curies").description("Curies are used for online documentation")
+                        ),
+                        responseFields(
+                                fieldWithPath("text").description("The text of the chat message"),
+                                fieldWithPath("timeStamp").description("The timestamp of the chat message"),
+                                subsectionWithPath("_links").description("<<resources-index-links,Links>> to other resources"))));
     }
 
     @Test
@@ -238,10 +281,11 @@ public class ApiDocumentation {
         return user;
     }
 
-    private void createChatMessage(String text, User author) {
+    private Long createChatMessage(String text, User author) {
         ChatMessage chatMessage = new ChatMessage();
         chatMessage.setAuthor(author);
         chatMessage.setText(text);
         chatMessageRepository.save(chatMessage);
+        return chatMessage.getId();
     }
 }

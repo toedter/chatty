@@ -1,0 +1,24 @@
+[[resources-user]]
+=== User
+
+The User resource is used to get and change a single user.
+
+
+[[resources-user-get]]
+==== Getting a user
+
+===== Response structure
+
+include::{snippets}/user-get-example/response-fields.adoc[]
+
+===== Example request
+
+include::{snippets}/user-get-example/curl-request.adoc[]
+
+===== Example response
+
+include::{snippets}/user-get-example/http-response.adoc[]
+
+===== Links
+
+include::{snippets}/user-get-example/links.adoc[]
