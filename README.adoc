@@ -1,5 +1,5 @@
 [[chatty-build-status]]
-= chatty
+= Chatty
 
 image:https://travis-ci.org/toedter/chatty.svg?branch=master[Build Status, link="https://travis-ci.org/toedter/chatty"]
 image:http://img.shields.io/badge/license-MIT-blue.svg["MIT", link="http://toedter.mit-license.org"]
@@ -133,17 +133,15 @@ But please be aware
 that this is only a test installment and will be reset periodically.
 
 [[docker-integration]]
-== Docker integration
+== Docker Integration
 
 You find installation instructions at https://www.docker.com[Docker].
 When you use Windows or MAC, install https://www.docker.com/docker-toolbox[Docker Toolbox].
 To prepare the docker image creation you have to run 'gradlew build createDockerfile distTar'.
 Under Windows and MAC you want to create a VM with docker-machine and connect to it.
-Then you can create the images and start up 2 containers
-(one for the Spring Boot based service, the other for the Jetty/HABBuilder based service)
+Then you can create the images and start up a container for
+the Spring Boot based service (running on port 8080)
 by invoking: docker-compose up
-
-The Spring Boot based service is running on port 8080, the Jetty/HalBuilder based service on port 8081.
 
 [[pebble-client]]
 == Pebble Client
