@@ -142,7 +142,7 @@ task copyDoc(type: Copy) {
     into "$buildDir/resources/main/static/docs"
 }
 
-jar {
+bootJar {
     baseName = 'com.toedter.chatty'
     dependsOn createBuildInfoFile
     dependsOn copyWebApp
@@ -150,7 +150,6 @@ jar {
     dependsOn copyDoc
 }
 
-task stage(dependsOn: [':frontend:build', 'jar', 'bootRepackage'])
 
 
 
