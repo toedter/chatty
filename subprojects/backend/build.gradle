@@ -55,9 +55,9 @@ dependencies {
 
     testCompile 'com.jayway.jsonpath:json-path'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
-    testCompile "org.springframework.restdocs:spring-restdocs-core:$springRestdocsVersion"
-    testCompile "org.springframework.restdocs:spring-restdocs-asciidoctor:$springRestdocsVersion"
-    testCompile "org.springframework.restdocs:spring-restdocs-mockmvc:$springRestdocsVersion"
+    testCompile "org.springframework.restdocs:spring-restdocs-core"
+    testCompile "org.springframework.restdocs:spring-restdocs-asciidoctor"
+    testCompile "org.springframework.restdocs:spring-restdocs-mockmvc"
 }
 
 task deleteDockerDir(type: Delete) {
