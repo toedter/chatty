@@ -55,9 +55,12 @@ dependencies {
 
     testCompile 'com.jayway.jsonpath:json-path'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
-    testCompile "org.springframework.restdocs:spring-restdocs-core"
-    testCompile "org.springframework.restdocs:spring-restdocs-asciidoctor"
-    testCompile "org.springframework.restdocs:spring-restdocs-mockmvc"
+    testCompile("org.junit.jupiter:junit-jupiter-api:5.1.1")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.1.1")
+
+    testCompile "org.springframework.restdocs:spring-restdocs-core:$springRestdocsVersion"
+    testCompile "org.springframework.restdocs:spring-restdocs-asciidoctor:$springRestdocsVersion"
+    testCompile "org.springframework.restdocs:spring-restdocs-mockmvc:$springRestdocsVersion"
 }
 
 task deleteDockerDir(type: Delete) {
@@ -91,7 +94,7 @@ task moveBootExplodedLib() {
 }
 moveBootExplodedLib.dependsOn unzipBoot
 
-task createDockerfile () {
+task createDockerfile() {
     doLast {
         def dockerfile = new File("$buildDir/Dockerfile")
         dockerfile.write 'FROM java:openjdk-8-jre-alpine\n'
@@ -103,7 +106,7 @@ task createDockerfile () {
 }
 createDockerfile.dependsOn moveBootExplodedLib
 
-task createBuildInfoFile () {
+task createBuildInfoFile() {
     doLast {
         def buildInfoFile = new File("$buildDir/resources/main/build-info.properties")
         Properties props = new Properties()
@@ -115,6 +118,16 @@ task createBuildInfoFile () {
 
 test {
     outputs.dir snippetsDir
+
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+
+    reports {
+        html.enabled = true
+    }
 }
 
 asciidoctor {
@@ -127,7 +140,7 @@ asciidoctor {
 }
 
 task copyWebApp(type: Copy) {
-    from ('../frontend/dist') {
+    from('../frontend/dist') {
         include '**/*'
     }
 

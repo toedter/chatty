@@ -5,16 +5,17 @@ import com.toedter.chatty.server.boot.message.ChatMessage;
 import com.toedter.chatty.server.boot.message.web.ChatMessageRepository;
 import com.toedter.chatty.server.boot.user.User;
 import com.toedter.chatty.server.boot.user.web.UserRepository;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.hateoas.MediaTypes;
-import org.springframework.restdocs.JUnitRestDocumentation;
+import org.springframework.restdocs.RestDocumentationContextProvider;
+import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -39,12 +40,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
+@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 public class ApiDocumentation {
-    @Rule
-    public final JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("build/generated-snippets");
-
     private RestDocumentationResultHandler documentationHandler;
 
     @Autowired
@@ -56,24 +54,35 @@ public class ApiDocumentation {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Autowired
-    private WebApplicationContext context;
-
     private MockMvc mockMvc;
 
-    @Before
-    public void setUp() {
+    @BeforeEach
+    public void setUp(WebApplicationContext webApplicationContext,
+                      RestDocumentationContextProvider restDocumentation) {
         this.documentationHandler = document("{method-name}",
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint()));
 
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
-                .apply(documentationConfiguration(this.restDocumentation))
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+                .apply(documentationConfiguration(restDocumentation))
                 .alwaysDo(this.documentationHandler)
                 .build();
     }
 
+//    @BeforeEach
+//    public void setUp() {
+//        this.documentationHandler = document("{method-name}",
+//                preprocessRequest(prettyPrint()),
+//                preprocessResponse(prettyPrint()));
+//
+//        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
+//                .apply(documentationConfiguration(this.restDocumentation))
+//                .alwaysDo(this.documentationHandler)
+//                .build();
+//    }
+
     @Test
+    @DisplayName("should get content-type header")
     public void headersExample() throws Exception {
         this.mockMvc.perform(get("/api")
                 .header("Accept", MediaTypes.HAL_JSON))
@@ -84,6 +93,7 @@ public class ApiDocumentation {
     }
 
     @Test
+    @DisplayName("should return error messages")
     public void errorExample() throws Exception {
         this.mockMvc
                 .perform(get("/error")
@@ -107,6 +117,7 @@ public class ApiDocumentation {
     }
 
     @Test
+    @DisplayName("should return all links in root API")
     public void indexExample() throws Exception {
         this.mockMvc.perform(get("/api")
                 .header("Accept", MediaTypes.HAL_JSON))
@@ -124,6 +135,7 @@ public class ApiDocumentation {
     }
 
     @Test
+    @DisplayName("should list all users")
     public void usersListExample() throws Exception {
         this.userRepository.deleteAll();
 
@@ -146,6 +158,7 @@ public class ApiDocumentation {
     }
 
     @Test
+    @DisplayName("should get single user")
     public void userGetExample() throws Exception {
         this.userRepository.deleteAll();
 
@@ -168,6 +181,7 @@ public class ApiDocumentation {
     }
 
     @Test
+    @DisplayName("should create a user")
     public void usersCreateExample() throws Exception {
         Map<String, String> user = new HashMap<String, String>();
         user.put("id", "toedter_k");
@@ -186,6 +200,7 @@ public class ApiDocumentation {
     }
 
     @Test
+    @DisplayName("should list all chat messages")
     public void messagesListExample() throws Exception {
         this.userRepository.deleteAll();
         User user = createUser("toedter_k", "Kai Toedter", "kai@toedter.com");
@@ -210,6 +225,7 @@ public class ApiDocumentation {
     }
 
     @Test
+    @DisplayName("should create a chat message")
     public void messagesCreateExample() throws Exception {
         Map<String, String> user = new HashMap<String, String>();
         user.put("id", "toedter_k");
@@ -238,6 +254,7 @@ public class ApiDocumentation {
     }
 
     @Test
+    @DisplayName("should get a single chat message")
     public void messageGetExample() throws Exception {
         this.userRepository.deleteAll();
         User user = createUser("toedter_k", "Kai Toedter", "kai@toedter.com");
@@ -261,6 +278,7 @@ public class ApiDocumentation {
     }
 
     @Test
+    @DisplayName("should get the build information")
     public void buildInfoGetExample() throws Exception {
         this.mockMvc.perform(get("/api/buildinfo"))
                 .andExpect(status().isOk())

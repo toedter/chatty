@@ -1,6 +1,7 @@
 apply from: "$rootDir/gradle/versioning.gradle"
 
 ext {
+    springRestdocsVersion = '2.0.1.RELEASE'
     springBootVersion = '2.0.1.RELEASE'
 }
 
@@ -19,6 +20,6 @@ subprojects {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.6'
+    gradleVersion = '4.5.1'
 }
 
