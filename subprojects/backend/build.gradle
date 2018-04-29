@@ -58,9 +58,9 @@ dependencies {
     testCompile("org.junit.jupiter:junit-jupiter-api:5.1.1")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.1.1")
 
-    testCompile "org.springframework.restdocs:spring-restdocs-core:$springRestdocsVersion"
-    testCompile "org.springframework.restdocs:spring-restdocs-asciidoctor:$springRestdocsVersion"
-    testCompile "org.springframework.restdocs:spring-restdocs-mockmvc:$springRestdocsVersion"
+    testCompile "org.springframework.restdocs:spring-restdocs-core"
+    testCompile "org.springframework.restdocs:spring-restdocs-asciidoctor"
+    testCompile "org.springframework.restdocs:spring-restdocs-mockmvc"
 }
 
 task deleteDockerDir(type: Delete) {
