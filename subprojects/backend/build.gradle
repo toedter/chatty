@@ -155,12 +155,18 @@ task copyDoc(type: Copy) {
     into "$buildDir/resources/main/static/docs"
 }
 
+task copyHalExplorer(type: Copy) {
+    from "$projectDir/../hal-explorer/dist}"
+    into "$buildDir/resources/main/static/hal-explorer"
+}
+
 bootJar {
     baseName = 'com.toedter.chatty'
     dependsOn createBuildInfoFile
     dependsOn copyWebApp
     dependsOn asciidoctor
     dependsOn copyDoc
+    dependsOn copyHalExplorer
 }
 
 

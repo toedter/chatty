@@ -119,6 +119,14 @@ http://localhost:8080/api/hal-browser/browser.html#/api/[http://localhost:8080/a
 as entry point for exploring the HAL based API with the embedded
 HAL-Browser.
 
+[[hal-explorer]]
+== HAL Explorer Integration
+
+Additionally to the HAL-browser, you can build and integrate the https://github.com/toedter/hal-explorer[HAL Explorer].
+Then you have to invoke
+./gradlew build cloneHalBrowser
+./gradlew -p subprojects/hal-browser build
+
 [[live-demo]]
 == Live Demo
 

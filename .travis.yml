@@ -11,6 +11,8 @@ services:
 install: true
 
 script:
+  - ./gradlew cloneHalExplorer
+  - ./gradlew -p subprojects/hal-explorer build
   - ./gradlew build
   - cd subprojects/backend
   - ../../gradlew createDockerfile

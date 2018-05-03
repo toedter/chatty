@@ -1,4 +1,12 @@
+plugins {
+    id 'org.ajoberstar.grgit' version '2.2.0'
+}
+
 apply from: "$rootDir/gradle/versioning.gradle"
+
+repositories {
+    jcenter()
+}
 
 ext {
     springBootVersion = '2.0.1.RELEASE'
@@ -22,3 +30,10 @@ task wrapper(type: Wrapper) {
     gradleVersion = '4.7'
 }
 
+task cloneHalExplorer {
+    description = 'Clones HAL Explorer'
+    doLast {
+        grgit.clone(dir: "$rootDir/subprojects/hal-explorer/", uri: 'https://github.com/toedter/hal-explorer.git')
+        grgit.close()
+    }
+}
