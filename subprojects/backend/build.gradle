@@ -156,7 +156,7 @@ task copyDoc(type: Copy) {
 }
 
 task copyHalExplorer(type: Copy) {
-    from "$projectDir/../hal-explorer/dist}"
+    from "$projectDir/../hal-explorer/dist"
     into "$buildDir/resources/main/static/hal-explorer"
 }
 
