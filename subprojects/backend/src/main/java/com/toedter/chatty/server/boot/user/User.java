@@ -11,6 +11,7 @@ import com.toedter.chatty.server.boot.message.ChatMessage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.ReadOnlyProperty;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -28,6 +29,7 @@ public class User {
     private String fullName;
     private String email;
 
+    @ReadOnlyProperty
     @OneToMany(mappedBy="author", cascade= CascadeType.ALL)
     List<ChatMessage> messages;
 
