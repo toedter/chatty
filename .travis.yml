@@ -23,5 +23,5 @@ script:
   - docker login --username=_ --password="$HEROKU_AUTH_TOKEN" registry.heroku.com
   - docker tag kaitoedter/chatty registry.heroku.com/chatty42/web
   - docker push registry.heroku.com/chatty42/web
-  - ./heroku-container-release.sh
   - cd ../../..
+  - ./heroku-container-release.sh
