@@ -23,12 +23,5 @@ script:
   - docker login --username=_ --password="$HEROKU_AUTH_TOKEN" registry.heroku.com
   - docker tag kaitoedter/chatty registry.heroku.com/chatty42/web
   - docker push registry.heroku.com/chatty42/web
+  - ./heroku-container-release.sh
   - cd ../../..
-
-#deploy:
-#  provider: heroku
-#  api_key:
-#    secure: T+25rIkOT1erceI6nJ7Y1hYASsnTuMDqEzLcJHNbmuaDXiaiyVs9RUnmWLCpEHz4bzvwlcojYWis2sFD0/Iu7ajZOwW9PtCH4uCE0ZwkHS/NlxPYbKDEpGW+BSDSildxdFU/9pGQgKy+wt5w6bslo8j17m5CK410htt6sAiS+tE=
-#  app: chatty42
-#  on:
-#    repo: toedter/chatty
