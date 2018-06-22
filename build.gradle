@@ -9,7 +9,7 @@ repositories {
 }
 
 ext {
-    springBootVersion = '2.0.2.RELEASE'
+    springBootVersion = '2.0.3.RELEASE'
 }
 
 allprojects {
@@ -27,7 +27,7 @@ subprojects {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.7'
+    gradleVersion = '4.8'
 }
 
 task cloneHalExplorer {
