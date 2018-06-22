@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import {Observable} from 'rxjs/Observable';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {User} from './user';
+import {Observable} from 'rxjs';
+import {catchError, map} from "rxjs/operators";
 
 @Injectable()
 export class UserService {
@@ -22,38 +21,39 @@ export class UserService {
 
     public getUsers(): Observable<User[]> {
         let observable: Observable<User[]> =
-            this.http.get(this.baseURI)
-                .map((response: any) => response._embedded['chatty:users'])
-                .catch(this.handleError);
+            this.http.get(this.baseURI).pipe(
+                map((response: any) => response._embedded['chatty:users']),
+                catchError(this.handleError));
 
         return observable;
     }
 
     public getUserById(id: string): Observable<User> {
         let observable: Observable<User> =
-            this.http.get(this.baseURI + '/' + id)
-                .catch(this.handleError);
+            this.http.get(this.baseURI + '/' + id).pipe(
+                catchError(this.handleError));
 
         return observable;
     }
 
     public deleteUserById(id: string): Observable<number> {
         let observable: Observable<number> =
-            this.http.delete(this.baseURI + '/' + id, { observe: 'response'})
-                .map((response: HttpResponse<any>) => console.log('user service: deleted user ' + id + ', HTTP response status: ' + response.status))
-                .catch(this.handleError);
+            this.http.delete(this.baseURI + '/' + id, { observe: 'response'}).pipe(
+                map((response: HttpResponse<any>) =>
+                  console.log('user service: deleted user ' + id + ', HTTP response status: ' + response.status)),
+                catchError(this.handleError));
 
         return observable;
     }
 
     public createUser(user: User): Observable<User> {
         let observable: Observable<User> =
-            this.http.post(this.baseURI, user)
-                .map((response: any) => {
+            this.http.post(this.baseURI, user).pipe(
+                map((response: any) => {
                     this.currentUser = response;
                     return this.currentUser;
-                })
-                .catch(this.handleError);
+                }),
+                catchError(this.handleError));
 
         return observable;
     }
