@@ -24,7 +24,7 @@ script:
   - docker tag kaitoedter/chatty registry.heroku.com/chatty42/web
   - docker push registry.heroku.com/chatty42/web
   - docker login -u dockersvc -p $OPENSHIFT_TOKEN_DEV registry.horizon-dev.siemens.io
-  - docker tag kaitoedter/chatty registry.horizon-dev.siemens.io/chatty/chatty
-  - docker push registry.horizon-dev.siemens.io/chatty/chatty
+  - docker tag kaitoedter/chatty registry.horizon-dev.siemens.io/demos/chatty
+  - docker push registry.horizon-dev.siemens.io/demos/chatty
   - cd ../../..
   - ./heroku-container-release.sh
