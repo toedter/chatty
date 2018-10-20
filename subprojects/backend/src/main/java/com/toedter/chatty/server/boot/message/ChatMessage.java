@@ -20,7 +20,7 @@ import java.time.Instant;
 @Data
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor(suppressConstructorProperties = true)
+@AllArgsConstructor
 public class ChatMessage implements Identifiable<Long>{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
