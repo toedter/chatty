@@ -37,10 +37,7 @@ dependencies {
 
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
     compile "org.springframework.boot:spring-boot-starter-data-rest"
-    compile("org.springframework.boot:spring-boot-starter-web") {
-        exclude module: "spring-boot-starter-tomcat"
-    }
-    compile "org.springframework.boot:spring-boot-starter-jetty"
+    compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "org.springframework.boot:spring-boot-devtools"
     compile "org.springframework.data:spring-data-rest-hal-browser"
@@ -49,8 +46,8 @@ dependencies {
     compileOnly('org.projectlombok:lombok:1.16.20')
     annotationProcessor('org.projectlombok:lombok:1.16.20')
 
-    compile "org.atmosphere:atmosphere-annotations:2.4.0"
-    compile "org.atmosphere:wasync:2.1.2"
+    compile "org.atmosphere:atmosphere-annotations:2.5.0"
+    compile "org.atmosphere:wasync:2.1.5"
     compile "javax.inject:javax.inject:1"
     runtime 'org.hsqldb:hsqldb:2.3.3'
     runtime 'org.atteo:evo-inflector:1.2.1'
