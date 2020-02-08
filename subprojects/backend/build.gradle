@@ -43,8 +43,8 @@ dependencies {
     compile "org.springframework.data:spring-data-rest-hal-browser"
     compile "org.springframework.hateoas:spring-hateoas"
 
-    compileOnly('org.projectlombok:lombok:1.16.20')
-    annotationProcessor('org.projectlombok:lombok:1.16.20')
+    compileOnly('org.projectlombok:lombok:1.18.12')
+    annotationProcessor('org.projectlombok:lombok:1.18.12')
 
     compile "org.atmosphere:atmosphere-annotations:2.5.0"
     compile "org.atmosphere:wasync:2.1.5"
