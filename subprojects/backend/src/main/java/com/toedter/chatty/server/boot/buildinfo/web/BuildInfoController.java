@@ -5,18 +5,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.rest.webmvc.BasePathAwareController;
 import org.springframework.data.rest.webmvc.RepositoryLinksResource;
-import org.springframework.hateoas.ResourceProcessor;
+import org.springframework.hateoas.server.RepresentationModelProcessor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @PropertySource({ "classpath:build-info.properties" })
 @BasePathAwareController
-public class BuildInfoController implements ResourceProcessor<RepositoryLinksResource> {
+public class BuildInfoController implements RepresentationModelProcessor<RepositoryLinksResource> {
     @Value( "${version}" )
     private String version = "?";
     @Value( "${timestamp}" )

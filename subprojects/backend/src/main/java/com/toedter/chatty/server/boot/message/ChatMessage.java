@@ -12,7 +12,6 @@ import com.toedter.chatty.server.boot.config.JsonInstantSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.hateoas.Identifiable;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -21,7 +20,7 @@ import java.time.Instant;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChatMessage implements Identifiable<Long>{
+public class ChatMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private final Long id = null;

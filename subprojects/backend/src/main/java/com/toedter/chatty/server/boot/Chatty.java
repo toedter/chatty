@@ -7,7 +7,6 @@
 
 package com.toedter.chatty.server.boot;
 
-import com.toedter.chatty.server.boot.config.DynamicCurieProvider;
 import com.toedter.chatty.server.boot.config.TestDataLoader;
 import com.toedter.chatty.server.boot.message.web.ChatMessageRepositoryListener;
 import org.atmosphere.cpr.AtmosphereServlet;
@@ -18,7 +17,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.hateoas.UriTemplate;
-import org.springframework.hateoas.hal.CurieProvider;
+import org.springframework.hateoas.mediatype.hal.CurieProvider;
+import org.springframework.hateoas.mediatype.hal.DefaultCurieProvider;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
 
 import javax.servlet.Filter;
@@ -71,6 +71,6 @@ public class Chatty {
 
     @Bean
     public CurieProvider curieProvider() {
-        return new DynamicCurieProvider("chatty", new UriTemplate("/../docs/html5/{rel}.html"));
+        return new DefaultCurieProvider("chatty", UriTemplate.of("/../docs/html5/{rel}.html"));
     }
 }
