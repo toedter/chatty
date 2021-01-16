@@ -1,16 +1,17 @@
 plugins {
-    id "com.github.node-gradle.node" version "2.2.4"
+  id "com.github.node-gradle.node" version "2.2.4"
 }
 
 node {
-    version = '12.18.3'
-    download = true
-    workDir = file("${rootProject.buildDir}/node")
-    nodeModulesDir = file("${project.projectDir}")
+  version = '14.15.4'
+  npmVersion = '6.14.11'
+  download = true
+  workDir = file("${rootProject.buildDir}/node")
+  nodeModulesDir = file("${project.projectDir}")
 }
 
-clean{
-    delete "dist"
+clean {
+  delete "dist"
 }
 
 npm_install.inputs.file new File(projectDir, "package.json")
