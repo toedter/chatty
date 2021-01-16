@@ -9,7 +9,7 @@ repositories {
 }
 
 ext {
-    springBootVersion = '2.3.3.RELEASE'
+    springBootVersion = '2.4.1'
 }
 
 allprojects {

@@ -13,7 +13,7 @@ buildscript {
 
 plugins {
     id 'org.hidetake.ssh' version '0.4.3'
-    id 'org.asciidoctor.convert' version '1.5.8'
+    id 'org.asciidoctor.convert' version '2.4.0'
 }
 
 ext {
@@ -40,7 +40,6 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "org.springframework.boot:spring-boot-devtools"
-    compile "org.springframework.data:spring-data-rest-hal-browser"
     compile "org.springframework.hateoas:spring-hateoas"
 
     compileOnly('org.projectlombok:lombok:1.18.12')
