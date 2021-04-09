@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
         maven { url "http://repo.spring.io/snapshot" }
         maven { url "http://repo.spring.io/milestone" }
-        maven { url 'https://repo.spring.io/libs-snapshot' }
+        maven { url 'http://repo.spring.io/libs-snapshot' }
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
@@ -23,7 +23,7 @@ repositories {
     mavenCentral()
     maven { url "http://repo.spring.io/snapshot" }
     maven { url "http://repo.spring.io/milestone" }
-    maven { url 'https://repo.spring.io/libs-snapshot' }
+    maven { url 'http://repo.spring.io/libs-snapshot' }
 }
 
 apply plugin: 'eclipse'
