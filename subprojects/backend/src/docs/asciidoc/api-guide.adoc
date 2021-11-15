@@ -1,5 +1,5 @@
 = Chatty REST API Guide
-Kai Tödter; Version {project-version}
+Kai Tödter
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
