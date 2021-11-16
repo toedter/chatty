@@ -8,7 +8,7 @@ import {ConnectorService} from "../connector/connector.service";
     templateUrl: 'chatmessages.component.html'
 })
 export class ChatMessagesComponent {
-    chatMessages: ChatMessage[];
+    chatMessages: ChatMessage[] = [];
 
     constructor(private chatMessagesService: ChatMessagesService, private connectorService: ConnectorService) {
     }
@@ -21,6 +21,6 @@ export class ChatMessagesComponent {
     public loadChatMessages() {
         this.chatMessagesService.getChatMessages()
             .subscribe((chatMessages: ChatMessage[]) => this.chatMessages = chatMessages),
-            error => console.error('ChatMessagesComponent: cannot get chat messages from ChatMessagesService');
+            () => console.error('ChatMessagesComponent: cannot get chat messages from ChatMessagesService');
     }
 }

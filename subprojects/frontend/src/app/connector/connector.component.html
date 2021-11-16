@@ -1,13 +1,13 @@
 <br>
 <div class="container">
   <form #userForm="ngForm" class="form-inline mb-2" (ngSubmit)="submitConnection()">
-    <div class="form-group-row">
-      <input class="form-control mr-1" required minlength="3" maxlength="10" style="width:150px" type="text"
+    <div class="row">
+      <input class="form-control me-1" required minlength="3" maxlength="10" style="width:150px" type="text"
              [(ngModel)]="user.id" name="userId" [disabled]="isConnected" placeholder="Enter ID">
-      <input class="form-control mr-1" required maxlength="40" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" style="width:150px"
+      <input class="form-control me-1" required maxlength="40" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" style="width:150px"
              type="text" [(ngModel)]="user.email" name="userEmail"
              [disabled]="isConnected" placeholder="Enter email">
-      <input class="form-control mr-1" required minlength="3" maxlength="30" style="width:150px" type="text"
+      <input class="form-control me-1" required minlength="3" maxlength="30" style="width:150px" type="text"
              [(ngModel)]="user.fullName" name="userFullName"
              [disabled]="isConnected" placeholder="Enter full name">
       <button style="width:100px" id="connectButton" [disabled]="!(userForm.form.valid || isConnected)"
@@ -18,8 +18,8 @@
   </form>
 
   <form #messageForm="ngForm" class="form-inline mb-2" (ngSubmit)="sendChatMessage()">
-    <div class="form-group-row">
-      <input class="form-control mr-1" required style="width:458px" [(ngModel)]="chatMessageText" name="xxx"
+    <div class="row">
+      <input class="form-control me-1" required style="width:458px" [(ngModel)]="chatMessageText" name="xxx"
              [disabled]="!isConnected" maxlength="100" placeholder="Enter chat message">
       <button style="width:100px" type="submit" [disabled]="!(messageForm.form.valid && isConnected)"
               class="btn btn-success">Send
@@ -28,7 +28,7 @@
   </form>
 
   <form #statusForm="ngForm" class="form-inline">
-    <div class="form-group-row">
+    <div class="row">
       <div id="status" style="width:562px" class="alert {{connectionStateType}}">{{connectionState}}</div>
     </div>
   </form>

@@ -8,8 +8,8 @@ import {AboutService} from "./about.service";
     styleUrls: ['about.component.css']
 })
 export class AboutComponent implements OnInit{
-    version: string;
-    timestamp: string;
+    version: string | undefined;
+    timestamp: string | undefined;
 
     constructor(private aboutService: AboutService) {
     }
@@ -20,7 +20,7 @@ export class AboutComponent implements OnInit{
                 this.timestamp = about.timeStamp;
                 this.version = about.version;
             }),
-            error => console.error('AboutComponent: cannot get about from AboutService');
+            () => console.error('AboutComponent: cannot get about from AboutService');
     }
 
 }

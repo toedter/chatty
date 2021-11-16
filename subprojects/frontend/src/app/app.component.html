@@ -1,19 +1,20 @@
-<nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="#">Chatty</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link" [routerLink]="['messages']">Chat</a>
-                <a class="nav-item nav-link" [routerLink]="['users']">Users</a>
-                <a class="nav-item nav-link" [routerLink]="['about']">About</a>
-                <a class="nav-item nav-link" href="/hal-explorer/index.html#theme=Cosmo&layout=2&url=/api/">HAL Explorer</a>
-                <a class="nav-item nav-link" href="/docs/api.html">REST API Documentation</a>
-            </div>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-toggleable-md navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">Chatty</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbar1" aria-controls="navbar1" aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar1">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" [routerLink]="['messages']">Chat</a>
+        <a class="nav-item nav-link" [routerLink]="['users']">Users</a>
+        <a class="nav-item nav-link" [routerLink]="['about']">About</a>
+        <a class="nav-item nav-link" href="/hal-explorer/index.html#theme=Cosmo&layout=2&url=/api/">HAL Explorer</a>
+        <a class="nav-item nav-link" href="/docs/api.html">REST API Documentation</a>
+      </div>
     </div>
+  </div>
 </nav>
 <router-outlet></router-outlet>

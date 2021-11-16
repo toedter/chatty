@@ -1,9 +1,10 @@
 import {Injectable} from "@angular/core";
-import {Response} from "@angular/http";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AboutService {
     constructor(private http: HttpClient) {
     }

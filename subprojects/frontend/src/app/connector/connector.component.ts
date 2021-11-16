@@ -16,7 +16,7 @@ export class ConnectorComponent implements OnInit {
   static readonly NOT_CONNECTED = 'Not Connected';
 
   isConnected: boolean = false;
-  user: User;
+  user: User = { id: '?', email: '', fullName: ''};
   connectButtonText: string = 'Connect';
   connectionState: string = 'Not Connected';
   connectionStateType: string = 'alert-info';

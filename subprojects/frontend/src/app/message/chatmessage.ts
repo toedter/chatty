@@ -1,8 +1,8 @@
-export class ChatMessage {
-    public id: number;
-    public author: string;
-    public text: string;
-    public timeStamp: string;
+export interface ChatMessage {
+    id: number;
+    author: any;
+    text: string;
+    timeStamp: string;
 }
 
 

@@ -1,8 +1,11 @@
 import {Injectable} from "@angular/core";
 import {Subject} from "rxjs";
+// @ts-ignore
 import * as Atmosphere from 'atmosphere.js';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ConnectorService {
     private connected: boolean;
     private subject: Subject<any>;
@@ -47,7 +50,7 @@ export class ConnectorService {
 
             if (messageObject.hasOwnProperty('command')) {
                 if (messageObject.command === 'reloadChatMessages') {
-                    this.subject.next();
+                    this.subject.next(messageObject.command);
                 }
             }
         };

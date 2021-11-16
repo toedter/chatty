@@ -1,4 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-@import "chatty.css";
-/*@import "slate.css";*/
+
+.chatty-template {
+  padding: 40px 15px;
+  text-align: left;
+}
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
