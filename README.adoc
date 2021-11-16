@@ -1,7 +1,7 @@
 [[chatty-build-status]]
 = Chatty
 
-image:https://travis-ci.com/toedter/chatty.svg?branch=master[Build Status, link="https://travis-ci.com/toedter/chatty"]
+image:https://github.com/toedter/chatty/workflows/Build/badge.svg["build", link="https://github.com/toedter/chatty/actions"]
 image:https://img.shields.io/badge/license-MIT-blue.svg["MIT", link="http://toedter.mit-license.org"]
 
 A chat demo that evaluates several technologies (and hopefully shows best practices)
@@ -9,7 +9,7 @@ A chat demo that evaluates several technologies (and hopefully shows best practi
 [[used-technologies]]
 == Used Technologies
 
-* Java >= 8
+* https://adoptopenjdk.net/[Java] >= 8
 * http://projects.spring.io/spring-boot/[Spring Boot] (+ Spring Data REST & REST Docs)
 * http://stateless.co/hal_specification.html[HAL] (Hypertext Application Language)
 * https://github.com/Atmosphere/atmosphere[Atmosphere] (Async Pub/Sub)
