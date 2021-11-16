@@ -4,22 +4,24 @@ plugins {
 
 node {
   version = '16.13.0'
-  npmVersion = '8.1.3'
   download = true
   workDir = file("${rootProject.buildDir}/node")
   nodeModulesDir = file("${project.projectDir}")
 }
 
+yarn_install.inputs.file new File(projectDir, "package.json")
+yarn_install.inputs.file new File(projectDir, "yarn.lock")
+yarn_install.outputs.dir new File(projectDir, "node_modules")
+
+yarn_build.inputs.dir new File(projectDir, "src")
+yarn_build.outputs.dir new File(projectDir, "dist")
+
+yarn_build.dependsOn yarn_install // , yarn_lint , yarn_test
+
 clean {
   delete "dist"
 }
 
-npm_install.inputs.file new File(projectDir, "package.json")
-npm_install.outputs.dir new File(projectDir, "node_modules")
-
-npm_run_build.inputs.dir new File(projectDir, "src")
-npm_run_build.outputs.dir new File(projectDir, "dist")
-
-build.dependsOn npm_run_build
+build.dependsOn yarn_build
 
 
