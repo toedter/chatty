@@ -137,7 +137,7 @@ asciidoctor {
 }
 
 task copyWebApp(type: Copy) {
-    from('../frontend/dist') {
+    from('../frontend/dist/chatty') {
         include '**/*'
     }
 
