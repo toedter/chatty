@@ -65,3 +65,12 @@ jobs:
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
+      - name: Build, Push and Release a Docker container to Heroku.
+          uses: gonuit/heroku-docker-deploy@v1.3.3
+          with:
+            email: ${{ secrets.HEROKU_EMAIL }}
+            heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+            heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+            dockerfile_directory: ./subprojects/backend/build
+            process_type: web
+
