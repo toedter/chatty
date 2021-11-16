@@ -35,7 +35,13 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - name: Build with Gradle
+
+      - name: Clone HAL Explorer
+        run: ./gradlew cloneHalExplorer
+      - name: Build HAL Explorer with Gradle
+        run: ./gradlew -p subprojects/hal-explorer build
+
+      - name: Build Chatty with Gradle
         run: ./gradlew build createdockerfile
 
       - name: Set up Docker Buildx
