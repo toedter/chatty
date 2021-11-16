@@ -116,8 +116,9 @@ exploring the HAL based API.
 
 You can build and integrate the https://github.com/toedter/hal-explorer[HAL Explorer].
 Then you have to invoke
-./gradlew build cloneHalBrowser
-./gradlew -p subprojects/hal-browser build
+
+* `./gradlew build cloneHalBrowser`
+* `./gradlew -p subprojects/hal-browser build`
 
 [[live-demo]]
 == Live Demo
