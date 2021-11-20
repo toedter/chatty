@@ -71,6 +71,6 @@ public class Chatty {
 
     @Bean
     public CurieProvider curieProvider() {
-        return new DefaultCurieProvider("chatty", UriTemplate.of("/../docs/html5/{rel}.html"));
+        return new DefaultCurieProvider("chatty", UriTemplate.of("/docs/{rel}.html"));
     }
 }
