@@ -9,6 +9,7 @@ import org.springframework.hateoas.server.RepresentationModelProcessor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,7 +26,7 @@ public class BuildInfoController implements RepresentationModelProcessor<Reposit
     private static final String BUILD_INFO = "buildinfo";
     private static final String API =  "api/";
 
-    @RequestMapping("/" + BUILD_INFO)
+    @GetMapping("/" + BUILD_INFO)
     @ResponseBody
     public HttpEntity<BuildInfo> buildInfo() {
         BuildInfo buildInfo = new BuildInfo(version, timeStamp);
